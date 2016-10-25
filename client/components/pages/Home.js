@@ -9,11 +9,14 @@ import Preview from '../partials/Preview'
 export default class Home extends Page {
   constructor(props) {
     super(props)
+    this.unmountLanding = this.unmountLanding.bind(this)
+    Store.on(Constants.PREVIEWS_LOADED, this.unmountLanding)
+    this.state = { showLanding: true }
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
-  			<Landing/>
+  		<div id='home-page' ref='page-wrapper' className='page-wrapper'>
+  			{this.state.showLanding && <Landing/>}
         <Preview/>
   		</div>
   	)
@@ -40,5 +43,13 @@ export default class Home extends Page {
   }
   componentWillUnmount() {
     super.componentWillUnmount()
+  }
+
+  unmountLanding() {
+    TweenMax.to(window, 1, { scrollTo: window.innerHeight, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
+      this.state.showLanding = false
+      this.forceUpdate()
+      dom.classes.add(dom.select('#home-page'), 'page-wrapper--fixed')
+    }})
   }
 }

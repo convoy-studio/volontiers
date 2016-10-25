@@ -93,7 +93,7 @@ class Preview extends BaseComponent {
 
   generateSections() {
     console.log('generate')
-    dom.classes.remove(dom.select('#home-page'), 'page-wrapper--fixed')
+    // dom.classes.remove(dom.select('#home-page'), 'page-wrapper--fixed')
     TweenMax.ticker.addEventListener('tick', this.update.bind(this))
     // dom.event.on(this.refs.preview, 'mousemove', () => {
       // console.log(this.ropes[0].points[4], Store.Mouse.y)
@@ -123,6 +123,14 @@ class Preview extends BaseComponent {
     this.renderer.view.style.width = windowW + 'px'
     this.renderer.view.style.height = windowH + 'px'
     this.renderer.resize(windowW, windowH)
+    for (let i = 0; i < 1; i++) {
+      let previewH = windowH - this.margin
+      this.planes[i].mesh.height = previewH
+      this.planes[i].mesh.width = (this.planes[i].mesh.height * this.planes[i].mesh.texture.baseTexture.width) / this.planes[i].mesh.texture.baseTexture.height
+      this.planes[i].mesh.position.y = this.halfMargin + i * previewH
+      let left = ( windowW - this.planes[i].mesh.width) / 2
+      this.planes[i].mesh.position.x = left
+    }
   }
 
   update() {
