@@ -160,6 +160,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Canvas: undefined,
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
+  CurrentPreviewIndex: 0,
   IndexIsOpened: false,
   dispatcherIndex: Dispatcher.register((payload) => {
     const action = payload.action
@@ -172,6 +173,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.ROUTE_CHANGED:
       const route = Router.getNewRoute()
+      Store.emitChange(action.actionType)
+      break
+    case Constants.CHANGE_PREVIEW:
+      Store.CurrentPreviewIndex = action.item.previewIdx
       Store.emitChange(action.actionType)
       break
     default:

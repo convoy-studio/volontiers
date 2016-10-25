@@ -5,19 +5,26 @@ import dom from 'dom-hand'
 
 import Landing from '../partials/Landing'
 import Preview from '../partials/Preview'
+import PreviewFooter from '../partials/PreviewFooter'
+import PreviewLink from '../partials/PreviewLink'
 
 export default class Home extends Page {
   constructor(props) {
     super(props)
     this.unmountLanding = this.unmountLanding.bind(this)
     Store.on(Constants.PREVIEWS_LOADED, this.unmountLanding)
-    this.state = { showLanding: true }
+    this.state = {
+      showLanding: true,
+      showFooter: false
+    }
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper'>
+  		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
   			{this.state.showLanding && <Landing/>}
         <Preview/>
+        {!this.state.showLanding && <PreviewLink/>}
+        {this.state.showFooter && <PreviewFooter/>}
   		</div>
   	)
   }
@@ -46,10 +53,12 @@ export default class Home extends Page {
   }
 
   unmountLanding() {
-    TweenMax.to(window, 1, { scrollTo: window.innerHeight, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
+    let tl = new TimelineMax()
+    tl.to(dom.select('.landing'), 0.5, {opacity: 0, ease: Power2.easeIn})
+    tl.to(dom.select('.landing'), 1, { height: 0, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
       this.state.showLanding = false
+      this.state.showFooter = true
       this.forceUpdate()
-      dom.classes.add(dom.select('#home-page'), 'page-wrapper--fixed')
-    }})
+    }}, '-=0.2')
   }
 }

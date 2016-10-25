@@ -31,6 +31,24 @@ const Actions = {
       item: undefined
     })
   },
+  mouseEnterPreview: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSEENTER_PREVIEW,
+      item: undefined
+    })
+  },
+  mouseLeavePreview: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSELEAVE_PREVIEW,
+      item: undefined
+    })
+  },
+  changePreview: (idx) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CHANGE_PREVIEW,
+      item: { previewIdx: idx }
+    })
+  },
   windowResize: (windowW, windowH) => {
     Dispatcher.handleViewAction({
       actionType: Constants.WINDOW_RESIZE,

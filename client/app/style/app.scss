@@ -8,10 +8,12 @@
 @import "global/_global.scss";
 @import "global/_ui.scss";
 
-@import "layout/_front-container.scss";
+@import "layout/_navigation.scss";
+@import "layout/_footer.scss";
 @import "layout/_page-wrapper.scss";
 
 @import "pages/home";
 
 @import "components/landing";
 @import "components/preview";
+@import "components/previewLink";

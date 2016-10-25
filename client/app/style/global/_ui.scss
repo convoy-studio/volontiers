@@ -1,95 +1,125 @@
 * {
-    backface-visibility: hidden;
-    user-select: none;
-    transform-style: flat;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-user-drag: none;
-    outline: 0;
+  backface-visibility: hidden;
+  user-select: none;
+  transform-style: flat;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-drag: none;
+  outline: 0;
 }
 *, *:before, *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 button {
-    background: none repeat scroll 0 0 transparent;
-    border: medium none;
-    border-spacing: 0;
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    text-decoration: none;
-    text-indent: 0;
-    cursor: pointer;
+  background: none repeat scroll 0 0 transparent;
+  border: medium none;
+  border-spacing: 0;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  cursor: pointer;
 }
 img {
-    border:0;
-    border-style:none;
-    outline : none;
-    border: none;
+  border:0;
+  border-style:none;
+  outline : none;
+  border: none;
 }
 svg, svg * {
-    backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .clear-float {
-    clear: both;
+  clear: both;
 }
 img {
-    width: 100%;
+  width: 100%;
 }
 a:-moz-focus-inner {
-    border: 0;
-    outline: none;
+  border: 0;
+  outline: none;
 }
 a:focus {
-    border: 0;
-    outline: none;
+  border: 0;
+  outline: none;
 }
 // for firefox image scale smoothing
 img {
-    -ms-interpolation-mode: bicubic;
+  -ms-interpolation-mode: bicubic;
 }
 // for ie
 img {
-    background: transparent;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)"; /* IE8 */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);   /* IE6 & 7 */
-    zoom: 1;
+  background: transparent;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)"; /* IE8 */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);   /* IE6 & 7 */
+  zoom: 1;
 }
 .btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 .relative {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .full {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .top-left {
-    top: 0;
-    left: 0;
+  top: 0;
+  left: 0;
 }
 .vertical-center-parent {
-    width: 100%;
-    height: 100%;
-    display: table;
+  width: 100%;
+  height: 100%;
+  display: table;
 }
 .vertical-center-child {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 .full-block {
-    position: absolute;
-    @extend .top-left;
+  position: absolute;
+  @extend .top-left;
 }
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 #page-a, #page-b {
   & > div {
     opacity: 0;
   }
+}
+
+a.link {
+  color: $black;
+  position: relative;
+  font-size: 18px;
+  line-height: 20px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+
+  &--hidden {
+    opacity: 0;
+  }
+
+  // &:after {
+  //   content: '';
+  //   transition: all 0.2s linear;
+  //   position: absolute;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 2px;
+  //   bottom: -4px;
+  //   background-color: $black;
+  // }
+
+  // &:hover {
+  //   &:after {
+  //
+  //   }
+  // }
 }

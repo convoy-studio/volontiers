@@ -13,6 +13,7 @@ class Landing extends BaseComponent {
       if ({}.hasOwnProperty.call(Data.projects, k)) {
         Store.Previews.push({
           slug: k,
+          title: Data.projects[k].name,
           image: `images/${Data.projects[k].preview}`
         })
       }

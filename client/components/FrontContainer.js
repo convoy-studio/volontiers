@@ -17,13 +17,26 @@ export default class FrontContainer extends BaseComponent {
     	)
     })
     return (
-  		<div id='front-container' ref='front-container'>
-  			<header id="header">
-  				<ul>
-  					{menuItems}
-  				</ul>
-  			</header>
-  		</div>
+  		<header id='front-container' ref='front-container' className="navigation">
+        <a href="#" className="link">Projects</a>
+        <a href="home" className="navigation__center">
+          <img src="http://placehold.it/16/16"/>
+        </a>
+        <div className="navigation__right">
+          <ul>
+            <li>
+              <a href="#" className="link">EN</a>
+            </li>
+            <li className="navigation__spacer">—</li>
+            <li>
+              <a href="#" className="link">FR</a>
+            </li>
+            <li>
+              <a href="#" className="link">About</a>
+            </li>
+          </ul>
+        </div>
+  		</header>
   	)
   }
   didPageChange() {

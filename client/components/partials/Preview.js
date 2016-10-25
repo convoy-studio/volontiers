@@ -40,7 +40,7 @@ class Preview extends BaseComponent {
     let windowH = Store.Window.h
     this.parent = this.refs.preview
     this.renderer = new PIXI.WebGLRenderer(windowW, windowH, {antialias: true, roundPixels: true})
-    this.renderer.backgroundColor = 0xfffff
+    this.renderer.backgroundColor = 0xffffff
     this.parent.appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
     this.container = new PIXI.Container()
@@ -63,7 +63,6 @@ class Preview extends BaseComponent {
   }
 
   createPlane(texture, idx) {
-    console.log('plane')
     let previewH = Store.Window.h - this.margin
     this.planes[idx] = {}
     this.planes[idx].mesh = new PIXI.mesh.Plane(texture, 2, 2)
@@ -114,6 +113,7 @@ class Preview extends BaseComponent {
   mouseMove() {
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on left preview area
       if (!this.onceRight) {
+        Actions.mouseEnterPreview()
         let planeIdx = this.currentPlaneIdx
         TweenMax.to(this.tweenValue, 1, {
           v: this.hoverPreview,
@@ -129,6 +129,7 @@ class Preview extends BaseComponent {
       }
     } else {
       if (this.onceRight && this.tweenValue.v === this.hoverPreview) {
+        Actions.mouseLeavePreview()
         let planeIdx = this.currentPlaneIdx
         let newTop = this.planesInitialVertices[planeIdx][3]
         let newBottom = this.planesInitialVertices[planeIdx][7]
@@ -187,6 +188,7 @@ class Preview extends BaseComponent {
             this.initialBottomRightVertex = this.planesInitialVertices[this.currentPlaneIdx][7]
             this.onceRight = false
             this.tweenValue.v = 0
+            Actions.changePreview(this.currentPlaneIdx)
             dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
           }})
         }
