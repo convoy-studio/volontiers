@@ -9,16 +9,19 @@ import dom from 'dom-hand'
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
-    Store.on(Constants.PREVIEWS_LOADED, this.generateSections)
+    Store.on(Constants.PREVIEWS_LOADED, this.addListeners)
     Store.on(Constants.WINDOW_RESIZE, this.resize)
     Store.Window.w = window.innerWidth
     Store.Window.h = window.innerHeight
-    this.counter = 0
-    this.delta = 0
+    this.currentPlaneIdx = 0
+    this.currentScroll = 0
+    this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
-    this.planes = []
-    this.planesVertices = []
+    this.planes = [] // All planes array
+    this.planesVertices = [] // All initial vertices of all planes
+    this.onceRight = false // Used for mouseMove animation
+    this.hoverPreview = 150 // Used for mouseMove animation
   }
   render() {
     return (
@@ -42,80 +45,46 @@ class Preview extends BaseComponent {
 
   loadPreview() {
     let loader = new PIXI.loaders.Loader()
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < Store.Previews.length; i++) {
       loader.add(`preview-${i}`, `assets/${Store.Previews[i].image}`)
     }
-    loader.on('progress', this.progressLoader)
+    // loader.on('progress', this.progressLoader)
     loader.on('complete', this.completeLoader)
     loader.load()
   }
-  progressLoader() {
-    let texture = new PIXI.Texture.fromImage(`assets/${Store.Previews[this.counter].image}`)
-    this.createPlane(texture, this.counter)
-    // this.counter++
-  }
+  // progressLoader() {
+  //   let texture = new PIXI.Texture.fromImage(`assets/${Store.Previews[this.counter].image}`)
+  //   this.createPlane(texture, this.counter)
+  //   this.counter++
+  // }
   completeLoader() {
     console.log('loaded')
+    for (let i = 0; i < Store.Previews.length; i++) {
+      let texture = new PIXI.Texture.fromImage(`assets/${Store.Previews[i].image}`)
+      this.createPlane(texture, i)
+    }
     Actions.previewsLoaded()
   }
 
-  createPlane(texture, counter) {
+  createPlane(texture, idx) {
+    console.log('plane')
     let previewH = Store.Window.h - this.margin
-    // this.ropes[counter] = {}
-    // this.ropes[counter].ropeLength = Math.floor((((previewH) * texture.baseTexture.width) / texture.baseTexture.height) / 5)
-    // this.ropes[counter].points = []
-    // for (let i = 0; i < 5; i++) {
-    //   this.ropes[counter].points.push(new PIXI.Point(i * this.ropes[counter].ropeLength, 0))
-    // }
-    // console.log(this.ropes[counter])
-    // this.ropes[counter].mesh = new PIXI.mesh.Rope(texture, this.ropes[counter].points)
-    // this.ropes[counter].mesh.height = previewH
-    // this.ropes[counter].mesh.width = (this.ropes[counter].mesh.height * texture.baseTexture.width) / texture.baseTexture.height
-    // this.ropes[counter].mesh.position.y = (previewH / 2) + (this.halfMargin)
-    // this.ropes[counter].mesh.position.x = (Store.Window.w - this.ropes[counter].mesh.width) / 2
-    // this.container.addChild(this.ropes[counter].mesh)
-    let g = new PIXI.Graphics()
-    g.beginFill(0xFF0000, 1)
-    this.planes[counter] = {}
-    this.planes[counter].mesh = new PIXI.mesh.Plane(texture, 2, 2)
-    this.planes[counter].mesh.height = previewH
-    this.planes[counter].mesh.width = (this.planes[counter].mesh.height * texture.baseTexture.width) / texture.baseTexture.height
-    this.planes[counter].mesh.position.y = this.halfMargin + counter * previewH
-    let left = ( Store.Window.w - this.planes[counter].mesh.width) / 2
-    this.planes[counter].mesh.position.x = left
-    for (let k = 0; k < this.planes[counter].mesh.vertices.length; k += 2) {
-      g.drawCircle(((this.planes[counter].mesh.vertices[k] * this.planes[counter].mesh.width) / texture.baseTexture.width) + left, ((this.planes[counter].mesh.vertices[k + 1] * this.planes[counter].mesh.height) / texture.baseTexture.height) + (this.halfMargin), 5)
-    }
-    this.container.addChild(this.planes[counter].mesh)
-    this.container.addChild(g)
-    this.planesVertices[counter] = this.planes[counter].mesh.vertices
+    this.planes[idx] = {}
+    this.planes[idx].mesh = new PIXI.mesh.Plane(texture, 2, 2)
+    this.planes[idx].mesh.height = previewH
+    this.planes[idx].mesh.width = (this.planes[idx].mesh.height * texture.baseTexture.width) / texture.baseTexture.height
+    this.planes[idx].mesh.position.y = this.halfMargin + ((3 * idx) * this.halfMargin) + (idx * previewH)
+    let left = ( Store.Window.w - this.planes[idx].mesh.width) / 2
+    this.planes[idx].mesh.position.x = left
+    this.container.addChild(this.planes[idx].mesh)
+    this.planesVertices[idx] = this.planes[idx].mesh.vertices
   }
 
-  generateSections() {
+  addListeners() {
     console.log('generate')
-    // dom.classes.remove(dom.select('#home-page'), 'page-wrapper--fixed')
     TweenMax.ticker.addEventListener('tick', this.update.bind(this))
-    // dom.event.on(this.refs.preview, 'mousemove', () => {
-      // console.log(this.ropes[0].points[4], Store.Mouse.y)
-      // if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin)) {
-      //   if (Store.Mouse.y > (Store.Window.h / 2)) {
-          // this.ropes[0].points[4].y = 5
-          // this.ropes[0].points[3].y = 3
-          // this.ropes[0].points[2].y = 2
-          // for (let i = 0; i < this.ropes[0].points.length; i++) {
-          //   this.ropes[0].points[i].y = Math.sin((i * 0.5) + 0.05) * 30
-          // }
-        // } else {
-          // this.ropes[0].points[4].y = -5
-          // this.ropes[0].points[3].y = -3
-          // this.ropes[0].points[2].y = -2
-          // for (let i = 0; i < this.ropes[0].points.length; i++) {
-          //   this.ropes[0].points[i].y = Math.sin((i * 0.5) - 0.05) * 30
-          // }
-        // }
-      // }
-      // this.ropes[0].points[1].y = Math.sin((i * Math.random()) + this.delta) * 30
-    // })
+    this.mouseMove()
+    this.onScroll()
   }
   resize() {
     let windowW = Store.Window.w
@@ -123,11 +92,11 @@ class Preview extends BaseComponent {
     this.renderer.view.style.width = windowW + 'px'
     this.renderer.view.style.height = windowH + 'px'
     this.renderer.resize(windowW, windowH)
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < Store.Previews.length; i++) {
       let previewH = windowH - this.margin
       this.planes[i].mesh.height = previewH
       this.planes[i].mesh.width = (this.planes[i].mesh.height * this.planes[i].mesh.texture.baseTexture.width) / this.planes[i].mesh.texture.baseTexture.height
-      this.planes[i].mesh.position.y = this.halfMargin + i * previewH
+      this.planes[i].mesh.position.y = (this.margin * 2) + (i * previewH)
       let left = ( windowW - this.planes[i].mesh.width) / 2
       this.planes[i].mesh.position.x = left
     }
@@ -135,11 +104,80 @@ class Preview extends BaseComponent {
 
   update() {
     this.delta += 0.01
-    for (let i = 0; i < this.planes[0].mesh.vertices.length; i += 2) {
-      this.planes[0].mesh.vertices[i] = this.planesVertices[0][i] + Math.sin((i * 0.9) + this.delta) / 6
-      this.planes[0].mesh.vertices[i + 1] = this.planesVertices[0][i + 1] + Math.sin((i * 0.9) + this.delta) / 6
+    for (let k = 0; k < this.planes.length; k++) {
+      for (let i = 0; i < this.planes[k].mesh.vertices.length; i++) {
+        this.planes[k].mesh.vertices[i] = this.planesVertices[k][i] + (Math.sin((i * 0.9) + this.delta)) / 8
+      }
     }
     this.renderer.render(this.stage)
+  }
+
+  mouseMove() {
+    let defaultTop = this.planesVertices[0][3]
+    let defaultBottom = this.planesVertices[0][7]
+    let tweenValue = {
+      v: 0
+    }
+    dom.event.on(this.refs.preview, 'mousemove', () => {
+      if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on left preview area
+        if (!this.onceRight) {
+          TweenMax.to(tweenValue, 1, {
+            v: this.hoverPreview,
+            ease: Sine.easeOut,
+            onUpdate: () => {
+              this.planesVertices[0][3] = defaultTop + tweenValue.v
+              this.planesVertices[0][7] = defaultBottom - tweenValue.v
+            },
+            onComplete: () => {
+              this.onceRight = true
+            }
+          })
+        }
+      } else {
+        if (this.onceRight && tweenValue.v === this.hoverPreview) {
+          let newTop = this.planesVertices[0][3]
+          let newBottom = this.planesVertices[0][7]
+          let resetValues = {
+            t: this.planesVertices[0][3],
+            b: this.planesVertices[0][7]
+          }
+          TweenMax.to(resetValues, 1, {
+            t: defaultTop,
+            b: defaultBottom,
+            ease: Sine.easeOut,
+            onUpdate: () => {
+              this.planesVertices[0][3] = resetValues.t
+              this.planesVertices[0][7] = resetValues.b
+            },
+            onComplete: () => {
+              this.onceRight = false
+              tweenValue.v = 0
+            }
+          })
+        }
+      }
+    })
+  }
+
+  onScroll() {
+    require('mouse-wheel')((dx, dy) => {
+      let toScroll = 0
+      if (this.currentPlaneIdx >= 0 && this.currentPlaneIdx < this.planes.length) {
+        if (dy > 10 && this.currentPlaneIdx < this.planes.length - 1) {
+          toScroll = - ((this.halfMargin * 3) + this.planes[this.currentPlaneIdx].mesh.height)
+          this.currentPlaneIdx++
+          console.log('down')
+        } else if (dy < -10 && this.currentPlaneIdx > 0) {
+          toScroll = ((this.halfMargin * 3) + this.planes[this.currentPlaneIdx].mesh.height)
+          this.currentPlaneIdx--
+          console.log('up')
+        }
+        this.currentScroll = this.currentScroll  + toScroll
+        TweenMax.to(this.container.position, 1, {y: this.currentScroll, ease: Circ.easeOut, onComplete: () => {
+          console.log('ended')
+        }})
+      }
+    })
   }
 }
 
