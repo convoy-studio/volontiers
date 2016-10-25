@@ -96,10 +96,14 @@ class Preview extends BaseComponent {
       let previewH = windowH - this.margin
       this.planes[i].mesh.height = previewH
       this.planes[i].mesh.width = (this.planes[i].mesh.height * this.planes[i].mesh.texture.baseTexture.width) / this.planes[i].mesh.texture.baseTexture.height
-      this.planes[i].mesh.position.y = (this.margin * 2) + (i * previewH)
+      this.planes[i].mesh.position.y = this.halfMargin + ((3 * i) * this.halfMargin) + (i * previewH)
       let left = ( windowW - this.planes[i].mesh.width) / 2
       this.planes[i].mesh.position.x = left
     }
+    // Reset scroll
+    TweenMax.to(this.container.position, 0.5, {y: 0, ease: Circ.easeOut, onComplete: () => {
+      console.log('ended')
+    }})
   }
 
   update() {
@@ -172,7 +176,7 @@ class Preview extends BaseComponent {
           this.currentPlaneIdx--
           console.log('up')
         }
-        this.currentScroll = this.currentScroll  + toScroll
+        this.currentScroll = this.currentScroll + toScroll
         TweenMax.to(this.container.position, 1, {y: this.currentScroll, ease: Circ.easeOut, onComplete: () => {
           console.log('ended')
         }})
