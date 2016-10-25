@@ -17,7 +17,7 @@ export default {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
         fr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.'
       },
-      preview: 'PE01_NIKELAB_x_OLIVIER ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
+      preview: 'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
       assets: []
     },
     'airbnb-paris': {

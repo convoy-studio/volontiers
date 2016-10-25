@@ -9,7 +9,9 @@
 @import "global/_ui.scss";
 
 @import "layout/_front-container.scss";
+@import "layout/_page-wrapper.scss";
 
 @import "pages/home";
 
 @import "components/landing";
+@import "components/preview";

@@ -1,8 +1,10 @@
 import Page from '../Page'
 import Store from '../../store'
+import Constants from '../../constants'
 import dom from 'dom-hand'
 
 import Landing from '../partials/Landing'
+import Preview from '../partials/Preview'
 
 export default class Home extends Page {
   constructor(props) {
@@ -10,8 +12,9 @@ export default class Home extends Page {
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper'>
+  		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
   			<Landing/>
+        <Preview/>
   		</div>
   	)
   }

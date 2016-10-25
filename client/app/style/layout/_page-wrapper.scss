@@ -1,0 +1,7 @@
+.page-wrapper{
+  position: relative;
+
+  &--fixed {
+    overflow-y: hidden;
+  }
+}

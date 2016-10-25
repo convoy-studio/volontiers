@@ -2,20 +2,21 @@ import BaseComponent from '../../pager/components/BaseComponent'
 import LandingLogo from './LandingLogo'
 import Data from '../../data'
 import Store from '../../store'
+import Actions from '../../actions'
 
 class Landing extends BaseComponent {
   constructor(props) {
     super(props)
-    const manifest = []
     let k = 0
+    Store.Previews = []
     for (k in Data.projects) {
       if ({}.hasOwnProperty.call(Data.projects, k)) {
-        manifest.push(`assets/images/${Data.projects[k].preview}`)
+        Store.Previews.push({
+          slug: k,
+          image: `images/${Data.projects[k].preview}`
+        })
       }
     }
-    Store.Preloader.load(manifest, () => {
-      console.log('preview loaded')
-    })
   }
   render() {
     return (

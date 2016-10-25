@@ -25,6 +25,12 @@ const Actions = {
       })
     }
   },
+  previewsLoaded: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.PREVIEWS_LOADED,
+      item: undefined
+    })
+  },
   windowResize: (windowW, windowH) => {
     Dispatcher.handleViewAction({
       actionType: Constants.WINDOW_RESIZE,

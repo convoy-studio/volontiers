@@ -54,12 +54,6 @@ function _getTypeOfPage(route) {
   else type = Constants.HOME
   return type
 }
-function _getPageContent() {
-  const route = Router.getNewRoute()
-  const path = (route.type === Constants.ARTISTS) ? route.path.replace('/artists', '') : route.path
-  const content = data.routing[path]
-  return content
-}
 function _getMenuContent() {
   return data.routing
 }
@@ -82,9 +76,6 @@ function _windowWidthHeight() {
 const Store = assign({}, EventEmitter2.prototype, {
   emitChange: (type, item) => {
     Store.emit(type, item)
-  },
-  pageContent: () => {
-    return _getPageContent()
   },
   menuContent: () => {
     return _getMenuContent()
