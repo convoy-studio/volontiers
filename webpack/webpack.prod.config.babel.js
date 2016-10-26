@@ -50,16 +50,14 @@ export default {
         test: /\.css$/,
         loaders: [
           'style',
-          ExtractTextPlugin.extract('style', 'css'),
-          'postcss-loader'
+          ExtractTextPlugin.extract('style', 'css!postcss')
         ]
       },
       {
         test: /\.scss$/,
         loaders: [
           'style',
-          ExtractTextPlugin.extract('style', 'css!sass'),
-          'postcss-loader'
+          ExtractTextPlugin.extract('style', 'css!postcss!sass')
         ]
       },
       {

@@ -61,7 +61,7 @@ export default {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loaders: ['style', 'css', 'sass', 'postcss-loader']
+        loaders: ['style', 'css', 'postcss-loader', 'sass']
       },
       {
         test: /\.(png|jpe?g|gif)$/,
