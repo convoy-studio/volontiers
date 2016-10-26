@@ -102,25 +102,30 @@ a.link {
   line-height: 20px;
   box-sizing: border-box;
   text-transform: uppercase;
+  padding: 3px;
+  overflow-y: hidden;
 
   &--hidden {
     opacity: 0;
   }
 
-  // &:after {
-  //   content: '';
-  //   transition: all 0.2s linear;
-  //   position: absolute;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 2px;
-  //   bottom: -4px;
-  //   background-color: $black;
-  // }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    transform: translateY(100%);
+    background-color: $black;
+    visibility: hidden;
+    transition: all 0.2s linear;
+  }
 
-  // &:hover {
-  //   &:after {
-  //
-  //   }
-  // }
+  &:hover {
+    &:after {
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
 }

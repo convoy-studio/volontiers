@@ -22,6 +22,7 @@
 
         a {
           display: inline-block;
+          vertical-align: middle;
         }
 
         &:last-child {
@@ -37,9 +38,5 @@
     left: 50%;
     top: 0;
     transform: translateX(-100%);
-  }
-
-  a.link {
-    padding: 3px;
   }
 }
