@@ -31,6 +31,12 @@ const Actions = {
       item: undefined
     })
   },
+  projectImagesLoaded: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.PROJECT_IMAGES_LOADED,
+      item: undefined
+    })
+  },
   mouseEnterPreview: () => {
     Dispatcher.handleViewAction({
       actionType: Constants.MOUSEENTER_PREVIEW,

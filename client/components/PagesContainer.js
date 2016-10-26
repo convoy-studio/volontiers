@@ -27,11 +27,11 @@ export default class PagesContainer extends BasePager {
     Store.Parent.style.cursor = 'wait'
     const oldRoute = Router.getOldRoute()
     const newRoute = Router.getNewRoute()
-    if (oldRoute === undefined) {
-      this.templateSelection(newRoute)
-    } else {
-      PagerActions.onTransitionOut()
-    }
+    this.templateSelection(newRoute)
+    // if (oldRoute === undefined) {
+    // } else {
+    //   PagerActions.onTransitionOut()
+    // }
   }
   templateSelection(newRoute) {
     let type = undefined

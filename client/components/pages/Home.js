@@ -1,5 +1,6 @@
 import Page from '../Page'
 import Store from '../../store'
+import Data from '../../data'
 import Constants from '../../constants'
 import dom from 'dom-hand'
 
@@ -16,6 +17,17 @@ export default class Home extends Page {
     this.state = {
       showLanding: true,
       showFooter: false
+    }
+    let k = 0
+    Store.Previews = []
+    for (k in Data.projects) {
+      if ({}.hasOwnProperty.call(Data.projects, k)) {
+        Store.Previews.push({
+          slug: k,
+          title: Data.projects[k].name,
+          image: `images/${Data.projects[k].preview}`
+        })
+      }
     }
   }
   render() {
@@ -54,8 +66,8 @@ export default class Home extends Page {
 
   unmountLanding() {
     let tl = new TimelineMax()
-    tl.to(dom.select('.landing'), 0.5, {opacity: 0, ease: Power2.easeIn})
-    tl.to(dom.select('.landing'), 1, { height: 0, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
+    tl.to(dom.select('#home-page .landing'), 0.5, {opacity: 0, ease: Power2.easeIn})
+    tl.to(dom.select('#home-page .landing'), 1, { height: 0, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
       this.state.showLanding = false
       this.state.showFooter = true
       this.forceUpdate()

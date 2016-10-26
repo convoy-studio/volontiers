@@ -2,21 +2,27 @@ import Page from '../Page'
 import Store from '../../store'
 import dom from 'dom-hand'
 import Data from '../../data'
+import Constants from '../../constants'
+import Router from '../../services/router'
+import Landing from '../partials/Landing'
+import ProjectImage from '../partials/ProjectImage'
 
 export default class Project extends Page {
   constructor(props) {
     super(props)
     this.slug = props.hash.target
-    this.data.name = Data.projects[this.slug].name
+    this.data = Data.projects[this.slug]
+    this.unmountLanding = this.unmountLanding.bind(this)
+    Store.on(Constants.PROJECT_IMAGES_LOADED, this.unmountLanding)
+    this.state = {
+      showLanding: true
+    }
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper'>
-  			<div className='vertical-center-parent'>
-  				<p className='vertical-center-child'>
-            Project : {this.data.name}
-          </p>
-  			</div>
+  		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
+        {this.state.showLanding && <Landing/>}
+        <ProjectImage slug={this.slug}/>
   		</div>
   	)
   }
@@ -42,5 +48,13 @@ export default class Project extends Page {
   }
   componentWillUnmount() {
     super.componentWillUnmount()
+  }
+  unmountLanding() {
+    let tl = new TimelineMax()
+    tl.to(dom.select('#project-page .landing'), 0.5, {opacity: 0, ease: Power2.easeIn})
+    tl.to(dom.select('#project-page .landing'), 1, { height: 0, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
+      this.state.showLanding = false
+      this.forceUpdate()
+    }}, '-=0.2')
   }
 }

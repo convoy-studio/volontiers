@@ -7,17 +7,6 @@ import Actions from '../../actions'
 class Landing extends BaseComponent {
   constructor(props) {
     super(props)
-    let k = 0
-    Store.Previews = []
-    for (k in Data.projects) {
-      if ({}.hasOwnProperty.call(Data.projects, k)) {
-        Store.Previews.push({
-          slug: k,
-          title: Data.projects[k].name,
-          image: `images/${Data.projects[k].preview}`
-        })
-      }
-    }
   }
   render() {
     return (

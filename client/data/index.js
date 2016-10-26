@@ -18,7 +18,12 @@ export default {
         fr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.'
       },
       preview: 'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
-      assets: []
+      assets: [
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0718_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1275_PR.jpg'
+      ]
     },
     'airbnb-paris': {
       'name': 'Airbnb Paris',

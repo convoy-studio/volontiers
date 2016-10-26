@@ -24,7 +24,7 @@ function _getPageAssetsToLoad() {
   return manifest
 }
 function _addBasePathsToUrls(urls) {
-  let basePath = 'assets/'
+  let basePath = 'assets/images/'
   let manifest = []
   for (let i = 0; i < urls.length; i++) {
     const splitter = urls[i].split('.')

@@ -89,6 +89,7 @@ a {
   text-decoration: none;
 }
 #page-a, #page-b {
+  overflow: hidden;
   & > div {
     opacity: 0;
   }
