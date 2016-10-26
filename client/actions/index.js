@@ -45,8 +45,14 @@ const Actions = {
   },
   changePreview: (idx) => {
     Dispatcher.handleViewAction({
-      actionType: Constants.CHANGE_PREVIEW,
+      actionType: Constants.PREVIEW_CHANGED,
       item: { previewIdx: idx }
+    })
+  },
+  changeLang: (lang) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.LANGUAGE_CHANGED,
+      item: { lang: lang }
     })
   },
   windowResize: (windowW, windowH) => {

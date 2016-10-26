@@ -99,9 +99,7 @@ class Preview extends BaseComponent {
       this.planes[i].mesh.position.x = left
     }
     // Reset scroll
-    TweenMax.to(this.container.position, 0.5, {y: 0, ease: Circ.easeOut, onComplete: () => {
-      console.log('ended')
-    }})
+    TweenMax.to(this.container.position, 0.5, {y: 0, ease: Circ.easeOut})
   }
   update() {
     this.delta += 0.01

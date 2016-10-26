@@ -66,6 +66,21 @@ function _getAppData() {
 function _getDefaultRoute() {
   return data['default-route']
 }
+function _getUserLanguage() {
+  let lang = 'en'
+  if (localStorage.getItem('volontiers-lang') !== null) {
+    let item = localStorage.getItem('volontiers-lang')
+    if (item.toLocaleLowerCase() === 'fr') {
+      lang = 'fr'
+    } else if (item.toLocaleLowerCase() === 'en') {
+      return lang
+    }
+  } else {
+    lang = navigator.language || navigator.userLanguage
+    if (lang.toLocaleLowerCase() === 'fr') lang = 'fr'
+  }
+  return lang
+}
 function _windowWidthHeight() {
   return {
     w: window.innerWidth,
@@ -121,23 +136,8 @@ const Store = assign({}, EventEmitter2.prototype, {
     texture.needsUpdate = true
     return texture
   },
-  getPosts: () => {
-    return Store.Posts
-  },
-  getArtists: () => {
-    return Store.Artists
-  },
-  getArtist: () => {
-    return Store.Artist
-  },
-  getArticle: () => {
-    return Store.Article
-  },
-  getAbout: () => {
-    return Store.About
-  },
-  getFashionDesigners: () => {
-    return Store.FashionDesigner
+  getLang: () => {
+    return _getUserLanguage()
   },
   getTextureImg: (group, name) => {
     return Store.Preloader.getContentById(group + '-texture-' + name)
@@ -175,8 +175,13 @@ const Store = assign({}, EventEmitter2.prototype, {
       const route = Router.getNewRoute()
       Store.emitChange(action.actionType)
       break
-    case Constants.CHANGE_PREVIEW:
+    case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
+      Store.emitChange(action.actionType)
+      break
+    case Constants.LANGUAGE_CHANGED:
+      Store.Language = action.item.lang
+      localStorage.setItem('volontiers-lang', action.item.lang)
       Store.emitChange(action.actionType)
       break
     default:

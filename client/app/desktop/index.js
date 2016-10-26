@@ -15,6 +15,7 @@ class App {
     this.router = new Router()
     this.router.init()
     Store.Preloader = new Preloader()
+    Store.Language = Store.getLang()
     initGlobalEvents()
 
     ReactDOM.render(

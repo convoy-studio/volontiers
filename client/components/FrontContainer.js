@@ -1,6 +1,7 @@
 import BaseComponent from '../pager/components/BaseComponent'
 import Store from '../store'
 import Constants from '../constants'
+import LangButton from './partials/LangButton'
 
 export default class FrontContainer extends BaseComponent {
   constructor(props) {
@@ -25,11 +26,11 @@ export default class FrontContainer extends BaseComponent {
         <div className="navigation__right">
           <ul>
             <li>
-              <a href="#" className="link">EN</a>
+              <LangButton lang="en"/>
             </li>
             <li className="navigation__spacer">—</li>
             <li>
-              <a href="#" className="link">FR</a>
+              <LangButton lang="fr"/>
             </li>
             <li>
               <a href="#" className="link">About</a>
