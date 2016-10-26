@@ -6,6 +6,7 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import Landing from '../partials/Landing'
 import ProjectImage from '../partials/ProjectImage'
+import ProjectFooter from '../partials/ProjectFooter'
 
 export default class Project extends Page {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class Project extends Page {
   		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         {this.state.showLanding && <Landing/>}
         <ProjectImage slug={this.slug}/>
+        <ProjectFooter slug={this.slug}/>
   		</div>
   	)
   }

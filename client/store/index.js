@@ -161,6 +161,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
   CurrentPreviewIndex: 0,
+  CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,
   dispatcherIndex: Dispatcher.register((payload) => {
     const action = payload.action
@@ -177,6 +178,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
+      Store.emitChange(action.actionType)
+      break
+    case Constants.PROJECT_SLIDE_CHANGED:
+      Store.CurrentProjectSlideIndex = action.item.projectSlideIdx
       Store.emitChange(action.actionType)
       break
     case Constants.LANGUAGE_CHANGED:

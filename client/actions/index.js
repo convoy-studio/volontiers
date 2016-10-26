@@ -55,6 +55,12 @@ const Actions = {
       item: { previewIdx: idx }
     })
   },
+  changeProjectSlide: (idx) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.PROJECT_SLIDE_CHANGED,
+      item: { projectSlideIdx: idx }
+    })
+  },
   changeLang: (lang) => {
     Dispatcher.handleViewAction({
       actionType: Constants.LANGUAGE_CHANGED,
