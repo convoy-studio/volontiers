@@ -34,8 +34,8 @@ class PreviewFooter extends BaseComponent {
     this.data.curentPage = Store.CurrentPreviewIndex + 1
     this.data.title = Store.Previews[Store.CurrentPreviewIndex].title
     this.data.slug = '/project/' + Store.Previews[Store.CurrentPreviewIndex].slug
-    TweenMax.to(dom.select('.footer'), 0.2, {opacity: 0, ease: Sine.easeIn, onComplete() {
-      TweenMax.to(dom.select('.footer'), 0.2, {opacity: 1, ease: Sine.easeIn})
+    TweenMax.to(dom.select('.footer__title'), 0.2, {opacity: 0, ease: Sine.easeIn, onComplete() {
+      TweenMax.to(dom.select('.footer__title'), 0.2, {opacity: 1, ease: Sine.easeIn, delay: 0.1})
     }})
     setTimeout(() => {
       this.forceUpdate()

@@ -79,6 +79,8 @@ class Preview extends BaseComponent {
     TweenMax.ticker.addEventListener('tick', this.update.bind(this))
     this.initialTopRightVertex = this.planesInitialVertices[this.currentPlaneIdx][3]
     this.initialBottomRightVertex = this.planesInitialVertices[this.currentPlaneIdx][7]
+    this.initialTopLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][0]
+    this.initialBottomLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][5]
     dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
     this.onScroll()
   }
@@ -105,7 +107,7 @@ class Preview extends BaseComponent {
     this.delta += 0.01
     for (let k = 0; k < this.planes.length; k++) {
       for (let i = 0; i < this.planes[k].mesh.vertices.length; i++) {
-        this.planes[k].mesh.vertices[i] = this.planesInitialVertices[k][i] + (Math.sin((i * 0.9) + this.delta)) / 8
+        this.planes[k].mesh.vertices[i] = this.planesInitialVertices[k][i] + (Math.sin((i * 0.9) + this.delta)) / 6
       }
     }
     this.renderer.render(this.stage)
@@ -119,7 +121,9 @@ class Preview extends BaseComponent {
           v: this.hoverPreview,
           ease: Sine.easeOut,
           onUpdate: () => {
+            this.planesInitialVertices[planeIdx][0] = this.initialTopLeftVertex - this.tweenValue.v
             this.planesInitialVertices[planeIdx][3] = this.initialTopRightVertex + this.tweenValue.v
+            this.planesInitialVertices[planeIdx][5] = this.initialBottomLeftVertex + this.tweenValue.v
             this.planesInitialVertices[planeIdx][7] = this.initialBottomRightVertex - this.tweenValue.v
           },
           onComplete: () => {
@@ -134,16 +138,22 @@ class Preview extends BaseComponent {
         let newTop = this.planesInitialVertices[planeIdx][3]
         let newBottom = this.planesInitialVertices[planeIdx][7]
         let resetValues = {
-          t: this.planesInitialVertices[planeIdx][3],
-          b: this.planesInitialVertices[planeIdx][7]
+          tl: this.planesInitialVertices[planeIdx][0],
+          bl: this.planesInitialVertices[planeIdx][5],
+          tr: this.planesInitialVertices[planeIdx][3],
+          br: this.planesInitialVertices[planeIdx][7]
         }
         TweenMax.to(resetValues, 1, {
-          t: this.initialTopRightVertex,
-          b: this.initialBottomRightVertex,
+          tl: this.initialTopLeftVertex,
+          bl: this.initialBottomLeftVertex,
+          tr: this.initialTopRightVertex,
+          br: this.initialBottomRightVertex,
           ease: Sine.easeOut,
           onUpdate: () => {
-            this.planesInitialVertices[planeIdx][3] = resetValues.t
-            this.planesInitialVertices[planeIdx][7] = resetValues.b
+            this.planesInitialVertices[planeIdx][0] = resetValues.tl
+            this.planesInitialVertices[planeIdx][3] = resetValues.tr
+            this.planesInitialVertices[planeIdx][5] = resetValues.bl
+            this.planesInitialVertices[planeIdx][7] = resetValues.br
           },
           onComplete: () => {
             this.onceRight = false
@@ -161,14 +171,14 @@ class Preview extends BaseComponent {
       if (this.currentPlaneIdx >= 0 && this.currentPlaneIdx < this.planes.length && !this.isScrolling) {
         dom.event.off(this.refs.preview, 'mousemove', this.mouseMove)
         if (dy > 10 && this.currentPlaneIdx < this.planes.length - 1) {
-          toScroll = - ((this.halfMargin * 3) + this.planes[this.currentPlaneIdx].mesh.height)
+          toScroll = - Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
           this.isScrolling = true
           this.lastPlaneIdx = this.currentPlaneIdx
           this.currentPlaneIdx++
           needScroll = true
           console.log('⬇️')
         } else if (dy < -10 && this.currentPlaneIdx > 0) {
-          toScroll = ((this.halfMargin * 3) + this.planes[this.currentPlaneIdx].mesh.height)
+          toScroll = Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
           this.isScrolling = true
           this.lastPlaneIdx = this.currentPlaneIdx
           this.currentPlaneIdx--
@@ -182,10 +192,14 @@ class Preview extends BaseComponent {
             this.isScrolling = false
 
             // Reset plane vertices & add listener
+            this.planesInitialVertices[this.lastPlaneIdx][0] = this.initialTopLeftVertex
             this.planesInitialVertices[this.lastPlaneIdx][3] = this.initialTopRightVertex
+            this.planesInitialVertices[this.lastPlaneIdx][5] = this.initialBottomLeftVertex
             this.planesInitialVertices[this.lastPlaneIdx][7] = this.initialBottomRightVertex
             this.initialTopRightVertex = this.planesInitialVertices[this.currentPlaneIdx][3]
             this.initialBottomRightVertex = this.planesInitialVertices[this.currentPlaneIdx][7]
+            this.initialTopLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][0]
+            this.initialBottomLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][5]
             this.onceRight = false
             this.tweenValue.v = 0
             Actions.changePreview(this.currentPlaneIdx)
