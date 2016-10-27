@@ -3,6 +3,7 @@ import Data from '../../data'
 import Store from '../../store'
 import Actions from '../../actions'
 import Constants from '../../constants'
+import Router from '../../services/router'
 import utils from '../../utils/Utils'
 import dom from 'dom-hand'
 
@@ -24,7 +25,7 @@ class Preview extends BaseComponent {
     this.planesVertices = [] // All vertices of all planes
     this.planesInitialVertices = [] // All initial vertices of all planes
     this.onceRight = false // Used for mouseMove animation : test if transitioning
-    this.hoverPreview = 80 // Used for mouseMove animation : movement max of vertex
+    this.hoverPreview = 50 // Used for mouseMove animation : movement max of vertex
     this.tweenValue = { // Used for mouseMove animation
       v: 0
     }
@@ -87,6 +88,7 @@ class Preview extends BaseComponent {
       this.planesInitialVertices[i] = this.planesVertices[this.currentPlaneIdx][i]
     }
     dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
+    dom.event.on(this.refs.preview, 'click', this.mouseClick)
     require('mouse-wheel')(this.onScroll)
   }
   resize() {
@@ -117,17 +119,17 @@ class Preview extends BaseComponent {
   }
   mouseMove() {
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
+      Store.Parent.style.cursor = 'pointer'
       if (!this.onceRight) {
         Actions.mouseEnterPreview()
         let planeIdx = this.currentPlaneIdx
-        TweenMax.to(this.tweenValue, 0.5, {
+        TweenMax.to(this.tweenValue, 0.2, {
           v: this.hoverPreview,
-          ease: Sine.easeOut,
           onUpdate: () => {
             for (let i = 0; i < 8; i++) {
               let factor = 1
               if (i % 2 === 0) {
-                factor = 1.5
+                factor = 0.2
               }
               this.planesVertices[planeIdx][i] = this.planesInitialVertices[i] + this.tweenValue.v * factor * this.animSigns[i]
             }
@@ -138,6 +140,7 @@ class Preview extends BaseComponent {
         })
       }
     } else {
+      Store.Parent.style.cursor = 'auto'
       if (this.onceRight && this.tweenValue.v === this.hoverPreview) {
         Actions.mouseLeavePreview()
         let planeIdx = this.currentPlaneIdx
@@ -151,7 +154,7 @@ class Preview extends BaseComponent {
           brx: this.planesVertices[planeIdx][6],
           bry: this.planesVertices[planeIdx][7]
         }
-        TweenMax.to(resetValues, 0.3, {
+        TweenMax.to(resetValues, 0.2, {
           tlx: this.planesInitialVertices[0],
           tly: this.planesInitialVertices[1],
           trx: this.planesInitialVertices[2],
@@ -160,7 +163,6 @@ class Preview extends BaseComponent {
           bly: this.planesInitialVertices[5],
           brx: this.planesInitialVertices[6],
           bry: this.planesInitialVertices[7],
-          ease: Sine.easeOut,
           onUpdate: () => {
             for (let i = 0; i < 8; i++) {
               let key = this.verticesOrder[i]
@@ -173,6 +175,12 @@ class Preview extends BaseComponent {
           }
         })
       }
+    }
+  }
+
+  mouseClick(e) {
+    if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
+      Router.setRoute(`/project/${Store.Previews[this.currentPlaneIdx].slug}`)
     }
   }
 
