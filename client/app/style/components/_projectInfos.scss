@@ -1,0 +1,17 @@
+.project-infos {
+  @extend .full;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  padding: 25%;
+  cursor: pointer;
+
+  &__description {
+    width: 50%;
+
+    br {
+      line-height: 2;
+    }
+  }
+}

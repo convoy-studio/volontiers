@@ -12,6 +12,7 @@ class ProjectImage extends BaseComponent {
     this.slug = this.props.slug
     Store.on(Constants.PROJECT_IMAGES_LOADED, this.addListeners)
     Store.on(Constants.WINDOW_RESIZE, this.resize)
+    Store.on(Constants.TOGGLE_PROJECT_INFOS, this.toggleSlide)
     Store.Window.w = window.innerWidth
     Store.Window.h = window.innerHeight
     this.lastPlaneIdx = 0
@@ -29,6 +30,7 @@ class ProjectImage extends BaseComponent {
     this.tweenValue = { // Used for mouseMove animation
       v: 0
     }
+    this.toggleSlided = false
   }
   render() {
     return (
@@ -112,6 +114,16 @@ class ProjectImage extends BaseComponent {
       }
     }
     this.renderer.render(this.stage)
+  }
+  toggleSlide() {
+    let sign = 1
+    if (!this.toggleSlided) sign = -1
+    TweenMax.to(this.container.position, 0.3, {
+      y: this.container.position.y + Store.Window.h * sign,
+      onComplete: () => {
+        this.toggleSlided = !this.toggleSlided
+      }
+    })
   }
   mouseMove() {
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area

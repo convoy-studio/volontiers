@@ -61,6 +61,12 @@ const Actions = {
       item: { projectSlideIdx: idx }
     })
   },
+  toggleProjectInfos: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.TOGGLE_PROJECT_INFOS,
+      item: undefined
+    })
+  },
   changeLang: (lang) => {
     Dispatcher.handleViewAction({
       actionType: Constants.LANGUAGE_CHANGED,
