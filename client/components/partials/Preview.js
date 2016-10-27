@@ -89,7 +89,7 @@ class Preview extends BaseComponent {
     }
     dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
     dom.event.on(this.refs.preview, 'click', this.mouseClick)
-    require('mouse-wheel')(this.onScroll)
+    this.scrolListener = require('mouse-wheel')(this.onScroll)
   }
   resize() {
     let windowW = Store.Window.w
@@ -206,7 +206,7 @@ class Preview extends BaseComponent {
       }
       if (needScroll) {
         this.currentScroll = this.currentScroll + toScroll
-        TweenMax.to(this.container.position, 0.5, {y: this.currentScroll, ease: Circ.easeOut, onComplete: () => {
+        TweenMax.to(this.container.position, 0.2, {y: this.currentScroll, ease: Circ.easeOut, onComplete: () => {
           this.isScrolling = false
 
           // Reset plane vertices & add listener
@@ -226,7 +226,7 @@ class Preview extends BaseComponent {
   }
 
   componentWillUnmount() {
-    dom.event.off(window, 'wheel', this.onScroll)
+    dom.event.off(window, 'wheel', this.scrolListener)
   }
 }
 

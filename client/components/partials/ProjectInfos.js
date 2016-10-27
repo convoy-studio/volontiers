@@ -27,7 +27,6 @@ class ProjectInfos extends BaseComponent {
     Actions.toggleProjectInfos()
   }
   toggleSection() {
-    console.log('toggle')
     let sign = 1
     if (!this.toggled) sign = -1
     TweenMax.to(dom.select('.project-infos'), 0.4, {
