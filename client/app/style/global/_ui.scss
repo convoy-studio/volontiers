@@ -105,6 +105,10 @@ a.link {
   padding: 3px;
   overflow-y: hidden;
 
+  @media (max-width: $MQ_SMALL) {
+    font-size: $mobileFontSize;
+  }
+
   &--hidden {
     opacity: 0;
   }

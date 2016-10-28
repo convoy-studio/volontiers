@@ -8,13 +8,29 @@
   padding: 0 40px;
   text-transform: uppercase;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: $globalFontSize;
+
+  @media (max-width: $MQ_SMALL) {
+    font-size: $mobileFontSize;
+    padding: 0 $mobileMargin;
+    height: 42px;
+    line-height: 42px;
+  }
 
   &__title {
+    display: inline-block;
     position: absolute;
     left: 50%;
     top: 0;
     transform: translateX(-50%);
+
+    @media (max-width: $MQ_SMALL) {
+      left: 0;
+      width: calc(100% - 30px);
+      padding-left: 40px;
+      text-align: center;
+      transform: translateX(0);
+    }
   }
 
   &__link {
@@ -22,5 +38,14 @@
     right: 40px;
     top: 50%;
     transform: translateY(-50%);
+
+    @media (max-width: $MQ_SMALL) {
+      position: absolute;
+      top: auto;
+      right: $mobileMargin;
+      bottom: $mobileMargin;
+      transform-origin: right center;
+      transform: rotate(90deg) translateX(22px)
+    }
   }
 }

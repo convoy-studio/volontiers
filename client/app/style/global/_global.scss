@@ -3,9 +3,14 @@ html, body {
   margin: 0;
   font-family: 'Euclid Flex', Arial, sans-serif;
   color: $black;
-  font-size: 18px;
+  font-size: $globalFontSize;
   line-height: $globalLineHeight;
+
+  @media (max-width: $MQ_SMALL) {
+    font-size: $mobileFontSize;
+  }
 }
+
 
 html {
   @extend .full;
