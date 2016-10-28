@@ -8,16 +8,19 @@ import dom from 'dom-hand'
 class PreviewLink extends BaseComponent {
   constructor(props) {
     super(props)
-    this.update = this.update.bind(this)
-    Store.on(Constants.PREVIEW_CHANGED, this.update)
-    Store.on(Constants.MOUSEENTER_PREVIEW, this.showLink)
-    Store.on(Constants.MOUSELEAVE_PREVIEW, this.hideLink)
     this.data = {
       slug: '/project/' + Store.Previews[0].slug
     }
     this.state = {
       showLink: false
     }
+  }
+  componentDidMount() {
+    this.parent = this.refs.previewLink
+    this.update = this.update.bind(this)
+    Store.on(Constants.PREVIEW_CHANGED, this.update)
+    Store.on(Constants.MOUSEENTER_PREVIEW, this.showLink)
+    Store.on(Constants.MOUSELEAVE_PREVIEW, this.hideLink)
   }
   render() {
     return (
@@ -30,13 +33,13 @@ class PreviewLink extends BaseComponent {
   }
   showLink() {
     if (this.state.showLink === false) {
-      TweenMax.to(this.refs.previewLink, 0.2, {opacity: 1})
+      TweenMax.to(this.parent, 0.2, {opacity: 1})
       this.state.showLink = true
     }
   }
   hideLink() {
     if (this.state.showLink === true) {
-      TweenMax.to(this.refs.previewLink, 0.2, {opacity: 0})
+      TweenMax.to(this.parent, 0.2, {opacity: 0})
       this.state.showLink = false
     }
   }

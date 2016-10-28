@@ -85,8 +85,8 @@ class ProjectImage extends BaseComponent {
     this.initialBottomRightVertex = this.planesInitialVertices[this.currentPlaneIdx][7]
     this.initialTopLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][0]
     this.initialBottomLeftVertex = this.planesInitialVertices[this.currentPlaneIdx][5]
-    dom.event.on(this.refs.projectImage, 'mousemove', this.mouseMove)
-    dom.event.on(this.refs.projectImage, 'click', this.mouseClick)
+    dom.event.on(this.parent, 'mousemove', this.mouseMove)
+    dom.event.on(this.parent, 'click', this.mouseClick)
     // this.onScroll()
   }
   resize() {

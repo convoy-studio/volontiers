@@ -8,8 +8,6 @@ import dom from 'dom-hand'
 class PreviewFooter extends BaseComponent {
   constructor(props) {
     super(props)
-    this.update = this.update.bind(this)
-    Store.on(Constants.PREVIEW_CHANGED, this.update)
     this.data = {
       curentPage: 1,
       totalPages: Object.keys(Data.projects).length,
@@ -27,6 +25,8 @@ class PreviewFooter extends BaseComponent {
     )
   }
   componentDidMount() {
+    this.update = this.update.bind(this)
+    Store.on(Constants.PREVIEW_CHANGED, this.update)
     TweenMax.fromTo(dom.select('.footer'), 0.3, {y: 80, opacity: 0}, {y: 0, opacity: 1, ease: Sine.easeIn})
   }
   update() {

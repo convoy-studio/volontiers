@@ -86,12 +86,11 @@ class Preview extends BaseComponent {
     for (let i = 0; i < 8; i++) {
       this.planesInitialVertices[i] = this.planesVertices[this.currentPlaneIdx][i]
     }
-    dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
-    dom.event.on(this.refs.preview, 'click', this.mouseClick)
+    dom.event.on(this.parent, 'mousemove', this.mouseMove)
+    dom.event.on(this.parent, 'click', this.mouseClick)
     inertia.addCallback(this.onScroll)
-    dom.event.on(this.refs.preview, 'DOMMouseScroll', this.handleScroll)
-    dom.event.on(this.refs.preview, 'mousewheel', this.handleScroll)
-    // this.scrolListener = require('mouse-wheel')(this.onScroll)
+    dom.event.on(this.parent, 'DOMMouseScroll', this.handleScroll)
+    dom.event.on(this.parent, 'mousewheel', this.handleScroll)
   }
   resize() {
     let windowW = Store.Window.w
@@ -236,7 +235,10 @@ class Preview extends BaseComponent {
   }
 
   componentWillUnmount() {
-    dom.event.off(window, 'wheel', this.scrolListener)
+    dom.event.off(this.parent, 'mousemove', this.mouseMove)
+    dom.event.off(this.parent, 'click', this.mouseClick)
+    dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
+    dom.event.off(this.parent, 'mousewheel', this.handleScroll)
   }
 }
 
