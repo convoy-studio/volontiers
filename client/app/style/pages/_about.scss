@@ -12,5 +12,9 @@
     br {
       line-height: 2;
     }
+
+    @media (max-width: $MQ_SMALL) {
+      font-size: $mobileFontSize;
+    }
   }
 }
