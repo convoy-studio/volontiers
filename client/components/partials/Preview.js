@@ -80,10 +80,6 @@ class Preview extends BaseComponent {
   }
   addListeners() {
     TweenMax.ticker.addEventListener('tick', this.update.bind(this))
-    this.initialTopRightVertex = this.planesVertices[this.currentPlaneIdx][3]
-    this.initialBottomRightVertex = this.planesVertices[this.currentPlaneIdx][7]
-    this.initialTopLeftVertex = this.planesVertices[this.currentPlaneIdx][0]
-    this.initialBottomLeftVertex = this.planesVertices[this.currentPlaneIdx][5]
     for (let i = 0; i < 8; i++) {
       this.planesInitialVertices[i] = this.planesVertices[this.currentPlaneIdx][i]
     }
@@ -110,6 +106,7 @@ class Preview extends BaseComponent {
   }
   update() {
     this.delta += 0.01
+    // Give some circular movement to vertices
     for (let k = 0; k < this.planes.length; k++) {
       for (let i = 0; i < this.planes[k].mesh.vertices.length; i++) {
         this.planes[k].mesh.vertices[i] = this.planesVertices[k][i] + (Math.sin((i * 0.9) + this.delta)) / 6
@@ -120,7 +117,7 @@ class Preview extends BaseComponent {
   mouseMove() {
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
       Store.Parent.style.cursor = 'pointer'
-      if (!this.onceRight) {
+      if (!this.onceRight) { // Test if isn't already playing
         Actions.mouseEnterPreview()
         let planeIdx = this.currentPlaneIdx
         TweenMax.to(this.tweenValue, 0.2, {
@@ -135,15 +132,17 @@ class Preview extends BaseComponent {
             }
           },
           onComplete: () => {
+            // Reset animation
             this.onceRight = true
           }
         })
       }
     } else {
       Store.Parent.style.cursor = 'auto'
-      if (this.onceRight && this.tweenValue.v === this.hoverPreview) {
+      if (this.onceRight && this.tweenValue.v === this.hoverPreview) { // This animation done & completed
         Actions.mouseLeavePreview()
         let planeIdx = this.currentPlaneIdx
+        // Values to be resetted
         let resetValues = {
           tlx: this.planesVertices[planeIdx][0],
           tly: this.planesVertices[planeIdx][1],
@@ -170,7 +169,7 @@ class Preview extends BaseComponent {
             }
           },
           onComplete: () => {
-            this.onceRight = false
+            this.onceRight = false // Animation can be played again
             this.tweenValue.v = 0
           }
         })
@@ -187,16 +186,16 @@ class Preview extends BaseComponent {
   onScroll(dx, dy) {
     let toScroll = 0
     let needScroll = false
-    if (this.currentPlaneIdx >= 0 && this.currentPlaneIdx < this.planes.length && !this.isScrolling) {
+    if (this.currentPlaneIdx >= 0 && this.currentPlaneIdx < this.planes.length && !this.isScrolling) { // Limits
       dom.event.off(this.refs.preview, 'mousemove', this.mouseMove)
-      if (dy > 10 && this.currentPlaneIdx < this.planes.length - 1) {
+      if (dy > 10 && this.currentPlaneIdx < this.planes.length - 1) { // Down
         toScroll = - Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
         this.isScrolling = true
         this.lastPlaneIdx = this.currentPlaneIdx
         this.currentPlaneIdx++
         needScroll = true
         console.log('⬇️')
-      } else if (dy < -10 && this.currentPlaneIdx > 0) {
+      } else if (dy < -10 && this.currentPlaneIdx > 0) { // Up
         toScroll = Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
         this.isScrolling = true
         this.lastPlaneIdx = this.currentPlaneIdx
@@ -213,6 +212,7 @@ class Preview extends BaseComponent {
           for (let i = 0; i < 8; i++) {
             this.planesVertices[this.lastPlaneIdx][i] = this.planesInitialVertices[i]
           }
+          // Fill initial vertices array
           for (let i = 0; i < 8; i++) {
             this.planesInitialVertices[i] = this.planesVertices[this.currentPlaneIdx][i]
           }
