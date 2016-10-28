@@ -29,6 +29,10 @@
       li {
         display: inline-block;
 
+        &:last-child() {
+          padding-left: 24px;
+        }
+
         a {
           display: inline-block;
           vertical-align: middle;
