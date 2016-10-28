@@ -6,6 +6,7 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import utils from '../../utils/Utils'
 import dom from 'dom-hand'
+import inertia from 'wheel-inertia'
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -85,7 +86,10 @@ class Preview extends BaseComponent {
     }
     dom.event.on(this.refs.preview, 'mousemove', this.mouseMove)
     dom.event.on(this.refs.preview, 'click', this.mouseClick)
-    this.scrolListener = require('mouse-wheel')(this.onScroll)
+    inertia.addCallback(this.onScroll)
+    dom.event.on(this.refs.preview, 'DOMMouseScroll', this.handleScroll)
+    dom.event.on(this.refs.preview, 'mousewheel', this.handleScroll)
+    // this.scrolListener = require('mouse-wheel')(this.onScroll)
   }
   resize() {
     let windowW = Store.Window.w
@@ -182,20 +186,23 @@ class Preview extends BaseComponent {
       Router.setRoute(`/project/${Store.Previews[this.currentPlaneIdx].slug}`)
     }
   }
-
-  onScroll(dx, dy) {
+  handleScroll(e) {
+    let delta = e.wheelDelta
+    inertia.update(delta)
+  }
+  onScroll(direction) {
     let toScroll = 0
     let needScroll = false
     if (this.currentPlaneIdx >= 0 && this.currentPlaneIdx < this.planes.length && !this.isScrolling) { // Limits
       dom.event.off(this.refs.preview, 'mousemove', this.mouseMove)
-      if (dy > 10 && this.currentPlaneIdx < this.planes.length - 1) { // Down
+      if (direction === -1 && this.currentPlaneIdx < this.planes.length - 1) { // Down
         toScroll = - Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
         this.isScrolling = true
         this.lastPlaneIdx = this.currentPlaneIdx
         this.currentPlaneIdx++
         needScroll = true
         console.log('⬇️')
-      } else if (dy < -10 && this.currentPlaneIdx > 0) { // Up
+      } else if (direction === 1 && this.currentPlaneIdx > 0) { // Up
         toScroll = Math.floor(((this.halfMargin * 3) + (Store.Window.h - this.margin)))
         this.isScrolling = true
         this.lastPlaneIdx = this.currentPlaneIdx
