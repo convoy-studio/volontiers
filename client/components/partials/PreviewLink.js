@@ -15,10 +15,13 @@ class PreviewLink extends BaseComponent {
     this.data = {
       slug: '/project/' + Store.Previews[0].slug
     }
+    this.state = {
+      showLink: false
+    }
   }
   render() {
     return (
-      <a href={this.data.slug} className='link link--hidden preview-link'>View more</a>
+      <a href={this.data.slug} ref='previewLink' className='link preview-link'>View more</a>
     )
   }
   update() {
@@ -26,10 +29,16 @@ class PreviewLink extends BaseComponent {
     this.forceUpdate()
   }
   showLink() {
-    if (dom.classes.contains(dom.select('.preview-link'), 'link--hidden')) dom.classes.remove(dom.select('.preview-link'), 'link--hidden')
+    if (this.state.showLink === false) {
+      TweenMax.to(this.refs.previewLink, 0.2, {opacity: 1})
+      this.state.showLink = true
+    }
   }
   hideLink() {
-    if (!dom.classes.contains(dom.select('.preview-link'), 'link--hidden')) dom.classes.add(dom.select('.preview-link'), 'link--hidden')
+    if (this.state.showLink === true) {
+      TweenMax.to(this.refs.previewLink, 0.2, {opacity: 0})
+      this.state.showLink = false
+    }
   }
 }
 
