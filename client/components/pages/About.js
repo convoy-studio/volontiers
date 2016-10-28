@@ -7,16 +7,15 @@ export default class About extends Page {
   constructor(props) {
     super(props)
     this.slug = props.hash.path
-    this.data.assets = Data.routing[this.slug].assets
+
+    this.data = {
+      content: Data.routing['/about'].content[Store.Language]
+    }
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper'>
-  			<div className='vertical-center-parent'>
-  				<p className='vertical-center-child'>
-  					This is the about
-  				</p>
-  			</div>
+  		<div id='about-page' ref='page-wrapper' className='page-wrapper'>
+  			<p className="description" dangerouslySetInnerHTML={{__html: this.data.content}}></p>
   		</div>
   	)
   }

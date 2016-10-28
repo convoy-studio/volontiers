@@ -33,7 +33,7 @@ export default class FrontContainer extends BaseComponent {
               <LangButton lang="fr"/>
             </li>
             <li>
-              <a href="#" className="link">About</a>
+              <a href="/about" className="link">About</a>
             </li>
           </ul>
         </div>

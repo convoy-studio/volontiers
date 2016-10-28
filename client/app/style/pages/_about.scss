@@ -1,0 +1,16 @@
+#about-page {
+  @extend .full;
+  position: absolute;
+
+  .description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+
+    br {
+      line-height: 2;
+    }
+  }
+}

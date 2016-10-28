@@ -7,7 +7,11 @@ export default {
     },
     '/about': {
       name: 'About',
-      assets: []
+      assets: [],
+      content: {
+        en: 'Credibly productize error-free channels rather than pandemic bandwidth. Competently customize emerging content before bleeding-edge process improvements. Intrinsicly simplify wireless benefits after state of the art architectures. Progressively strategize clicks-and-mortar customer service and compelling e-commerce. Competently communicate extensive data without ethical systems.<br>Distinctively benchmark user-centric outsourcing via economically sound strategic theme areas. Completely incubate scalable results without granular ideas.',
+        fr: 'Credibly productize error-free channels rather than pandemic bandwidth. Competently customize emerging content before bleeding-edge process improvements. Intrinsicly simplify wireless benefits after state of the art architectures. Progressively strategize clicks-and-mortar customer service and compelling e-commerce. Competently communicate extensive data without ethical systems.<br>Distinctively benchmark user-centric outsourcing via economically sound strategic theme areas. Completely incubate scalable results without granular ideas.'
+      }
     }
   },
   projects: {
