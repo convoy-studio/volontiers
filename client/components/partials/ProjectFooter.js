@@ -16,7 +16,7 @@ class ProjectFooter extends BaseComponent {
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.changeInfosText)
     this.data = {
       curentPage: 1,
-      totalPages: Object.keys(Data.projects).length,
+      totalPages: Object.keys(Data.projects[this.slug]).length,
       title: Data.projects[this.slug].name,
       infosText: 'View'
     }
