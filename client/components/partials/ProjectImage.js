@@ -128,9 +128,9 @@ class ProjectImage extends BaseComponent {
   mouseMove() {
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
       if (!this.onceRight && !this.onceLeft && this.tweenValue.v === 0) {
-        // Actions.mouseEnterPreview()
+        Actions.mouseEnterRightProject()
         let planeIdx = this.currentPlaneIdx
-        TweenMax.to(this.tweenValue, 1, {
+        TweenMax.to(this.tweenValue, 0.3, {
           v: this.hoverPreview,
           ease: Sine.easeOut,
           onUpdate: () => {
@@ -145,7 +145,7 @@ class ProjectImage extends BaseComponent {
         })
       }
       if (this.onceLeft && this.tweenValue.v === this.hoverPreview) {
-        // Actions.mouseLeavePreview()
+        Actions.mouseLeaveLeftProject()
         let planeIdx = this.currentPlaneIdx
         let resetValues = {
           tl: this.planesInitialVertices[planeIdx][0],
@@ -153,7 +153,7 @@ class ProjectImage extends BaseComponent {
           tr: this.planesInitialVertices[planeIdx][3],
           br: this.planesInitialVertices[planeIdx][7]
         }
-        TweenMax.to(resetValues, 1, {
+        TweenMax.to(resetValues, 0.3, {
           tl: this.initialTopLeftVertex,
           bl: this.initialBottomLeftVertex,
           tr: this.initialTopRightVertex,
@@ -173,9 +173,9 @@ class ProjectImage extends BaseComponent {
       }
     } else if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x < Store.Window.w / 2) {
       if (!this.onceLeft && !this.onceRight && this.tweenValue.v === 0) {
-        // Actions.mouseEnterPreview()
+        Actions.mouseEnterLeftProject()
         let planeIdx = this.currentPlaneIdx
-        TweenMax.to(this.tweenValue, 1, {
+        TweenMax.to(this.tweenValue, 0.3, {
           v: this.hoverPreview,
           ease: Sine.easeOut,
           onUpdate: () => {
@@ -190,7 +190,7 @@ class ProjectImage extends BaseComponent {
         })
       }
       if (this.onceRight && this.tweenValue.v === this.hoverPreview) {
-        // Actions.mouseLeavePreview()
+        Actions.mouseLeaveRightProject()
         let planeIdx = this.currentPlaneIdx
         let resetValues = {
           tl: this.planesInitialVertices[planeIdx][0],
@@ -198,7 +198,7 @@ class ProjectImage extends BaseComponent {
           tr: this.planesInitialVertices[planeIdx][3],
           br: this.planesInitialVertices[planeIdx][7]
         }
-        TweenMax.to(resetValues, 1, {
+        TweenMax.to(resetValues, 0.3, {
           tl: this.initialTopLeftVertex,
           bl: this.initialBottomLeftVertex,
           tr: this.initialTopRightVertex,

@@ -8,6 +8,8 @@ import Landing from '../partials/Landing'
 import ProjectImage from '../partials/ProjectImage'
 import ProjectFooter from '../partials/ProjectFooter'
 import ProjectInfos from '../partials/ProjectInfos'
+import ProjectPreviousLink from '../partials/ProjectPreviousLink'
+import ProjectNextLink from '../partials/ProjectNextLink'
 
 export default class Project extends Page {
   constructor(props) {
@@ -25,6 +27,8 @@ export default class Project extends Page {
   		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         {this.state.showLanding && <Landing/>}
         <ProjectImage slug={this.slug}/>
+        <ProjectPreviousLink slug={this.slug}/>
+        <ProjectNextLink slug={this.slug}/>
         <ProjectFooter slug={this.slug}/>
         <ProjectInfos slug={this.slug}/>
   		</div>

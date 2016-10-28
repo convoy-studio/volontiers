@@ -1,0 +1,29 @@
+.project-previous-link {
+  position: fixed !important;
+  left: 40px;
+  top: 50%;
+  transform-origin: left center;
+  transform: rotateZ(-90deg) translateX(-50%);
+  text-transform: uppercase;
+  pointer-events: auto;
+  opacity: 0;
+
+  span {
+    padding-left: 20px;
+  }
+}
+
+.project-next-link {
+  position: fixed !important;
+  right: 40px;
+  top: 50%;
+  transform-origin: right center;
+  transform: rotateZ(90deg) translateX(50%);
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+
+  span {
+    padding-left: 20px;
+  }
+}

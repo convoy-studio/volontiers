@@ -160,6 +160,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Canvas: undefined,
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
+  ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,

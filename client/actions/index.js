@@ -49,6 +49,30 @@ const Actions = {
       item: undefined
     })
   },
+  mouseEnterRightProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSEENTER_RIGHT_PROJECT,
+      item: undefined
+    })
+  },
+  mouseLeaveRightProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSELEAVE_RIGHT_PROJECT,
+      item: undefined
+    })
+  },
+  mouseEnterLeftProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSEENTER_LEFT_PROJECT,
+      item: undefined
+    })
+  },
+  mouseLeaveLeftProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.MOUSELEAVE_LEFT_PROJECT,
+      item: undefined
+    })
+  },
   changePreview: (idx) => {
     Dispatcher.handleViewAction({
       actionType: Constants.PREVIEW_CHANGED,

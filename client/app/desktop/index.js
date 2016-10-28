@@ -32,6 +32,7 @@ class App {
     let k = 0
     for (k in Data.projects) {
       if ({}.hasOwnProperty.call(Data.projects, k)) {
+        Store.ProjectsSlugs.push(k)
         Data.routing[`/project/${k}`] = {
           name: Data.projects[k].name,
           assets: Data.projects[k].assets
