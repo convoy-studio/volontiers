@@ -53,6 +53,7 @@ class Preview extends BaseComponent {
   }
   loadPreview() {
     let loader = new PIXI.loaders.Loader()
+    // TODO: Replace Store.Previews.length by desired number of projects to show on home page
     for (let i = 0; i < Store.Previews.length; i++) {
       loader.add(`preview-${i}`, `assets/${Store.Previews[i].image}`)
     }
@@ -60,6 +61,7 @@ class Preview extends BaseComponent {
     loader.load()
   }
   completeLoader() {
+    // TODO: Replace Store.Previews.length by desired number of projects to show on home page
     for (let i = 0; i < Store.Previews.length; i++) {
       let texture = new PIXI.Texture.fromImage(`assets/${Store.Previews[i].image}`)
       this.createPlane(texture, i)
@@ -182,7 +184,8 @@ class Preview extends BaseComponent {
   }
 
   mouseClick(e) {
-    if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
+    // Test if on right preview area
+    if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) {
       Router.setRoute(`/project/${Store.Previews[this.currentPlaneIdx].slug}`)
     }
   }

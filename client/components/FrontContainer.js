@@ -11,12 +11,6 @@ export default class FrontContainer extends BaseComponent {
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
   }
   render() {
-    const menuData = Store.menuContent()
-    const menuItems = Object.keys(menuData).map((key, index)=>{
-      return (
-    		<li key={index}><a href={key}>{menuData[key].name}</a></li>
-    	)
-    })
     return (
   		<header id='front-container' ref='front-container' className="navigation">
         <a href="#" className="link">Projects</a>

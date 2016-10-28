@@ -36,3 +36,22 @@ Add your routes in `client/data/index.js`. If you need nested routes, check out 
 
 
 Also update `client/components/PagesContainer.js`.
+
+## TODO
+### SEO
+- [ ] Fill index.tpl.html head
+- [ ] Add h1 tag
+- [ ] ( Add analytics scripts ? )
+
+### Components
+- [ ] Projects overlay
+
+### Mobile
+- [ ]
+
+### Miscellaneous
+- [ ] Change language ( without reloading ? )
+
+
+### Rendering
+- [ ]

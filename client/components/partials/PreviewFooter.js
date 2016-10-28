@@ -30,12 +30,12 @@ class PreviewFooter extends BaseComponent {
     TweenMax.fromTo(dom.select('.footer'), 0.3, {y: 80, opacity: 0}, {y: 0, opacity: 1, ease: Sine.easeIn})
   }
   update() {
-    this.data.curentPage = Store.CurrentPreviewIndex + 1
     this.data.title = Store.Previews[Store.CurrentPreviewIndex].title
     this.data.slug = '/project/' + Store.Previews[Store.CurrentPreviewIndex].slug
-    TweenMax.to(dom.select('.footer__title'), 0.2, {opacity: 0, ease: Sine.easeIn, onComplete() {
-      TweenMax.to(dom.select('.footer__title'), 0.2, {opacity: 1, ease: Sine.easeIn, delay: 0.1})
-    }})
+    this.data.curentPage = Store.CurrentPreviewIndex + 1
+    let tl = new TimelineMax()
+    tl.to(dom.select('.footer__title'), 0.2, {opacity: 0, ease: Sine.easeIn})
+    tl.to(dom.select('.footer__title'), 0.2, {opacity: 1, ease: Sine.easeIn}, '+=0.1')
     setTimeout(() => {
       this.forceUpdate()
     }, 300)
