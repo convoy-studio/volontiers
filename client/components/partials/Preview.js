@@ -32,6 +32,8 @@ class Preview extends BaseComponent {
     }
     this.animSigns = ['1', '-1', '-1', '1', '1', '1', '-1', '-1'] // Used for mouseMove animation : direction of vertices
     this.verticesOrder = ['tlx', 'tly', 'trx', 'try', 'blx', 'bly', 'brx', 'bry'] // Used for mouseMove animation : positions of vertices
+    this.firstPreviewLoaded = false
+    this.previewLoadCounter = 0
   }
   render() {
     return (
@@ -52,21 +54,29 @@ class Preview extends BaseComponent {
     this.stage.addChild(this.container)
   }
   loadPreview() {
-    let loader = new PIXI.loaders.Loader()
+    const loader = new PIXI.loaders.Loader()
     // TODO: Replace Store.Previews.length by desired number of projects to show on home page
-    for (let i = 0; i < Store.Previews.length; i++) {
-      loader.add(`preview-${i}`, `assets/${Store.Previews[i].image}`)
-    }
-    loader.on('complete', this.completeLoader)
+    // for (let i = 0; i < Store.Previews.length; i++) {
+    //   loader.add(`preview-${i}`, `assets/${Store.Previews[i].image}`)
+    // }
+    loader.add(`preview-${this.previewLoadCounter}`, `assets/${Store.Previews[this.previewLoadCounter].image}`)
     loader.load()
+    loader.on('complete', this.completeLoader)
   }
-  completeLoader() {
-    // TODO: Replace Store.Previews.length by desired number of projects to show on home page
-    for (let i = 0; i < Store.Previews.length; i++) {
-      let texture = new PIXI.Texture.fromImage(`assets/${Store.Previews[i].image}`)
-      this.createPlane(texture, i)
+  completeLoader(loader, resources) {
+    let texture = resources[`preview-${this.previewLoadCounter}`].texture
+    this.createPlane(texture, this.previewLoadCounter)
+    if (!this.firstPreviewLoaded) {
+      this.firstPreviewLoaded = true
+      Actions.previewsLoaded()
     }
-    Actions.previewsLoaded()
+    this.previewLoadCounter++
+    if (this.previewLoadCounter < Store.Previews.length) {
+      const newLoader = new PIXI.loaders.Loader()
+      newLoader.add(`preview-${this.previewLoadCounter}`, `assets/${Store.Previews[this.previewLoadCounter].image}`)
+      newLoader.load()
+      newLoader.on('complete', this.completeLoader)
+    }
   }
 
   createPlane(texture, idx) {

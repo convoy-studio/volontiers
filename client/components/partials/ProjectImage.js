@@ -28,6 +28,8 @@ class ProjectImage extends BaseComponent {
       v: 0
     }
     this.toggleSlided = false
+    this.firstPreviewLoaded = false
+    this.previewLoadCounter = 0
   }
   render() {
     return (
@@ -51,19 +53,25 @@ class ProjectImage extends BaseComponent {
     this.stage.addChild(this.container)
   }
   loadPreview() {
-    let loader = new PIXI.loaders.Loader()
-    for (let i = 0; i < Data.projects[this.slug].assets.length; i++) {
-      loader.add(`preview-${i}`, `assets/images/${Data.projects[this.slug].assets[i]}`)
-    }
+    const loader = new PIXI.loaders.Loader()
+    loader.add(`preview-${this.previewLoadCounter}`, `assets/images/${Data.projects[this.slug].assets[this.previewLoadCounter]}`)
     loader.on('complete', this.completeLoader)
     loader.load()
   }
-  completeLoader() {
-    for (let i = 0; i < Data.projects[this.slug].assets.length; i++) {
-      let texture = new PIXI.Texture.fromImage(`assets/images/${Data.projects[this.slug].assets[i]}`)
-      this.createPlane(texture, i)
+  completeLoader(loader, resources) {
+    let texture = resources[`preview-${this.previewLoadCounter}`].texture
+    this.createPlane(texture, this.previewLoadCounter)
+    if (!this.firstPreviewLoaded) {
+      this.firstPreviewLoaded = true
+      Actions.projectImagesLoaded()
     }
-    Actions.projectImagesLoaded()
+    this.previewLoadCounter++
+    if (this.previewLoadCounter < Data.projects[this.slug].assets.length) {
+      const newLoader = new PIXI.loaders.Loader()
+      newLoader.add(`preview-${this.previewLoadCounter}`, `assets/images/${Data.projects[this.slug].assets[this.previewLoadCounter]}`)
+      newLoader.load()
+      newLoader.on('complete', this.completeLoader)
+    }
   }
 
   createPlane(texture, idx) {
