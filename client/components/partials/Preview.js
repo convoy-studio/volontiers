@@ -110,38 +110,28 @@ class Preview extends BaseComponent {
   update() {
     this.delta += 0.01
     const currentPlane = this.planes[this.counter.props.index]
-    const easing = 0.1
-    const mnX = Store.Mouse.nX * 0.02
-    const mnY = Store.Mouse.nY * -0.005
+    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.3
+    const offsetX = nextNx * 600
+    const offsetY = nextNx * 500
+    const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
 
-    const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX) * 50) - currentPlane.verts[0]) * easing
-    const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1]) * easing
-    const ntrx = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX) * 50) - currentPlane.verts[2]) * easing
-    const ntry = ((currentPlane.iverts[3] + Math.cos(Store.Mouse.nY) * 30) - currentPlane.verts[3]) * easing
-    const nblx = ((currentPlane.iverts[4] + Math.sin(Store.Mouse.nX) * 80) - currentPlane.verts[4]) * easing
-    const nbly = ((currentPlane.iverts[5] + Math.cos(Store.Mouse.nY) * 40) - currentPlane.verts[5]) * easing
-    const nbrx = ((currentPlane.iverts[6] + Math.sin(Store.Mouse.nX) * 80) - currentPlane.verts[6]) * easing
-    const nbry = ((currentPlane.iverts[7] + Math.cos(Store.Mouse.nY) * 20) - currentPlane.verts[7]) * easing
-    currentPlane.verts[0] += ntlx
-    currentPlane.verts[1] += ntly
-    currentPlane.verts[2] += ntrx
-    currentPlane.verts[3] += ntry
-    currentPlane.verts[4] += nblx
-    currentPlane.verts[5] += nbly
-    currentPlane.verts[6] += nbrx
-    currentPlane.verts[7] += nbry
-
-    // currentPlane.mesh.skew.set(mnX, mnY)
-
-    // const newTopRightX = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX) * 200) - currentPlane.verts[2]) * 0.02
-    // currentPlane.verts[2] += newTopRightX
-
-    // // Give some circular movement to vertices
-    // for (let k = 0; k < this.planes.length; k++) {
-    //   for (let i = 0; i < this.planes[k].mesh.vertices.length; i++) {
-    //     this.planes[k].mesh.vertices[i] = this.planesVertices[k][i] + (Math.sin((i * 0.9) + this.delta)) / 6
-    //   }
-    // }
+    const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX - 0.5) * 50) - currentPlane.verts[0] + offsetX) * easing
+    const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1] - offsetY) * easing
+    const ntrx = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX + 0.5) * 50) - currentPlane.verts[2] + offsetX) * easing
+    const ntry = ((currentPlane.iverts[3] + Math.cos(Store.Mouse.nY) * 30) - currentPlane.verts[3] + offsetY) * easing
+    const nblx = ((currentPlane.iverts[4] + Math.sin(Store.Mouse.nX - 0.4) * 80) - currentPlane.verts[4] + offsetX) * easing
+    const nbly = ((currentPlane.iverts[5] + Math.cos(Store.Mouse.nY - 0.6) * 40) - currentPlane.verts[5] + offsetY) * easing
+    const nbrx = ((currentPlane.iverts[6] + Math.sin(Store.Mouse.nX + 0.4) * 80) - currentPlane.verts[6] + offsetX) * easing
+    const nbry = ((currentPlane.iverts[7] + Math.cos(Store.Mouse.nY - 0.6) * 20) - currentPlane.verts[7] - offsetY) * easing
+    currentPlane.verts[0] += ntlx + Math.cos(this.delta) * 2
+    currentPlane.verts[1] += ntly - Math.sin(this.delta) * 3
+    currentPlane.verts[2] += ntrx - Math.cos(this.delta) * 1
+    currentPlane.verts[3] += ntry + Math.sin(this.delta) * 4
+    currentPlane.verts[4] += nblx + Math.cos(this.delta) * 1
+    currentPlane.verts[5] += nbly - Math.sin(this.delta) * 2
+    currentPlane.verts[6] += nbrx + Math.cos(this.delta) * 2
+    currentPlane.verts[7] += nbry - Math.sin(this.delta) * 1
+    
     this.renderer.render(this.stage)
   }
   onPreviewsLoaded() {
