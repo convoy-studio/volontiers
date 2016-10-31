@@ -110,15 +110,20 @@ class Preview extends BaseComponent {
   update() {
     this.delta += 0.01
     const currentPlane = this.planes[this.counter.props.index]
+    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.3
 
-    const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX - 0.5) * 50) - currentPlane.verts[0]) * 0.1
-    const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1]) * 0.1
-    const ntrx = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX + 0.5) * 50) - currentPlane.verts[2]) * 0.1
-    const ntry = ((currentPlane.iverts[3] + Math.sin(Store.Mouse.nY) * 10) - currentPlane.verts[3]) * 0.1
-    const nblx = ((currentPlane.iverts[4] + Math.sin(Store.Mouse.nX - 0.4) * 80) - currentPlane.verts[4]) * 0.1
-    const nbly = ((currentPlane.iverts[5] + Math.cos(Store.Mouse.nY - 0.6) * 20) - currentPlane.verts[5]) * 0.1
-    const nbrx = ((currentPlane.iverts[6] + Math.sin(Store.Mouse.nX + 0.4) * 80) - currentPlane.verts[6]) * 0.1
-    const nbry = ((currentPlane.iverts[7] + Math.sin(Store.Mouse.nY - 0.6) * 20) - currentPlane.verts[7]) * 0.1
+    const offsetX = nextNx * 200
+    const offsetY = nextNx * 500
+    const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
+
+    const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX - 0.5) * 50) - currentPlane.verts[0] + offsetX) * easing
+    const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1] - offsetY) * easing
+    const ntrx = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX + 0.5) * 50) - currentPlane.verts[2] + offsetX) * easing
+    const ntry = ((currentPlane.iverts[3] + Math.cos(Store.Mouse.nY) * 30) - currentPlane.verts[3] + offsetY) * easing
+    const nblx = ((currentPlane.iverts[4] + Math.sin(Store.Mouse.nX - 0.4) * 80) - currentPlane.verts[4] + offsetX) * easing
+    const nbly = ((currentPlane.iverts[5] + Math.cos(Store.Mouse.nY - 0.6) * 40) - currentPlane.verts[5] + offsetY) * easing
+    const nbrx = ((currentPlane.iverts[6] + Math.sin(Store.Mouse.nX + 0.4) * 80) - currentPlane.verts[6] + offsetX) * easing
+    const nbry = ((currentPlane.iverts[7] + Math.cos(Store.Mouse.nY - 0.6) * 20) - currentPlane.verts[7] - offsetY) * easing
     currentPlane.verts[0] += ntlx
     currentPlane.verts[1] += ntly
     currentPlane.verts[2] += ntrx
