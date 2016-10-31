@@ -8,8 +8,9 @@ import dom from 'dom-hand'
 class PreviewLink extends BaseComponent {
   constructor(props) {
     super(props)
+    this.projects = Store.getProjects()
     this.data = {
-      slug: '/project/' + Store.Previews[0].slug
+      slug: '/project/' + this.projects[0].slug
     }
     this.state = {
       showLink: false
@@ -28,7 +29,7 @@ class PreviewLink extends BaseComponent {
     )
   }
   update() {
-    this.data.slug = '/project/' + Store.Previews[Store.CurrentPreviewIndex].slug
+    this.data.slug = '/project/' + this.projects[Store.CurrentPreviewIndex].slug
     this.forceUpdate()
   }
   showLink() {

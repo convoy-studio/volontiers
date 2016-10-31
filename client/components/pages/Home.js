@@ -23,6 +23,7 @@ export default class Home extends Page {
   		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
   			{/* {this.state.showLanding && <Landing/> */}
         <Preview/>
+        <PreviewLink/>
         {/*
         {!this.state.showLanding && <PreviewLink/>}
         {this.state.showFooter && <PreviewFooter/>}

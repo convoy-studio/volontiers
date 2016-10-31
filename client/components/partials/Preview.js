@@ -31,6 +31,7 @@ class Preview extends BaseComponent {
     this.tweenValue = { // Used for mouseMove animation
       v: 0
     }
+    this.isEnteredPreview = false
     this.animSigns = ['1', '-1', '-1', '1', '1', '1', '-1', '-1'] // Used for mouseMove animation : direction of vertices
     this.verticesOrder = ['tlx', 'tly', 'trx', 'try', 'blx', 'bly', 'brx', 'bry'] // Used for mouseMove animation : positions of vertices
     this.firstPreviewLoaded = false
@@ -81,15 +82,9 @@ class Preview extends BaseComponent {
     plane.iverts = plane.verts.slice(0)
     this.container.addChild(plane.mesh)
     this.planes.push(plane)
-    // this.planesVertices[idx] = this.planes[idx].mesh.vertices
-    // console.log(this.planes)
   }
   addListeners() {
     TweenMax.ticker.addEventListener('tick', this.update.bind(this))
-    // for (let i = 0; i < 8; i++) {
-    //   this.planesInitialVertices[i] = this.planesVertices[this.currentPlaneIdx][i]
-    // }
-    dom.event.on(this.parent, 'mousemove', this.mouseMove)
     dom.event.on(this.parent, 'click', this.mouseClick)
     inertia.addCallback(this.onScroll)
     dom.event.on(this.parent, 'DOMMouseScroll', this.handleScroll)
@@ -110,10 +105,12 @@ class Preview extends BaseComponent {
   update() {
     this.delta += 0.01
     const currentPlane = this.planes[this.counter.props.index]
-    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.3
-    const offsetX = nextNx * 600
-    const offsetY = nextNx * 500
+    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
+    const offsetX = nextNx * 400
+    const offsetY = nextNx * 300
     const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
+
+    this.mousePreviewActionHandler(nextNx)
 
     const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX - 0.5) * 50) - currentPlane.verts[0] + offsetX) * easing
     const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1] - offsetY) * easing
@@ -131,75 +128,22 @@ class Preview extends BaseComponent {
     currentPlane.verts[5] += nbly - Math.sin(this.delta) * 2
     currentPlane.verts[6] += nbrx + Math.cos(this.delta) * 2
     currentPlane.verts[7] += nbry - Math.sin(this.delta) * 1
-    
     this.renderer.render(this.stage)
+  }
+  mousePreviewActionHandler(val) {
+    if (val > 0) {
+      if (this.isEnteredPreview) return
+      this.isEnteredPreview = true
+      Actions.mouseEnterPreview()
+    } else {
+      if (!this.isEnteredPreview) return
+      this.isEnteredPreview = false
+      Actions.mouseLeavePreview()
+    }
   }
   onPreviewsLoaded() {
     this.addListeners()
   }
-  mouseMove() {
-    if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) { // Test if on right preview area
-      Store.Parent.style.cursor = 'pointer'
-      if (!this.onceRight) { // Test if isn't already playing
-        Actions.mouseEnterPreview()
-        let planeIdx = this.currentPlaneIdx
-        // TweenMax.to(this.tweenValue, 0.2, {
-        //   v: this.hoverPreview,
-        //   onUpdate: () => {
-        //     for (let i = 0; i < 8; i++) {
-        //       let factor = 1
-        //       if (i % 2 === 0) {
-        //         factor = 0.2
-        //       }
-        //       this.planesVertices[planeIdx][i] = this.planesInitialVertices[i] + this.tweenValue.v * factor * this.animSigns[i]
-        //     }
-        //   },
-        //   onComplete: () => {
-        //     // Reset animation
-        //     this.onceRight = true
-        //   }
-        // })
-      }
-    } else {
-      Store.Parent.style.cursor = 'auto'
-      if (this.onceRight && this.tweenValue.v === this.hoverPreview) { // This animation done & completed
-        Actions.mouseLeavePreview()
-        let planeIdx = this.currentPlaneIdx
-        // Values to be resetted
-        let resetValues = {
-          tlx: this.planesVertices[planeIdx][0],
-          tly: this.planesVertices[planeIdx][1],
-          trx: this.planesVertices[planeIdx][2],
-          try: this.planesVertices[planeIdx][3],
-          blx: this.planesVertices[planeIdx][4],
-          bly: this.planesVertices[planeIdx][5],
-          brx: this.planesVertices[planeIdx][6],
-          bry: this.planesVertices[planeIdx][7]
-        }
-        // TweenMax.to(resetValues, 0.2, {
-        //   tlx: this.planesInitialVertices[0],
-        //   tly: this.planesInitialVertices[1],
-        //   trx: this.planesInitialVertices[2],
-        //   try: this.planesInitialVertices[3],
-        //   blx: this.planesInitialVertices[4],
-        //   bly: this.planesInitialVertices[5],
-        //   brx: this.planesInitialVertices[6],
-        //   bry: this.planesInitialVertices[7],
-        //   onUpdate: () => {
-        //     for (let i = 0; i < 8; i++) {
-        //       let key = this.verticesOrder[i]
-        //       this.planesVertices[planeIdx][i] = resetValues[key]
-        //     }
-        //   },
-        //   onComplete: () => {
-        //     this.onceRight = false // Animation can be played again
-        //     this.tweenValue.v = 0
-        //   }
-        // })
-      }
-    }
-  }
-
   mouseClick(e) {
     // Test if on right preview area
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) {
@@ -222,6 +166,7 @@ class Preview extends BaseComponent {
       this.counter.inc()
     }
     this.animateContainer()
+    Actions.changePreview(this.counter.props.index)
   }
   animateContainer() {
     const windowH = Store.Window.h
@@ -231,7 +176,6 @@ class Preview extends BaseComponent {
   componentWillUnmount() {
     Store.off(Constants.PREVIEWS_LOADED, this.addListeners)
     Store.off(Constants.WINDOW_RESIZE, this.resize)
-    dom.event.off(this.parent, 'mousemove', this.mouseMove)
     dom.event.off(this.parent, 'click', this.mouseClick)
     dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.off(this.parent, 'mousewheel', this.handleScroll)
