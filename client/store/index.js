@@ -5,6 +5,7 @@ import assign from 'object-assign'
 import data from '../data'
 import Router from '../services/router'
 import isRetina from 'is-retina'
+
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
 }
@@ -88,6 +89,21 @@ function _windowWidthHeight() {
   }
 }
 
+function _getProjects() {
+  let k = 0
+  const projects = []
+  for (k in data.projects) {
+    if ({}.hasOwnProperty.call(data.projects, k)) {
+      projects.push({
+        slug: k,
+        title: data.projects[k].name,
+        image: `images/${data.projects[k].preview}`
+      })
+    }
+  }
+  return projects
+}
+
 const Store = assign({}, EventEmitter2.prototype, {
   emitChange: (type, item) => {
     Store.emit(type, item)
@@ -109,6 +125,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   getRoutePathScopeById: (id) => {
     return data.routing[id]
+  },
+  getProjects: () => {
+    return _getProjects()
   },
   pagePreloaderId: () => {
     const route = Router.getNewRoute()

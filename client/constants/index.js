@@ -47,7 +47,7 @@ export default {
   },
 
   MEDIA_GLOBAL_W: 1920,
-  MEDIA_GLOBAL_H: 1080,
+  MEDIA_GLOBAL_H: 1280,
 
   MIN_MIDDLE_W: 960,
   MQ_XSMALL: 320,

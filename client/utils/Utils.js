@@ -99,6 +99,22 @@ class Utils {
     folder.add(vec3, 'z', vec3.z - offsetZ, vec3.z + offsetZ).onChange((value) => { vec3.z = value })
     if (opened) folder.open()
   }
+  static pixiLoad(id, url, cb) {
+    let scope
+    const loader = new PIXI.loaders.Loader()
+    loader.add(id, url)
+    loader.load()
+    loader.once('complete', (data, resources) => {
+      scope.texture = resources[scope.id].texture
+      cb(scope)
+    })
+    scope = {
+      loader,
+      id,
+      url
+    }
+    return scope
+  }
 }
 
 export default Utils
