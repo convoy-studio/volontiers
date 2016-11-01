@@ -70,6 +70,7 @@ class BasePager extends React.Component {
   		/>
     this.components['old-component'] = this.components['new-component']
     this.components['new-component'] = ReactDOM.render(page, el)
+    return this.components['new-component']
   }
   onPageReady(route) {
     PagerActions.onPageReady(route)

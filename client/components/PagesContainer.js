@@ -48,7 +48,7 @@ export default class PagesContainer extends BasePager {
     	default:
       type = Home
     }
-    this.setupNewComponent(newRoute, type)
+    this.currentComponent = this.setupNewComponent(newRoute, type)
   }
   pageAssetsLoaded() {
     const newRoute = Router.getNewRoute()

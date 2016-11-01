@@ -14,26 +14,11 @@ class Preview extends BaseComponent {
     super(props)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     Store.on(Constants.WINDOW_RESIZE, this.resize)
-    Store.Window.w = window.innerWidth
-    Store.Window.h = window.innerHeight
-    this.lastPlaneIdx = 0
-    this.currentPlaneIdx = 0
-    this.currentScroll = 0
-    this.isScrolling = false
     this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
     this.planes = [] // All planes array
-    this.planesVertices = [] // All vertices of all planes
-    this.planesInitialVertices = [] // All initial vertices of all planes
-    this.onceRight = false // Used for mouseMove animation : test if transitioning
-    this.hoverPreview = 50 // Used for mouseMove animation : movement max of vertex
-    this.tweenValue = { // Used for mouseMove animation
-      v: 0
-    }
     this.isEnteredPreview = false
-    this.animSigns = ['1', '-1', '-1', '1', '1', '1', '-1', '-1'] // Used for mouseMove animation : direction of vertices
-    this.verticesOrder = ['tlx', 'tly', 'trx', 'try', 'blx', 'bly', 'brx', 'bry'] // Used for mouseMove animation : positions of vertices
     this.firstPreviewLoaded = false
     this.previewLoadCounter = 0
     this.projects = Store.getProjects()
@@ -46,10 +31,8 @@ class Preview extends BaseComponent {
   }
   componentDidMount() {
     this.loadPreview()
-    let windowW = Store.Window.w
-    let windowH = Store.Window.h
     this.parent = this.refs.preview
-    this.renderer = new PIXI.WebGLRenderer(windowW, windowH, {antialias: true, roundPixels: true})
+    this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true})
     this.renderer.backgroundColor = 0xffffff
     this.parent.appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
@@ -84,7 +67,6 @@ class Preview extends BaseComponent {
     this.planes.push(plane)
   }
   addListeners() {
-    TweenMax.ticker.addEventListener('tick', this.update.bind(this))
     dom.event.on(this.parent, 'click', this.mouseClick)
     inertia.addCallback(this.onScroll)
     dom.event.on(this.parent, 'DOMMouseScroll', this.handleScroll)
@@ -103,40 +85,24 @@ class Preview extends BaseComponent {
     this.renderer.resize(windowW, windowH)
   }
   update() {
+    if (this.previewLoadCounter === 0) return
     this.delta += 0.01
     const currentPlane = this.planes[this.counter.props.index]
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     const offsetX = nextNx * 400
     const offsetY = nextNx * 300
     const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
-
     this.mousePreviewActionHandler(nextNx)
-
-    const ntlx = ((currentPlane.iverts[0] + Math.sin(Store.Mouse.nX - 0.5) * 50) - currentPlane.verts[0] + offsetX) * easing
-    const ntly = ((currentPlane.iverts[1] + Math.cos(Store.Mouse.nY) * 10) - currentPlane.verts[1] - offsetY) * easing
-    const ntrx = ((currentPlane.iverts[2] + Math.sin(Store.Mouse.nX + 0.5) * 50) - currentPlane.verts[2] + offsetX) * easing
-    const ntry = ((currentPlane.iverts[3] + Math.cos(Store.Mouse.nY) * 30) - currentPlane.verts[3] + offsetY) * easing
-    const nblx = ((currentPlane.iverts[4] + Math.sin(Store.Mouse.nX - 0.4) * 80) - currentPlane.verts[4] + offsetX) * easing
-    const nbly = ((currentPlane.iverts[5] + Math.cos(Store.Mouse.nY - 0.6) * 40) - currentPlane.verts[5] + offsetY) * easing
-    const nbrx = ((currentPlane.iverts[6] + Math.sin(Store.Mouse.nX + 0.4) * 80) - currentPlane.verts[6] + offsetX) * easing
-    const nbry = ((currentPlane.iverts[7] + Math.cos(Store.Mouse.nY - 0.6) * 20) - currentPlane.verts[7] - offsetY) * easing
-    currentPlane.verts[0] += ntlx + Math.cos(this.delta) * 2
-    currentPlane.verts[1] += ntly - Math.sin(this.delta) * 3
-    currentPlane.verts[2] += ntrx - Math.cos(this.delta) * 1
-    currentPlane.verts[3] += ntry + Math.sin(this.delta) * 4
-    currentPlane.verts[4] += nblx + Math.cos(this.delta) * 1
-    currentPlane.verts[5] += nbly - Math.sin(this.delta) * 2
-    currentPlane.verts[6] += nbrx + Math.cos(this.delta) * 2
-    currentPlane.verts[7] += nbry - Math.sin(this.delta) * 1
+    Utils.planeAnim(currentPlane, Store.Mouse, this.delta, offsetX, offsetY, easing)
     this.renderer.render(this.stage)
   }
   mousePreviewActionHandler(val) {
     if (val > 0) {
-      if (this.isEnteredPreview) return
+      if (this.isEnteredPreview) return // return is it's already entered, so avoid to send multiple actions
       this.isEnteredPreview = true
       Actions.mouseEnterPreview()
     } else {
-      if (!this.isEnteredPreview) return
+      if (!this.isEnteredPreview) return // return is it's already not entered, so avoid to send multiple actions
       this.isEnteredPreview = false
       Actions.mouseLeavePreview()
     }
@@ -147,7 +113,7 @@ class Preview extends BaseComponent {
   mouseClick(e) {
     // Test if on right preview area
     if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) {
-      Router.setRoute(`/project/${this.projects[this.currentPlaneIdx].slug}`)
+      Router.setRoute(`/project/${this.projects[this.counter.props.index].slug}`)
     }
   }
   handleScroll(e) {

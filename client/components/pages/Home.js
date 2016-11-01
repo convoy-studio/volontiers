@@ -22,7 +22,7 @@ export default class Home extends Page {
     return (
   		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
   			{/* {this.state.showLanding && <Landing/> */}
-        <Preview/>
+        <Preview ref='preview'/>
         <PreviewLink/>
         <PreviewFooter/>
         {/*
@@ -46,6 +46,9 @@ export default class Home extends Page {
   }
   willTransitionOut() {
     super.willTransitionOut()
+  }
+  update() {
+    this.refs.preview.update()
   }
   resize() {
     const windowW = Store.Window.w
