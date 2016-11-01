@@ -24,6 +24,7 @@ export default class Home extends Page {
   			{/* {this.state.showLanding && <Landing/> */}
         <Preview/>
         <PreviewLink/>
+        <PreviewFooter/>
         {/*
         {!this.state.showLanding && <PreviewLink/>}
         {this.state.showFooter && <PreviewFooter/>}

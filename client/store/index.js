@@ -198,7 +198,7 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
-      Store.emitChange(action.actionType)
+      Store.emitChange(action.actionType, action.item)
       break
     case Constants.PROJECT_SLIDE_CHANGED:
       Store.CurrentProjectSlideIndex = action.item.projectSlideIdx
