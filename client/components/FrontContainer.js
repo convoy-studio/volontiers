@@ -2,7 +2,7 @@ import BaseComponent from '../pager/components/BaseComponent'
 import Store from '../store'
 import Constants from '../constants'
 import LangButton from './partials/LangButton'
-import SVGComponent from './SVGComponent'
+import SVGComponent from './partials/SVGComponent'
 
 export default class FrontContainer extends BaseComponent {
   constructor(props) {

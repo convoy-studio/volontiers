@@ -1,5 +1,4 @@
 import BaseComponent from '../../pager/components/BaseComponent'
-import Data from '../../data'
 import Store from '../../store'
 import Actions from '../../actions'
 import Constants from '../../constants'
@@ -8,6 +7,7 @@ import Utils from '../../utils/Utils'
 import dom from 'dom-hand'
 import inertia from 'wheel-inertia'
 import counter from 'ccounter'
+import slide from './Slide'
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -17,7 +17,8 @@ class Preview extends BaseComponent {
     this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
-    this.planes = [] // All planes array
+    this.currentSlide = undefined
+    this.slides = [] // All slides array
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
     this.previewLoadCounter = 0
@@ -30,7 +31,6 @@ class Preview extends BaseComponent {
     )
   }
   componentDidMount() {
-    this.loadPreview()
     this.parent = this.refs.preview
     this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true})
     this.renderer.backgroundColor = 0xffffff
@@ -38,33 +38,26 @@ class Preview extends BaseComponent {
     this.stage = new PIXI.Container()
     this.container = new PIXI.Container()
     this.stage.addChild(this.container)
+    this.projects.forEach((project, i) => {
+      this.slides.push(slide(this.container, project, i))
+    })
+    this.loadPreview()
   }
   loadPreview() {
     // TODO: Replace this.projects.length by desired number of projects to show on home page
-    const loader = Utils.pixiLoad(`preview-${this.previewLoadCounter}`, `assets/${this.projects[this.previewLoadCounter].image}`, this.completeLoader)
+    this.slides[this.previewLoadCounter].load(this.completeLoader)
   }
-  completeLoader(data) {
-    let texture = data.texture
-    this.createPlane(texture, this.previewLoadCounter)
+  completeLoader() {
     this.resize()
     if (!this.firstPreviewLoaded) {
       this.firstPreviewLoaded = true
+      this.updateCurrentSlide()
       Actions.previewsLoaded()
     }
     this.previewLoadCounter++
     if (this.previewLoadCounter < this.projects.length) {
-      const newLoader = Utils.pixiLoad(`preview-${this.previewLoadCounter}`, `assets/${this.projects[this.previewLoadCounter].image}`, this.completeLoader)
+      this.slides[this.previewLoadCounter].load(this.completeLoader)
     }
-  }
-  createPlane(texture, idx) {
-    let previewH = Store.Window.h - this.margin
-    const plane = {
-      mesh: new PIXI.mesh.Plane(texture, 2, 2)
-    }
-    plane.verts = plane.mesh.vertices
-    plane.iverts = plane.verts.slice(0)
-    this.container.addChild(plane.mesh)
-    this.planes.push(plane)
   }
   addListeners() {
     dom.event.on(this.parent, 'click', this.mouseClick)
@@ -75,25 +68,14 @@ class Preview extends BaseComponent {
   resize() {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    const marginScale = 0.7
-    const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
-    for (let i = 0; i < this.planes.length; i++) {
-      this.planes[i].mesh.scale = new PIXI.Point(resizeVars.scale, resizeVars.scale)
-      this.planes[i].mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-      this.planes[i].mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
-    }
+    this.slides.forEach((item, i) => { item.resize(i) })
     this.renderer.resize(windowW, windowH)
   }
   update() {
-    if (this.previewLoadCounter === 0) return
-    this.delta += 0.01
-    const currentPlane = this.planes[this.counter.props.index]
+    if (this.currentSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-    const offsetX = nextNx * 400
-    const offsetY = nextNx * 300
-    const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
     this.mousePreviewActionHandler(nextNx)
-    Utils.planeAnim(currentPlane, Store.Mouse, this.delta, offsetX, offsetY, easing)
+    this.currentSlide.animate()
     this.renderer.render(this.stage)
   }
   mousePreviewActionHandler(val) {
@@ -131,6 +113,10 @@ class Preview extends BaseComponent {
     default:
       this.counter.inc()
     }
+    this.updateCurrentSlide()
+  }
+  updateCurrentSlide() {
+    this.currentSlide = this.slides[this.counter.props.index]
     this.animateContainer()
     Actions.changePreview(this.counter.props.index)
   }
