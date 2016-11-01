@@ -1,5 +1,6 @@
 import BasePager from '../pager/components/BasePager'
 import Constants from '../constants'
+import Actions from '../actions'
 import {PagerActions} from '../pager/Pager'
 import Store from '../store'
 import Router from '../services/router'
@@ -28,10 +29,6 @@ export default class PagesContainer extends BasePager {
     const oldRoute = Router.getOldRoute()
     const newRoute = Router.getNewRoute()
     this.templateSelection(newRoute)
-    // if (oldRoute === undefined) {
-    // } else {
-    //   PagerActions.onTransitionOut()
-    // }
   }
   templateSelection(newRoute) {
     let type = undefined

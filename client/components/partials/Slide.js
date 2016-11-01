@@ -2,18 +2,17 @@ import Utils from '../../utils/Utils'
 import Store from '../../store'
 import Constants from '../../constants'
 
-export default (container, project, index)=> {
+export default (container, project, index, pre = 'preview')=> {
   let scope
   const createPlane = (texture) => {
-    const plane = {
-      mesh: new PIXI.mesh.Plane(texture, 2, 2)
-    }
+    const plane = {}
+    plane.mesh = new PIXI.mesh.Plane(texture, 2, 2)
     plane.verts = plane.mesh.vertices
     plane.iverts = plane.verts.slice(0)
     return plane
   }
   const load = (done) => {
-    Utils.pixiLoadTexture(`preview-${scope.index}`, `assets/${scope.project.image}`, (data) => {
+    Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.project.image}`, (data) => {
       scope.plane = createPlane(data.texture)
       scope.mesh = scope.plane.mesh
       scope.container.addChild(scope.mesh)

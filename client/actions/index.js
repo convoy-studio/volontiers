@@ -108,6 +108,18 @@ const Actions = {
       actionType: Constants.APP_START,
       item: undefined
     })
+  },
+  addToCanvas: (child) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.ADD_TO_CANVAS,
+      item: {child}
+    })
+  },
+  removeFromCanvas: (child) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.REMOVE_FROM_CANVAS,
+      item: {child}
+    })
   }
 }
 

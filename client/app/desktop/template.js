@@ -1,25 +1,35 @@
 import Store from '../../store'
-import { initGlobalEvents, resize } from '../../services/global-events'
+import Constants from '../../constants'
+import { initGlobalEvents, resize as globalResize } from '../../services/global-events'
 import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
+import CanvasContainer from '../../components/CanvasContainer'
 
 export default class AppTemplate extends React.Component {
   componentWillMount() {
     this.update = this.update.bind(this)
-    resize() // before render the app call the resize action to fill the initial values (Mouse, WindowSize)
+    this.resize = this.resize.bind(this)
   }
   render() {
     return (
       <div id='app-template'>
         <FrontContainer />
         <PagesContainer ref='pages-container' />
+        <CanvasContainer ref='canvas-container' />
       </div>
     )
   }
   componentDidMount() {
+    Store.on(Constants.WINDOW_RESIZE, this.resize)
     TweenMax.ticker.addEventListener('tick', this.update)
+    globalResize() // before render the app call the resize action to fill the initial values (Mouse, WindowSize)
   }
   update() {
     this.refs['pages-container'].update()
+    this.refs['canvas-container'].update()
+  }
+  resize() {
+    this.refs['pages-container'].resize()
+    this.refs['canvas-container'].resize()
   }
 }

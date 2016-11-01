@@ -88,7 +88,10 @@ function _windowWidthHeight() {
     h: window.innerHeight
   }
 }
-
+function _getCurrentProject() {
+  const route = Router.getNewRoute()
+  return data.projects[route.target]
+}
 function _getProjects() {
   let k = 0
   const projects = []
@@ -125,6 +128,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   getRoutePathScopeById: (id) => {
     return data.routing[id]
+  },
+  getCurrentProject: () => {
+    return _getCurrentProject()
   },
   getProjects: () => {
     return _getProjects()

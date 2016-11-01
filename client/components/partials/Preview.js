@@ -8,12 +8,12 @@ import dom from 'dom-hand'
 import inertia from 'wheel-inertia'
 import counter from 'ccounter'
 import slide from './Slide'
+import slideshow from './Slideshow'
 
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
-    Store.on(Constants.WINDOW_RESIZE, this.resize)
     this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
@@ -32,12 +32,8 @@ class Preview extends BaseComponent {
   }
   componentDidMount() {
     this.parent = this.refs.preview
-    this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true})
-    this.renderer.backgroundColor = 0xffffff
-    this.parent.appendChild(this.renderer.view)
-    this.stage = new PIXI.Container()
     this.container = new PIXI.Container()
-    this.stage.addChild(this.container)
+    setTimeout(() => {Actions.addToCanvas(this.container)})
     this.projects.forEach((project, i) => {
       this.slides.push(slide(this.container, project, i))
     })
@@ -69,14 +65,12 @@ class Preview extends BaseComponent {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.slides.forEach((item, i) => { item.resize(i) })
-    this.renderer.resize(windowW, windowH)
   }
   update() {
     if (this.currentSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     this.mousePreviewActionHandler(nextNx)
     this.currentSlide.animate()
-    this.renderer.render(this.stage)
   }
   mousePreviewActionHandler(val) {
     if (val > 0) {
@@ -103,6 +97,7 @@ class Preview extends BaseComponent {
     inertia.update(delta)
   }
   onScroll(direction) {
+    if (this.isProject) return
     switch (direction) {
     case 1:
       this.counter.dec()
@@ -127,10 +122,10 @@ class Preview extends BaseComponent {
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEWS_LOADED, this.addListeners)
-    Store.off(Constants.WINDOW_RESIZE, this.resize)
     dom.event.off(this.parent, 'click', this.mouseClick)
     dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.off(this.parent, 'mousewheel', this.handleScroll)
+    setTimeout(() => {Actions.removeFromCanvas(this.container)})
   }
 }
 
