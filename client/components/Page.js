@@ -5,11 +5,8 @@ import Constants from '../constants'
 export default class Page extends BasePage {
   constructor(props) {
     super(props)
-    this.data = {}
-    this.resize = this.resize.bind(this)
   }
   componentWillMount() {
-    Store.on(Constants.WINDOW_RESIZE, this.resize)
     super.componentWillMount()
   }
   render() {
@@ -21,8 +18,9 @@ export default class Page extends BasePage {
   resize() {
     super.resize()
   }
+  update() {
+  }
   componentWillUnmount() {
-    Store.off(Constants.WINDOW_RESIZE, this.resize)
     super.componentWillUnmount()
   }
 }

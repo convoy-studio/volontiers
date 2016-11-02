@@ -1,7 +1,6 @@
 import Page from '../Page'
 import Store from '../../store'
 import dom from 'dom-hand'
-import Data from '../../data'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import Landing from '../partials/Landing'
@@ -15,9 +14,9 @@ export default class Project extends Page {
   constructor(props) {
     super(props)
     this.slug = props.hash.target
-    this.data = Data.projects[this.slug]
-    this.unmountLanding = this.unmountLanding.bind(this)
-    Store.on(Constants.PROJECT_IMAGES_LOADED, this.unmountLanding)
+    // this.data = Data.projects[this.slug]
+    // this.unmountLanding = this.unmountLanding.bind(this)
+    // Store.on(Constants.PROJECT_IMAGES_LOADED, this.unmountLanding)
     this.state = {
       showLanding: true
     }
@@ -25,7 +24,7 @@ export default class Project extends Page {
   render() {
     return (
   		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
-        {this.state.showLanding && <Landing/>}
+        {/* this.state.showLanding && <Landing/> */}
         <ProjectImage slug={this.slug}/>
         <ProjectPreviousLink slug={this.slug}/>
         <ProjectNextLink slug={this.slug}/>
