@@ -13,14 +13,24 @@ import slideshow from './Slideshow'
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
+    this.onPreviewsLoaded = this.onPreviewsLoaded.bind(this)
+    this.nextSlide = this.nextSlide.bind(this)
+    this.previousSlide = this.previousSlide.bind(this)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
+    Store.on(Constants.NEXT_SLIDE, this.nextSlide)
+    Store.on(Constants.PREVIOUS_SLIDE, this.previousSlide)
     this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
-    this.currentSlide = undefined
+    this.oldPreviewSlide = undefined
+    this.currentPreviewSlide = undefined
+    this.oldSlideshowSlide = undefined
+    this.currentSlideshowSlide = undefined
+    this.isRendering = false
     this.slides = [] // All slides array
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
+    this.isProject = false
     this.previewLoadCounter = 0
     this.projects = Store.getProjects()
     this.counter = counter(this.projects.length)
@@ -33,9 +43,12 @@ class Preview extends BaseComponent {
   componentDidMount() {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
+    this.slideshowContainer = new PIXI.Container()
+    this.slideshow = slideshow(this.slideshowContainer)
+    setTimeout(() => {Actions.addToCanvas(this.slideshowContainer)})
     setTimeout(() => {Actions.addToCanvas(this.container)})
     this.projects.forEach((project, i) => {
-      this.slides.push(slide(this.container, project, i))
+      this.slides.push(slide(this.container, project.image, i))
     })
     this.loadPreview()
   }
@@ -64,13 +77,26 @@ class Preview extends BaseComponent {
   resize() {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    this.slides.forEach((item, i) => { item.resize(i) })
+    this.slides.forEach((item, i) => {
+      const resizeVars = item.resize()
+      if (item.isLoaded) {
+        item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
+        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+      }
+    })
   }
   update() {
-    if (this.currentSlide === undefined) return
+    if (!this.isRendering) return
+    if (this.currentPreviewSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     this.mousePreviewActionHandler(nextNx)
-    this.currentSlide.animate()
+    const route = Router.getNewRoute()
+    if (route.type === Constants.PROJECT) {
+      if (this.oldSlideshowSlide) this.oldSlideshowSlide.animate()
+      this.currentSlideshowSlide.animate()
+    } else {
+      this.currentPreviewSlide.animate()
+    }
   }
   mousePreviewActionHandler(val) {
     if (val > 0) {
@@ -111,7 +137,10 @@ class Preview extends BaseComponent {
     this.updateCurrentSlide()
   }
   updateCurrentSlide() {
-    this.currentSlide = this.slides[this.counter.props.index]
+    this.oldPreviewSlide = this.currentPreviewSlide
+    this.currentPreviewSlide = this.currentSlideshowSlide = this.slides[this.counter.props.index]
+    if (this.oldPreviewSlide) this.oldPreviewSlide.deactivate()
+    this.currentPreviewSlide.activate()
     this.animateContainer()
     Actions.changePreview(this.counter.props.index)
   }
@@ -120,12 +149,57 @@ class Preview extends BaseComponent {
     const position = this.counter.props.index * windowH
     TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
   }
+  openProject() {
+    this.isRendering = false
+    this.isProject = true
+    this.slideshow.updateSlides(() => {
+      this.isRendering = true
+    })
+  }
+  closeProject() {
+    this.isProject = false
+  }
+  nextSlide() {
+    this.slideshow.next()
+    // update slideshow state if it's in the end of the slides
+    if (this.slideshow.lastProject) setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.END)})
+    else setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.MIDDLE)})
+    const index = this.slideshow.counter.props.index
+    if (index === 1) {
+      this.oldSlideshowSlide = this.slides[this.counter.props.index]
+      this.currentSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.prev]
+    } else {
+      this.oldSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.prev - 1]
+      this.currentSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.prev]
+    }
+    this.oldSlideshowSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
+    this.currentSlideshowSlide.show({from: Constants.RIGHT, to: Constants.CENTER})
+  }
+  previousSlide() {
+    this.slideshow.previous()
+    // update slideshow state if it's in the begin of the slides
+    if (this.slideshow.counter.props.index === 0) setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.BEGIN)})
+    else setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.MIDDLE)})
+    const index = this.slideshow.counter.props.index
+    if (index === 0) {
+      this.oldSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.index]
+      this.currentSlideshowSlide = this.slides[this.counter.props.index]
+    } else {
+      this.oldSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.index]
+      this.currentSlideshowSlide = this.slideshow.slides[this.slideshow.counter.props.prev]
+    }
+    this.oldSlideshowSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
+    this.currentSlideshowSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+  }
   componentWillUnmount() {
-    Store.off(Constants.PREVIEWS_LOADED, this.addListeners)
+    Store.off(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
+    Store.off(Constants.NEXT_SLIDE, this.nextSlide)
+    Store.off(Constants.PREVIOUS_SLIDE, this.previousSlide)
     dom.event.off(this.parent, 'click', this.mouseClick)
     dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.off(this.parent, 'mousewheel', this.handleScroll)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
+    setTimeout(() => {Actions.removeFromCanvas(this.slideshowContainer)})
   }
 }
 

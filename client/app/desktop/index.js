@@ -17,12 +17,10 @@ class App {
     Store.Preloader = new Preloader()
     Store.Language = Store.getLang()
     initGlobalEvents()
-
     ReactDOM.render(
 			<AppTemplate />,
 			document.getElementById('app-container')
 		)
-
     this.router.beginRouting()
   }
   /**

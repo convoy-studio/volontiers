@@ -120,6 +120,42 @@ const Actions = {
       actionType: Constants.REMOVE_FROM_CANVAS,
       item: {child}
     })
+  },
+  openProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.OPEN_PROJECT,
+      item: undefined
+    })
+  },
+  closeProject: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CLOSE_PROJECT,
+      item: undefined
+    })
+  },
+  slideshowIsReady: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SLIDESHOW_IS_READY,
+      item: undefined
+    })
+  },
+  nextSlide: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.NEXT_SLIDE,
+      item: undefined
+    })
+  },
+  previousSlide: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.PREVIOUS_SLIDE,
+      item: undefined
+    })
+  },
+  setSlideshowState: (state) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SLIDESHOW_STATE_CHANGED,
+      item: state
+    })
   }
 }
 

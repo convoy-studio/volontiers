@@ -13,6 +13,7 @@ export default class PagesContainer extends BasePager {
     super()
     this.didPageChange = this.didPageChange.bind(this)
     this.pageAssetsLoaded = this.pageAssetsLoaded.bind(this)
+    this.firstTimeLaunch = true
   }
   componentWillMount() {
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
@@ -25,10 +26,13 @@ export default class PagesContainer extends BasePager {
     super.componentWillUnmount()
   }
   didPageChange() {
-    Store.Parent.style.cursor = 'wait'
     const oldRoute = Router.getOldRoute()
     const newRoute = Router.getNewRoute()
     this.templateSelection(newRoute)
+    if (this.firstTimeLaunch) {
+      setTimeout(Actions.appStart)
+      this.firstTimeLaunch = false
+    }
   }
   templateSelection(newRoute) {
     let type = undefined
@@ -40,12 +44,22 @@ export default class PagesContainer extends BasePager {
       type = About
       break
     	case Constants.PROJECT:
-      type = Project
+      type = Home
       break
     	default:
       type = Home
     }
-    this.currentComponent = this.setupNewComponent(newRoute, type)
+    this.components['old-component'] = this.components['new-component']
+    if (this.components['new-component'] === undefined) {
+      this.setupNewComponent(newRoute, type) // create one if is undefined
+    } else {
+      if (this.components['new-component'].props.hash.type !== this.components['old-component'].props.hash.type) { // check if we was on a same type components, now and before
+        this.setupNewComponent(newRoute, type)
+      }
+    }
+    if (newRoute.type === Constants.PROJECT) {
+      setTimeout(Actions.openProject) // if is Project send an action so to update the slideshow
+    }
   }
   pageAssetsLoaded() {
     const newRoute = Router.getNewRoute()
@@ -53,9 +67,9 @@ export default class PagesContainer extends BasePager {
     super.pageAssetsLoaded()
   }
   update() {
-    if (this.currentComponent !== undefined) this.currentComponent.update()
+    if (this.components['new-component'] !== undefined) this.components['new-component'].update()
   }
   resize() {
-    if (this.currentComponent !== undefined) this.currentComponent.resize()
+    if (this.components['new-component'] !== undefined) this.components['new-component'].resize()
   }
 }

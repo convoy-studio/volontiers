@@ -1,18 +1,26 @@
 import Page from '../Page'
 import Store from '../../store'
-import Data from '../../data'
 import Constants from '../../constants'
+import Router from '../../services/router'
 import dom from 'dom-hand'
 import Landing from '../partials/Landing'
 import Preview from '../partials/Preview'
 import PreviewFooter from '../partials/PreviewFooter'
 import PreviewLink from '../partials/PreviewLink'
+import NextPreviousBtns from '../partials/NextPreviousBtns'
 
 export default class Home extends Page {
   constructor(props) {
     super(props)
     // this.unmountLanding = this.unmountLanding.bind(this)
     // Store.on(Constants.PREVIEWS_LOADED, this.unmountLanding)
+    this.openProject = this.openProject.bind(this)
+    this.closeProject = this.closeProject.bind(this)
+    this.routeChanged = this.routeChanged.bind(this)
+    Store.on(Constants.OPEN_PROJECT, this.openProject)
+    Store.on(Constants.CLOSE_PROJECT, this.closeProject)
+    Store.on(Constants.ROUTE_CHANGED, this.routeChanged)
+    Store.on(Constants.APP_START, this.routeChanged)
     this.state = {
       showLanding: true,
       showFooter: false
@@ -20,43 +28,51 @@ export default class Home extends Page {
   }
   render() {
     return (
-  		<div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
-  			{/* {this.state.showLanding && <Landing/> */}
+      <div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
+        {/* {this.state.showLanding && <Landing/> */}
         <Preview ref='preview'/>
-        <PreviewLink/>
+        <PreviewLink ref='preview-link'/>
+        <NextPreviousBtns ref='next-previous-btns'/>
         <PreviewFooter/>
         {/*
         {!this.state.showLanding && <PreviewLink/>}
         {this.state.showFooter && <PreviewFooter/>}
         */}
-  		</div>
-  	)
+      </div>
+    )
   }
   componentDidMount() {
+    this.previewComponent = this.refs.preview
     super.componentDidMount()
   }
-  setupAnimations() {
-    super.setupAnimations()
-  }
-  didTransitionInComplete() {
-    super.didTransitionInComplete()
-  }
-  willTransitionIn() {
-    super.willTransitionIn()
-  }
-  willTransitionOut() {
-    super.willTransitionOut()
-  }
   update() {
-    this.refs.preview.update()
+    this.previewComponent.update()
   }
   resize() {
-    const windowW = Store.Window.w
-    const windowH = Store.Window.h
+    this.refs.preview.resize()
+    this.refs['preview-link'].resize()
+    this.refs['next-previous-btns'].resize()
     super.resize()
   }
-  componentWillUnmount() {
-    super.componentWillUnmount()
+  openProject() {
+    this.previewComponent.openProject()
+  }
+  closeProject() {
+    this.previewComponent.closeProject()
+  }
+  routeChanged() {
+    const route = Router.getNewRoute()
+    switch (route.type) {
+    case Constants.HOME:
+      this.refs['preview-link'].show()
+      this.refs['next-previous-btns'].hide()
+      break
+    case Constants.PROJECT:
+      this.refs['next-previous-btns'].show()
+      this.refs['preview-link'].hide()
+      break
+    default:
+    }
   }
   unmountLanding() {
     let tl = new TimelineMax()
@@ -66,5 +82,8 @@ export default class Home extends Page {
       this.state.showFooter = true
       this.forceUpdate()
     }}, '-=0.2')
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount()
   }
 }

@@ -23,7 +23,6 @@ export default {
       },
       preview: 'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
       assets: [
-        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0707_PR.jpg',
         'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0718_PR.jpg',
         'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
         'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1275_PR.jpg'
@@ -36,7 +35,11 @@ export default {
         fr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.'
       },
       preview: 'PE02_AIRBNB_PARIS/AirBnb_Selects-4.jpg',
-      assets: []
+      assets: [
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0718_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1275_PR.jpg'
+      ]
     },
     'airbnb-london': {
       'name': 'Airbnb London',
@@ -45,7 +48,11 @@ export default {
         fr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.'
       },
       preview: 'PE03_AIRBNB_LONDON/AirBnB-120B.jpg',
-      assets: []
+      assets: [
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0718_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1275_PR.jpg'
+      ]
     },
     'nike-rt-and-training': {
       'name': 'Nike R.T. and Training',
@@ -54,7 +61,11 @@ export default {
         fr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.'
       },
       preview: 'PE04_NIKE_RT_TRAINING/Nike-RiccardoTisci-NovembreMagazine-RemiProcureur-9.jpg',
-      assets: []
+      assets: [
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ0718_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
+        'PE01_NIKELAB_x_OLIVIER_ROUSTEING/SW16043_NIKE_NSW_OR_JJ1275_PR.jpg'
+      ]
     }
   }
 }

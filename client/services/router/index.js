@@ -23,6 +23,7 @@ class Router {
     page(url, this.onParseUrl)
   }
   onParseUrl(ctx) {
+    console.log(ctx)
     // Swallow the action if we are already on that url
     if (routerStore.newRoute !== undefined) { if (this.areSimilarURL(routerStore.newRoute.path, ctx.path)) return }
     this.newRouteFounded = false

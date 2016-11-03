@@ -41,7 +41,7 @@ class BasePager extends React.Component {
     this.components['old-component'].willTransitionOut()
   }
   didPageTransitionInComplete() {
-    Store.Parent.style.cursor = 'auto'
+    this.hideLoadState()
     this.unmountComponent('old-component')
   }
   didPageTransitionOutComplete() {
@@ -57,6 +57,7 @@ class BasePager extends React.Component {
     oldEl.style.zIndex = 1
   }
   setupNewComponent(hash, Type) {
+    this.showLoadState()
     this.oldPageDivRef = this.currentPageDivRef
     this.currentPageDivRef = (this.currentPageDivRef === 'page-a') ? 'page-b' : 'page-a'
     const el = this.refs[this.currentPageDivRef]
@@ -74,6 +75,12 @@ class BasePager extends React.Component {
   }
   onPageReady(route) {
     PagerActions.onPageReady(route)
+  }
+  showLoadState() {
+    Store.Parent.style.cursor = 'wait'
+  }
+  hideLoadState() {
+    Store.Parent.style.cursor = 'auto'
   }
   unmountComponent(ref) {
     if (this.components[ref] !== undefined) {

@@ -37,9 +37,9 @@ class PreviewFooter extends BaseComponent {
     const tl = new TimelineMax()
     tl.to(dom.select('.footer__title'), 0.2, {opacity: 0, ease: Sine.easeIn})
     tl.to(dom.select('.footer__title'), 0.2, {opacity: 1, ease: Sine.easeIn}, '+=0.1')
-    setTimeout(() => {
-      this.forceUpdate()
-    }, 300)
+    // setTimeout(() => {
+    //   this.forceUpdate()
+    // }, 300)
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEW_CHANGED, this.update)

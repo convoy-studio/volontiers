@@ -1,5 +1,6 @@
 import Store from '../../store'
 import Constants from '../../constants'
+import Actions from '../../actions'
 import { initGlobalEvents, resize as globalResize } from '../../services/global-events'
 import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
@@ -23,6 +24,9 @@ export default class AppTemplate extends React.Component {
     Store.on(Constants.WINDOW_RESIZE, this.resize)
     TweenMax.ticker.addEventListener('tick', this.update)
     globalResize() // before render the app call the resize action to fill the initial values (Mouse, WindowSize)
+    // setTimeout(() => {
+    //   Actions.appStart()
+    // }, 0)
   }
   update() {
     this.refs['pages-container'].update()

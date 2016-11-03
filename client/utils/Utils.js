@@ -1,4 +1,5 @@
 import Constants from '../constants'
+import Store from '../store'
 import dom from 'dom-hand'
 
 class Utils {
@@ -132,6 +133,89 @@ class Utils {
     plane.verts[5] += nbly - Math.sin(delta) * 2
     plane.verts[6] += nbrx + Math.cos(delta) * 2
     plane.verts[7] += nbry - Math.sin(delta) * 1
+  }
+  static planeTransition(plane, easing, direction) {
+    let rFactor = 1
+    let lFactor = 1
+    if (direction.from === Constants.RIGHT && direction.to === Constants.CENTER) {
+      rFactor = 0.4
+      lFactor = 1
+    } else if (direction.from === Constants.CENTER && direction.to === Constants.LEFT) {
+      rFactor = 0.4
+      lFactor = 1
+    } else if (direction.from === Constants.LEFT && direction.to === Constants.CENTER) {
+      rFactor = 1
+      lFactor = 0.4
+    } else if (direction.from === Constants.CENTER && direction.to === Constants.RIGHT) {
+      rFactor = 1
+      lFactor = 0.4
+    }
+    const ntlx = (plane.fverts[0] - plane.verts[0]) * (easing * lFactor)
+    const ntly = (plane.fverts[1] - plane.verts[1]) * (easing * lFactor)
+    const ntrx = (plane.fverts[2] - plane.verts[2]) * (easing * rFactor)
+    const ntry = (plane.fverts[3] - plane.verts[3]) * (easing * rFactor)
+    const nblx = (plane.fverts[4] - plane.verts[4]) * (easing * lFactor)
+    const nbly = (plane.fverts[5] - plane.verts[5]) * (easing * lFactor)
+    const nbrx = (plane.fverts[6] - plane.verts[6]) * (easing * rFactor)
+    const nbry = (plane.fverts[7] - plane.verts[7]) * (easing * rFactor)
+    plane.verts[0] += ntlx
+    plane.verts[1] += ntly
+    plane.verts[2] += ntrx
+    plane.verts[3] += ntry
+    plane.verts[4] += nblx
+    plane.verts[5] += nbly
+    plane.verts[6] += nbrx
+    plane.verts[7] += nbry
+  }
+  static setDefaultPlanePositions(plane) {
+    const windowW = Store.Window.w
+    const windowH = Store.Window.h
+    plane.verts[0] = plane.iverts[0] + (windowW * Utils.rand(8, 12, 1))
+    plane.verts[1] = plane.iverts[1] - (windowW >> 1)
+    plane.verts[2] = plane.iverts[2] + (windowW * Utils.rand(3.2, 4, 1))
+    plane.verts[3] = plane.iverts[3] - (windowW >> 1)
+    plane.verts[4] = plane.iverts[4] + (windowW * Utils.rand(8, 12, 1))
+    plane.verts[5] = plane.iverts[5] + (windowW >> 1)
+    plane.verts[6] = plane.iverts[6] + (windowW * Utils.rand(3.2, 4, 1))
+    plane.verts[7] = plane.iverts[7] + (windowW >> 1)
+  }
+  static updateGoToPlanePositions(plane, dir) {
+    const windowW = Store.Window.w
+    const windowH = Store.Window.h
+    plane.fverts = plane.verts.slice(0)
+    switch (dir) {
+    case Constants.CENTER:
+      plane.fverts[0] = plane.iverts[0]
+      plane.fverts[1] = plane.iverts[1]
+      plane.fverts[2] = plane.iverts[2]
+      plane.fverts[3] = plane.iverts[3]
+      plane.fverts[4] = plane.iverts[4]
+      plane.fverts[5] = plane.iverts[5]
+      plane.fverts[6] = plane.iverts[6]
+      plane.fverts[7] = plane.iverts[7]
+      break
+    case Constants.LEFT:
+      plane.fverts[0] = plane.verts[0] - (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[1] = plane.verts[1] + (windowW >> 1)
+      plane.fverts[2] = plane.verts[2] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[3] = plane.verts[3] + (windowW >> 1)
+      plane.fverts[4] = plane.verts[4] - (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[5] = plane.verts[5] - (windowW >> 1)
+      plane.fverts[6] = plane.verts[6] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[7] = plane.verts[7] - (windowW >> 1)
+      break
+    case Constants.RIGHT:
+      plane.fverts[0] = plane.verts[0] + (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[1] = plane.verts[1] + (windowW >> 1)
+      plane.fverts[2] = plane.verts[2] + (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[3] = plane.verts[3] + (windowW >> 1)
+      plane.fverts[4] = plane.verts[4] + (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[5] = plane.verts[5] - (windowW >> 1)
+      plane.fverts[6] = plane.verts[6] + (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[7] = plane.verts[7] - (windowW >> 1)
+      break
+    default:
+    }
   }
 }
 

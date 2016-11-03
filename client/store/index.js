@@ -5,6 +5,7 @@ import assign from 'object-assign'
 import data from '../data'
 import Router from '../services/router'
 import isRetina from 'is-retina'
+import Actions from '../actions'
 
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
@@ -106,6 +107,19 @@ function _getProjects() {
   }
   return projects
 }
+function _getNextProject() {
+  const projects = _getProjects()
+  const route = Router.getNewRoute()
+  let project = undefined
+  for (let i = 0; i < projects.length; i++) {
+    const p = projects[i]
+    if (p.slug === route.target) {
+      project = projects[i + 1]
+      if (project === undefined) project = projects[0]
+    }
+  }
+  return project
+}
 
 const Store = assign({}, EventEmitter2.prototype, {
   emitChange: (type, item) => {
@@ -116,6 +130,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   appData: () => {
     return _getAppData()
+  },
+  nextProject: () => {
+    return _getNextProject()
   },
   defaultRoute: () => {
     return _getDefaultRoute()
@@ -186,6 +203,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
   ProjectsSlugs: [],
+  CurrentSlideshowState: Constants.SLIDESHOW.MIDDLE,
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,
@@ -196,10 +214,6 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.Window.w = action.item.windowW
       Store.Window.h = action.item.windowH
       Store.Orientation = (Store.Window.w > Store.Window.h) ? Constants.ORIENTATION.LANDSCAPE : Constants.ORIENTATION.PORTRAIT
-      Store.emitChange(action.actionType)
-      break
-    case Constants.ROUTE_CHANGED:
-      const route = Router.getNewRoute()
       Store.emitChange(action.actionType)
       break
     case Constants.PREVIEW_CHANGED:
@@ -214,6 +228,16 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.Language = action.item.lang
       localStorage.setItem('volontiers-lang', action.item.lang)
       Store.emitChange(action.actionType)
+      break
+    case Constants.OPEN_PROJECT:
+      setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.BEGIN)})
+      Store.emitChange(action.actionType, action.item)
+      break
+    case Constants.SLIDESHOW_STATE_CHANGED:
+      if (Store.CurrentSlideshowState !== action.item) {
+        Store.CurrentSlideshowState = action.item
+        Store.emitChange(action.actionType, action.item)
+      }
       break
     default:
       Store.emitChange(action.actionType, action.item)
