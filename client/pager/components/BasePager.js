@@ -29,20 +29,22 @@ class BasePager extends React.Component {
   componentWillMount() {
     PagerStore.on(PagerConstants.PAGE_TRANSITION_IN, this.willPageTransitionIn)
     PagerStore.on(PagerConstants.PAGE_TRANSITION_OUT, this.willPageTransitionOut)
+    PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.pageTransitionDidFinish)
   }
   willPageTransitionIn() {
     this.switchPagesDivIndex()
     this.components['new-component'].willTransitionIn()
   }
   willPageTransitionOut() {
-    setTimeout(Actions.loadPageAssets, 0)
+    if (this.components['old-component']) this.components['old-component'].willTransitionOut()
+    else this.willPageTransitionIn()
   }
   pageAssetsLoaded() {
-    this.components['old-component'].willTransitionOut()
   }
   didPageTransitionInComplete() {
     this.hideLoadState()
-    this.unmountComponent('old-component')
+    PagerActions.onTransitionInComplete()
+    PagerActions.pageTransitionDidFinish()
   }
   didPageTransitionOutComplete() {
     PagerActions.onTransitionOutComplete()
@@ -57,7 +59,6 @@ class BasePager extends React.Component {
     oldEl.style.zIndex = 1
   }
   setupNewComponent(hash, Type) {
-    this.showLoadState()
     this.oldPageDivRef = this.currentPageDivRef
     this.currentPageDivRef = (this.currentPageDivRef === 'page-a') ? 'page-b' : 'page-a'
     const el = this.refs[this.currentPageDivRef]

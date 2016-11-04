@@ -14,7 +14,7 @@ const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
 let transitionHideTime = 0
 let transitionShowTime = 0
 
-export default (container, imgFilename, index, pre = 'preview')=> {
+export default (container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
   const createPlane = (texture) => {
     const plane = {}
@@ -40,7 +40,7 @@ export default (container, imgFilename, index, pre = 'preview')=> {
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
-      Utils.setDefaultPlanePositions(scope.plane)
+      Utils.setDefaultPlanePositions(scope.plane, scope.defaultPosition)
     }
     return resizeVars
   }
@@ -99,13 +99,11 @@ export default (container, imgFilename, index, pre = 'preview')=> {
   scope = {
     plane: undefined,
     mesh: undefined,
-    direction: {
-      from: Constants.RIGHT,
-      to: Constants.RIGHT
-    },
     isLoaded: false,
     delta: 0,
     state: STATE.DEACTIVE,
+    defaultPosition,
+    direction,
     activate,
     deactivate,
     show,

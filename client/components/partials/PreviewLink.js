@@ -13,49 +13,31 @@ class PreviewLink extends BaseComponent {
     this.data = {
       slug: '/project/' + this.projects[0].slug
     }
-    this.state = {
-      showLink: false
-    }
   }
   componentDidMount() {
-    this.parent = this.refs.previewLink
     this.update = this.update.bind(this)
+    this.showLink = this.showLink.bind(this)
+    this.hideLink = this.hideLink.bind(this)
     Store.on(Constants.PREVIEW_CHANGED, this.update)
     Store.on(Constants.MOUSEENTER_PREVIEW, this.showLink)
     Store.on(Constants.MOUSELEAVE_PREVIEW, this.hideLink)
-    setTimeout(() => {
-      this.resize()
-    }, 300)
+    setTimeout(() => { this.resize() }, 300)
   }
   render() {
     return (
-      <MainBtn ref='previewLink' rotation='90deg' title='View more' onClick={this.onPreviewClicked} className='link preview-link'>View more</MainBtn>
+      <MainBtn ref='previewLink' rotation='90deg' title='View more' onClick={this.onPreviewClicked} className='link preview-link'></MainBtn>
     )
   }
   update() {
-    // {/*<a href={this.data.slug} ref='previewLink' className='link preview-link'>View more</a>*/}
     this.data.slug = '/project/' + this.projects[Store.CurrentPreviewIndex].slug
-    this.forceUpdate()
   }
   onPreviewClicked() {
     Router.setRoute(this.data.slug)
   }
   showLink() {
-    // if (this.state.showLink === false) {
-    //   TweenMax.to(this.parent, 0.2, {opacity: 1})
-    //   this.state.showLink = true
-    // }
-  }
-  hideLink() {
-    // if (this.state.showLink === true) {
-    //   TweenMax.to(this.parent, 0.2, {opacity: 0})
-    //   this.state.showLink = false
-    // }
-  }
-  show() {
     this.refs.previewLink.show()
   }
-  hide() {
+  hideLink() {
     this.refs.previewLink.hide()
   }
   resize() {
@@ -63,6 +45,11 @@ class PreviewLink extends BaseComponent {
     const windowH = Store.Window.h
     this.refs.previewLink.refs.parent.style.top = (windowH >> 1) - (this.refs.previewLink.size[0] >> 1) + 'px'
     this.refs.previewLink.refs.parent.style.left = windowW - 40 + 'px'
+  }
+  componentWillUnmount() {
+    Store.off(Constants.PREVIEW_CHANGED, this.update)
+    Store.off(Constants.MOUSEENTER_PREVIEW, this.showLink)
+    Store.off(Constants.MOUSELEAVE_PREVIEW, this.hideLink)
   }
 }
 

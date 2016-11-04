@@ -167,17 +167,19 @@ class Utils {
     plane.verts[6] += nbrx
     plane.verts[7] += nbry
   }
-  static setDefaultPlanePositions(plane) {
+  static setDefaultPlanePositions(plane, position) {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    plane.verts[0] = plane.iverts[0] + (windowW * Utils.rand(8, 12, 1))
-    plane.verts[1] = plane.iverts[1] - (windowW >> 1)
-    plane.verts[2] = plane.iverts[2] + (windowW * Utils.rand(3.2, 4, 1))
-    plane.verts[3] = plane.iverts[3] - (windowW >> 1)
-    plane.verts[4] = plane.iverts[4] + (windowW * Utils.rand(8, 12, 1))
-    plane.verts[5] = plane.iverts[5] + (windowW >> 1)
-    plane.verts[6] = plane.iverts[6] + (windowW * Utils.rand(3.2, 4, 1))
-    plane.verts[7] = plane.iverts[7] + (windowW >> 1)
+    if (position !== Constants.CENTER) {
+      plane.verts[0] = plane.iverts[0] + (windowW * Utils.rand(8, 12, 1))
+      plane.verts[1] = plane.iverts[1] - (windowW >> 1)
+      plane.verts[2] = plane.iverts[2] + (windowW * Utils.rand(3.2, 4, 1))
+      plane.verts[3] = plane.iverts[3] - (windowW >> 1)
+      plane.verts[4] = plane.iverts[4] + (windowW * Utils.rand(8, 12, 1))
+      plane.verts[5] = plane.iverts[5] + (windowW >> 1)
+      plane.verts[6] = plane.iverts[6] + (windowW * Utils.rand(3.2, 4, 1))
+      plane.verts[7] = plane.iverts[7] + (windowW >> 1)
+    }
   }
   static updateGoToPlanePositions(plane, dir) {
     const windowW = Store.Window.w

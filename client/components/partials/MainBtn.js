@@ -52,14 +52,10 @@ class MainBtn extends BaseComponent {
     this.setState(state)
   }
   show() {
-    this.refs.parent.style.visibility = 'visible'
     dom.classes.add(this.refs.parent, 'show')
   }
   hide() {
     dom.classes.remove(this.refs.parent, 'show')
-    setTimeout(() => {
-      this.refs.parent.style.visibility = 'hidden'
-    }, 500)
   }
 }
 

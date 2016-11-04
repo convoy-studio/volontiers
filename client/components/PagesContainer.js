@@ -13,7 +13,6 @@ export default class PagesContainer extends BasePager {
     super()
     this.didPageChange = this.didPageChange.bind(this)
     this.pageAssetsLoaded = this.pageAssetsLoaded.bind(this)
-    this.firstTimeLaunch = true
   }
   componentWillMount() {
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
@@ -26,12 +25,14 @@ export default class PagesContainer extends BasePager {
     super.componentWillUnmount()
   }
   didPageChange() {
-    const oldRoute = Router.getOldRoute()
+    this.showLoadState()
     const newRoute = Router.getNewRoute()
-    this.templateSelection(newRoute)
-    if (this.firstTimeLaunch) {
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute === undefined) {
+      this.templateSelection(newRoute)
       setTimeout(Actions.appStart)
-      this.firstTimeLaunch = false
+    } else {
+      setTimeout(Actions.loadPageAssets, 0)
     }
   }
   templateSelection(newRoute) {
@@ -44,22 +45,12 @@ export default class PagesContainer extends BasePager {
       type = About
       break
     	case Constants.PROJECT:
-      type = Home
+      type = Project
       break
     	default:
       type = Home
     }
-    this.components['old-component'] = this.components['new-component']
-    if (this.components['new-component'] === undefined) {
-      this.setupNewComponent(newRoute, type) // create one if is undefined
-    } else {
-      if (this.components['new-component'].props.hash.type !== this.components['old-component'].props.hash.type) { // check if we was on a same type components, now and before
-        this.setupNewComponent(newRoute, type)
-      }
-    }
-    if (newRoute.type === Constants.PROJECT) {
-      setTimeout(Actions.openProject) // if is Project send an action so to update the slideshow
-    }
+    this.setupNewComponent(newRoute, type)
   }
   pageAssetsLoaded() {
     const newRoute = Router.getNewRoute()

@@ -5,12 +5,12 @@ html, body {
   color: $black;
   font-size: $globalFontSize;
   line-height: $globalLineHeight;
+  overflow: hidden;
 
   @media (max-width: $MQ_SMALL) {
     font-size: $mobileFontSize;
   }
 }
-
 
 html {
   @extend .full;

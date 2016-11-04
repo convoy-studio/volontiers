@@ -25,24 +25,24 @@ export default class BasePage extends React.Component {
     this.tlOut.pause(0)
   }
   willTransitionIn() {
+    console.log('willTransitionIn')
     this.tlIn.eventCallback('onComplete', this.didTransitionInComplete)
     this.tlIn.timeScale(1.8)
     setTimeout(()=>this.tlIn.play(0), 0)
   }
   willTransitionOut() {
-    if (this.tlOut.getChildren().length < 1) {
-      this.didTransitionOutComplete()
-    } else {
-      this.tlOut.eventCallback('onComplete', this.didTransitionOutComplete)
-      this.tlOut.timeScale(1.8)
-      setTimeout(()=>this.tlOut.play(0), 500)
-    }
+    console.log('willTransitionOut')
+    this.tlOut.eventCallback('onComplete', this.didTransitionOutComplete)
+    this.tlOut.timeScale(1.8)
+    setTimeout(()=>this.tlOut.play(0), 500)
   }
   didTransitionInComplete() {
+    console.log('didTransitionInComplete')
     this.tlIn.eventCallback('onComplete', null)
     setTimeout(() => this.props.didTransitionInComplete(), 0)
   }
   didTransitionOutComplete() {
+    console.log('didTransitionOutComplete')
     this.tlOut.eventCallback('onComplete', null)
     setTimeout(() => this.props.didTransitionOutComplete(), 0)
   }
@@ -54,6 +54,7 @@ export default class BasePage extends React.Component {
     this.didTransitionOutComplete()
   }
   componentWillUnmount() {
+    console.log('componentWillUnmount')
     this.tlIn.clear()
     this.tlOut.clear()
   }

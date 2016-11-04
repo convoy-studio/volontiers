@@ -119,12 +119,12 @@ a {
   text-transform: uppercase;
   .holder {
     @include opacity(0);
-    @include anim(.6s, .0s, $easeInOutExpo, scale(1));
+    @include anim(.8s, .0s, $easeOutCirc, scale(1));
   }
   &.show {
     .holder {
       @include opacity(1);
-      @include anim(.6s, .0s, $easeInOutExpo, scale(1));
+      @include anim(.8s, .0s, $easeOutCirc, scale(1));
     }
   }
   @media (max-width: $MQ_SMALL) {

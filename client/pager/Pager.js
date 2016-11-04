@@ -22,6 +22,12 @@ const PagerActions = {
       item: undefined
     })
   },
+  onTransitionInComplete: () => {
+    PagerDispatcher.handlePagerAction({
+      type: PagerConstants.PAGE_TRANSITION_IN_COMPLETE,
+      item: undefined
+    })
+  },
   pageTransitionDidFinish: () => {
     PagerDispatcher.handlePagerAction({
       type: PagerConstants.PAGE_TRANSITION_DID_FINISH,
@@ -36,9 +42,12 @@ const PagerConstants = {
   PAGE_TRANSITION_IN: 'PAGE_TRANSITION_IN',
   PAGE_TRANSITION_OUT: 'PAGE_TRANSITION_OUT',
   PAGE_TRANSITION_OUT_COMPLETE: 'PAGE_TRANSITION_OUT_COMPLETE',
+  PAGE_TRANSITION_IN_COMPLETE: 'PAGE_TRANSITION_IN_COMPLETE',
   PAGE_TRANSITION_IN_PROGRESS: 'PAGE_TRANSITION_IN_PROGRESS',
+  PAGE_TRANSITION_OUT_PROGRESS: 'PAGE_TRANSITION_OUT_PROGRESS',
   PAGE_TRANSITION_DID_FINISH: 'PAGE_TRANSITION_DID_FINISH'
 }
+
 
 // Dispatcher
 const PagerDispatcher = assign(new Flux.Dispatcher(), {
@@ -56,12 +65,12 @@ const PagerStore = assign({}, EventEmitter2.prototype, {
     const item = payload.item
     switch (actionType) {
     case PagerConstants.PAGE_IS_READY:
-      PagerStore.pageTransitionState = PagerConstants.PAGE_TRANSITION_IN_PROGRESS
-      const type = PagerConstants.PAGE_TRANSITION_IN
-      PagerStore.emit(type)
+      PagerStore.pageTransitionState = PagerConstants.PAGE_TRANSITION_OUT_PROGRESS
+      PagerStore.emit(PagerConstants.PAGE_TRANSITION_OUT)
       break
     case PagerConstants.PAGE_TRANSITION_OUT_COMPLETE:
-      PagerStore.emit(type)
+      PagerStore.pageTransitionState = PagerConstants.PAGE_TRANSITION_IN_PROGRESS
+      PagerStore.emit(PagerConstants.PAGE_TRANSITION_IN)
       break
     case PagerConstants.PAGE_TRANSITION_DID_FINISH:
       if (PagerStore.firstPageTransition) PagerStore.firstPageTransition = false
