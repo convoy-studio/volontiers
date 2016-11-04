@@ -5,17 +5,19 @@ import Constants from '../../constants'
 import dom from 'dom-hand'
 import Router from '../../services/router'
 
-class MainBtn extends BaseComponent {
+class MainTitle extends BaseComponent {
   constructor(props) {
     super(props)
     this.size = [0, 0]
+    this.isVisible = false
     this.state = {
       title: this.props.title,
       eventId: this.props.eventId
     }
   }
   render() {
-    const classNames = this.props.className + ' main-btn btn'
+    let classNames = this.props.className + ' main-btn'
+    if (this.props.onClick) classNames +=  ' btn'
     return (
       <div ref='parent' onClick={(e) => { e.preventDefault(); this.props.onClick(this.state.eventId) }} className={classNames}>
         <div ref='holder' className="holder">
@@ -53,10 +55,12 @@ class MainBtn extends BaseComponent {
   }
   show() {
     dom.classes.add(this.refs.parent, 'show')
+    this.isVisible = true
   }
   hide() {
     dom.classes.remove(this.refs.parent, 'show')
+    this.isVisible = false
   }
 }
 
-export default MainBtn
+export default MainTitle

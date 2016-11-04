@@ -4,7 +4,7 @@ import Actions from '../../actions'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
-import MainBtn from './MainBtn'
+import MainTitle from './MainTitle'
 
 class PreviewLink extends BaseComponent {
   constructor(props) {
@@ -25,7 +25,7 @@ class PreviewLink extends BaseComponent {
   }
   render() {
     return (
-      <MainBtn ref='previewLink' rotation='90deg' title='View more' onClick={this.onPreviewClicked} className='link preview-link'></MainBtn>
+      <MainTitle ref='previewLink' rotation='90deg' title='View more' onClick={this.onPreviewClicked} className='link preview-link'></MainTitle>
     )
   }
   update() {

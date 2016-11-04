@@ -1,6 +1,7 @@
 import Store from '../../store'
 import Actions from '../../actions'
 import Constants from '../../constants'
+import Router from '../../services/router'
 import slide from './Slide'
 import counter from 'ccounter'
 import Utils from '../../utils/Utils'
@@ -44,11 +45,18 @@ export default (container)=> {
       Actions.slideshowIsReady()
       loadAllSlides()
       updateCurrentSlide()
-      scope.currentSlide.activate()
+      const oldRoute = Router.getOldRoute()
+      if (oldRoute) {
+        Utils.setDefaultPlanePositions(plane, Constants.RIGHT)
+        scope.currentSlide.show({from: Constants.RIGHT, to: Constants.CENTER})
+      } else {
+        scope.currentSlide.activate()
+      }
     } else { // the rest of the slides goes here
       Utils.setDefaultPlanePositions(plane, Constants.RIGHT)
     }
     resize()
+    updateSlideshowState()
   }
   const resize = () => {
     const windowW = Store.Window.w
@@ -62,19 +70,23 @@ export default (container)=> {
     })
   }
   const next = () => {
-    if (scope.counter.props.index === scope.slides.length - 1) scope.lastProject = true
-    else scope.lastProject = false
     scope.counter.inc()
     updateCurrentSlide()
     if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
     scope.currentSlide.show({from: Constants.RIGHT, to: Constants.CENTER})
+    updateSlideshowState()
   }
   const previous = () => {
     scope.counter.dec()
-    scope.lastProject = false
     updateCurrentSlide()
     if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
     scope.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+    updateSlideshowState()
+  }
+  const updateSlideshowState = () => {
+    if (scope.counter.props.index >= scope.slides.length - 1) setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.END)})
+    else if (scope.counter.props.index === 0) setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.BEGIN)})
+    else setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.MIDDLE)})
   }
   const updateCurrentSlide = () => {
     scope.oldSlide = scope.currentSlide
@@ -84,6 +96,9 @@ export default (container)=> {
     scope.slides.forEach((item) => {
       item.animate()
     })
+  }
+  const transitionOut = () => {
+    scope.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   const clear = () => {
     removeSlides()
@@ -102,9 +117,9 @@ export default (container)=> {
     previous,
     update,
     clear,
+    transitionOut,
     currentSlide: undefined,
     oldSlide: undefined,
-    lastProject: false,
     counter: undefined,
     slides: []
   }

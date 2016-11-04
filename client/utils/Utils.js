@@ -197,13 +197,13 @@ class Utils {
       plane.fverts[7] = plane.iverts[7]
       break
     case Constants.LEFT:
-      plane.fverts[0] = plane.verts[0] - (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[0] = plane.verts[0] - (windowW * Utils.rand(3.2, 4, 1))
       plane.fverts[1] = plane.verts[1] + (windowW >> 1)
-      plane.fverts[2] = plane.verts[2] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[2] = plane.verts[2] - (windowW * Utils.rand(8, 12, 1))
       plane.fverts[3] = plane.verts[3] + (windowW >> 1)
-      plane.fverts[4] = plane.verts[4] - (windowW * Utils.rand(8, 12, 1))
+      plane.fverts[4] = plane.verts[4] - (windowW * Utils.rand(3.2, 4, 1))
       plane.fverts[5] = plane.verts[5] - (windowW >> 1)
-      plane.fverts[6] = plane.verts[6] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.fverts[6] = plane.verts[6] - (windowW * Utils.rand(8, 12, 1))
       plane.fverts[7] = plane.verts[7] - (windowW >> 1)
       break
     case Constants.RIGHT:

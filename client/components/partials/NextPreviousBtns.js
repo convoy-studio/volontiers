@@ -4,7 +4,7 @@ import Actions from '../../actions'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
-import MainBtn from './MainBtn'
+import MainTitle from './MainTitle'
 
 const NEXT_IMAGE = 'NEXT_IMAGE'
 const PREVIOUS_IMAGE = 'PREVIOUS_IMAGE'
@@ -24,8 +24,8 @@ class NextPreviousBtns extends BaseComponent {
   render() {
     return (
       <div className='next-previous-container'>
-        <MainBtn ref='previousBtn' rotation='90deg' title='Previous Image' eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainBtn>
-        <MainBtn ref='nextBtn' rotation='90deg' title='Next Image' eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainBtn>
+        <MainTitle ref='previousBtn' rotation='90deg' title='Previous Image' eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
+        <MainTitle ref='nextBtn' rotation='90deg' title='Next Image' eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainTitle>
       </div>
     )
   }
@@ -37,6 +37,11 @@ class NextPreviousBtns extends BaseComponent {
     switch (e) {
     case PREVIOUS_IMAGE:
       Actions.previousSlide()
+      break
+    case BACK:
+      const oldRoute = Router.getOldRoute()
+      if (oldRoute) Router.setRoute(oldRoute.path)
+      else Router.setRoute('/home')
       break
     default:
     }
@@ -56,17 +61,17 @@ class NextPreviousBtns extends BaseComponent {
   show(side) {
     switch (side) {
     case Constants.LEFT:
-      this.refs.previousBtn.show()
+      if (!this.refs.previousBtn.isVisible) this.refs.previousBtn.show()
       break
     case Constants.RIGHT:
-      this.refs.nextBtn.show()
+      if (!this.refs.nextBtn.isVisible) this.refs.nextBtn.show()
       break
     default:
     }
   }
   hide() {
-    this.refs.previousBtn.hide()
-    this.refs.nextBtn.hide()
+    if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
+    if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
   }
   slideshowStateChanged(state) {
     if (state === Constants.SLIDESHOW.BEGIN) {
@@ -90,6 +95,9 @@ class NextPreviousBtns extends BaseComponent {
       })
     }
     this.resize()
+  }
+  componentWillUnmount() {
+    Store.off(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
   }
   resize() {
     const windowW = Store.Window.w

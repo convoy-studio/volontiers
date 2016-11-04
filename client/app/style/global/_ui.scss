@@ -107,8 +107,13 @@ a {
   }
   .background {
     @extend .full;
-    background-color: red;
+    // background-color: red;
   }
+}
+.bottom-project-title {
+  margin: 0 auto;
+  top: 100%;
+  margin-top: - ($globalFontSize / 2) - $globalMargin;
 }
 .link {
   color: $black;

@@ -12,6 +12,7 @@ import ProjectPreviousLink from '../partials/ProjectPreviousLink'
 import ProjectNextLink from '../partials/ProjectNextLink'
 import slideshow from '../partials/Slideshow'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
+import MainTitle from '../partials/MainTitle'
 
 export default class Project extends Page {
   constructor(props) {
@@ -19,11 +20,14 @@ export default class Project extends Page {
     this.state = {
       showLanding: true
     }
+    this.content = Store.getCurrentProject()
+    console.log(this.content)
   }
   render() {
     return (
-  		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
+      <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
+        <MainTitle ref='projectTitle' title={this.content.name} className='link bottom-project-title'></MainTitle>
         {/*
         this.state.showLanding && <Landing/>
         <ProjectImage slug={this.slug}/>
@@ -38,22 +42,21 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    this.slideshow = slideshow(this.container).load(() => {
-      console.log('slideshow ready')
-    })
+    this.slideshow = slideshow(this.container).load(() => {})
     super.componentDidMount()
+  }
+  didTransitionInComplete() {
+    this.refs.projectTitle.show()
+    super.didTransitionInComplete()
   }
   setupAnimations() {
     super.setupAnimations()
   }
-  didTransitionInComplete() {
-    super.didTransitionInComplete()
-  }
-  willTransitionIn() {
-    super.willTransitionIn()
-  }
   willTransitionOut() {
-    super.willTransitionOut()
+    this.slideshow.transitionOut()
+    setTimeout(() => {
+      super.willTransitionOut()
+    }, 700)
   }
   update() {
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
