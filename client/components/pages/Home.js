@@ -28,15 +28,18 @@ export default class Home extends Page {
       </div>
     )
   }
-  willTransitionOut() {
-    super.willTransitionOut()
-  }
-  didTransitionOutComplete() {
-    super.didTransitionOutComplete()
-  }
   componentDidMount() {
     this.previewComponent = this.refs.preview
     super.componentDidMount()
+  }
+  willTransitionOut() {
+    this.refs.preview.transitionOut()
+    setTimeout(() => {
+      super.willTransitionOut()
+    }, 500)
+  }
+  didTransitionOutComplete() {
+    super.didTransitionOutComplete()
   }
   update() {
     this.previewComponent.update()

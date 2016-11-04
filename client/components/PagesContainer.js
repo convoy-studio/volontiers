@@ -58,9 +58,10 @@ export default class PagesContainer extends BasePager {
     super.pageAssetsLoaded()
   }
   update() {
-    if (this.components['new-component'] !== undefined) this.components['new-component'].update()
+    if (this.components['new-component']) this.components['new-component'].update()
+    if (this.components['old-component']) this.components['old-component'].update()
   }
   resize() {
-    if (this.components['new-component'] !== undefined) this.components['new-component'].resize()
+    if (this.components['new-component']) this.components['new-component'].resize()
   }
 }

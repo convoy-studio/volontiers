@@ -88,6 +88,7 @@ class BasePager extends React.Component {
       const id = this.components[ref].props.id
       const domToRemove = this.refs[id]
       ReactDOM.unmountComponentAtNode(domToRemove)
+      this.components['old-component'] = undefined
     }
   }
 }

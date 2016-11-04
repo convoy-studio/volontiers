@@ -32,9 +32,13 @@ export default class BasePage extends React.Component {
   }
   willTransitionOut() {
     console.log('willTransitionOut')
-    this.tlOut.eventCallback('onComplete', this.didTransitionOutComplete)
-    this.tlOut.timeScale(1.8)
-    setTimeout(()=>this.tlOut.play(0), 500)
+    if (this.tlOut.getChildren().length < 1) {
+      this.didTransitionOutComplete()
+    } else {
+      this.tlOut.eventCallback('onComplete', this.didTransitionOutComplete)
+      this.tlOut.timeScale(1.8)
+      setTimeout(()=>this.tlOut.play(0), 500)
+    }
   }
   didTransitionInComplete() {
     console.log('didTransitionInComplete')

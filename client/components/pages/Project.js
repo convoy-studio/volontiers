@@ -24,12 +24,14 @@ export default class Project extends Page {
   render() {
     return (
   		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
-        {/* this.state.showLanding && <Landing/> */}
+        {/*
+        this.state.showLanding && <Landing/>
         <ProjectImage slug={this.slug}/>
         <ProjectPreviousLink slug={this.slug}/>
         <ProjectNextLink slug={this.slug}/>
         <ProjectFooter slug={this.slug}/>
         <ProjectInfos slug={this.slug}/>
+        */}
   		</div>
   	)
   }

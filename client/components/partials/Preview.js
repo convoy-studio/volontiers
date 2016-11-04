@@ -134,6 +134,9 @@ class Preview extends BaseComponent {
     const position = this.counter.props.index * windowH
     TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
   }
+  transitionOut() {
+    this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
+  }
   componentWillUnmount() {
     Store.off(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     dom.event.off(this.parent, 'click', this.mouseClick)
