@@ -36,7 +36,6 @@ class Preview extends BaseComponent {
   componentDidMount() {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
-    this.slideshowContainer = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
     this.projects.forEach((project, i) => {
       this.slides.push(slide(this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))

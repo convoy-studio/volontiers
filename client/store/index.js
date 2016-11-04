@@ -10,18 +10,20 @@ import Actions from '../actions'
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
 }
-function _getPageAssetsToLoad() {
-  const route = Router.getNewRoute()
-  const routeObj = (route === undefined) ? Router.getNewRoute() : route
-  const scope = _getContentScope(routeObj)
-  const type = _getTypeOfPage()
-  const typeId = type.toLowerCase()
+function _getPageAssetsToLoad(r) {
+  const route = r || Router.getNewRoute()
+  const scope = _getContentScope(route)
+  const type = route.type
   let manifest = []
-  // In case of extra assets
+  // Get the assets array from .json
   if (scope.assets !== undefined) {
     const assets = scope.assets
     let assetsManifest = _addBasePathsToUrls(assets)
     manifest = (manifest === undefined) ? assetsManifest : manifest.concat(assetsManifest)
+  }
+  // When project page load only the first image of the s
+  if (type === Constants.PROJECT) {
+    manifest = manifest.slice(0, 1)
   }
   return manifest
 }
@@ -48,13 +50,6 @@ function _getImageDeviceExtension() {
 function _getDeviceRatio() {
   const scale = (window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio
   return (scale > 1) ? 2 : 1
-}
-function _getTypeOfPage(route) {
-  let type
-  const h = route || Router.getNewRoute()
-  if (h.parts.length === 3) type = Constants.ARTISTS
-  else type = Constants.HOME
-  return type
 }
 function _getMenuContent() {
   return data.routing
@@ -203,7 +198,6 @@ const Store = assign({}, EventEmitter2.prototype, {
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
   ProjectsSlugs: [],
-  CurrentSlideshowState: Constants.SLIDESHOW.MIDDLE,
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,
@@ -229,15 +223,9 @@ const Store = assign({}, EventEmitter2.prototype, {
       localStorage.setItem('volontiers-lang', action.item.lang)
       Store.emitChange(action.actionType)
       break
-    case Constants.OPEN_PROJECT:
-      setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.BEGIN)})
-      Store.emitChange(action.actionType, action.item)
-      break
-    case Constants.SLIDESHOW_STATE_CHANGED:
-      if (Store.CurrentSlideshowState !== action.item) {
-        Store.CurrentSlideshowState = action.item
-        Store.emitChange(action.actionType, action.item)
-      }
+    case Constants.APP_START:
+      setTimeout(Actions.routeChanged) // re-dispatch the route-changed so to create the view
+      Store.emitChange(action.actionType)
       break
     default:
       Store.emitChange(action.actionType, action.item)

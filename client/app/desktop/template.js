@@ -24,9 +24,6 @@ export default class AppTemplate extends React.Component {
     Store.on(Constants.WINDOW_RESIZE, this.resize)
     TweenMax.ticker.addEventListener('tick', this.update)
     globalResize() // before render the app call the resize action to fill the initial values (Mouse, WindowSize)
-    // setTimeout(() => {
-    //   Actions.appStart()
-    // }, 0)
   }
   update() {
     this.refs['pages-container'].update()

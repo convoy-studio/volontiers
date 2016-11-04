@@ -30,7 +30,6 @@ export default class PagesContainer extends BasePager {
     const oldRoute = Router.getOldRoute()
     if (oldRoute === undefined) {
       this.templateSelection(newRoute)
-      setTimeout(Actions.appStart)
     } else {
       setTimeout(Actions.loadPageAssets, 0)
     }

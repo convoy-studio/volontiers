@@ -2,6 +2,7 @@ import Page from '../Page'
 import Store from '../../store'
 import dom from 'dom-hand'
 import Constants from '../../constants'
+import Actions from '../../actions'
 import Router from '../../services/router'
 import Landing from '../partials/Landing'
 import ProjectImage from '../partials/ProjectImage'
@@ -9,12 +10,12 @@ import ProjectFooter from '../partials/ProjectFooter'
 import ProjectInfos from '../partials/ProjectInfos'
 import ProjectPreviousLink from '../partials/ProjectPreviousLink'
 import ProjectNextLink from '../partials/ProjectNextLink'
+import slideshow from '../partials/Slideshow'
 
 export default class Project extends Page {
   constructor(props) {
     super(props)
     this.slug = props.hash.target
-    // this.data = Data.projects[this.slug]
     // this.unmountLanding = this.unmountLanding.bind(this)
     // Store.on(Constants.PROJECT_IMAGES_LOADED, this.unmountLanding)
     this.state = {
@@ -36,6 +37,9 @@ export default class Project extends Page {
   	)
   }
   componentDidMount() {
+    this.container = new PIXI.Container()
+    setTimeout(() => {Actions.addToCanvas(this.container)})
+    this.slideshow = slideshow(this.container)
     super.componentDidMount()
   }
   setupAnimations() {
@@ -56,6 +60,7 @@ export default class Project extends Page {
     super.resize()
   }
   componentWillUnmount() {
+    setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()
   }
   unmountLanding() {

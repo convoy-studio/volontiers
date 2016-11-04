@@ -10,6 +10,16 @@ class Router {
     this.routing = data.routing
     this.baseName = ''
     this.newRouteFounded = false
+    let k = 0
+    for (k in data.projects) {
+      if ({}.hasOwnProperty.call(data.projects, k)) {
+        Store.ProjectsSlugs.push(k)
+        data.routing[`/project/${k}`] = {
+          name: data.projects[k].name,
+          assets: data.projects[k].assets
+        }
+      }
+    }
     this.setupRoutes()
     this.setupPage()
   }
