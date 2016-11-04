@@ -79,7 +79,6 @@ class Preview extends BaseComponent {
     if (this.currentSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     this.mousePreviewActionHandler(nextNx)
-    const route = Router.getNewRoute()
     this.currentSlide.animate()
   }
   mousePreviewActionHandler(val) {

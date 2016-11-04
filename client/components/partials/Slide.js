@@ -30,7 +30,7 @@ export default (container, imgFilename, index, pre = 'preview', direction = { fr
       scope.mesh = scope.plane.mesh
       scope.container.addChild(scope.mesh)
       scope.isLoaded = true
-      done()
+      done(scope.plane, scope.index)
     })
   }
   const resize = () => {

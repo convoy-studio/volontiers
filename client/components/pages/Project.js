@@ -11,13 +11,11 @@ import ProjectInfos from '../partials/ProjectInfos'
 import ProjectPreviousLink from '../partials/ProjectPreviousLink'
 import ProjectNextLink from '../partials/ProjectNextLink'
 import slideshow from '../partials/Slideshow'
+import NextPreviousBtns from '../partials/NextPreviousBtns'
 
 export default class Project extends Page {
   constructor(props) {
     super(props)
-    this.slug = props.hash.target
-    // this.unmountLanding = this.unmountLanding.bind(this)
-    // Store.on(Constants.PROJECT_IMAGES_LOADED, this.unmountLanding)
     this.state = {
       showLanding: true
     }
@@ -25,6 +23,7 @@ export default class Project extends Page {
   render() {
     return (
   		<div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
+        <NextPreviousBtns ref='next-previous-btns' />
         {/*
         this.state.showLanding && <Landing/>
         <ProjectImage slug={this.slug}/>
@@ -39,7 +38,9 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    this.slideshow = slideshow(this.container)
+    this.slideshow = slideshow(this.container).load(() => {
+      console.log('slideshow ready')
+    })
     super.componentDidMount()
   }
   setupAnimations() {
@@ -54,21 +55,24 @@ export default class Project extends Page {
   willTransitionOut() {
     super.willTransitionOut()
   }
+  update() {
+    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
+    const prevNx = Math.min(Store.Mouse.nX + 0.4, 0) * 0.2
+    if (nextNx > 0) this.refs['next-previous-btns'].show(Constants.RIGHT)
+    else if (prevNx < 0) this.refs['next-previous-btns'].show(Constants.LEFT)
+    else this.refs['next-previous-btns'].hide()
+    if (this.slideshow) this.slideshow.update()
+  }
   resize() {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
+    this.refs['next-previous-btns'].resize()
+    if (this.slideshow) this.slideshow.resize()
     super.resize()
   }
   componentWillUnmount() {
+    this.slideshow.clear()
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()
-  }
-  unmountLanding() {
-    let tl = new TimelineMax()
-    tl.to(dom.select('#project-page .landing'), 0.5, {opacity: 0, ease: Power2.easeIn})
-    tl.to(dom.select('#project-page .landing'), 1, { height: 0, ease: Circ.easeOut, delay: 0.5, onComplete: () => {
-      this.state.showLanding = false
-      this.forceUpdate()
-    }}, '-=0.2')
   }
 }

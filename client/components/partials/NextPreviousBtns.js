@@ -30,7 +30,7 @@ class NextPreviousBtns extends BaseComponent {
     )
   }
   componentDidMount() {
-    this.resize()
+    setTimeout(this.resize, 300)
   }
   onPreviousClicked(e) {
     // console.log(e)
@@ -53,9 +53,16 @@ class NextPreviousBtns extends BaseComponent {
     default:
     }
   }
-  show() {
-    this.refs.previousBtn.show()
-    this.refs.nextBtn.show()
+  show(side) {
+    switch (side) {
+    case Constants.LEFT:
+      this.refs.previousBtn.show()
+      break
+    case Constants.RIGHT:
+      this.refs.nextBtn.show()
+      break
+    default:
+    }
   }
   hide() {
     this.refs.previousBtn.hide()
