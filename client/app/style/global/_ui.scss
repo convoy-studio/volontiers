@@ -165,4 +165,9 @@ a {
   bottom: $globalMargin;
   right: $globalMargin;
 }
+.top-projects-title {
+  top: 0;
+  left: $globalMargin;
+  position: absolute;
+}
 

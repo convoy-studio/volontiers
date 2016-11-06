@@ -14,7 +14,7 @@ export default class AppTemplate extends React.Component {
   render() {
     return (
       <div id='app-template'>
-        <FrontContainer />
+        <FrontContainer ref='front-container' />
         <PagesContainer ref='pages-container' />
         <CanvasContainer ref='canvas-container' />
       </div>
@@ -32,5 +32,6 @@ export default class AppTemplate extends React.Component {
   resize() {
     this.refs['pages-container'].resize()
     this.refs['canvas-container'].resize()
+    this.refs['front-container'].resize()
   }
 }

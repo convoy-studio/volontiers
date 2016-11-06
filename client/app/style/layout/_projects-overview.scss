@@ -1,0 +1,44 @@
+#projects-overview {
+	position: fixed;
+	@extend .top-left;
+	.projects-container {
+		$thumbScale: 1;
+		$thumbW: 238px;
+		$thumbH: 159px;
+		position: absolute;
+		& > li {
+			list-style-type: none;
+			width: $thumbW * $thumbScale;
+			height: $thumbH * $thumbScale;
+			position: relative;
+			.project-container {
+				@extend .full;
+			}
+			.title-holder, .thumbnail-holder {
+				@extend .full;
+				position: absolute;
+			}
+			.title-holder {
+				z-index: 2;
+				background-color: $white;
+				@include opacity(0);
+      			@include anim(.8s, .0s, $easeOutExpo, scale(1));
+				p {
+					padding: 20px;
+				}
+			}
+			&:hover {
+				.title-holder {
+					@include opacity(1);
+	      			@include anim(.6s, .0s, $easeOutExpo, scale(1));
+				}
+			}
+		}
+		&.event {
+			left: 0;
+		}
+		&.retail {
+			right: 0;
+		}
+	}
+}

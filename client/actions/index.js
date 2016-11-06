@@ -162,6 +162,18 @@ const Actions = {
       actionType: Constants.UPDATE_PREVIEW_SLIDE,
       item: id
     })
+  },
+  openProjectsOverview: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.OPEN_PROJECTS_OVERVIEW,
+      item: undefined
+    })
+  },
+  closeProjectsOverview: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CLOSE_PROJECTS_OVERVIEW,
+      item: undefined
+    })
   }
 }
 

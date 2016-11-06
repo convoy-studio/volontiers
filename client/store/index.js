@@ -110,9 +110,7 @@ function _getProjectsByType(type) {
   const projects = Store.AllProjects
   const filteredProjects = []
   projects.forEach((item) => {
-    if (item.type === type) {
-      filteredProjects.push(item)
-    }
+    if (item.type === type) { filteredProjects.push(item) }
   })
   return filteredProjects
 }
@@ -219,6 +217,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
   AllProjects: _getAllProjects(), // cache projects array
+  State: Constants.STATE.NORMAL,
   ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
@@ -252,6 +251,14 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.TOGGLE_PROJECT_INFOS:
       Store.ProjectInfoIsOpened = (Store.ProjectInfoIsOpened) ? false : true
+      Store.emitChange(action.actionType)
+      break
+    case Constants.OPEN_PROJECTS_OVERVIEW:
+      Store.State = Constants.STATE.PROJECTS
+      Store.emitChange(action.actionType)
+      break
+    case Constants.CLOSE_PROJECTS_OVERVIEW:
+      Store.State = Constants.STATE.NORMAL
       Store.emitChange(action.actionType)
       break
     default:
