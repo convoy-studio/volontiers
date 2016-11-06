@@ -18,7 +18,7 @@ function _getPageAssetsToLoad(r) {
   // Get the assets array from .json
   if (scope.assets !== undefined) {
     const assets = scope.assets
-    let assetsManifest = _addBasePathsToUrls(assets)
+    let assetsManifest = _addBasePathsToUrls(assets, route.target)
     manifest = (manifest === undefined) ? assetsManifest : manifest.concat(assetsManifest)
   }
   // When project page load only the first image of the s
@@ -27,8 +27,8 @@ function _getPageAssetsToLoad(r) {
   }
   return manifest
 }
-function _addBasePathsToUrls(urls) {
-  let basePath = 'assets/images/'
+function _addBasePathsToUrls(urls, parent) {
+  let basePath = `assets/images/${parent}/`
   let manifest = []
   for (let i = 0; i < urls.length; i++) {
     const splitter = urls[i].split('.')
@@ -91,7 +91,7 @@ function _getCurrentProject() {
 function _getCurrentAboutContent() {
   return _getCurrentProject().about[Store.Language]
 }
-function _getProjects() {
+function _getAllProjects() {
   let k = 0
   const projects = []
   for (k in data.projects) {
@@ -99,14 +99,25 @@ function _getProjects() {
       projects.push({
         slug: k,
         title: data.projects[k].name,
+        type: data.projects[k].type,
         image: `images/${k}/${data.projects[k].preview}`
       })
     }
   }
   return projects
 }
+function _getProjectsByType(type) {
+  const projects = Store.AllProjects
+  const filteredProjects = []
+  projects.forEach((item) => {
+    if (item.type === type) {
+      filteredProjects.push(item)
+    }
+  })
+  return filteredProjects
+}
 function _getNextProject() {
-  const projects = _getProjects()
+  const projects = Store.AllProjects
   const route = Router.getNewRoute()
   let project = undefined
   for (let i = 0; i < projects.length; i++) {
@@ -114,6 +125,7 @@ function _getNextProject() {
     if (p.slug === route.target) {
       project = projects[i + 1]
       if (project === undefined) project = projects[0]
+      break
     }
   }
   return project
@@ -151,7 +163,10 @@ const Store = assign({}, EventEmitter2.prototype, {
     return _getCurrentAboutContent()
   },
   getProjects: () => {
-    return _getProjects()
+    return Store.AllProjects
+  },
+  getProjectsByType: (type) => {
+    return _getProjectsByType(type)
   },
   pagePreloaderId: () => {
     const route = Router.getNewRoute()
@@ -203,6 +218,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Canvas: undefined,
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
+  AllProjects: _getAllProjects(), // cache projects array
   ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,

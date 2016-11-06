@@ -38,8 +38,9 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const resize = () => {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    const marginScale = 0.63
-    const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, scope.size[0], scope.size[1])
+    const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
+    const marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.63
+    const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
       Utils.setDefaultPlanePositions(scope.plane, scope.defaultPosition)

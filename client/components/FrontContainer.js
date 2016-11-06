@@ -7,9 +7,9 @@ import SVGComponent from './partials/SVGComponent'
 export default class FrontContainer extends BaseComponent {
   constructor(props) {
     super(props)
+    console.log(Store.getProjectsByType(Constants.TYPE.RETAIL))
   }
   componentWillMount() {
-    Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
   }
   render() {
     return (
@@ -36,8 +36,5 @@ export default class FrontContainer extends BaseComponent {
         </div>
       </header>
     )
-  }
-  didPageChange() {
-    // Update or highlight parts of interface depends the route
   }
 }

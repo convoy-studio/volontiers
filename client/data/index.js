@@ -103,6 +103,58 @@ export default {
       assets: [
         '3I3A2431.jpg'
       ]
+    },
+    'nikelab-talaria': {
+      'name': 'NIKELAB TALARIA',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+      },
+      preview: '3I3A3788.jpg',
+      assets: [
+        '3I3A3793.jpg'
+      ]
+    },
+    'nikelab-ricardo-tisci-bw': {
+      'name': 'NIKELAB RICARDO TISCI BW',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+      },
+      preview: '3I3A7786.jpg',
+      assets: [
+        '3I3A7794.jpg'
+      ]
+    },
+    'nikelab-x-olivier-rousteing': {
+      'name': 'NIKELAB X OLIVIER ROUSTEING',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+      },
+      preview: 'OR KEYSHOT-1.jpg',
+      assets: [
+        '_Q0A2713 copie.jpg',
+        '3I3A4346.jpg',
+        '3I3A4361.jpg',
+        'NIKE X OR3339.jpg'
+      ]
+    },
+    'nikelab-x-kim-jones': {
+      'name': 'NIKELAB X KIM JONES',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+      },
+      preview: '3I3A8050.jpg',
+      assets: [
+        'IMG_0865.jpg',
+        'IMG_0869.jpg'
+      ]
     }
   }
 }

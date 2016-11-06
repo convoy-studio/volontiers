@@ -21,7 +21,7 @@ class Utils {
     const aspectRatio = contentW / contentH
     let scale
     if (orientation !== undefined) {
-      if (orientation === Constants.LANDSCAPE) {
+      if (orientation === Constants.ORIENTATION.LANDSCAPE) {
         scale = (windowW / contentW) * 1
       } else {
         scale = (windowH / contentH) * 1
