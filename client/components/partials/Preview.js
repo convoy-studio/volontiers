@@ -14,7 +14,9 @@ class Preview extends BaseComponent {
   constructor(props) {
     super(props)
     this.onPreviewsLoaded = this.onPreviewsLoaded.bind(this)
+    this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
+    Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     this.delta = 0 // Used for update movement animation
     this.halfMargin = 80
     this.margin = 180
@@ -38,7 +40,7 @@ class Preview extends BaseComponent {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
     this.projects.forEach((project, i) => {
-      this.slides.push(slide(this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
+      this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
     this.loadPreview()
   }
@@ -81,6 +83,16 @@ class Preview extends BaseComponent {
     this.mousePreviewActionHandler(nextNx)
     this.currentSlide.animate()
   }
+  onUpdatePreviewSlide(id) {
+    this.slides.forEach((item, i) => {
+      if (item.id === id) {
+        // this.counter.set(i)
+        // console.log(this.counter.props)
+        // console.log(this.counter, item.index)
+        // this.updateCurrentSlide()
+      }
+    })
+  }
   mousePreviewActionHandler(val) {
     if (val > 0) {
       if (this.isEnteredPreview) return // return is it's already entered, so avoid to send multiple actions
@@ -120,12 +132,13 @@ class Preview extends BaseComponent {
     this.updateCurrentSlide()
   }
   updateCurrentSlide() {
+    console.log('updateCurrentSlide')
     this.oldSlide = this.currentSlide
     this.currentSlide = this.slides[this.counter.props.index]
     if (this.oldSlide) this.oldSlide.deactivate()
     this.currentSlide.activate()
     this.animateContainer()
-    Actions.changePreview(this.counter.props.index)
+    setTimeout(() => { Actions.changePreview(this.counter.props.index) })
   }
   animateContainer() {
     const windowH = Store.Window.h

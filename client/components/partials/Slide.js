@@ -14,7 +14,7 @@ const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
 let transitionHideTime = 0
 let transitionShowTime = 0
 
-export default (container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
+export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
   const createPlane = (texture) => {
     const plane = {}
@@ -26,6 +26,8 @@ export default (container, imgFilename, index, pre = 'preview', direction = { fr
   }
   const load = (done) => {
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
+      scope.size[0] = data.texture.width
+      scope.size[1] = data.texture.height
       scope.plane = createPlane(data.texture)
       scope.mesh = scope.plane.mesh
       scope.container.addChild(scope.mesh)
@@ -37,7 +39,7 @@ export default (container, imgFilename, index, pre = 'preview', direction = { fr
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     const marginScale = 0.63
-    const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
+    const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, scope.size[0], scope.size[1])
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
       Utils.setDefaultPlanePositions(scope.plane, scope.defaultPosition)
@@ -102,6 +104,8 @@ export default (container, imgFilename, index, pre = 'preview', direction = { fr
     isLoaded: false,
     delta: 0,
     state: STATE.DEACTIVE,
+    size: [0, 0],
+    id,
     defaultPosition,
     direction,
     activate,

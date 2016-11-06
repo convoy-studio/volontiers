@@ -7,6 +7,8 @@ import dom from 'dom-hand'
 class PreviewFooter extends BaseComponent {
   constructor(props) {
     super(props)
+    this.update = this.update.bind(this)
+    Store.on(Constants.PREVIEW_CHANGED, this.update)
     this.projects = Store.getProjects()
     this.data = {
       curentPage: 1,
@@ -25,8 +27,6 @@ class PreviewFooter extends BaseComponent {
     )
   }
   componentDidMount() {
-    this.update = this.update.bind(this)
-    Store.on(Constants.PREVIEW_CHANGED, this.update)
     TweenMax.fromTo(dom.select('.footer'), 0.3, {y: 80, opacity: 0}, {y: 0, opacity: 1, ease: Sine.easeIn})
   }
   update(item) {
@@ -37,9 +37,9 @@ class PreviewFooter extends BaseComponent {
     const tl = new TimelineMax()
     tl.to(dom.select('.footer__title'), 0.2, {opacity: 0, ease: Sine.easeIn})
     tl.to(dom.select('.footer__title'), 0.2, {opacity: 1, ease: Sine.easeIn}, '+=0.1')
-    // setTimeout(() => {
-    //   this.forceUpdate()
-    // }, 300)
+    setTimeout(() => {
+      this.forceUpdate()
+    }, 300)
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEW_CHANGED, this.update)

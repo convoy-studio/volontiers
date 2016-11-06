@@ -1,17 +1,13 @@
 .project-infos {
   @extend .full;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #ffffff;
   cursor: pointer;
 
   &__description {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 50%;
+    transform: translate(-50%, -50%);
 
     br {
       line-height: 2;

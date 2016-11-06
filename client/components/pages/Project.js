@@ -17,25 +17,19 @@ import MainTitle from '../partials/MainTitle'
 export default class Project extends Page {
   constructor(props) {
     super(props)
-    this.state = {
-      showLanding: true
-    }
-    this.content = Store.getCurrentProject()
-    console.log(this.content)
+    this.onProjectInformationsClick = this.onProjectInformationsClick.bind(this)
+    this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
+    Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
+    this.state = { showLanding: true }
   }
   render() {
+    const content = Store.getCurrentProject()
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
-        <MainTitle ref='projectTitle' title={this.content.name} className='link bottom-project-title'></MainTitle>
-        {/*
-        this.state.showLanding && <Landing/>
-        <ProjectImage slug={this.slug}/>
-        <ProjectPreviousLink slug={this.slug}/>
-        <ProjectNextLink slug={this.slug}/>
-        <ProjectFooter slug={this.slug}/>
-        <ProjectInfos slug={this.slug}/>
-        */}
+        <MainTitle ref='projectTitle' title={content.name} className='link bottom-project-title'></MainTitle>
+        <MainTitle ref='projectInformations' title={'View Informations'} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
+        <ProjectInfos />
   		</div>
   	)
   }
@@ -47,6 +41,7 @@ export default class Project extends Page {
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
+    this.refs.projectInformations.show()
     super.didTransitionInComplete()
   }
   setupAnimations() {
@@ -57,6 +52,18 @@ export default class Project extends Page {
     setTimeout(() => {
       super.willTransitionOut()
     }, 700)
+  }
+  onProjectInformationsClick() {
+    Actions.toggleProjectInfos()
+  }
+  onToggleProjectInfos() {
+    if (Store.ProjectInfoIsOpened) {
+      this.slideshow.hideCurrentSlide()
+      this.refs.projectInformations.updateState({title: 'close informations'})
+    } else {
+      this.slideshow.showCurrentSlide()
+      this.refs.projectInformations.updateState({title: 'view informations'})
+    }
   }
   update() {
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
@@ -75,6 +82,7 @@ export default class Project extends Page {
   }
   componentWillUnmount() {
     this.slideshow.clear()
+    Store.off(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()
   }

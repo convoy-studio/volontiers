@@ -88,6 +88,9 @@ function _getCurrentProject() {
   const route = Router.getNewRoute()
   return data.projects[route.target]
 }
+function _getCurrentAboutContent() {
+  return _getCurrentProject().about[Store.Language]
+}
 function _getProjects() {
   let k = 0
   const projects = []
@@ -96,7 +99,7 @@ function _getProjects() {
       projects.push({
         slug: k,
         title: data.projects[k].name,
-        image: `images/${data.projects[k].preview}`
+        image: `images/${k}/${data.projects[k].preview}`
       })
     }
   }
@@ -143,6 +146,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   getCurrentProject: () => {
     return _getCurrentProject()
+  },
+  getCurrentAboutContent: () => {
+    return _getCurrentAboutContent()
   },
   getProjects: () => {
     return _getProjects()
@@ -201,6 +207,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,
+  ProjectInfoIsOpened: false,
   dispatcherIndex: Dispatcher.register((payload) => {
     const action = payload.action
     switch (action.actionType) {
@@ -225,6 +232,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.APP_START:
       setTimeout(Actions.routeChanged) // re-dispatch the route-changed so to create the view
+      Store.emitChange(action.actionType)
+      break
+    case Constants.TOGGLE_PROJECT_INFOS:
+      Store.ProjectInfoIsOpened = (Store.ProjectInfoIsOpened) ? false : true
       Store.emitChange(action.actionType)
       break
     default:

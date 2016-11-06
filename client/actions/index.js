@@ -156,6 +156,12 @@ const Actions = {
       actionType: Constants.SLIDESHOW_STATE_CHANGED,
       item: state
     })
+  },
+  updatePreviewSlide: (id) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.UPDATE_PREVIEW_SLIDE,
+      item: id
+    })
   }
 }
 

@@ -10,10 +10,11 @@ export default (container)=> {
   let scope
   const load = (done) => {
     const content = Store.getCurrentProject()
+    const route = Router.getNewRoute()
     const assets = content.assets
     scope.counter = counter(assets.length, 0, false)
     assets.forEach((asset, i) => {
-      scope.slides.push(slide(scope.container, `images/${asset}`, i, 'slide'))
+      scope.slides.push(slide(route.target, scope.container, `images/${route.target}/${asset}`, i, 'slide'))
     })
     loadFirstSlide()
     done()
@@ -23,11 +24,8 @@ export default (container)=> {
     scope.slides[0].load(onSlideLoaded)
   }
   const removeSlides = () => {
-    console.log('children container num is', scope.container.children.length)
     scope.slides.forEach((child) => {
       child.clear()
-      console.log('clear', child)
-      console.log('children container num after clear is', scope.container.children.length)
     })
   }
   /*
@@ -100,6 +98,12 @@ export default (container)=> {
   const transitionOut = () => {
     scope.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
+  const showCurrentSlide = () => {
+    scope.currentSlide.show({from: Constants.TOP, to: Constants.CENTER})
+  }
+  const hideCurrentSlide = () => {
+    scope.currentSlide.hide({from: Constants.CENTER, to: Constants.TOP})
+  }
   const clear = () => {
     removeSlides()
     Store.off(Constants.NEXT_SLIDE, next)
@@ -118,6 +122,8 @@ export default (container)=> {
     update,
     clear,
     transitionOut,
+    showCurrentSlide,
+    hideCurrentSlide,
     currentSlide: undefined,
     oldSlide: undefined,
     counter: undefined,

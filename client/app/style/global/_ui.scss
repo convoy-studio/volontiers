@@ -110,11 +110,6 @@ a {
     // background-color: red;
   }
 }
-.bottom-project-title {
-  margin: 0 auto;
-  top: 100%;
-  margin-top: - ($globalFontSize / 2) - $globalMargin;
-}
 .link {
   color: $black;
   position: relative;
@@ -159,3 +154,15 @@ a {
     }
   }
 }
+.bottom-project-title {
+  position: relative;
+  top: 100%;
+  margin: 0 auto;
+  margin-top: - $globalFontSize - $globalMargin;
+}
+.bottom-project-informations {
+  position: absolute;
+  bottom: $globalMargin;
+  right: $globalMargin;
+}
+

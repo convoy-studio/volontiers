@@ -49,7 +49,16 @@ export default class PagesContainer extends BasePager {
     	default:
       type = Home
     }
-    this.setupNewComponent(newRoute, type)
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute && oldRoute.type === Constants.HOME && newRoute.type === Constants.HOME) {
+      console.log('don`t create new component')
+    } else {
+      this.setupNewComponent(newRoute, type)
+    }
+
+    if (oldRoute && oldRoute.type === Constants.HOME && newRoute.type === Constants.HOME || (newRoute.type === Constants.HOME && newRoute.parts.length > 1)) {
+      setTimeout(() => { Actions.updatePreviewSlide(newRoute.target) })
+    }
   }
   pageAssetsLoaded() {
     const newRoute = Router.getNewRoute()

@@ -18,6 +18,10 @@ class Router {
           name: data.projects[k].name,
           assets: data.projects[k].assets
         }
+        data.routing[`/home/${k}`] = {
+          name: data.projects[k].name,
+          assets: []
+        }
       }
     }
     this.setupRoutes()
