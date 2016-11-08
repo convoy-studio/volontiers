@@ -3,10 +3,10 @@ import Constants from '../constants'
 export default {
   'default-route': '/home',
   'routing': {
-    '/home': {
-      name: 'Home',
-      assets: []
-    },
+    // '/home': {
+    //   name: 'Home',
+    //   assets: []
+    // },
     '/about': {
       name: 'About',
       assets: [],

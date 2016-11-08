@@ -24,6 +24,13 @@ function _getPageAssetsToLoad(r) {
   // When project page load only the first image of the s
   if (type === Constants.PROJECT) {
     manifest = manifest.slice(0, 1)
+  } else if (type === Constants.HOME) {
+    const project = _getProjectById(route.target)
+    if (project) {
+      manifest.push({
+        src: `assets/${project.image}`
+      })
+    }
   }
   return manifest
 }
@@ -61,7 +68,8 @@ function _getAppData() {
   return data
 }
 function _getDefaultRoute() {
-  return data['default-route']
+  const homeProjects = _getHomeProjects()
+  return `/home/${homeProjects[0].slug}`
 }
 function _getUserLanguage() {
   let lang = 'en'
@@ -136,6 +144,18 @@ function _getHomeProjects() {
     if (item.inHome) filteredProjects.push(item)
   })
   return filteredProjects
+}
+function _getProjectById(id) {
+  const projects = Store.AllProjects
+  let selected = undefined
+  for (let i = 0; i < projects.length; i++) {
+    const p = projects[i]
+    if (p.slug === id) {
+      selected = p
+      break
+    }
+  }
+  return selected
 }
 
 const Store = assign({}, EventEmitter2.prototype, {

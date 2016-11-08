@@ -42,7 +42,6 @@ class BasePager extends React.Component {
   pageAssetsLoaded() {
   }
   didPageTransitionInComplete() {
-    this.hideLoadState()
     PagerActions.onTransitionInComplete()
     PagerActions.pageTransitionDidFinish()
   }
@@ -50,6 +49,7 @@ class BasePager extends React.Component {
     PagerActions.onTransitionOutComplete()
   }
   pageTransitionDidFinish() {
+    this.hideLoadState()
     this.unmountComponent('old-component')
   }
   switchPagesDivIndex() {

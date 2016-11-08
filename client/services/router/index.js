@@ -10,20 +10,6 @@ class Router {
     this.routing = data.routing
     this.baseName = ''
     this.newRouteFounded = false
-    let k = 0
-    for (k in data.projects) {
-      if ({}.hasOwnProperty.call(data.projects, k)) {
-        Store.ProjectsSlugs.push(k)
-        data.routing[`/project/${k}`] = {
-          name: data.projects[k].name,
-          assets: data.projects[k].assets
-        }
-        data.routing[`/home/${k}`] = {
-          name: data.projects[k].name,
-          assets: []
-        }
-      }
-    }
     this.setupRoutes()
     this.setupPage()
   }
@@ -105,8 +91,24 @@ class Router {
     page(Store.defaultRoute())
   }
   setupRoutes() {
-    routerStore.pageRoutes = []
     let k = 0
+    for (k in data.projects) {
+      if ({}.hasOwnProperty.call(data.projects, k)) {
+        Store.ProjectsSlugs.push(k)
+        data.routing[`/project/${k}`] = {
+          name: data.projects[k].name,
+          assets: data.projects[k].assets
+        }
+      }
+    }
+    const homeProjects = Store.getHomeProjects()
+    homeProjects.forEach((item) => {
+      data.routing[`/home/${item.slug}`] = {
+        name: item.name,
+        assets: []
+      }
+    })
+    routerStore.pageRoutes = []
     const baseName = this.baseName
     for (k in this.routing) {
       if ({}.hasOwnProperty.call(this.routing, k)) {

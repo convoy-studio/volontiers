@@ -136,10 +136,14 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   }
   const clear = () => {
     removeEvents()
-    scope.container.removeChild(scope.mesh)
-    scope.mesh.destroy()
-    scope.plane.iverts = null
-    scope.plane.fverts = null
+    if (scope.mesh) {
+      scope.mesh.destroy()
+      scope.container.removeChild(scope.mesh)
+    }
+    if (scope.plane) {
+      scope.plane.iverts = null
+      scope.plane.fverts = null
+    }
   }
   scope = {
     plane: undefined,

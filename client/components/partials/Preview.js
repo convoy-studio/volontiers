@@ -9,6 +9,7 @@ import inertia from 'wheel-inertia'
 import counter from 'ccounter'
 import slide from './Slide'
 import slideshow from './Slideshow'
+import {PagerActions} from '../../pager/Pager'
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -17,19 +18,13 @@ class Preview extends BaseComponent {
     this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
-    this.delta = 0 // Used for update movement animation
-    this.halfMargin = 80
-    this.margin = 180
     this.oldSlide = undefined
     this.currentSlide = undefined
-    this.slides = [] // All slides array
+    this.slides = []
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
-    this.isProject = false
-    this.previewLoadCounter = 0
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
-    console.log(this.projects)
   }
   render() {
     return (
@@ -43,26 +38,33 @@ class Preview extends BaseComponent {
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
-    this.loadPreview()
+    this.loadFirstSlide()
   }
-  loadPreview() {
-    // TODO: Replace this.projects.length by desired number of projects to show on home page
-    this.slides[this.previewLoadCounter].load(this.completeLoader)
+  loadFirstSlide() {
+    const currentSlide = this.getSlideById(Router.getNewRoute().target)
+    this.slides[currentSlide.index].load(this.onFirstSlideLoaded)
+    this.counter.set(currentSlide.index)
+  }
+  onFirstSlideLoaded() {
+    this.resize()
+    this.updateCurrentSlide()
+    Actions.previewsLoaded()
+    this.loadNextPreviousSlide()
+    this.firstPreviewLoaded = true
+  }
+  loadNextPreviousSlide() {
+    const slides = this.getNextPreviousSlide()
+    this.loadSlide(slides.prev)
+    this.loadSlide(slides.next)
   }
   completeLoader() {
     this.resize()
-    if (!this.firstPreviewLoaded) {
-      this.firstPreviewLoaded = true
-      this.updateCurrentSlide()
-      Actions.previewsLoaded()
-    }
-    this.previewLoadCounter++
-    if (this.previewLoadCounter < this.projects.length) {
-      this.slides[this.previewLoadCounter].load(this.completeLoader)
-    }
+  }
+  loadSlide(s) {
+    if (s.isLoaded) this.completeLoader()
+    else s.load(this.completeLoader)
   }
   addListeners() {
-    dom.event.on(this.parent, 'click', this.mouseClick)
     inertia.addCallback(this.onScroll)
     dom.event.on(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.on(this.parent, 'mousewheel', this.handleScroll)
@@ -85,14 +87,33 @@ class Preview extends BaseComponent {
     this.currentSlide.animate()
   }
   onUpdatePreviewSlide(id) {
-    this.slides.forEach((item, i) => {
-      if (item.id === id) {
-        // this.counter.set(i)
-        // console.log(this.counter.props)
-        // console.log(this.counter, item.index)
-        // this.updateCurrentSlide()
+    if (!this.firstPreviewLoaded) return
+    for (let i = 0; i < this.slides.length; i++) {
+      const s = this.slides[i]
+      if (s.id === id) {
+        this.counter.set(i)
+        this.updateCurrentSlide()
+        break
       }
-    })
+    }
+    PagerActions.pageTransitionDidFinish()
+  }
+  getSlideById(id) {
+    let currentSlide = undefined
+    for (let i = 0; i < this.slides.length; i++) {
+      const s = this.slides[i]
+      if (s.id === id) {
+        currentSlide = s
+        break
+      }
+    }
+    return currentSlide
+  }
+  getNextPreviousSlide() {
+    return {
+      prev: this.slides[this.counter.props.prev],
+      next: this.slides[this.counter.props.next]
+    }
   }
   mousePreviewActionHandler(val) {
     if (val > 0) {
@@ -108,18 +129,11 @@ class Preview extends BaseComponent {
   onPreviewsLoaded() {
     this.addListeners()
   }
-  mouseClick(e) {
-    // Test if on right preview area
-    // if (Store.Mouse.y > this.halfMargin && Store.Mouse.y < Store.Window.h - (this.halfMargin) && Store.Mouse.x > Store.Window.w / 2) {
-    //   Router.setRoute(`/project/${this.projects[this.counter.props.index].slug}`)
-    // }
-  }
   handleScroll(e) {
     let delta = e.wheelDelta
     inertia.update(delta)
   }
   onScroll(direction) {
-    if (this.isProject) return
     switch (direction) {
     case 1:
       this.counter.dec()
@@ -130,31 +144,35 @@ class Preview extends BaseComponent {
     default:
       this.counter.inc()
     }
-    this.updateCurrentSlide()
+    Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
   }
   updateCurrentSlide() {
-    console.log('updateCurrentSlide')
     this.oldSlide = this.currentSlide
     this.currentSlide = this.slides[this.counter.props.index]
     if (this.oldSlide) this.oldSlide.deactivate()
     this.currentSlide.activate()
     this.animateContainer()
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
+    if (this.firstPreviewLoaded) this.loadNextPreviousSlide()
   }
   animateContainer() {
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
+    if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
+    else this.container.position.y = -position
   }
   transitionOut() {
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   componentWillUnmount() {
+    this.slides.forEach((item) => { item.clear() })
     Store.off(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
-    dom.event.off(this.parent, 'click', this.mouseClick)
+    Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.off(this.parent, 'mousewheel', this.handleScroll)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
+    this.slides.length = 0
+    this.slides = undefined
   }
 }
 
