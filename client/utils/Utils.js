@@ -186,6 +186,22 @@ class Utils {
     const windowH = Store.Window.h
     plane.fverts = plane.verts.slice(0)
     switch (dir) {
+    case Constants.SMALL:
+      const scale = 0.2
+      const size = 500
+      const orientation = plane.size[0] > plane.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
+      const resizeVars = Utils.resizePositionProportionally(windowW, windowH, plane.size[0], plane.size[1], orientation)
+      const w = (plane.size[0] * resizeVars.scale) * 0.3
+      const h = (plane.size[1] * resizeVars.scale) * 0.3
+      plane.fverts[0] = plane.fverts[0] + (w)
+      plane.fverts[1] = plane.fverts[1] + (h)
+      plane.fverts[2] = plane.fverts[2] - (w)
+      plane.fverts[3] = plane.fverts[3] + (h)
+      plane.fverts[4] = plane.fverts[4] + (w)
+      plane.fverts[5] = plane.fverts[5] - (h)
+      plane.fverts[6] = plane.fverts[6] - (w)
+      plane.fverts[7] = plane.fverts[7] - (h)
+      break
     case Constants.CENTER:
       plane.fverts[0] = plane.iverts[0]
       plane.fverts[1] = plane.iverts[1]

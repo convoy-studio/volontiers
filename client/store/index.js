@@ -100,6 +100,7 @@ function _getAllProjects() {
         slug: k,
         title: data.projects[k].name,
         type: data.projects[k].type,
+        inHome: data.projects[k].inHome,
         image: `images/${k}/${data.projects[k].preview}`
       })
     }
@@ -127,6 +128,14 @@ function _getNextProject() {
     }
   }
   return project
+}
+function _getHomeProjects() {
+  const projects = Store.AllProjects
+  const filteredProjects = []
+  projects.forEach((item) => {
+    if (item.inHome) filteredProjects.push(item)
+  })
+  return filteredProjects
 }
 
 const Store = assign({}, EventEmitter2.prototype, {
@@ -165,6 +174,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   getProjectsByType: (type) => {
     return _getProjectsByType(type)
+  },
+  getHomeProjects: () => {
+    return _getHomeProjects()
   },
   pagePreloaderId: () => {
     const route = Router.getNewRoute()
@@ -231,6 +243,14 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.Window.h = action.item.windowH
       Store.Orientation = (Store.Window.w > Store.Window.h) ? Constants.ORIENTATION.LANDSCAPE : Constants.ORIENTATION.PORTRAIT
       Store.emitChange(action.actionType)
+      break
+    case Constants.ROUTE_CHANGED:
+      if (Store.State === Constants.STATE.PROJECTS) {
+        setTimeout(Actions.closeProjectsOverview)
+        setTimeout(() => { Store.emitChange(action.actionType) }, 600)
+      } else {
+        Store.emitChange(action.actionType)
+      }
       break
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx

@@ -27,8 +27,9 @@ class Preview extends BaseComponent {
     this.firstPreviewLoaded = false
     this.isProject = false
     this.previewLoadCounter = 0
-    this.projects = Store.getProjects()
+    this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
+    console.log(this.projects)
   }
   render() {
     return (

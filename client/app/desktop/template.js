@@ -28,6 +28,7 @@ export default class AppTemplate extends React.Component {
   update() {
     this.refs['pages-container'].update()
     this.refs['canvas-container'].update()
+    this.refs['front-container'].update()
   }
   resize() {
     this.refs['pages-container'].resize()

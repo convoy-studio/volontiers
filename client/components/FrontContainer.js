@@ -46,6 +46,9 @@ export default class FrontContainer extends BaseComponent {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
     else setTimeout(Actions.openProjectsOverview)
   }
+  update() {
+    this.refs['projects-overview'].update()
+  }
   resize() {
     this.refs['projects-overview'].resize()
   }

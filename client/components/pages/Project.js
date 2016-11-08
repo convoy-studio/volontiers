@@ -49,6 +49,10 @@ export default class Project extends Page {
   }
   willTransitionOut() {
     this.slideshow.transitionOut()
+    this.refs.projectTitle.hide()
+    this.refs.projectInformations.hide()
+    this.refs['next-previous-btns'].hide(Constants.LEFT)
+    this.refs['next-previous-btns'].hide(Constants.RIGHT)
     setTimeout(() => {
       super.willTransitionOut()
     }, 700)

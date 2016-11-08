@@ -1,22 +1,53 @@
 #projects-overview {
+	$thumbScale: 1;
+	$thumbW: 238px;
+	$thumbH: 159px;
 	position: fixed;
 	@extend .top-left;
-	.projects-container {
-		$thumbScale: 1;
-		$thumbW: 238px;
-		$thumbH: 159px;
+	@include anim(.0s, .0s, $easeOutExpo, translateY(-99999px) translateZ(1px));
+	&.open {
+		@include anim(.0s, .0s, $easeOutExpo, translateY(0px) translateZ(0px));
+	}
+	.background {
 		position: absolute;
+		z-index: 2;
+		@extend .top-left;
+		@extend .full;
+	}
+	.titles-container {
+		position: absolute;
+		z-index: 1;
+		@extend .top-left;
+		@extend .full;
+		.event-title, .retail-title {
+			position: absolute;
+		}
+		.event-title {
+			left: $globalFontSize + ($thumbW * $thumbScale) + ($globalMargin * 3);
+		}
+		.retail-title {
+			right: (-$globalFontSize*2) + ($thumbW * $thumbScale) + ($globalMargin * 3);
+		}
+	}
+	.projects-container {
+		position: absolute;
+		z-index: 3;
 		& > li {
 			list-style-type: none;
 			width: $thumbW * $thumbScale;
 			height: $thumbH * $thumbScale;
 			position: relative;
+			margin: ($globalMargin / 2) 0;
 			.project-container {
 				@extend .full;
 			}
 			.title-holder, .thumbnail-holder {
 				@extend .full;
 				position: absolute;
+			}
+			.thumbnail-holder {
+				@include opacity(1);
+	      		@include anim(.8s, .0s, $easeOutExpo, scale(1));
 			}
 			.title-holder {
 				z-index: 2;
@@ -32,13 +63,17 @@
 					@include opacity(1);
 	      			@include anim(.6s, .0s, $easeOutExpo, scale(1));
 				}
+				.thumbnail-holder {
+					@include opacity(0);
+	      			@include anim(.6s, .1s, $easeOutExpo, scale(1));
+				}
 			}
 		}
 		&.event {
-			left: 0;
+			left: $globalMargin;
 		}
 		&.retail {
-			right: 0;
+			right: $globalMargin;
 		}
 	}
 }

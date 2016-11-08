@@ -18,6 +18,7 @@ export default {
   },
   projects: {
     'nike-olivier-rousteing': {
+      'inHome': true,
       'name': 'Nike × Olivier Rousteing',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -36,6 +37,7 @@ export default {
       ]
     },
     'airbnb-paris': {
+      'inHome': true,
       'name': 'AIRBNB PARIS - LA MAISON PARISIENNE',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -58,6 +60,7 @@ export default {
       ]
     },
     'airbnb-london': {
+      'inHome': true,
       'name': 'AIRBNB LONDON - LA MAISON',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -78,6 +81,7 @@ export default {
       ]
     },
     'nike-rt-and-training': {
+      'inHome': true,
       'name': 'Nike R.T. and Training',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -86,13 +90,46 @@ export default {
       },
       preview: 'Nike-RiccardoTisci-NovembreMagazine-RemiProcureur (1 sur 1)-9.jpg',
       assets: [
-        '1.png',
+        '1.jpg',
         'Nike-RiccardoTisci-NovembreMagazine-RemiProcureur (1 sur 1)-12.jpg',
         'Nike-RiccardoTisci-NovembreMagazine-RemiProcureur (1 sur 1)-34.jpg',
         'Nike-RiccardoTisci-NovembreMagazine-RemiProcureur (1 sur 1)-60.jpg'
       ]
     },
+    'pok-fete-de-la-musique-x-coca': {
+      'inHome': true,
+      'name': 'POK FETE DE LA MUSIQUE x COCA',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'VOLONTIERS staged the NIKELAB x RICCARDO TISCI collection through a training session in which a group of Parisian influencers were invited to participate. A collaboration imagined to redefine training itself, it seemed appropriate to test the gear as soon as it was available in its natural habitat.<br/>This session, led by the artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through derivatives of endurance and adaptability exercises lifted from Russian martial art Systema. A video-tracking device was recording each participant’s movements, transcribing the recorded data into images and sounds broadcast within the training space, in real time.<br/>A amazing feat to link places to actors and their environments, and to bring their activity through digital data visualization.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+      },
+      preview: 'DSC_0349.jpg',
+      assets: [
+        'DSC_0884.jpg',
+        'DSC_1543.jpg',
+        'DSC_1804.jpg',
+        'DSC_9752.jpg'
+      ]
+    },
+    'acg-nikelab': {
+      'inHome': true,
+      'name': 'ACG NIKELAB',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To celebrate the release of the new ACG line as well as to highlight the visuals created by Novembre Magazine, VOLONTIERS transformed the NikeLab shop in Paris to offer journalists and influencers a chance to to discover the collection around a cocktail party and an exhibition of creations specially made for the event.',
+        fr: 'Pour célébrer la sortie de la nouvelle ligne ACG ainsi que pour mettre en évidence les visuels créés par le magazine Novembre, VOLONTIERS a transformé la boutique NikeLab de Paris proposait aux journalistes et influencers invités de découvrir la collection autour d’un cocktail dinatoire et d’une exposition des creations fabriquées pour l’événement'
+      },
+      preview: 'ACG HO15 NIKELAB P75 LAUNCH EVENT-HD.jpg',
+      assets: [
+        '3I3A3934.jpg',
+        '3I3A4006.jpg',
+        '3I3A4140.jpg',
+        '3I3A4289.jpg'
+      ]
+    },
     'nikelab-lunar': {
+      'inHome': true,
       'name': 'NIKELAB LUNAR',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -105,6 +142,7 @@ export default {
       ]
     },
     'nikelab-talaria': {
+      'inHome': true,
       'name': 'NIKELAB TALARIA',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -117,6 +155,7 @@ export default {
       ]
     },
     'nikelab-ricardo-tisci-bw': {
+      'inHome': true,
       'name': 'NIKELAB RICARDO TISCI BW',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -129,6 +168,7 @@ export default {
       ]
     },
     'nikelab-x-olivier-rousteing': {
+      'inHome': true,
       'name': 'NIKELAB X OLIVIER ROUSTEING',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -144,6 +184,7 @@ export default {
       ]
     },
     'nikelab-x-kim-jones': {
+      'inHome': true,
       'name': 'NIKELAB X KIM JONES',
       'type': Constants.TYPE.RETAIL,
       'about': {

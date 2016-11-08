@@ -63,6 +63,7 @@ export default {
   CENTER: 'CENTER',
   TOP: 'TOP',
   BOTTOM: 'BOTTOM',
+  SMALL: 'SMALL',
 
   GLOBAL_MARGIN: 20,
 
