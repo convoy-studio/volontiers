@@ -5,17 +5,18 @@
   text-transform: uppercase;
   box-sizing: border-box;
   margin-top: $globalMargin;
-
+  @include anim(.8s, .0s, $easeOutExpo, translateY(0));
+  &.hide {
+    @include anim(.8s, .0s, $easeOutExpo, translateY(-($globalMargin * 4)));
+  }
   .link.projects {
     margin-left: $globalMargin;
   }
-
   @media (max-width: $MQ_SMALL) {
     > .link {
       padding-left: 0;
     }
   }
-
   &__right {
     position: absolute;
     right: $globalMargin;

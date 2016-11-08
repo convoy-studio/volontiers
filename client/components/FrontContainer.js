@@ -6,11 +6,14 @@ import LangButton from './partials/LangButton'
 import ProjectsOverview from './partials/ProjectsOverview'
 import SVGComponent from './partials/SVGComponent'
 import MainTitle from './partials/MainTitle'
+import dom from 'dom-hand'
 
 export default class FrontContainer extends BaseComponent {
   constructor(props) {
     super(props)
     this.onProjectsClick = this.onProjectsClick.bind(this)
+    this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
+    Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
   }
   render() {
     return (
@@ -41,6 +44,10 @@ export default class FrontContainer extends BaseComponent {
   }
   componentDidMount() {
     this.refs.projectsTitle.show()
+  }
+  onToggleProjectInfos() {
+    if (Store.ProjectInfoIsOpened) dom.classes.add(this.refs['front-container'], 'hide')
+    else dom.classes.remove(this.refs['front-container'], 'hide')
   }
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)

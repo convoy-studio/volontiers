@@ -19,7 +19,10 @@ export default class Project extends Page {
     super(props)
     this.onProjectInformationsClick = this.onProjectInformationsClick.bind(this)
     this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
+    this.onSlideshowUpdated = this.onSlideshowUpdated.bind(this)
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
+    Store.on(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
+    Store.on(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     this.state = { showLanding: true }
   }
   render() {
@@ -29,6 +32,7 @@ export default class Project extends Page {
         <NextPreviousBtns ref='next-previous-btns' />
         <MainTitle ref='projectTitle' title={content.name} className='link bottom-project-title'></MainTitle>
         <MainTitle ref='projectInformations' title={'View Informations'} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
+        <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} className='link bottom-project-counter'></MainTitle>
         <ProjectInfos />
   		</div>
   	)
@@ -42,6 +46,7 @@ export default class Project extends Page {
   didTransitionInComplete() {
     this.refs.projectTitle.show()
     this.refs.projectInformations.show()
+    this.refs.projectCounter.show()
     super.didTransitionInComplete()
   }
   setupAnimations() {
@@ -69,6 +74,13 @@ export default class Project extends Page {
       this.refs.projectInformations.updateState({title: 'view informations'})
     }
   }
+  onSlideshowUpdated() {
+    setTimeout(() => {
+      this.refs.projectCounter.updateState({
+        title: `${this.slideshow.counter.props.index + 1}/${this.slideshow.slides.length}`
+      })
+    })
+  }
   update() {
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     const prevNx = Math.min(Store.Mouse.nX + 0.4, 0) * 0.2
@@ -86,6 +98,8 @@ export default class Project extends Page {
   }
   componentWillUnmount() {
     this.slideshow.clear()
+    Store.off(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
+    Store.off(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()

@@ -269,7 +269,12 @@ const Store = assign({}, EventEmitter2.prototype, {
         setTimeout(Actions.closeProjectsOverview)
         setTimeout(() => { Store.emitChange(action.actionType) }, 600)
       } else {
-        Store.emitChange(action.actionType)
+        if (Store.ProjectInfoIsOpened) {
+          setTimeout(Actions.toggleProjectInfos)
+          setTimeout(() => { Store.emitChange(action.actionType) }, 800)
+        } else {
+          Store.emitChange(action.actionType)
+        }
       }
       break
     case Constants.PREVIEW_CHANGED:

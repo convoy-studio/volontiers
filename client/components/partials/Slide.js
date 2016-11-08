@@ -11,12 +11,12 @@ const STATE = {
   SCALE_UP: 'SCALE_UP',
   SCALE_DOWN: 'SCALE_DOWN'
 }
-const scaleUpBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
-const scaleDownBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
+const scaleUpBezier = bezier(1, 0.01, 0.14, 1.01, 500)
+const scaleDownBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 let scaleUpTime = 0
 let scaleDownTime = 0
-const transitionHideBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
-const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
+const transitionHideBezier = bezier(1, 0.01, 0.14, 1.01, 500)
+const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 let transitionHideTime = 0
 let transitionShowTime = 0
 
@@ -67,23 +67,23 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
       break
     case STATE.SCALE_UP:
-      scaleUpTime += 0.01
+      scaleUpTime += 0.02
       const scaleUp = Math.min(scaleUpBezier(scaleUpTime), 1)
       Utils.planeTransition(currentSlide, scaleUp, scope.direction)
       break
     case STATE.SCALE_DOWN:
-      scaleDownTime += 0.01
+      scaleDownTime += 0.02
       const scaleDown = Math.min(scaleDownBezier(scaleDownTime), 1)
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.01
+      transitionShowTime += 0.02
       const easeIn = transitionShowBezier(transitionShowTime)
-      if (transitionShowTime >= 1) scope.activate()
+      if (transitionShowTime >= 0.6) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.01
+      transitionHideTime += 0.02
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)

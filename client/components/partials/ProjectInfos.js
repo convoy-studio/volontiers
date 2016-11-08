@@ -28,10 +28,10 @@ class ProjectInfos extends BaseComponent {
   }
   onToggleSection() {
     if (this.toggled) {
-      this.tl.reverse().timeScale(1.8)
+      this.tl.reverse().timeScale(2)
       this.toggled = false
     } else {
-      this.tl.play().timeScale(1.4)
+      this.tl.play().timeScale(1.8)
       this.toggled = true
     }
   }
