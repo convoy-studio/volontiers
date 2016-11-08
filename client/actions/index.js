@@ -174,6 +174,18 @@ const Actions = {
       actionType: Constants.CLOSE_PROJECTS_OVERVIEW,
       item: undefined
     })
+  },
+  unBlockInteractivity: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.UN_BLOCK_INTERACTIVITY,
+      item: undefined
+    })
+  },
+  blockInteractivity: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.BLOCK_INTERACTIVITY,
+      item: undefined
+    })
   }
 }
 

@@ -28,9 +28,11 @@ export default class Home extends Page {
   }
   willTransitionOut() {
     this.refs.preview.transitionOut()
-    setTimeout(() => {
-      super.willTransitionOut()
-    }, 700)
+    setTimeout(() => { super.willTransitionOut() }, 700)
+  }
+  willTransitionIn() {
+    this.refs.preview.transitionIn()
+    setTimeout(() => { super.willTransitionIn() }, 700)
   }
   didTransitionOutComplete() {
     super.didTransitionOutComplete()

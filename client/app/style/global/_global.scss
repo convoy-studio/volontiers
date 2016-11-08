@@ -32,15 +32,12 @@ html {
   position: absolute;
   @extend .full;
 }
-
 #app-template {
   @extend .full;
 }
-
 #base-pager, #pages-container {
   @extend .full;
 }
-
 #pages-container {
   position: absolute;
   z-index: 10;
@@ -49,12 +46,13 @@ html {
     position: absolute;
   }
 }
-
-#front-block {
+#block-interaction-layer {
   @extend .full;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999999;
   visibility: hidden;
+  background-color: red;
+  @include opacity(0.2);
 }

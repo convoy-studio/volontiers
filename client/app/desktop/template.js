@@ -5,6 +5,7 @@ import { initGlobalEvents, resize as globalResize } from '../../services/global-
 import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
 import CanvasContainer from '../../components/CanvasContainer'
+import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
 
 export default class AppTemplate extends React.Component {
   componentWillMount() {
@@ -14,6 +15,7 @@ export default class AppTemplate extends React.Component {
   render() {
     return (
       <div id='app-template'>
+        <BlockInteractionLayer />
         <FrontContainer ref='front-container' />
         <PagesContainer ref='pages-container' />
         <CanvasContainer ref='canvas-container' />

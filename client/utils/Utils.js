@@ -170,7 +170,7 @@ class Utils {
   static setDefaultPlanePositions(plane, position) {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    if (position !== Constants.CENTER) {
+    if (position === Constants.RIGHT) {
       plane.verts[0] = plane.iverts[0] + (windowW * Utils.rand(8, 12, 1))
       plane.verts[1] = plane.iverts[1] - (windowW >> 1)
       plane.verts[2] = plane.iverts[2] + (windowW * Utils.rand(3.2, 4, 1))
@@ -179,6 +179,15 @@ class Utils {
       plane.verts[5] = plane.iverts[5] + (windowW >> 1)
       plane.verts[6] = plane.iverts[6] + (windowW * Utils.rand(3.2, 4, 1))
       plane.verts[7] = plane.iverts[7] + (windowW >> 1)
+    } else if (position === Constants.LEFT) {
+      plane.verts[0] = plane.iverts[0] - (windowW * Utils.rand(8, 12, 1))
+      plane.verts[1] = plane.iverts[1] + (windowW >> 1)
+      plane.verts[2] = plane.iverts[2] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.verts[3] = plane.iverts[3] + (windowW >> 1)
+      plane.verts[4] = plane.iverts[4] - (windowW * Utils.rand(8, 12, 1))
+      plane.verts[5] = plane.iverts[5] - (windowW >> 1)
+      plane.verts[6] = plane.iverts[6] - (windowW * Utils.rand(3.2, 4, 1))
+      plane.verts[7] = plane.iverts[7] - (windowW >> 1)
     }
   }
   static updateGoToPlanePositions(plane, dir) {

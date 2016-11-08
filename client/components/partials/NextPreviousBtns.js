@@ -33,7 +33,6 @@ class NextPreviousBtns extends BaseComponent {
     setTimeout(this.resize, 300)
   }
   onPreviousClicked(e) {
-    // console.log(e)
     switch (e) {
     case PREVIOUS_IMAGE:
       Actions.previousSlide()

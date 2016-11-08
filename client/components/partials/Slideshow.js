@@ -96,7 +96,9 @@ export default (container)=> {
     })
   }
   const transitionOut = () => {
-    scope.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
+    const newRoute = Router.getNewRoute()
+    if (newRoute.type === Constants.HOME) scope.currentSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
+    else scope.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   const showCurrentSlide = () => {
     scope.currentSlide.show({from: Constants.TOP, to: Constants.CENTER})

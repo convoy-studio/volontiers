@@ -46,10 +46,12 @@ class Preview extends BaseComponent {
     this.counter.set(currentSlide.index)
   }
   onFirstSlideLoaded() {
+    const oldRoute = Router.getOldRoute()
     this.resize()
     this.updateCurrentSlide()
     Actions.previewsLoaded()
     this.loadNextPreviousSlide()
+    if (oldRoute && oldRoute.type === Constants.PROJECT) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
     this.firstPreviewLoaded = true
   }
   loadNextPreviousSlide() {
@@ -160,6 +162,12 @@ class Preview extends BaseComponent {
     const position = this.counter.props.index * windowH
     if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
     else this.container.position.y = -position
+  }
+  transitionIn() {
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute && oldRoute.type === Constants.PROJECT) {
+      this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+    }
   }
   transitionOut() {
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})

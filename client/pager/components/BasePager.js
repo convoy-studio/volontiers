@@ -79,9 +79,11 @@ class BasePager extends React.Component {
   }
   showLoadState() {
     Store.Parent.style.cursor = 'wait'
+    setTimeout(Actions.blockInteractivity)
   }
   hideLoadState() {
     Store.Parent.style.cursor = 'auto'
+    setTimeout(Actions.unBlockInteractivity)
   }
   unmountComponent(ref) {
     if (this.components[ref] !== undefined) {
