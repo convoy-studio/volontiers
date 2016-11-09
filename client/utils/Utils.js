@@ -254,6 +254,22 @@ class Utils {
     default:
     }
   }
+  static countActivityHandler(delay) {
+    let scope
+    const count = () => {
+      setTimeout(() => {
+        scope.isReady = true
+      }, scope.delay)
+      scope.isReady = false
+      return scope
+    }
+    scope = {
+      count,
+      delay: delay,
+      isReady: true
+    }
+    return scope
+  }
 }
 
 export default Utils

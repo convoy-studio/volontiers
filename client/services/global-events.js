@@ -1,7 +1,10 @@
 import Actions from '../actions'
 import Store from '../store'
 import Constants from '../constants'
+import Utils from '../utils/Utils'
 import dom from 'dom-hand'
+
+const keyboardActivityHandler = Utils.countActivityHandler(900)
 
 export function resize() {
   Actions.windowResize(window.innerWidth, window.innerHeight)
@@ -19,6 +22,8 @@ function mousemove(e) {
 
 function keypress(e) {
   e.preventDefault()
+  if (keyboardActivityHandler.isReady === false) return
+  keyboardActivityHandler.count()
   const char = event.which || event.keyCode
   switch (char) {
   case 38:

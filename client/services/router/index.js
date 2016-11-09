@@ -85,7 +85,7 @@ class Router {
   updatePageRoute(path) {
     routerStore.oldRoute = routerStore.newRoute
     routerStore.newRoute = this.getRouteByPath(path)
-    Actions.routeChanged()
+    setTimeout(Actions.routeChanged)
   }
   sendToDefault() {
     page(Store.defaultRoute())

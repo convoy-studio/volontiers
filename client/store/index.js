@@ -6,16 +6,10 @@ import data from '../data'
 import Router from '../services/router'
 import isRetina from 'is-retina'
 import Actions from '../actions'
+import Utils from '../utils/Utils'
 
-const slideshowActivityHandler = {
-  delay: 1000,
-  isReady: true
-}
-
-const projectOverviewActivityHandler = {
-  delay: 1200,
-  isReady: true
-}
+const slideshowActivityHandler = Utils.countActivityHandler(1000)
+const projectOverviewActivityHandler = Utils.countActivityHandler(1200)
 
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
@@ -125,6 +119,14 @@ function _getAllProjects() {
   }
   return projects
 }
+function _getAllHomeProjects() {
+  const projects = _getAllProjects()
+  const filteredProjects = []
+  projects.forEach((item) => {
+    if (item.inHome) filteredProjects.push(item)
+  })
+  return filteredProjects
+}
 function _getProjectsByType(type) {
   const projects = Store.AllProjects
   const filteredProjects = []
@@ -148,12 +150,7 @@ function _getNextProject() {
   return project
 }
 function _getHomeProjects() {
-  const projects = Store.AllProjects
-  const filteredProjects = []
-  projects.forEach((item) => {
-    if (item.inHome) filteredProjects.push(item)
-  })
-  return filteredProjects
+  return Store.AllHomeProjects
 }
 function _getProjectById(id) {
   const projects = Store.AllProjects
@@ -259,6 +256,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   Orientation: Constants.ORIENTATION.LANDSCAPE,
   Detector: {},
   AllProjects: _getAllProjects(), // cache projects array
+  AllHomeProjects: _getAllHomeProjects(), // cache home projects array
   State: Constants.STATE.NORMAL,
   ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
@@ -276,18 +274,12 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.NEXT_SLIDE:
       if (slideshowActivityHandler.isReady === false) return
-      setTimeout(() => {
-        slideshowActivityHandler.isReady = true
-      }, slideshowActivityHandler.delay)
-      slideshowActivityHandler.isReady = false
+      slideshowActivityHandler.count()
       Store.emitChange(action.actionType)
       break
     case Constants.PREVIOUS_SLIDE:
       if (slideshowActivityHandler.isReady === false) return
-      setTimeout(() => {
-        slideshowActivityHandler.isReady = true
-      }, slideshowActivityHandler.delay)
-      slideshowActivityHandler.isReady = false
+      slideshowActivityHandler.count()
       Store.emitChange(action.actionType)
       break
     case Constants.ROUTE_CHANGED:
@@ -327,26 +319,18 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.OPEN_PROJECTS_OVERVIEW:
       if (projectOverviewActivityHandler.isReady === false) return
-      setTimeout(() => {
-        projectOverviewActivityHandler.isReady = true
-      }, projectOverviewActivityHandler.delay)
-      projectOverviewActivityHandler.isReady = false
+      projectOverviewActivityHandler.count()
       Store.State = Constants.STATE.PROJECTS
       if (Store.ProjectInfoIsOpened) {
         setTimeout(Actions.toggleProjectInfos)
-        setTimeout(() => {
-          Store.emitChange(action.actionType)
-        }, 800)
+        setTimeout(() => { Store.emitChange(action.actionType) }, 800)
       } else {
         Store.emitChange(action.actionType)
       }
       break
     case Constants.CLOSE_PROJECTS_OVERVIEW:
       if (projectOverviewActivityHandler.isReady === false) return
-      setTimeout(() => {
-        projectOverviewActivityHandler.isReady = true
-      }, projectOverviewActivityHandler.delay)
-      projectOverviewActivityHandler.isReady = false
+      projectOverviewActivityHandler.count()
       Store.State = Constants.STATE.NORMAL
       Store.emitChange(action.actionType)
       break

@@ -16,8 +16,10 @@ class Preview extends BaseComponent {
     super(props)
     this.onPreviewsLoaded = this.onPreviewsLoaded.bind(this)
     this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
+    this.keyboardTriggered = this.keyboardTriggered.bind(this)
     Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
+    Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     this.oldSlide = undefined
     this.currentSlide = undefined
     this.slides = []
@@ -176,10 +178,16 @@ class Preview extends BaseComponent {
   transitionOut() {
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
+  keyboardTriggered(key) {
+    if (key === Constants.LEFT || key === Constants.DOWN) this.onScroll(1)
+    else if (key === Constants.RIGHT || key === Constants.UP) this.onScroll(-1)
+    else Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+  }
   componentWillUnmount() {
     this.slides.forEach((item) => { item.clear() })
     Store.off(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
+    Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
     dom.event.off(this.parent, 'mousewheel', this.handleScroll)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})

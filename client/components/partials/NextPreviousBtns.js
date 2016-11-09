@@ -17,11 +17,13 @@ class NextPreviousBtns extends BaseComponent {
     this.onPreviousClicked = this.onPreviousClicked.bind(this)
     this.onNextClicked = this.onNextClicked.bind(this)
     this.slideshowStateChanged = this.slideshowStateChanged.bind(this)
+    this.keyboardTriggered = this.keyboardTriggered.bind(this)
     this.isActive = false
     this.currentProject = Store.getCurrentProject()
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
+    Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
   }
   render() {
     return (
@@ -34,14 +36,21 @@ class NextPreviousBtns extends BaseComponent {
   componentDidMount() {
     setTimeout(this.resize, 300)
   }
+  goBack() {
+    const currentRoute = Router.getNewRoute()
+    Router.setRoute(`/home/${currentRoute.target}`)
+  }
+  goNext() {
+    const next = Store.nextProject()
+    Router.setRoute(`/project/${next.slug}`)
+  }
   onPreviousClicked(e) {
     switch (e) {
     case PREVIOUS_IMAGE:
       Actions.previousSlide()
       break
     case BACK:
-      const currentRoute = Router.getNewRoute()
-      Router.setRoute(`/home/${currentRoute.target}`)
+      this.goBack()
       break
     default:
     }
@@ -52,8 +61,7 @@ class NextPreviousBtns extends BaseComponent {
       Actions.nextSlide()
       break
     case NEXT_PROJECT:
-      const next = Store.nextProject()
-      Router.setRoute(`/project/${next.slug}`)
+      this.goNext()
       break
     default:
     }
@@ -76,6 +84,7 @@ class NextPreviousBtns extends BaseComponent {
     if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
   }
   slideshowStateChanged(state) {
+    this.currentState = state
     if (state === Constants.SLIDESHOW.BEGIN) {
       this.refs.previousBtn.updateState({
         title: 'back',
@@ -104,8 +113,13 @@ class NextPreviousBtns extends BaseComponent {
     }
     this.resize()
   }
+  keyboardTriggered(key) {
+    if ((key === Constants.LEFT || key === Constants.DOWN) && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
+    else if ((key === Constants.RIGHT || key === Constants.UP) && this.currentState === Constants.SLIDESHOW.END) this.goNext()
+  }
   componentWillUnmount() {
     Store.off(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
+    Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
   }
   resize() {
     const windowW = Store.Window.w
