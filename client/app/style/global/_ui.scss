@@ -109,6 +109,25 @@ a {
     @extend .full;
     // background-color: red;
   }
+  .line {
+    background-color: $black;
+    @include anim(.8s, .0s, $easeInOutCirc, scaleY(0), 0%, 0%);
+  }
+  .holder {
+    @include opacity(0);
+    @include anim(.8s, .0s, $easeOutCirc, scale(1));
+  }
+  &.hover {
+    .line {
+      @include anim(.4s, .0s, cubic-bezier(0,.63,0,1.07), scaleY(1), 0%, 0%);
+    }
+  }
+  &.show {
+    .holder {
+      @include opacity(1);
+      @include anim(.8s, .0s, $easeOutCirc, scale(1));
+    }
+  }
 }
 .link {
   color: $black;
@@ -117,16 +136,6 @@ a {
   line-height: 20px;
   box-sizing: border-box;
   text-transform: uppercase;
-  .holder {
-    @include opacity(0);
-    @include anim(.8s, .0s, $easeOutCirc, scale(1));
-  }
-  &.show {
-    .holder {
-      @include opacity(1);
-      @include anim(.8s, .0s, $easeOutCirc, scale(1));
-    }
-  }
   @media (max-width: $MQ_SMALL) {
     // font-size: $mobileFontSize;
   }

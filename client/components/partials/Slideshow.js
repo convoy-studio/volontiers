@@ -16,12 +16,14 @@ export default (container)=> {
     assets.forEach((asset, i) => {
       scope.slides.push(slide(route.target, scope.container, `images/${route.target}/${asset}`, i, 'slide'))
     })
-    loadFirstSlide()
-    done()
+    loadFirstSlide(done)
     return scope
   }
-  const loadFirstSlide = () => {
-    scope.slides[0].load(onSlideLoaded)
+  const loadFirstSlide = (done) => {
+    scope.slides[0].load((plane, index) => {
+      onSlideLoaded(plane, index)
+      done()
+    })
   }
   const removeSlides = () => {
     scope.slides.forEach((child) => {

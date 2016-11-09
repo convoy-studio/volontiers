@@ -1,5 +1,3 @@
-// import {TimelineMax} from 'gsap'
-
 export default class BasePage extends React.Component {
   constructor(props) {
     super(props)

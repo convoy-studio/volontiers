@@ -17,6 +17,8 @@ class NextPreviousBtns extends BaseComponent {
     this.onPreviousClicked = this.onPreviousClicked.bind(this)
     this.onNextClicked = this.onNextClicked.bind(this)
     this.slideshowStateChanged = this.slideshowStateChanged.bind(this)
+    this.isActive = false
+    this.currentProject = Store.getCurrentProject()
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
@@ -38,9 +40,8 @@ class NextPreviousBtns extends BaseComponent {
       Actions.previousSlide()
       break
     case BACK:
-      const oldRoute = Router.getOldRoute()
-      if (oldRoute) Router.setRoute(oldRoute.path)
-      else Router.setRoute('/home')
+      const currentRoute = Router.getNewRoute()
+      Router.setRoute(`/home/${currentRoute.target}`)
       break
     default:
     }
@@ -58,6 +59,7 @@ class NextPreviousBtns extends BaseComponent {
     }
   }
   show(side) {
+    if (!this.isActive) return
     switch (side) {
     case Constants.LEFT:
       if (!this.refs.previousBtn.isVisible) this.refs.previousBtn.show()
@@ -69,6 +71,7 @@ class NextPreviousBtns extends BaseComponent {
     }
   }
   hide() {
+    if (!this.isActive) return
     if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
     if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
   }
@@ -79,6 +82,12 @@ class NextPreviousBtns extends BaseComponent {
         eventId: BACK
       })
     } else if (state === Constants.SLIDESHOW.END) {
+      if (this.currentProject.assets.length <= 1) {
+        this.refs.previousBtn.updateState({
+          title: 'back',
+          eventId: BACK
+        })
+      }
       this.refs.nextBtn.updateState({
         title: 'next project',
         eventId: NEXT_PROJECT

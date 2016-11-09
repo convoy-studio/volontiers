@@ -38,11 +38,13 @@ class Preview extends BaseComponent {
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
-    this.loadFirstSlide()
   }
-  loadFirstSlide() {
+  loadFirstSlide(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
-    this.slides[currentSlide.index].load(this.onFirstSlideLoaded)
+    this.slides[currentSlide.index].load(() => {
+      this.onFirstSlideLoaded()
+      done()
+    })
     this.counter.set(currentSlide.index)
   }
   onFirstSlideLoaded() {

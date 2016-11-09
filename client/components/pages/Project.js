@@ -30,9 +30,9 @@ export default class Project extends Page {
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
-        <MainTitle ref='projectTitle' title={content.name} className='link bottom-project-title'></MainTitle>
-        <MainTitle ref='projectInformations' title={'View Informations'} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
-        <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} className='link bottom-project-counter'></MainTitle>
+        <MainTitle ref='projectTitle' title={content.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
+        <MainTitle ref='projectInformations' title={'View Informations'} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
+        <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
         <ProjectInfos />
   		</div>
   	)
@@ -40,27 +40,29 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    this.slideshow = slideshow(this.container).load(() => {})
-    super.componentDidMount()
+    this.slideshow = slideshow(this.container).load(() => {
+      super.componentDidMount()
+    })
+  }
+  willTransitionIn() {
+    super.willTransitionIn()
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
     this.refs.projectInformations.show()
     this.refs.projectCounter.show()
+    this.refs['next-previous-btns'].isActive = true
+    this.refs['next-previous-btns'].show()
     super.didTransitionInComplete()
-  }
-  setupAnimations() {
-    super.setupAnimations()
   }
   willTransitionOut() {
     this.slideshow.transitionOut()
     this.refs.projectTitle.hide()
     this.refs.projectInformations.hide()
-    this.refs['next-previous-btns'].hide(Constants.LEFT)
-    this.refs['next-previous-btns'].hide(Constants.RIGHT)
-    setTimeout(() => {
-      super.willTransitionOut()
-    }, 700)
+    this.refs.projectCounter.hide()
+    this.refs['next-previous-btns'].hide()
+    this.refs['next-previous-btns'].isActive = false
+    setTimeout(() => { super.willTransitionOut() }, 700)
   }
   onProjectInformationsClick() {
     Actions.toggleProjectInfos()

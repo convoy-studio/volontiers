@@ -55,7 +55,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     return resizeVars
   }
   const animate = () => {
-    if (scope.state === STATE.DEACTIVE) return
+    if (scope.state === STATE.DEACTIVE || scope.isLoaded === false) return
     scope.delta += 0.01
     const currentSlide = scope.plane
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
@@ -67,23 +67,23 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
       break
     case STATE.SCALE_UP:
-      scaleUpTime += 0.02
+      scaleUpTime += 0.008
       const scaleUp = Math.min(scaleUpBezier(scaleUpTime), 1)
       Utils.planeTransition(currentSlide, scaleUp, scope.direction)
       break
     case STATE.SCALE_DOWN:
-      scaleDownTime += 0.02
+      scaleDownTime += 0.01
       const scaleDown = Math.min(scaleDownBezier(scaleDownTime), 1)
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.02
+      transitionShowTime += 0.008
       const easeIn = transitionShowBezier(transitionShowTime)
-      if (transitionShowTime >= 0.6) scope.activate()
+      if (transitionShowTime >= 0.5) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.02
+      transitionHideTime += 0.01
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)

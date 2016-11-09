@@ -5,7 +5,7 @@
   text-transform: uppercase;
   box-sizing: border-box;
   margin-top: $globalMargin;
-  @include anim(.8s, .0s, $easeOutExpo, translateY(0));
+  @include anim(.8s, .5s, $easeOutExpo, translateY(0));
   &.hide {
     @include anim(.8s, .0s, $easeOutExpo, translateY(-($globalMargin * 4)));
   }

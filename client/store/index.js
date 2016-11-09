@@ -7,6 +7,11 @@ import Router from '../services/router'
 import isRetina from 'is-retina'
 import Actions from '../actions'
 
+const slideshowActivityHandler = {
+  delay: 1000,
+  isReady: true
+}
+
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
 }
@@ -264,7 +269,24 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.Orientation = (Store.Window.w > Store.Window.h) ? Constants.ORIENTATION.LANDSCAPE : Constants.ORIENTATION.PORTRAIT
       Store.emitChange(action.actionType)
       break
+    case Constants.NEXT_SLIDE:
+      if (slideshowActivityHandler.isReady === false) return
+      setTimeout(() => {
+        slideshowActivityHandler.isReady = true
+      }, slideshowActivityHandler.delay)
+      slideshowActivityHandler.isReady = false
+      Store.emitChange(action.actionType)
+      break
+    case Constants.PREVIOUS_SLIDE:
+      if (slideshowActivityHandler.isReady === false) return
+      setTimeout(() => {
+        slideshowActivityHandler.isReady = true
+      }, slideshowActivityHandler.delay)
+      slideshowActivityHandler.isReady = false
+      Store.emitChange(action.actionType)
+      break
     case Constants.ROUTE_CHANGED:
+      if (slideshowActivityHandler.isReady === false) return
       if (Store.State === Constants.STATE.PROJECTS) {
         setTimeout(Actions.closeProjectsOverview)
         setTimeout(() => { Store.emitChange(action.actionType) }, 600)

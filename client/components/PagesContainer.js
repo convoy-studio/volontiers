@@ -51,7 +51,7 @@ export default class PagesContainer extends BasePager {
     }
     const oldRoute = Router.getOldRoute()
     if (oldRoute && oldRoute.type === Constants.HOME && newRoute.type === Constants.HOME) {
-      console.log('don`t create new component')
+      // console.log('don`t create new component')
     } else {
       this.setupNewComponent(newRoute, type)
     }
