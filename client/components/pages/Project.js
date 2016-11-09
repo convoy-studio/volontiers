@@ -45,7 +45,7 @@ export default class Project extends Page {
     })
   }
   willTransitionIn() {
-    super.willTransitionIn()
+    setTimeout(() => { super.willTransitionIn() }, 300)
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
@@ -56,13 +56,16 @@ export default class Project extends Page {
     super.didTransitionInComplete()
   }
   willTransitionOut() {
-    this.slideshow.transitionOut()
     this.refs.projectTitle.hide()
     this.refs.projectInformations.hide()
     this.refs.projectCounter.hide()
     this.refs['next-previous-btns'].hide()
     this.refs['next-previous-btns'].isActive = false
-    setTimeout(() => { super.willTransitionOut() }, 700)
+    setTimeout(() => { super.willTransitionOut() }, 200)
+  }
+  didTransitionOutComplete() {
+    this.slideshow.transitionOut()
+    setTimeout(() => { super.didTransitionOutComplete() }, 0)
   }
   onProjectInformationsClick() {
     Actions.toggleProjectInfos()
@@ -70,7 +73,10 @@ export default class Project extends Page {
   onToggleProjectInfos() {
     if (Store.ProjectInfoIsOpened) {
       this.slideshow.hideCurrentSlide()
-      this.refs.projectInformations.updateState({title: 'close informations'})
+      this.refs.projectInformations.onMouseLeave()
+      setTimeout(() => {
+        this.refs.projectInformations.updateState({title: 'close informations'})
+      }, 400)
     } else {
       this.slideshow.showCurrentSlide()
       this.refs.projectInformations.updateState({title: 'view informations'})

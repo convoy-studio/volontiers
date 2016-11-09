@@ -56,14 +56,14 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   }
   const animate = () => {
     if (scope.state === STATE.DEACTIVE || scope.isLoaded === false) return
-    scope.delta += 0.01
+    scope.delta += 0.02
     const currentSlide = scope.plane
-    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-    const offsetX = nextNx * 400
-    const offsetY = nextNx * 300
-    const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
     switch (scope.state) {
     case STATE.ACTIVE:
+      const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
+      const offsetX = nextNx * 400
+      const offsetY = nextNx * 300
+      const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
       break
     case STATE.SCALE_UP:
@@ -77,13 +77,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.008
+      transitionShowTime += 0.01
       const easeIn = transitionShowBezier(transitionShowTime)
       if (transitionShowTime >= 0.5) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.01
+      transitionHideTime += 0.014
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)
@@ -108,20 +108,21 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const onProjectsOverviewOpen = () => {
     scope.direction = { from: Constants.CENTER, to: Constants.SMALL }
     scaleDownTime = 0
-    Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
+    if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
     scope.state = STATE.SCALE_DOWN
   }
   const onProjectsOverviewClose = () => {
     scope.direction = { from: Constants.SMALL, to: Constants.CENTER }
     scaleUpTime = 0
-    Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
+    if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
     scope.state = STATE.SCALE_UP
+    removeEvents()
     setTimeout(() => {
       scope.activate()
-      removeEvents()
     }, 500)
   }
   const activate = () => {
+    removeEvents()
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, onProjectsOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     scope.state = STATE.ACTIVE

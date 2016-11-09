@@ -64,11 +64,11 @@ class MainTitle extends BaseComponent {
     this.setState(state)
   }
   onMouseEnter(e) {
-    e.preventDefault()
+    if (e) e.preventDefault()
     dom.classes.add(this.refs.parent, 'hover')
   }
   onMouseLeave(e) {
-    e.preventDefault()
+    if (e) e.preventDefault()
     dom.classes.remove(this.refs.parent, 'hover')
   }
   transitionIn() {

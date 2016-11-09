@@ -43,10 +43,7 @@ export default class Home extends Page {
   }
   willTransitionIn() {
     this.refs.preview.transitionIn()
-    setTimeout(() => { super.willTransitionIn() }, 700)
-  }
-  didTransitionOutComplete() {
-    super.didTransitionOutComplete()
+    setTimeout(() => { super.willTransitionIn() }, 300)
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()

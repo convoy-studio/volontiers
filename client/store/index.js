@@ -12,6 +12,11 @@ const slideshowActivityHandler = {
   isReady: true
 }
 
+const projectOverviewActivityHandler = {
+  delay: 1200,
+  isReady: true
+}
+
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
 }
@@ -286,7 +291,6 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.ROUTE_CHANGED:
-      if (slideshowActivityHandler.isReady === false) return
       if (Store.State === Constants.STATE.PROJECTS) {
         setTimeout(Actions.closeProjectsOverview)
         setTimeout(() => { Store.emitChange(action.actionType) }, 600)
@@ -318,15 +322,53 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.TOGGLE_PROJECT_INFOS:
       Store.ProjectInfoIsOpened = (Store.ProjectInfoIsOpened) ? false : true
+      if (Store.State === Constants.STATE.PROJECTS && Store.ProjectInfoIsOpened) setTimeout(Actions.closeProjectsOverview)
       Store.emitChange(action.actionType)
       break
     case Constants.OPEN_PROJECTS_OVERVIEW:
+      if (projectOverviewActivityHandler.isReady === false) return
+      setTimeout(() => {
+        projectOverviewActivityHandler.isReady = true
+      }, projectOverviewActivityHandler.delay)
+      projectOverviewActivityHandler.isReady = false
       Store.State = Constants.STATE.PROJECTS
-      Store.emitChange(action.actionType)
+      if (Store.ProjectInfoIsOpened) {
+        setTimeout(Actions.toggleProjectInfos)
+        setTimeout(() => {
+          Store.emitChange(action.actionType)
+        }, 800)
+      } else {
+        Store.emitChange(action.actionType)
+      }
       break
     case Constants.CLOSE_PROJECTS_OVERVIEW:
+      if (projectOverviewActivityHandler.isReady === false) return
+      setTimeout(() => {
+        projectOverviewActivityHandler.isReady = true
+      }, projectOverviewActivityHandler.delay)
+      projectOverviewActivityHandler.isReady = false
       Store.State = Constants.STATE.NORMAL
       Store.emitChange(action.actionType)
+      break
+    case Constants.KEYBOARD_TRIGGERED:
+      const key = action.item
+      switch (Store.State) {
+      case Constants.STATE.PROJECTS:
+        setTimeout(Actions.closeProjectsOverview)
+        break
+      case Constants.STATE.ABOUT:
+        break
+      default:
+        const route = Router.getNewRoute()
+        if (route.type === Constants.PROJECT) {
+          if (key === Constants.UP || key === Constants.RIGHT) setTimeout(Actions.nextSlide)
+          else if (key === Constants.DOWN || key === Constants.LEFT) setTimeout(Actions.previousSlide)
+          else if (key === Constants.ESC) setTimeout(Actions.openProjectsOverview)
+          else if (key === Constants.SPACE) setTimeout(Actions.toggleProjectInfos)
+          else setTimeout(Actions.nextSlide)
+        }
+      }
+      Store.emitChange(action.actionType, action.item)
       break
     default:
       Store.emitChange(action.actionType, action.item)

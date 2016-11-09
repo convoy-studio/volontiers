@@ -6,6 +6,7 @@ import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
 import CanvasContainer from '../../components/CanvasContainer'
 import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
+import raf from 'raf'
 
 export default class AppTemplate extends React.Component {
   componentWillMount() {
@@ -24,13 +25,16 @@ export default class AppTemplate extends React.Component {
   }
   componentDidMount() {
     Store.on(Constants.WINDOW_RESIZE, this.resize)
-    TweenMax.ticker.addEventListener('tick', this.update)
+    this.update()
     globalResize() // before render the app call the resize action to fill the initial values (Mouse, WindowSize)
   }
   update() {
-    this.refs['pages-container'].update()
-    this.refs['canvas-container'].update()
-    this.refs['front-container'].update()
+    raf(() => {
+      this.refs['pages-container'].update()
+      this.refs['canvas-container'].update()
+      this.refs['front-container'].update()
+      this.update()
+    })
   }
   resize() {
     this.refs['pages-container'].resize()

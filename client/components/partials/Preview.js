@@ -154,7 +154,7 @@ class Preview extends BaseComponent {
     this.oldSlide = this.currentSlide
     this.currentSlide = this.slides[this.counter.props.index]
     if (this.oldSlide) this.oldSlide.deactivate()
-    this.currentSlide.activate()
+    if (this.firstPreviewLoaded) this.currentSlide.activate()
     this.animateContainer()
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
     if (this.firstPreviewLoaded) this.loadNextPreviousSlide()
@@ -169,6 +169,8 @@ class Preview extends BaseComponent {
     const oldRoute = Router.getOldRoute()
     if (oldRoute && oldRoute.type === Constants.PROJECT) {
       this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+    } else {
+      this.currentSlide.activate()
     }
   }
   transitionOut() {

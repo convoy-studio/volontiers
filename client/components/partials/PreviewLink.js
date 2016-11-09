@@ -44,7 +44,7 @@ class PreviewLink extends BaseComponent {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.refs.previewLink.refs.parent.style.top = (windowH >> 1) - (this.refs.previewLink.size[0] >> 1) + 'px'
-    this.refs.previewLink.refs.parent.style.left = windowW - 40 + 'px'
+    this.refs.previewLink.refs.parent.style.left = windowW - Constants.GLOBAL_MARGIN + 'px'
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEW_CHANGED, this.update)

@@ -22,6 +22,8 @@ let transitionHideTime = 0
 let transitionShowTime = 0
 const initialPos = 400
 
+let showTitlesTimeout = undefined
+
 export default class ProjectsOverview extends BaseComponent {
   constructor(props) {
     super(props)
@@ -94,11 +96,15 @@ export default class ProjectsOverview extends BaseComponent {
     this.retailProjects.pos[0] = initialPos
     this.animationsState = STATE.TRANSITION_IN
     dom.classes.add(this.refs.parent, 'open')
-    this.refs.eventTitle.show()
-    this.refs.retailTitle.show()
+    clearTimeout(showTitlesTimeout)
+    showTitlesTimeout = setTimeout(() => {
+      this.refs.eventTitle.show()
+      this.refs.retailTitle.show()
+    }, 500)
     dom.event.on(this.refs.background, 'click', this.onBackgroundClick)
   }
   close() {
+    clearTimeout(showTitlesTimeout)
     this.animationsState = STATE.TRANSITION_OUT
     setTimeout(() => { dom.classes.remove(this.refs.parent, 'open') }, 700)
     this.refs.eventTitle.hide()

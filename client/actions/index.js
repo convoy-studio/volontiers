@@ -186,6 +186,12 @@ const Actions = {
       actionType: Constants.BLOCK_INTERACTIVITY,
       item: undefined
     })
+  },
+  triggerKeyboard: (key) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.KEYBOARD_TRIGGERED,
+      item: key
+    })
   }
 }
 
