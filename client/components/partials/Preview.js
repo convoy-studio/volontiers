@@ -56,7 +56,7 @@ class Preview extends BaseComponent {
     this.updateCurrentSlide()
     Actions.previewsLoaded()
     this.loadNextPreviousSlide()
-    if (oldRoute && oldRoute.type === Constants.PROJECT) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
+    if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
     this.firstPreviewLoaded = true
   }
   loadNextPreviousSlide() {
@@ -150,7 +150,7 @@ class Preview extends BaseComponent {
   transitionIn() {
     if (!this.currentSlide) return
     const oldRoute = Router.getOldRoute()
-    if (oldRoute && oldRoute.type === Constants.PROJECT) this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+    if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
     else this.currentSlide.activate()
   }
   transitionOut() {

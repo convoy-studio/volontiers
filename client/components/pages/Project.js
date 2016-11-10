@@ -64,7 +64,7 @@ export default class Project extends Page {
   }
   didTransitionOutComplete() {
     this.slideshow.transitionOut()
-    setTimeout(() => { super.didTransitionOutComplete() }, 0)
+    setTimeout(() => { super.didTransitionOutComplete() }, 300)
   }
   onProjectInformationsClick() {
     Actions.toggleProjectInfos()

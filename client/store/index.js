@@ -9,7 +9,8 @@ import Actions from '../actions'
 import Utils from '../utils/Utils'
 
 const slideshowActivityHandler = Utils.countActivityHandler(1000)
-const projectOverviewActivityHandler = Utils.countActivityHandler(1200)
+const projectOpenOverviewActivityHandler = Utils.countActivityHandler(1200)
+const projectCloseOverviewActivityHandler = Utils.countActivityHandler(1200)
 
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
@@ -324,8 +325,8 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.OPEN_PROJECTS_OVERVIEW:
-      if (projectOverviewActivityHandler.isReady === false) return
-      projectOverviewActivityHandler.count()
+      if (projectOpenOverviewActivityHandler.isReady === false) return
+      projectOpenOverviewActivityHandler.count()
       Store.State = Constants.STATE.PROJECTS
       if (Store.ProjectInfoIsOpened) {
         setTimeout(Actions.toggleProjectInfos)
@@ -336,8 +337,8 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.CLOSE_PROJECTS_OVERVIEW:
       const oldRoute = Router.getOldRoute()
-      if (projectOverviewActivityHandler.isReady === false && (oldRoute && oldRoute.type !== Constants.HOME)) return
-      projectOverviewActivityHandler.count()
+      if (projectCloseOverviewActivityHandler.isReady === false && (oldRoute && oldRoute.type !== Constants.ABOUT)) return
+      projectCloseOverviewActivityHandler.count()
       Store.State = Constants.STATE.NORMAL
       Store.emitChange(action.actionType)
       break
@@ -347,8 +348,6 @@ const Store = assign({}, EventEmitter2.prototype, {
       case Constants.STATE.PROJECTS:
         setTimeout(Actions.closeProjectsOverview)
         break
-      case Constants.STATE.ABOUT:
-        break
       default:
         const route = Router.getNewRoute()
         if (route.type === Constants.PROJECT) {
@@ -357,6 +356,8 @@ const Store = assign({}, EventEmitter2.prototype, {
           else if (key === Constants.ESC) setTimeout(Actions.openProjectsOverview)
           else if (key === Constants.SPACE) setTimeout(Actions.toggleProjectInfos)
           else setTimeout(Actions.nextSlide)
+        } else if (route.type === Constants.ABOUT) {
+          setTimeout(Actions.openProjectsOverview)
         }
       }
       Store.emitChange(action.actionType, action.item)

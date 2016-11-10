@@ -5,6 +5,8 @@ import Utils from '../utils/Utils'
 import dom from 'dom-hand'
 import mouseW from 'mouse-wheel'
 import inertia from 'wheel-inertia'
+import raf from 'raf'
+import {PagerStore, PagerConstants} from '../pager/Pager'
 
 const keyboardActivityHandler = Utils.countActivityHandler(650)
 
@@ -23,18 +25,21 @@ function mousemove(e) {
 }
 
 function mouseWheel(dx, dy) {
-  inertia.update(dy)
+  raf(() => {
+    inertia.update(dy)
+  })
 }
 
 function onScroll(direction) {
+  if (PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH) return
   Actions.triggerScroll(direction)
 }
 
 function keypress(e) {
   e.preventDefault()
-  if (keyboardActivityHandler.isReady === false) return
+  if (keyboardActivityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH) return
   keyboardActivityHandler.count()
-  const char = event.which || event.keyCode
+  const char = e.which || e.keyCode
   switch (char) {
   case 38:
     Actions.triggerKeyboard(Constants.UP)

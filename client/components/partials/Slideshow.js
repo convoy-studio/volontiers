@@ -74,7 +74,7 @@ export default (container)=> {
     })
   }
   const next = () => {
-    if (activityHandler.isReady === false || scope.firstItemLoaded === false) return
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened) return
     activityHandler.count()
     scope.counter.inc()
     updateCurrentSlide()
@@ -83,7 +83,7 @@ export default (container)=> {
     updateSlideshowState()
   }
   const previous = () => {
-    if (activityHandler.isReady === false || scope.firstItemLoaded === false) return
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened) return
     activityHandler.count()
     scope.counter.dec()
     updateCurrentSlide()

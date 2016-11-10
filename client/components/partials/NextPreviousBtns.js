@@ -120,6 +120,7 @@ class NextPreviousBtns extends BaseComponent {
     else if ((key === Constants.RIGHT || key === Constants.UP) && this.currentState === Constants.SLIDESHOW.END) this.goNext()
   }
   scrollTriggered(direction) {
+    if (Store.State === Constants.STATE.PROJECTS) return
     if (direction === -1 && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
     else if (direction === 1 && this.currentState === Constants.SLIDESHOW.END) this.goNext()
     else {
