@@ -108,14 +108,28 @@ export default (container)=> {
   const hideCurrentSlide = () => {
     scope.currentSlide.hide({from: Constants.CENTER, to: Constants.TOP})
   }
+  const onScroll = (direction) => {
+    switch (direction) {
+    case -1:
+      setTimeout(Actions.previousSlide)
+      break
+    case 1:
+      setTimeout(Actions.nextSlide)
+      break
+    default:
+      setTimeout(Actions.nextSlide)
+    }
+  }
   const clear = () => {
     removeSlides()
     Store.off(Constants.NEXT_SLIDE, next)
     Store.off(Constants.PREVIOUS_SLIDE, previous)
+    Store.off(Constants.SCROLL_TRIGGERED, onScroll)
     scope.slides.length = 0
   }
   Store.on(Constants.NEXT_SLIDE, next)
   Store.on(Constants.PREVIOUS_SLIDE, previous)
+  Store.on(Constants.SCROLL_TRIGGERED, onScroll)
   scope = {
     container,
     load,

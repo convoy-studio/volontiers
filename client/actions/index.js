@@ -192,6 +192,12 @@ const Actions = {
       actionType: Constants.KEYBOARD_TRIGGERED,
       item: key
     })
+  },
+  triggerScroll: (direction) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SCROLL_TRIGGERED,
+      item: direction
+    })
   }
 }
 

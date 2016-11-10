@@ -14,7 +14,6 @@ export default class Home extends Page {
     super(props)
     this.didPreviewChange = this.didPreviewChange.bind(this)
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
-    Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     this.projects = Store.getHomeProjects()
   }
   render() {
@@ -29,6 +28,7 @@ export default class Home extends Page {
     )
   }
   componentDidMount() {
+    Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     this.previewComponent = this.refs.preview
     this.refs.preview.loadFirstSlide(() => {
       super.componentDidMount()
@@ -62,9 +62,11 @@ export default class Home extends Page {
       title: project.title
     })
     setTimeout(() => {
-      this.refs.projectCounter.updateState({
-        title: `${item.previewIdx + 1}/${this.projects.length}`
-      })
+      if (this.refs.projectCounter) {
+        this.refs.projectCounter.updateState({
+          title: `${item.previewIdx + 1}/${this.projects.length}`
+        })
+      }
     })
   }
   update() {

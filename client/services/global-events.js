@@ -3,6 +3,8 @@ import Store from '../store'
 import Constants from '../constants'
 import Utils from '../utils/Utils'
 import dom from 'dom-hand'
+import mouseW from 'mouse-wheel'
+import inertia from 'wheel-inertia'
 
 const keyboardActivityHandler = Utils.countActivityHandler(650)
 
@@ -18,6 +20,14 @@ function mousemove(e) {
   Store.Mouse.y  = e.clientY
   Store.Mouse.nX = (e.clientX / windowW) * 2 - 1
   Store.Mouse.nY = (e.clientY / windowH) * 2 + 1
+}
+
+function mouseWheel(dx, dy) {
+  inertia.update(dy)
+}
+
+function onScroll(direction) {
+  Actions.triggerScroll(direction)
 }
 
 function keypress(e) {
@@ -52,4 +62,7 @@ export function initGlobalEvents() {
   dom.event.on(window, 'resize', resize)
   dom.event.on(window, 'mousemove', mousemove)
   dom.event.on(window, 'keydown', keypress)
+  dom.event.on(window, 'keydown', keypress)
+  mouseW(mouseWheel)
+  inertia.addCallback(onScroll)
 }

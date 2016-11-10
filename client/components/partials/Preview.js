@@ -5,7 +5,6 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import Utils from '../../utils/Utils'
 import dom from 'dom-hand'
-import inertia from 'wheel-inertia'
 import counter from 'ccounter'
 import slide from './Slide'
 import slideshow from './Slideshow'
@@ -14,12 +13,12 @@ import {PagerActions} from '../../pager/Pager'
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
-    this.onPreviewsLoaded = this.onPreviewsLoaded.bind(this)
     this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
     this.keyboardTriggered = this.keyboardTriggered.bind(this)
-    Store.on(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
+    this.onScroll = this.onScroll.bind(this)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
+    Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
     this.oldSlide = undefined
     this.currentSlide = undefined
     this.slides = []
@@ -70,22 +69,6 @@ class Preview extends BaseComponent {
     if (s.isLoaded) this.completeLoader()
     else s.load(this.completeLoader)
   }
-  addListeners() {
-    inertia.addCallback(this.onScroll)
-    dom.event.on(this.parent, 'DOMMouseScroll', this.handleScroll)
-    dom.event.on(this.parent, 'mousewheel', this.handleScroll)
-  }
-  resize() {
-    const windowW = Store.Window.w
-    const windowH = Store.Window.h
-    this.slides.forEach((item, i) => {
-      const resizeVars = item.resize()
-      if (item.isLoaded) {
-        item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
-      }
-    })
-  }
   update() {
     if (this.currentSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
@@ -132,19 +115,12 @@ class Preview extends BaseComponent {
       this.isEnteredPreview = false
     }
   }
-  onPreviewsLoaded() {
-    this.addListeners()
-  }
-  handleScroll(e) {
-    let delta = e.wheelDelta
-    inertia.update(delta)
-  }
   onScroll(direction) {
     switch (direction) {
-    case 1:
+    case -1:
       this.counter.dec()
       break
-    case -1:
+    case 1:
       this.counter.inc()
       break
     default:
@@ -168,6 +144,7 @@ class Preview extends BaseComponent {
     else this.container.position.y = -position
   }
   transitionIn() {
+    if (!this.currentSlide) return
     const oldRoute = Router.getOldRoute()
     if (oldRoute && oldRoute.type === Constants.PROJECT) {
       this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
@@ -176,6 +153,7 @@ class Preview extends BaseComponent {
     }
   }
   transitionOut() {
+    if (!this.currentSlide) return
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   keyboardTriggered(key) {
@@ -183,13 +161,23 @@ class Preview extends BaseComponent {
     else if (key === Constants.LEFT || key === Constants.UP) this.onScroll(1)
     else Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
   }
+  resize() {
+    if (!this.slides || this.slides.length < 1) return
+    const windowW = Store.Window.w
+    const windowH = Store.Window.h
+    this.slides.forEach((item, i) => {
+      const resizeVars = item.resize()
+      if (item.isLoaded) {
+        item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
+        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+      }
+    })
+  }
   componentWillUnmount() {
     this.slides.forEach((item) => { item.clear() })
-    Store.off(Constants.PREVIEWS_LOADED, this.onPreviewsLoaded)
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
-    dom.event.off(this.parent, 'DOMMouseScroll', this.handleScroll)
-    dom.event.off(this.parent, 'mousewheel', this.handleScroll)
+    Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     this.slides.length = 0
     this.slides = undefined

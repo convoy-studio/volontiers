@@ -41,6 +41,7 @@ class PreviewLink extends BaseComponent {
     this.refs.previewLink.hide()
   }
   resize() {
+    if (!this.refs.previewLink) return
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.refs.previewLink.refs.parent.style.top = (windowH >> 1) - (this.refs.previewLink.size[0] >> 1) + 'px'
