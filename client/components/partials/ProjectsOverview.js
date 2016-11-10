@@ -100,13 +100,13 @@ export default class ProjectsOverview extends BaseComponent {
     showTitlesTimeout = setTimeout(() => {
       this.refs.eventTitle.show()
       this.refs.retailTitle.show()
-    }, 500)
+    }, 300)
     dom.event.on(this.refs.background, 'click', this.onBackgroundClick)
   }
   close() {
     clearTimeout(showTitlesTimeout)
     this.animationsState = STATE.TRANSITION_OUT
-    setTimeout(() => { dom.classes.remove(this.refs.parent, 'open') }, 700)
+    setTimeout(() => { dom.classes.remove(this.refs.parent, 'open') }, 600)
     this.refs.eventTitle.hide()
     this.refs.retailTitle.hide()
     dom.event.off(this.refs.background, 'click', this.onBackgroundClick)
@@ -146,18 +146,18 @@ export default class ProjectsOverview extends BaseComponent {
     this.positionContainerDependsMousePosition(this.retailProjects, windowH)
     switch (this.animationsState) {
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.01
+      transitionShowTime += 0.02
       const easeIn = transitionShowBezier(transitionShowTime)
       this.eventProjects.pos[0] += (0 - this.eventProjects.pos[0]) * easeIn
       this.retailProjects.pos[0] += (0 - this.retailProjects.pos[0]) * easeIn
-      if (transitionShowTime > 1.2) this.animationsState = STATE.ACTIVE
+      if (transitionShowTime > 1) this.animationsState = STATE.ACTIVE
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.01
+      transitionHideTime += 0.02
       const easeOut = transitionHideBezier(transitionHideTime)
       this.eventProjects.pos[0] += (-initialPos - this.eventProjects.pos[0]) * easeOut
       this.retailProjects.pos[0] += (initialPos - this.retailProjects.pos[0]) * easeOut
-      if (transitionHideTime > 1.2) this.animationsState = STATE.DEACTIVE
+      if (transitionHideTime > 1) this.animationsState = STATE.DEACTIVE
       break
     default:
     }

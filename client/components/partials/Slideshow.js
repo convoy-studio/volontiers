@@ -6,6 +6,8 @@ import slide from './Slide'
 import counter from 'ccounter'
 import Utils from '../../utils/Utils'
 
+const activityHandler = Utils.countActivityHandler(650)
+
 export default (container)=> {
   let scope
   const load = (done) => {
@@ -21,6 +23,8 @@ export default (container)=> {
   }
   const loadFirstSlide = (done) => {
     scope.slides[0].load((plane, index) => {
+      activityHandler.count()
+      scope.firstItemLoaded = true
       onSlideLoaded(plane, index)
       done()
     })
@@ -70,6 +74,8 @@ export default (container)=> {
     })
   }
   const next = () => {
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false) return
+    activityHandler.count()
     scope.counter.inc()
     updateCurrentSlide()
     if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
@@ -77,6 +83,8 @@ export default (container)=> {
     updateSlideshowState()
   }
   const previous = () => {
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false) return
+    activityHandler.count()
     scope.counter.dec()
     updateCurrentSlide()
     if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
@@ -108,28 +116,14 @@ export default (container)=> {
   const hideCurrentSlide = () => {
     scope.currentSlide.hide({from: Constants.CENTER, to: Constants.TOP})
   }
-  const onScroll = (direction) => {
-    switch (direction) {
-    case -1:
-      setTimeout(Actions.previousSlide)
-      break
-    case 1:
-      setTimeout(Actions.nextSlide)
-      break
-    default:
-      setTimeout(Actions.nextSlide)
-    }
-  }
   const clear = () => {
     removeSlides()
     Store.off(Constants.NEXT_SLIDE, next)
     Store.off(Constants.PREVIOUS_SLIDE, previous)
-    Store.off(Constants.SCROLL_TRIGGERED, onScroll)
     scope.slides.length = 0
   }
   Store.on(Constants.NEXT_SLIDE, next)
   Store.on(Constants.PREVIOUS_SLIDE, previous)
-  Store.on(Constants.SCROLL_TRIGGERED, onScroll)
   scope = {
     container,
     load,
@@ -142,6 +136,7 @@ export default (container)=> {
     transitionOut,
     showCurrentSlide,
     hideCurrentSlide,
+    firstItemLoaded: false,
     currentSlide: undefined,
     oldSlide: undefined,
     counter: undefined,

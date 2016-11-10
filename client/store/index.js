@@ -224,6 +224,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   getTextureSrc: (group, name) => {
     return Store.Preloader.getImageURL(group + '-texture-' + name)
   },
+  getAboutPageContent: () => {
+    return data.routing['/about'].content[Store.Language]
+  },
   getTexture: (group, name) => {
     const img = Store.getTextureImg(group, name)
     const texture = new THREE.Texture()
@@ -263,6 +266,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   CurrentProjectSlideIndex: 0,
   IndexIsOpened: false,
   ProjectInfoIsOpened: false,
+  AppIsStarted: false,
   dispatcherIndex: Dispatcher.register((payload) => {
     const action = payload.action
     switch (action.actionType) {
@@ -283,6 +287,7 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.ROUTE_CHANGED:
+      if (!Store.AppIsStarted) return
       if (Store.State === Constants.STATE.PROJECTS) {
         setTimeout(Actions.closeProjectsOverview)
         setTimeout(() => { Store.emitChange(action.actionType) }, 600)
@@ -309,6 +314,7 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.APP_START:
+      Store.AppIsStarted = true
       setTimeout(Actions.routeChanged) // re-dispatch the route-changed so to create the view
       Store.emitChange(action.actionType)
       break
@@ -329,7 +335,8 @@ const Store = assign({}, EventEmitter2.prototype, {
       }
       break
     case Constants.CLOSE_PROJECTS_OVERVIEW:
-      if (projectOverviewActivityHandler.isReady === false) return
+      const oldRoute = Router.getOldRoute()
+      if (projectOverviewActivityHandler.isReady === false && (oldRoute && oldRoute.type !== Constants.HOME)) return
       projectOverviewActivityHandler.count()
       Store.State = Constants.STATE.NORMAL
       Store.emitChange(action.actionType)

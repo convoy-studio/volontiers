@@ -28,11 +28,8 @@ export default class PagesContainer extends BasePager {
     this.showLoadState()
     const newRoute = Router.getNewRoute()
     const oldRoute = Router.getOldRoute()
-    if (oldRoute === undefined) {
-      this.templateSelection(newRoute)
-    } else {
-      setTimeout(Actions.loadPageAssets, 0)
-    }
+    if (oldRoute === undefined) this.templateSelection(newRoute)
+    else setTimeout(Actions.loadPageAssets, 0)
   }
   templateSelection(newRoute) {
     let type = undefined

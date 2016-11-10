@@ -23,7 +23,6 @@ export default class Project extends Page {
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     Store.on(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.on(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
-    this.state = { showLanding: true }
   }
   render() {
     const content = Store.getCurrentProject()
@@ -34,8 +33,8 @@ export default class Project extends Page {
         <MainTitle ref='projectInformations' title={'View Informations'} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
         <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
         <ProjectInfos />
-  		</div>
-  	)
+      </div>
+    )
   }
   componentDidMount() {
     this.container = new PIXI.Container()

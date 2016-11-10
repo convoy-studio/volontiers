@@ -10,6 +10,8 @@ import slide from './Slide'
 import slideshow from './Slideshow'
 import {PagerActions} from '../../pager/Pager'
 
+const activityHandler = Utils.countActivityHandler(650)
+
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
@@ -116,6 +118,8 @@ class Preview extends BaseComponent {
     }
   }
   onScroll(direction) {
+    if (activityHandler.isReady === false) return
+    activityHandler.count()
     switch (direction) {
     case -1:
       this.counter.dec()
@@ -146,19 +150,16 @@ class Preview extends BaseComponent {
   transitionIn() {
     if (!this.currentSlide) return
     const oldRoute = Router.getOldRoute()
-    if (oldRoute && oldRoute.type === Constants.PROJECT) {
-      this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
-    } else {
-      this.currentSlide.activate()
-    }
+    if (oldRoute && oldRoute.type === Constants.PROJECT) this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+    else this.currentSlide.activate()
   }
   transitionOut() {
     if (!this.currentSlide) return
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   keyboardTriggered(key) {
-    if (key === Constants.RIGHT || key === Constants.DOWN) this.onScroll(-1)
-    else if (key === Constants.LEFT || key === Constants.UP) this.onScroll(1)
+    if (key === Constants.RIGHT || key === Constants.DOWN) this.onScroll(1)
+    else if (key === Constants.LEFT || key === Constants.UP) this.onScroll(-1)
     else Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
   }
   resize() {

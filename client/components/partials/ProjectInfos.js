@@ -20,7 +20,7 @@ class ProjectInfos extends BaseComponent {
   }
   componentDidMount() {
     this.tl = new TimelineMax()
-    this.tl.from(this.refs.parent, 1, { y: Store.Window.h * 1, scaleY: 1.8, force3D: true, transformOrigin: '50% 0%', ease: Expo.easeInOut }, 0)
+    this.tl.from(this.refs.parent, 1, { y: Store.Window.h * 2, force3D: true, transformOrigin: '50% 0%', ease: Expo.easeInOut }, 0)
     this.tl.pause(0)
   }
   hideSection() {

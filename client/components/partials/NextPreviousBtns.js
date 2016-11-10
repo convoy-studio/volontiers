@@ -18,12 +18,14 @@ class NextPreviousBtns extends BaseComponent {
     this.onNextClicked = this.onNextClicked.bind(this)
     this.slideshowStateChanged = this.slideshowStateChanged.bind(this)
     this.keyboardTriggered = this.keyboardTriggered.bind(this)
+    this.scrollTriggered = this.scrollTriggered.bind(this)
     this.isActive = false
     this.currentProject = Store.getCurrentProject()
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
+    Store.on(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
   }
   render() {
     return (
@@ -117,9 +119,26 @@ class NextPreviousBtns extends BaseComponent {
     if ((key === Constants.LEFT || key === Constants.DOWN) && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
     else if ((key === Constants.RIGHT || key === Constants.UP) && this.currentState === Constants.SLIDESHOW.END) this.goNext()
   }
+  scrollTriggered(direction) {
+    if (direction === -1 && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
+    else if (direction === 1 && this.currentState === Constants.SLIDESHOW.END) this.goNext()
+    else {
+      switch (direction) {
+      case -1:
+        setTimeout(Actions.previousSlide)
+        break
+      case 1:
+        setTimeout(Actions.nextSlide)
+        break
+      default:
+        setTimeout(Actions.nextSlide)
+      }
+    }
+  }
   componentWillUnmount() {
     Store.off(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
+    Store.off(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
   }
   resize() {
     const windowW = Store.Window.w

@@ -56,7 +56,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   }
   const animate = () => {
     if (scope.state === STATE.DEACTIVE || scope.isLoaded === false) return
-    scope.delta += 0.02
+    scope.delta += 0.012
     const currentSlide = scope.plane
     switch (scope.state) {
     case STATE.ACTIVE:
@@ -67,12 +67,12 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
       break
     case STATE.SCALE_UP:
-      scaleUpTime += 0.008
+      scaleUpTime += 0.02
       const scaleUp = Math.min(scaleUpBezier(scaleUpTime), 1)
       Utils.planeTransition(currentSlide, scaleUp, scope.direction)
       break
     case STATE.SCALE_DOWN:
-      scaleDownTime += 0.01
+      scaleDownTime += 0.02
       const scaleDown = Math.min(scaleDownBezier(scaleDownTime), 1)
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break

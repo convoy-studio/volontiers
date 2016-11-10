@@ -1,41 +1,26 @@
 import Page from '../Page'
 import Store from '../../store'
 import dom from 'dom-hand'
-import Data from '../../data'
 
 export default class About extends Page {
   constructor(props) {
     super(props)
-    this.slug = props.hash.path
-
-    this.data = {
-      content: Data.routing['/about'].content[Store.Language]
-    }
   }
   render() {
+    const content = Store.getAboutPageContent()
     return (
   		<div id='about-page' ref='page-wrapper' className='page-wrapper'>
-  			<p className="description" dangerouslySetInnerHTML={{__html: this.data.content}}></p>
+  			<p className="description" dangerouslySetInnerHTML={{__html: content}}></p>
   		</div>
   	)
   }
-  componentDidMount() {
-    super.componentDidMount()
-  }
-  setupAnimations() {
-    super.setupAnimations()
+  willTransitionOut() {
+    dom.classes.remove(this.refs['page-wrapper'], 'show')
+    setTimeout(() => { super.willTransitionOut() }, 400)
   }
   didTransitionInComplete() {
-    super.didTransitionInComplete()
-  }
-  willTransitionIn() {
     dom.classes.add(this.refs['page-wrapper'], 'show')
-    setTimeout(() => {
-      super.willTransitionIn()
-    }, 700)
-  }
-  willTransitionOut() {
-    super.willTransitionOut()
+    setTimeout(() => { super.didTransitionInComplete() }, 850)
   }
   resize() {
     const windowW = Store.Window.w
