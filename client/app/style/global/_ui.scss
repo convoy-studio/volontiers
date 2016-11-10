@@ -135,7 +135,7 @@ a {
   font-size: 18px;
   line-height: 20px;
   box-sizing: border-box;
-  text-transform: uppercase;
+  text-transform: capitalize;
   @media (max-width: $MQ_SMALL) {
     // font-size: $mobileFontSize;
   }

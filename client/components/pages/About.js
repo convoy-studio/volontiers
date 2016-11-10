@@ -29,7 +29,10 @@ export default class About extends Page {
     super.didTransitionInComplete()
   }
   willTransitionIn() {
-    super.willTransitionIn()
+    dom.classes.add(this.refs['page-wrapper'], 'show')
+    setTimeout(() => {
+      super.willTransitionIn()
+    }, 700)
   }
   willTransitionOut() {
     super.willTransitionOut()

@@ -179,8 +179,8 @@ class Preview extends BaseComponent {
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   keyboardTriggered(key) {
-    if (key === Constants.LEFT || key === Constants.DOWN) this.onScroll(1)
-    else if (key === Constants.RIGHT || key === Constants.UP) this.onScroll(-1)
+    if (key === Constants.RIGHT || key === Constants.DOWN) this.onScroll(-1)
+    else if (key === Constants.LEFT || key === Constants.UP) this.onScroll(1)
     else Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
   }
   componentWillUnmount() {

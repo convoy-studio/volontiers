@@ -1,6 +1,14 @@
 #about-page {
   @extend .full;
   position: absolute;
+  
+  @include opacity(0);
+  @include anim(.0s, .0s, $easeOutCirc, translateY(0));
+
+  &.show {
+    @include opacity(1);
+    @include anim(.8s, .0s, $easeOutCirc, translateY(0));
+  }
 
   .description {
     position: absolute;

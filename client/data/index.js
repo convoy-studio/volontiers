@@ -19,7 +19,7 @@ export default {
   projects: {
     'nike-olivier-rousteing': {
       'inHome': true,
-      'name': 'Nike × Olivier Rousteing',
+      'name': 'nike × olivier rousteing',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To unveil collaboration between Nike and the artistic director of Balmain, Olivier Rousteing, VOLONTIERS designed and produced a show of great magnitude. To do this, we invested and transformed the main castle of the International University City of Paris to host a special celebration of the past footballing brand, before ending up in a hoisted nave in the gardens to unveil bold future the vision Nike Football.<br/>Once on site, the press, celebrities and handpicked guests could discover a collection designed by Olivier Rousteing in the dome of the gardens of the Cité Universitaire Internationale de Paris, entirely recreated by us for the occasion. When time came for the runway show, the doors opened on the lawn where was sat a dome with a 30 meter diameter. Inside, 360* mapping served as a dynamic backdrop to a show combining models and dancers whose movements were interacting  with the projected images.<br/>Then, to continue with the celebration of football on the eve of Euro 2016 as it should, we littered on top of the inner pyramid structure - built to accommodate guests - a circular dance floor and a golden Dj booth.',
@@ -38,7 +38,7 @@ export default {
     },
     'airbnb-paris': {
       'inHome': true,
-      'name': 'AIRBNB PARIS - LA MAISON PARISIENNE',
+      'name': 'airbnb paris - la maison parisienne',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To breathe life into the “Don’t go there, live there" AIRBNB campaign, orchestrated by the AKQA Paris agency, which purpose was to urge tourists to take possession of the cities they visited as locals would, VOLONTIERS took up residency in an Airbnb house and imagined many workshops to pace said house during 4 days.<br/>In Paris, a magnificent home was redecorated for the occasion, each room offering its audience an immersive and authentic experience of Parisian local life through different thematic such as music, culture, gastronomy and sports.',
@@ -61,7 +61,7 @@ export default {
     },
     'airbnb-london': {
       'inHome': true,
-      'name': 'AIRBNB LONDON - LA MAISON',
+      'name': 'airbnb london - la maison',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To breathe life into the “Don’t go there, live there" AIRBNB campaign, orchestrated by the AKQA Paris agency, which purpose was to urge tourists to take possession of the cities they visited as locals would, VOLONTIERS took up residency in an Airbnb house in Paris first then in London, and imagined many workshops to pace said house during 4 days.<br/>In London, a magnificent home was redecorated for the occasion, each room offering its audience an immersive and authentic experience of London’s extremely vibrant local life through the same themes of music, culture, gastronomy and sports.',
@@ -82,11 +82,11 @@ export default {
     },
     'nike-rt-and-training': {
       'inHome': true,
-      'name': 'Nike R.T. and Training',
+      'name': 'nike r.t. and training',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: 'VOLONTIERS staged the NIKELAB x RICCARDO TISCI collection through a training session in which a group of Parisian influencers were invited to participate. A collaboration imagined to redefine training itself, it seemed appropriate to test the gear as soon as it was available in its natural habitat.<br/>This session, led by the artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through derivatives of endurance and adaptability exercises lifted from Russian martial art Systema. A video-tracking device was recording each participant’s movements, transcribing the recorded data into images and sounds broadcast within the training space, in real time.<br/>A amazing feat to link places to actors and their environments, and to bring their activity through digital data visualization.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        en: 'VOLONTIERS staged the NIKELAB × RICCARDO TISCI collection through a training session in which a group of Parisian influencers were invited to participate. A collaboration imagined to redefine training itself, it seemed appropriate to test the gear as soon as it was available in its natural habitat.<br/>This session, led by the artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through derivatives of endurance and adaptability exercises lifted from Russian martial art Systema. A video-tracking device was recording each participant’s movements, transcribing the recorded data into images and sounds broadcast within the training space, in real time.<br/>A amazing feat to link places to actors and their environments, and to bring their activity through digital data visualization.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: 'Nike-RiccardoTisci-NovembreMagazine-RemiProcureur (1 sur 1)-9.jpg',
       assets: [
@@ -98,11 +98,11 @@ export default {
     },
     'pok-fete-de-la-musique-x-coca': {
       'inHome': true,
-      'name': 'POK FETE DE LA MUSIQUE x COCA',
+      'name': 'pok fete de la musique × coca',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: 'VOLONTIERS staged the NIKELAB x RICCARDO TISCI collection through a training session in which a group of Parisian influencers were invited to participate. A collaboration imagined to redefine training itself, it seemed appropriate to test the gear as soon as it was available in its natural habitat.<br/>This session, led by the artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through derivatives of endurance and adaptability exercises lifted from Russian martial art Systema. A video-tracking device was recording each participant’s movements, transcribing the recorded data into images and sounds broadcast within the training space, in real time.<br/>A amazing feat to link places to actors and their environments, and to bring their activity through digital data visualization.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        en: 'VOLONTIERS staged the NIKELAB × RICCARDO TISCI collection through a training session in which a group of Parisian influencers were invited to participate. A collaboration imagined to redefine training itself, it seemed appropriate to test the gear as soon as it was available in its natural habitat.<br/>This session, led by the artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through derivatives of endurance and adaptability exercises lifted from Russian martial art Systema. A video-tracking device was recording each participant’s movements, transcribing the recorded data into images and sounds broadcast within the training space, in real time.<br/>A amazing feat to link places to actors and their environments, and to bring their activity through digital data visualization.',
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: 'DSC_0349.jpg',
       assets: [
@@ -114,7 +114,7 @@ export default {
     },
     'acg-nikelab': {
       'inHome': true,
-      'name': 'ACG NIKELAB',
+      'name': 'acg nikelab',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To celebrate the release of the new ACG line as well as to highlight the visuals created by Novembre Magazine, VOLONTIERS transformed the NikeLab shop in Paris to offer journalists and influencers a chance to to discover the collection around a cocktail party and an exhibition of creations specially made for the event.',
@@ -130,11 +130,11 @@ export default {
     },
     'nikelab-lunar': {
       'inHome': true,
-      'name': 'NIKELAB LUNAR',
+      'name': 'nikelab lunar',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: '3I3A2028.jpg',
       assets: [
@@ -143,11 +143,11 @@ export default {
     },
     'nikelab-talaria': {
       'inHome': true,
-      'name': 'NIKELAB TALARIA',
+      'name': 'nikelab talaria',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: '3I3A3788.jpg',
       assets: [
@@ -156,11 +156,11 @@ export default {
     },
     'nikelab-ricardo-tisci-bw': {
       'inHome': true,
-      'name': 'NIKELAB RICARDO TISCI BW',
+      'name': 'nikelab ricardo tisci bw',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: '3I3A7786.jpg',
       assets: [
@@ -169,27 +169,27 @@ export default {
     },
     'nikelab-x-olivier-rousteing': {
       'inHome': true,
-      'name': 'NIKELAB X OLIVIER ROUSTEING',
+      'name': 'nikelab × olivier rousteing',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: 'OR KEYSHOT-1.jpg',
       assets: [
         '_Q0A2713 copie.jpg',
         '3I3A4346.jpg',
         '3I3A4361.jpg',
-        'NIKE X OR3339.jpg'
+        'NIKE x OR3339.jpg'
       ]
     },
     'nikelab-x-kim-jones': {
       'inHome': true,
-      'name': 'NIKELAB X KIM JONES',
+      'name': 'nikelab × kim jones',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem aspernatur, quisquam blanditiis ipsam obcaecati repellendus repudiandae saepe recusandae culpa animi.',
-        fr: 'VOLONTIERS a mis en scène la collection NIKELAB x RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
+        fr: 'VOLONTIERS a mis en scène la collection NIKELAB × RICCARDO TISCI à travers une session d’entrainement à laquelle participait un groupe d’influencers parisiens. <br/>Cette session, dirigée par l`artiste NS DOS, proposait de redéfinir le concept de l’entrainement, tant au niveau physique que psychologique, à travers des exercices d’endurance et d’adaptabilité dérivés de l’art martial russe Systema.<br/>Un dispositif de tracking video captait les mouvements des participants, les traduisait en data créant des images et des sons diffusés dans l’espace en temps réel.'
       },
       preview: '3I3A8050.jpg',
       assets: [

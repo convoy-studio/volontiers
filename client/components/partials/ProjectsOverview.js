@@ -46,8 +46,8 @@ export default class ProjectsOverview extends BaseComponent {
         <div ref="event-projects" className="event projects-container">{eventProjects}</div>
         <div ref="retail-projects" className="retail projects-container">{retailProjects}</div>
         <div className="titles-container">
-          <MainTitle ref='eventTitle' rotation='-90deg' title='EVENT' className='link event-title'></MainTitle>
-          <MainTitle ref='retailTitle' rotation='90deg' title='RETAIL' className='link retail-title'></MainTitle>
+          <MainTitle ref='eventTitle' rotation='-90deg' title='event' className='link event-title'></MainTitle>
+          <MainTitle ref='retailTitle' rotation='90deg' title='retail' className='link retail-title'></MainTitle>
         </div>
         <div ref='background' className="background btn"></div>
       </div>

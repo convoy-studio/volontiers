@@ -2,9 +2,9 @@ import BaseComponent from '../pager/components/BaseComponent'
 import Store from '../store'
 import Constants from '../constants'
 import Actions from '../actions'
+import Router from '../services/router'
 import LangButton from './partials/LangButton'
 import ProjectsOverview from './partials/ProjectsOverview'
-import SVGComponent from './partials/SVGComponent'
 import MainTitle from './partials/MainTitle'
 import dom from 'dom-hand'
 
@@ -13,17 +13,16 @@ export default class FrontContainer extends BaseComponent {
     super(props)
     this.onProjectsClick = this.onProjectsClick.bind(this)
     this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
+    this.onLogoClick = this.onLogoClick.bind(this)
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
   }
   render() {
     return (
       <header id='front-container' ref='front-container' className="navigation">
         <MainTitle ref='projectsTitle' title={'Projects'} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
-        <a href="home" className="navigation__center">
-          <SVGComponent width='100%' viewBox="0 0 13 13">
-            <polygon fillRule="evenodd" clipRule="evenodd" points="0.25,0.25 12.75,0.25 8.667,12.75 4.412,12.75"/>
-          </SVGComponent>
-        </a>
+        <div className="navigation__center">
+          <MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle>
+        </div>
         <div className="navigation__right">
           <ul>
             <li>
@@ -44,6 +43,7 @@ export default class FrontContainer extends BaseComponent {
   }
   componentDidMount() {
     this.refs.projectsTitle.show()
+    this.refs.logoTitle.show()
   }
   onToggleProjectInfos() {
     if (Store.ProjectInfoIsOpened) dom.classes.add(this.refs['front-container'], 'hide')
@@ -52,6 +52,9 @@ export default class FrontContainer extends BaseComponent {
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
     else setTimeout(Actions.openProjectsOverview)
+  }
+  onLogoClick() {
+    Router.setRoute(Store.defaultRoute())
   }
   update() {
     this.refs['projects-overview'].update()

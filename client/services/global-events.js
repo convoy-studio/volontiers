@@ -4,7 +4,7 @@ import Constants from '../constants'
 import Utils from '../utils/Utils'
 import dom from 'dom-hand'
 
-const keyboardActivityHandler = Utils.countActivityHandler(900)
+const keyboardActivityHandler = Utils.countActivityHandler(650)
 
 export function resize() {
   Actions.windowResize(window.innerWidth, window.innerHeight)

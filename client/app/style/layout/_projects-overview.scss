@@ -44,6 +44,7 @@
 			.title-holder, .thumbnail-holder {
 				@extend .full;
 				position: absolute;
+				text-transform: capitalize;
 			}
 			.thumbnail-holder {
 				@include opacity(1);
