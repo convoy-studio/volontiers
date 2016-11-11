@@ -100,7 +100,7 @@ class NextPreviousBtns extends BaseComponent {
         })
       }
       this.refs.nextBtn.updateState({
-        title: 'next project',
+        title: 'Discover next project',
         eventId: NEXT_PROJECT
       })
     } else {

@@ -22,7 +22,11 @@
     right: $globalMargin;
     top: 0;
     display: inline-block;
-
+    .navigation__spacer {
+      margin: 0 8px;
+      position: relative;
+      top: -4px;
+    }
     ul {
       display: inline-block;
       li {

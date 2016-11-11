@@ -77,17 +77,17 @@ function _getDefaultRoute() {
   return `/home/${homeProjects[0].slug}`
 }
 function _getUserLanguage() {
-  let lang = 'en'
+  let lang = Constants.LANG.EN
   if (localStorage.getItem('volontiers-lang') !== null) {
     let item = localStorage.getItem('volontiers-lang')
-    if (item.toLocaleLowerCase() === 'fr') {
-      lang = 'fr'
-    } else if (item.toLocaleLowerCase() === 'en') {
+    if (item.toLocaleLowerCase() === Constants.LANG.FR) {
+      lang = Constants.LANG.FR
+    } else if (item.toLocaleLowerCase() === Constants.LANG.EN) {
       return lang
     }
   } else {
     lang = navigator.language || navigator.userLanguage
-    if (lang.toLocaleLowerCase() === 'fr') lang = 'fr'
+    if (lang.toLocaleLowerCase() === Constants.LANG.FR) lang = Constants.LANG.FR
   }
   return lang
 }
@@ -310,9 +310,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.LANGUAGE_CHANGED:
-      Store.Language = action.item.lang
-      localStorage.setItem('volontiers-lang', action.item.lang)
-      Store.emitChange(action.actionType)
+      const currentLang = Store.getLang()
+      const langToStore = currentLang === Constants.LANG.FR ? Constants.LANG.EN : Constants.LANG.FR
+      localStorage.setItem('volontiers-lang', langToStore)
+      location.reload()
       break
     case Constants.APP_START:
       Store.AppIsStarted = true

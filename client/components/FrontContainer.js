@@ -3,7 +3,6 @@ import Store from '../store'
 import Constants from '../constants'
 import Actions from '../actions'
 import Router from '../services/router'
-import LangButton from './partials/LangButton'
 import ProjectsOverview from './partials/ProjectsOverview'
 import MainTitle from './partials/MainTitle'
 import dom from 'dom-hand'
@@ -14,6 +13,8 @@ export default class FrontContainer extends BaseComponent {
     this.onProjectsClick = this.onProjectsClick.bind(this)
     this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
     this.onLogoClick = this.onLogoClick.bind(this)
+    this.changeLangClick = this.changeLangClick.bind(this)
+    this.aboutClick = this.aboutClick.bind(this)
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
   }
   render() {
@@ -26,14 +27,10 @@ export default class FrontContainer extends BaseComponent {
         <div className="navigation__right">
           <ul>
             <li>
-              <LangButton lang="en"/>
-            </li>
-            <li className="navigation__spacer">—</li>
-            <li>
-              <LangButton lang="fr"/>
+              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={false} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <a href="/about" className="link">About</a>
+              <MainTitle ref='aboutTitle' title={'About'} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
           </ul>
         </div>
@@ -44,6 +41,14 @@ export default class FrontContainer extends BaseComponent {
   componentDidMount() {
     this.refs.projectsTitle.show()
     this.refs.logoTitle.show()
+    this.refs.langTitle.show()
+    this.refs.aboutTitle.show()
+  }
+  changeLangClick() {
+    Actions.changeLang()
+  }
+  aboutClick() {
+    Router.setRoute('/about')
   }
   onToggleProjectInfos() {
     if (Store.ProjectInfoIsOpened) dom.classes.add(this.refs['front-container'], 'hide')

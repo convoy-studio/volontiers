@@ -26,13 +26,16 @@ export default class Project extends Page {
   }
   render() {
     const content = Store.getCurrentProject()
+    const infoContent = Store.getCurrentAboutContent()
+    const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={'View Informations'} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
+    const projectInfo = infoButton ? (<ProjectInfos />) : undefined
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
         <MainTitle ref='projectTitle' title={content.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
-        <MainTitle ref='projectInformations' title={'View Informations'} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>
+        {infoButton}
         <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
-        <ProjectInfos />
+        {projectInfo}
       </div>
     )
   }
@@ -48,7 +51,7 @@ export default class Project extends Page {
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
-    this.refs.projectInformations.show()
+    if (this.refs.projectInformations) this.refs.projectInformations.show()
     this.refs.projectCounter.show()
     this.refs['next-previous-btns'].isActive = true
     this.refs['next-previous-btns'].show()
@@ -56,7 +59,7 @@ export default class Project extends Page {
   }
   willTransitionOut() {
     this.refs.projectTitle.hide()
-    this.refs.projectInformations.hide()
+    if (this.refs.projectInformations) this.refs.projectInformations.hide()
     this.refs.projectCounter.hide()
     this.refs['next-previous-btns'].hide()
     this.refs['next-previous-btns'].isActive = false
@@ -74,11 +77,11 @@ export default class Project extends Page {
       this.slideshow.hideCurrentSlide()
       this.refs.projectInformations.onMouseLeave()
       setTimeout(() => {
-        this.refs.projectInformations.updateState({title: 'close informations'})
+        if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'close informations'})
       }, 400)
     } else {
       this.slideshow.showCurrentSlide()
-      this.refs.projectInformations.updateState({title: 'view informations'})
+      if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'view informations'})
     }
   }
   onSlideshowUpdated() {

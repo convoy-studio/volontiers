@@ -50,6 +50,11 @@ export default {
     RETAIL: 'RETAIL'
   },
 
+  LANG: {
+    EN: 'en',
+    FR: 'fr'
+  },
+
   OPEN_PROJECTS_OVERVIEW: 'OPEN_PROJECTS_OVERVIEW',
   CLOSE_PROJECTS_OVERVIEW: 'CLOSE_PROJECTS_OVERVIEW',
 

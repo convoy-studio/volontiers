@@ -35,9 +35,7 @@ class MainTitle extends BaseComponent {
       dom.event.on(this.refs.parent, 'mouseenter', this.onMouseEnter)
       dom.event.on(this.refs.parent, 'mouseleave', this.onMouseLeave)
     }
-    setTimeout(() => {
-      this.onUpdate()
-    }, 10)
+    this.onUpdate()
   }
   componentDidUpdate() {
     this.onUpdate()
