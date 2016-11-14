@@ -3,7 +3,7 @@ import React from 'react'
 export default class Img extends React.Component {
   render() {
     return (
-      <img src={this.props.src}/>
+      <img src={require(`staticFolder/${this.props.src}`)}/>
     )
   }
   componentDidMount() {

@@ -23,7 +23,7 @@ export default {
       '.json'
     ],
     alias: {
-      'assetsFolder': path.resolve(__dirname, '..', 'static/assets')
+      'staticFolder': path.resolve(__dirname, '..', 'static')
     }
   },
   module: {
