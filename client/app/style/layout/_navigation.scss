@@ -70,13 +70,10 @@
   }
 
   &__center {
-    $size: 13px;
-    width: $size;
-    height: $size;
     display: block;
     position: absolute;
     left: 50%;
     top: 0;
-    margin-left: -$size / 2;
+    transform: translateX(-50%);
   }
 }
