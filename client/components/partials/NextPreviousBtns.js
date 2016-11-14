@@ -30,7 +30,7 @@ class NextPreviousBtns extends BaseComponent {
   render() {
     return (
       <div className='next-previous-container'>
-        <MainTitle ref='previousBtn' rotation='90deg' title='Previous Image' eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
+        <MainTitle ref='previousBtn' rotation='-90deg' title='Previous Image' eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
         <MainTitle ref='nextBtn' rotation='90deg' title='Next Image' eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainTitle>
       </div>
     )

@@ -153,13 +153,15 @@ a {
   @extend .top-left;
   .main-btn {
     position: fixed;
-    &.previous {
-      right: 200px;
-      top: 0;
+    &:after {
+      content: '';
+      position: absolute -40px 50%;
+      width: 80vh;
+      height: 30vw;
+      transform: translate(-50%);
     }
-    &.next {
-      right: 200px;
-      top: 0;
+    &.previous {
+      transform: rotateZ(-90deg) translate(-100%, -100%) !important;
     }
   }
 }
