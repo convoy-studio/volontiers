@@ -5,6 +5,30 @@
 	position: fixed;
 	@extend .top-left;
 	@include anim(.0s, .0s, $easeOutExpo, translateY(-99999px) translateZ(1px));
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 10%;
+		width: 100%;
+		background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+		margin-top: -20px;
+		z-index: 4;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 10%;
+		width: 100%;
+		background: linear-gradient(to top, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+		z-index: 4;
+	}
+
 	&.open {
 		@include anim(.0s, .0s, $easeOutExpo, translateY(0px) translateZ(0px));
 	}

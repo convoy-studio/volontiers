@@ -20,9 +20,13 @@ export default class Project extends Page {
     this.onProjectInformationsClick = this.onProjectInformationsClick.bind(this)
     this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
     this.onSlideshowUpdated = this.onSlideshowUpdated.bind(this)
+    this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
+    this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     Store.on(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.on(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
+    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
+    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
   }
   render() {
     const content = Store.getCurrentProject()
@@ -76,13 +80,29 @@ export default class Project extends Page {
     if (Store.ProjectInfoIsOpened) {
       this.slideshow.hideCurrentSlide()
       this.refs.projectInformations.onMouseLeave()
+      this.refs['next-previous-btns'].hide()
+      this.refs['next-previous-btns'].isActive = false
       setTimeout(() => {
         if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'close informations'})
       }, 400)
     } else {
       this.slideshow.showCurrentSlide()
       if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'view informations'})
+      this.refs['next-previous-btns'].show()
+      this.refs['next-previous-btns'].isActive = true
     }
+  }
+  projectOverviewOpened() {
+    this.refs.projectTitle.hide()
+    this.refs.projectCounter.hide()
+    this.refs['next-previous-btns'].hide()
+    this.refs['next-previous-btns'].isActive = false
+  }
+  projectOverviewClosed() {
+    this.refs.projectTitle.show()
+    this.refs.projectCounter.show()
+    this.refs['next-previous-btns'].show()
+    this.refs['next-previous-btns'].isActive = true
   }
   onSlideshowUpdated() {
     setTimeout(() => {

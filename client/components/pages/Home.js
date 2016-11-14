@@ -14,13 +14,15 @@ export default class Home extends Page {
     super(props)
     this.didPreviewChange = this.didPreviewChange.bind(this)
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
+    this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
+    this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
     this.projects = Store.getHomeProjects()
   }
   render() {
     return (
       <div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <Preview ref='preview'/>
-        <PreviewLink ref='preview-link'/>
+        <PreviewLink ref='previewLink'/>
         <MainTitle ref='projectTitle' title={''} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
         <MainTitle ref='projectDiscover' title={'Discover Project'} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-informations'></MainTitle>
         <MainTitle ref='projectCounter' title={`1/${this.projects.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
@@ -29,6 +31,8 @@ export default class Home extends Page {
   }
   componentDidMount() {
     Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
+    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
+    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     this.previewComponent = this.refs.preview
     this.refs.preview.loadFirstSlide(() => {
       super.componentDidMount()
@@ -69,16 +73,30 @@ export default class Home extends Page {
       }
     })
   }
+  projectOverviewOpened() {
+    this.refs.projectTitle.hide()
+    this.refs.projectDiscover.hide()
+    this.refs.projectCounter.hide()
+    this.refs.previewLink.hideLink()
+  }
+  projectOverviewClosed() {
+    this.refs.projectTitle.show()
+    this.refs.projectDiscover.show()
+    this.refs.projectCounter.show()
+    this.refs.previewLink.showLink()
+  }
   update() {
     this.previewComponent.update()
   }
   resize() {
     this.refs.preview.resize()
-    this.refs['preview-link'].resize()
+    this.refs.previewLink.resize()
     super.resize()
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEW_CHANGED, this.didPreviewChange)
+    Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
+    Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     super.componentWillUnmount()
   }
 }

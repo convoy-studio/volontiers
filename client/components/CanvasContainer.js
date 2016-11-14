@@ -20,7 +20,7 @@ export default class CanvasContainer extends BaseComponent {
   componentDidMount() {
     this.el = this.refs['canvas-container']
     this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true})
-    this.renderer.backgroundColor = 0xffffff
+    this.renderer.backgroundColor = 0xe6e6e6
     this.el.appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
   }

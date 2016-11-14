@@ -11,17 +11,25 @@
   }
   .link.projects {
     margin-left: $globalMargin;
+    z-index: 5;
   }
   @media (max-width: $MQ_SMALL) {
     > .link {
       padding-left: 0;
     }
   }
+  .top-projects-title {
+    top: 0;
+    left: $globalMargin;
+    position: absolute;
+    z-index: 5;
+  }
   &__right {
     position: absolute;
     right: $globalMargin;
     top: 0;
     display: inline-block;
+    z-index: 5;
     .navigation__spacer {
       margin: 0 8px;
       position: relative;
@@ -75,5 +83,6 @@
     left: 50%;
     top: 0;
     transform: translateX(-50%);
+    z-index: 5;
   }
 }
