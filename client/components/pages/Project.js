@@ -131,6 +131,8 @@ export default class Project extends Page {
     Store.off(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
+    Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
+    Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()
   }
