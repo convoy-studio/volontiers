@@ -30,6 +30,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     plane.fverts = undefined
     return plane
   }
+  const createHitArea = () => {
+    let bounds = scope.plane.mesh.getBounds()
+    const graphics = new PIXI.Graphics()
+    graphics.lineStyle(10, 0xffd900, 0)
+    graphics.drawRect(bounds.x, bounds.y, bounds.width, bounds.height)
+    return graphics
+  }
   const load = (done) => {
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
       scope.size[0] = data.texture.width
@@ -38,6 +45,10 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       scope.plane.size = scope.size
       scope.mesh = scope.plane.mesh
       scope.container.addChild(scope.mesh)
+      if (pre === 'preview') {
+        scope.hitArea = createHitArea()
+        scope.container.addChild(scope.hitArea)
+      }
       scope.isLoaded = true
       done(scope.plane, scope.index)
     })
@@ -50,6 +61,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale, windowH * marginScale, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
+      if (pre === 'preview') scope.hitArea.scale.set(resizeVars.scale, resizeVars.scale)
       Utils.setDefaultPlanePositions(scope.plane, scope.defaultPosition)
     }
     return resizeVars

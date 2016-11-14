@@ -49,6 +49,17 @@ class Preview extends BaseComponent {
       done()
     })
     this.counter.set(currentSlide.index)
+    dom.event.on(this.refs.preview, 'click', this.goToProject)
+  }
+  goToProject() {
+    const bounds = this.currentSlide.hitArea.getBounds()
+    const boundsWidth = bounds.width + bounds.x
+    const boundsHeight = bounds.height + bounds.y
+    if (Store.Mouse.x > bounds.x - 50 && Store.Mouse.x < bounds.width + 50 && Store.Mouse.y > bounds.y - 50 && Store.Mouse.y < bounds.height + 50) {
+      if (activityHandler.isReady === false) return
+      activityHandler.count()
+      Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+    }
   }
   onFirstSlideLoaded() {
     const oldRoute = Router.getOldRoute()
@@ -169,8 +180,12 @@ class Preview extends BaseComponent {
     this.slides.forEach((item, i) => {
       const resizeVars = item.resize()
       if (item.isLoaded) {
-        item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+        let x = (windowW >> 1) - (resizeVars.width >> 1)
+        let y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+        item.mesh.position.x = x
+        item.mesh.position.y = y
+        item.hitArea.position.x = x
+        item.hitArea.position.y = y
       }
     })
   }
