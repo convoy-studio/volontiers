@@ -117,15 +117,15 @@ class Utils {
     return scope
   }
   static planeAnim(plane, mouse, delta, offsetX, offsetY, easing) {
-    const movement = 0.6
-    const ntlx = ((plane.iverts[0] + Math.sin(mouse.nX - 0.5) * 50) - plane.verts[0] + offsetX) * easing
-    const ntly = ((plane.iverts[1] + Math.cos(mouse.nY) * 10) - plane.verts[1] - offsetY) * easing
-    const ntrx = ((plane.iverts[2] + Math.sin(mouse.nX + 0.5) * 50) - plane.verts[2] + offsetX) * easing
-    const ntry = ((plane.iverts[3] + Math.cos(mouse.nY) * 30) - plane.verts[3] + offsetY) * easing
-    const nblx = ((plane.iverts[4] + Math.sin(mouse.nX - 0.4) * 10) - plane.verts[4] + offsetX) * easing
-    const nbly = ((plane.iverts[5] + Math.cos(mouse.nY - 0.6) * 40) - plane.verts[5] + offsetY) * easing
-    const nbrx = ((plane.iverts[6] + Math.sin(mouse.nX + 0.4) * 80) - plane.verts[6] + offsetX) * easing
-    const nbry = ((plane.iverts[7] + Math.cos(mouse.nY - 0.6) * 20) - plane.verts[7] - offsetY) * easing
+    const movement = 0
+    const ntlx = ((plane.iverts[0] + Math.sin(mouse.nX - 0.5) * 0) - plane.verts[0] + offsetX) * easing
+    const ntly = ((plane.iverts[1] + Math.cos(mouse.nY) * 0) - plane.verts[1] - offsetY) * easing
+    const ntrx = ((plane.iverts[2] + Math.sin(mouse.nX + 0.5) * 0) - plane.verts[2] + offsetX) * easing
+    const ntry = ((plane.iverts[3] + Math.cos(mouse.nY) * 0) - plane.verts[3] + offsetY) * easing
+    const nblx = ((plane.iverts[4] + Math.sin(mouse.nX - 0.4) * 0) - plane.verts[4] + offsetX) * easing
+    const nbly = ((plane.iverts[5] + Math.cos(mouse.nY - 0.6) * 0) - plane.verts[5] + offsetY) * easing
+    const nbrx = ((plane.iverts[6] + Math.sin(mouse.nX + 0.4) * 0) - plane.verts[6] + offsetX) * easing
+    const nbry = ((plane.iverts[7] + Math.cos(mouse.nY - 0.6) * 0) - plane.verts[7] - offsetY) * easing
     plane.verts[0] += ntlx + Math.cos(delta) * (0.6 + movement)
     plane.verts[1] += ntly - Math.sin(delta) * (0.8 + movement)
     plane.verts[2] += ntrx - Math.cos(delta) * (0.5 + movement)

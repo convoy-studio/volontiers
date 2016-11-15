@@ -61,7 +61,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     switch (scope.state) {
     case STATE.ACTIVE:
       const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-      const offsetX = nextNx * 400
+      const offsetX = nextNx * 500
       const offsetY = nextNx * 300
       const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
@@ -77,13 +77,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.01
+      transitionShowTime += 0.02
       const easeIn = transitionShowBezier(transitionShowTime)
-      if (transitionShowTime >= 0.5) scope.activate()
+      if (transitionShowTime >= 0.8) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.014
+      transitionHideTime += 0.024
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)
