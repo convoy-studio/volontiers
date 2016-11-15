@@ -1,5 +1,6 @@
 import Page from '../Page'
 import Store from '../../store'
+import Actions from '../../actions'
 import Constants from '../../constants'
 import dom from 'dom-hand'
 
@@ -18,6 +19,10 @@ export default class About extends Page {
         <p className="description" dangerouslySetInnerHTML={{__html: content}}></p>
       </div>
     )
+  }
+  componentDidMount() {
+    setTimeout(() => {Actions.changeRendererColor('0xffffff')})
+    super.componentDidMount()
   }
   setupAnimations() {
     const parent = this.refs['page-wrapper']

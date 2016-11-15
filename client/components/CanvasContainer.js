@@ -11,6 +11,7 @@ export default class CanvasContainer extends BaseComponent {
   componentWillMount() {
     Store.on(Constants.ADD_TO_CANVAS, this.addChild)
     Store.on(Constants.REMOVE_FROM_CANVAS, this.removeChild)
+    Store.on(Constants.CHANGE_RENDERER_COLOR, this.changeRendererColor)
   }
   render() {
     return (
@@ -20,7 +21,7 @@ export default class CanvasContainer extends BaseComponent {
   componentDidMount() {
     this.el = this.refs['canvas-container']
     this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true})
-    this.renderer.backgroundColor = 0xe6e6e6
+    this.renderer.backgroundColor = 0xffffff
     this.el.appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
   }
@@ -29,6 +30,9 @@ export default class CanvasContainer extends BaseComponent {
   }
   removeChild(item) {
     this.stage.removeChild(item.child)
+  }
+  changeRendererColor(item) {
+    if (this.renderer.backgroundColor !== item.color) this.renderer.backgroundColor = item.color
   }
   update() {
     this.renderer.render(this.stage)

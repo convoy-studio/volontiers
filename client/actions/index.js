@@ -109,16 +109,22 @@ const Actions = {
       item: undefined
     })
   },
-  addToCanvas: (child) => {
+  addToCanvas: (child, background) => {
     Dispatcher.handleViewAction({
       actionType: Constants.ADD_TO_CANVAS,
-      item: {child}
+      item: {child, background}
     })
   },
   removeFromCanvas: (child) => {
     Dispatcher.handleViewAction({
       actionType: Constants.REMOVE_FROM_CANVAS,
       item: {child}
+    })
+  },
+  changeRendererColor: (color) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CHANGE_RENDERER_COLOR,
+      item: {color}
     })
   },
   openProject: () => {

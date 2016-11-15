@@ -38,6 +38,7 @@ class Preview extends BaseComponent {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
+    setTimeout(() => {Actions.changeRendererColor('0xffffff')})
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })

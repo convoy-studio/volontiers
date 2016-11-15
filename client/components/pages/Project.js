@@ -46,6 +46,7 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
+    setTimeout(() => {Actions.changeRendererColor('0xefefef')})
     this.slideshow = slideshow(this.container).load(() => {
       super.componentDidMount()
     })
