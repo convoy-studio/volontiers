@@ -97,13 +97,14 @@ export default class Project extends Page {
     this.refs.projectTitle.hide()
     this.refs.projectCounter.hide()
     this.refs.projectInformations.hide()
+    if (this.refs.projectInformations) this.refs.projectInformations.hide()
     this.refs['next-previous-btns'].hide()
     this.refs['next-previous-btns'].isActive = false
   }
   projectOverviewClosed() {
     this.refs.projectTitle.show()
     this.refs.projectCounter.show()
-    this.refs.projectInformations.show()
+    if (this.refs.projectInformations) this.refs.projectInformations.show()
     this.refs['next-previous-btns'].show()
     this.refs['next-previous-btns'].isActive = true
   }
