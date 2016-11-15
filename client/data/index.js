@@ -109,7 +109,7 @@ export default {
       ]
     },
     'acg-nikelab': {
-      'inHome': true,
+      'inHome': false,
       'name': 'acg nikelab',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -125,7 +125,7 @@ export default {
       ]
     },
     'nikelab-lunar': {
-      'inHome': true,
+      'inHome': false,
       'name': 'nikelab lunar',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -138,7 +138,7 @@ export default {
       ]
     },
     'nikelab-talaria': {
-      'inHome': true,
+      'inHome': false,
       'name': 'nikelab talaria',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -151,7 +151,7 @@ export default {
       ]
     },
     'nikelab-ricardo-tisci-bw': {
-      'inHome': true,
+      'inHome': false,
       'name': 'nikelab ricardo tisci bw',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -164,7 +164,7 @@ export default {
       ]
     },
     'nikelab-x-olivier-rousteing': {
-      'inHome': true,
+      'inHome': false,
       'name': 'nikelab × olivier rousteing',
       'type': Constants.TYPE.RETAIL,
       'about': {
@@ -180,7 +180,7 @@ export default {
       ]
     },
     'nikelab-x-kim-jones': {
-      'inHome': true,
+      'inHome': false,
       'name': 'nikelab × kim jones',
       'type': Constants.TYPE.RETAIL,
       'about': {

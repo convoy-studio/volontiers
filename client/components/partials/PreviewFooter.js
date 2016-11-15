@@ -9,7 +9,7 @@ class PreviewFooter extends BaseComponent {
     super(props)
     this.update = this.update.bind(this)
     Store.on(Constants.PREVIEW_CHANGED, this.update)
-    this.projects = Store.getProjects()
+    this.projects = Store.getHomeProjects()
     this.data = {
       curentPage: 1,
       totalPages: this.projects.length,
