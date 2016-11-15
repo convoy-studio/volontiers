@@ -28,6 +28,7 @@ export default class ProjectsOverview extends BaseComponent {
   constructor(props) {
     super(props)
     this.animationsState = STATE.DEACTIVE
+    this.activeProject = ''
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -35,8 +36,10 @@ export default class ProjectsOverview extends BaseComponent {
     this.onImgLoad = this.onImgLoad.bind(this)
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
+    this.didPageChange = this.didPageChange.bind(this)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
+    Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
   }
   render() {
     const eventProjects = this.getMappedProjects(Constants.TYPE.EVENT)
@@ -74,7 +77,7 @@ export default class ProjectsOverview extends BaseComponent {
     const projects = Store.getProjectsByType(id)
     return projects.map((project, index) => {
       return (
-        <li key={`${id}_${index}`} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className="btn">
+        <li key={`${id}_${index}`} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`}>
           <div className="project-container">
             <div className="title-holder">
               <div className="vertical-center-parent">
@@ -110,6 +113,13 @@ export default class ProjectsOverview extends BaseComponent {
     this.refs.eventTitle.hide()
     this.refs.retailTitle.hide()
     dom.event.off(this.refs.background, 'click', this.onBackgroundClick)
+  }
+  didPageChange(item) {
+    const route = Router.getNewRoute()
+    if (route.type === 'HOME' || route.type === 'PROJECT') {
+      if (dom.select('#projects-overview .btn.hide') !== null) dom.classes.remove(dom.select('#projects-overview .btn.hide'), 'hide')
+      dom.classes.add(dom.select(`#projects-overview .btn.${route.target}`), 'hide')
+    }
   }
   onBackgroundClick(e) {
     e.preventDefault()
