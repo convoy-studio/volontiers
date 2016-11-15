@@ -86,7 +86,6 @@ class NextPreviousBtns extends BaseComponent {
     if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
   }
   slideshowStateChanged(state) {
-    this.currentState = state
     if (state === Constants.SLIDESHOW.BEGIN) {
       this.refs.previousBtn.updateState({
         title: 'back',
@@ -99,11 +98,13 @@ class NextPreviousBtns extends BaseComponent {
           eventId: BACK
         })
       }
+      dom.classes.add(this.refs.nextBtn.refs.parent, 'last')
       this.refs.nextBtn.updateState({
         title: 'Discover next project',
         eventId: NEXT_PROJECT
       })
     } else {
+      if (dom.classes.has(this.refs.nextBtn.refs.parent, 'last')) dom.classes.remove(this.refs.nextBtn.refs.parent, 'last')
       this.refs.previousBtn.updateState({
         title: 'previous image',
         eventId: PREVIOUS_IMAGE

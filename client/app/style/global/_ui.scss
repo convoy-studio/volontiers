@@ -163,6 +163,24 @@ a {
     &.previous {
       transform: rotateZ(-90deg) translate(-100%, -100%) !important;
     }
+    &.next.last {
+      &:before {
+        content: '';
+        width: 18px;
+        height: 11px;
+        background-image: url('/assets/images/arrow.svg');
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50%;
+        top: 36px;
+        transform-origin: center center;
+        @include opacity(0);
+        transform: rotate(-90deg);
+      }
+      &.hover:before {
+        @include opacity(1);
+      }
+    }
   }
 }
 .bottom-project-title {

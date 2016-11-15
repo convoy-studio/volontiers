@@ -11,11 +11,9 @@ export default class FrontContainer extends BaseComponent {
   constructor(props) {
     super(props)
     this.onProjectsClick = this.onProjectsClick.bind(this)
-    this.onToggleProjectInfos = this.onToggleProjectInfos.bind(this)
     this.onLogoClick = this.onLogoClick.bind(this)
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
-    Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
   }
   render() {
     return (
@@ -49,10 +47,6 @@ export default class FrontContainer extends BaseComponent {
   }
   aboutClick() {
     Router.setRoute('/about')
-  }
-  onToggleProjectInfos() {
-    if (Store.ProjectInfoIsOpened) dom.classes.add(this.refs['front-container'], 'hide')
-    else dom.classes.remove(this.refs['front-container'], 'hide')
   }
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
