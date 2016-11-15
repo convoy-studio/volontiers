@@ -34,7 +34,7 @@ export default class Home extends Page {
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     this.previewComponent = this.refs.preview
-    this.refs.preview.loadFirstSlide(() => {
+    this.refs.preview.loadSlides(() => {
       super.componentDidMount()
     })
   }

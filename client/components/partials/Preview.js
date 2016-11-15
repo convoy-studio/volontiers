@@ -26,8 +26,10 @@ class Preview extends BaseComponent {
     this.slides = []
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
+    this.scrollAnimation = false
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
+    this.loadingCounter = counter(this.projects.length)
   }
   render() {
     return (
@@ -43,42 +45,40 @@ class Preview extends BaseComponent {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
   }
-  loadFirstSlide(done) {
+  loadSlides(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
-    this.slides[currentSlide.index].load(() => {
-      this.onFirstSlideLoaded()
-      done()
-    })
     this.counter.set(currentSlide.index)
-    dom.event.on(this.refs.preview, 'click', this.goToProject)
+    this.firstPreviewLoaded = true
+    this.scrollAnimation = true
+    this.projects.forEach((project, i) => {
+      this.loadSlide(this.slides[i])
+    })
+    this.previewsLoadedCb = done
   }
   goToProject() {
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
     if (Store.Mouse.x > bounds.x - 50 && Store.Mouse.x < boundsWidth + 50 && Store.Mouse.y > bounds.y - 50 && Store.Mouse.y < boundsHeight + 50) {
-      console.log('in')
       if (activityHandler.isReady === false) return
       activityHandler.count()
       Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
     }
   }
-  onFirstSlideLoaded() {
+  slidesLoaded() {
     const oldRoute = Router.getOldRoute()
     this.resize()
     this.updateCurrentSlide()
     Actions.previewsLoaded()
-    this.loadNextPreviousSlide()
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
-    this.firstPreviewLoaded = true
-  }
-  loadNextPreviousSlide() {
-    const slides = this.getNextPreviousSlide()
-    this.loadSlide(slides.prev)
-    this.loadSlide(slides.next)
+    dom.event.on(this.refs.preview, 'click', this.goToProject)
   }
   completeLoader() {
-    this.resize()
+    if (this.loadingCounter.props.index === 4) {
+      this.slidesLoaded()
+      this.previewsLoadedCb()
+    }
+    this.loadingCounter.inc()
   }
   loadSlide(s) {
     if (s.isLoaded) this.completeLoader()
@@ -152,12 +152,12 @@ class Preview extends BaseComponent {
     if (this.firstPreviewLoaded) this.currentSlide.activate()
     this.animateContainer()
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
-    if (this.firstPreviewLoaded) this.loadNextPreviousSlide()
   }
   animateContainer() {
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
+    if (this.scrollAnimation) TweenMax.fromTo(this.container.position, 1.5, {y: -(this.projects.length * windowH)}, {y: -position, ease: Circ.easeOut, onComplete: () => { this.scrollAnimation = false }})
+    else if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
     else this.container.position.y = -position
   }
   transitionIn() {
