@@ -26,7 +26,7 @@ export default class FrontContainer extends BaseComponent {
       <header id='front-container' ref='front-container' className={`navigation ${this.state.currentPage}`}>
         <MainTitle ref='projectsTitle' title={'Projects'} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
         <div className="navigation__center">
-          <MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle>
+          <h1><MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle></h1>
         </div>
         <div className="navigation__right">
           <ul>
