@@ -61,6 +61,10 @@ export default {
         ]
       },
       {
+        test: /\.(txt|htaccess|xml)$/,
+        loader: 'static'
+      },
+      {
         test: /\.(gif|png|jpe?g|gif|svg)$/i,
         loaders: [
           'file?hash=sha512&digest=hex&name=assets/images/[hash].[ext]',

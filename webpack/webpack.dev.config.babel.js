@@ -64,6 +64,10 @@ export default {
         loaders: ['style', 'css', 'postcss-loader', 'sass']
       },
       {
+        test: /\.(txt|htaccess|xml)$/,
+        loader: 'static'
+      },
+      {
         test: /\.(png|jpe?g|gif)$/,
         loader: 'url-loader?limit=8192'
       },
