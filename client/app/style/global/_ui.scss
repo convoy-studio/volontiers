@@ -175,7 +175,7 @@ a {
         top: 36px;
         transform-origin: center center;
         @include opacity(0);
-        transform: rotate(-90deg);
+        transform: translateX(-50%) rotate(-90deg);
       }
       &.hover:before {
         @include opacity(1);
