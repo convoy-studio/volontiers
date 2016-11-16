@@ -8,6 +8,7 @@ import Img from './Img'
 import MainTitle from './MainTitle'
 import dom from 'dom-hand'
 import bezier from 'cubic-bezier'
+import {PagerStore, PagerActions, PagerConstants} from '../../pager/Pager'
 
 const STATE = {
   ACTIVE: 'ACTIVE',
@@ -29,6 +30,9 @@ export default class ProjectsOverview extends BaseComponent {
     super(props)
     this.animationsState = STATE.DEACTIVE
     this.activeProject = ''
+    this.state = {
+      currentPage: ''
+    }
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -40,12 +44,13 @@ export default class ProjectsOverview extends BaseComponent {
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
+    PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.pageTransitionOut)
   }
   render() {
     const eventProjects = this.getMappedProjects(Constants.TYPE.EVENT)
     const retailProjects = this.getMappedProjects(Constants.TYPE.RETAIL)
     return (
-      <div id='projects-overview' ref='parent'>
+      <div id='projects-overview' ref='parent' className={this.state.currentPage}>
         <div ref="event-projects" className="event projects-container">{eventProjects}</div>
         <div ref="retail-projects" className="retail projects-container">{retailProjects}</div>
         <div className="titles-container">
@@ -55,6 +60,14 @@ export default class ProjectsOverview extends BaseComponent {
         <div ref='background' className="background btn"></div>
       </div>
     )
+  }
+  pageTransitionOut() {
+    const newRoute = Router.getNewRoute()
+    console.log(newRoute)
+    const state = {
+      currentPage: newRoute.type.toLowerCase()
+    }
+    this.setState(state)
   }
   componentDidMount() {
     this.direction = Constants.LEFT

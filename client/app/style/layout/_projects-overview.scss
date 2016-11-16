@@ -29,6 +29,15 @@
 		z-index: 4;
 	}
 
+	&.project {
+		&:before {
+			background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+		}
+		&:after {
+			background: linear-gradient(to top, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+		}
+	}
+
 	&.open {
 		@include anim(.0s, .0s, $easeOutExpo, translateY(0px) translateZ(0px));
 	}
@@ -102,17 +111,6 @@
 		}
 		&.retail {
 			right: $globalMargin;
-		}
-	}
-}
-
-#app-template.project {
-	#projects-overview {
-		&:before {
-			background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
-		}
-		&:after {
-			background: linear-gradient(to top, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
 		}
 	}
 }
