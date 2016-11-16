@@ -132,6 +132,15 @@ a {
     }
   }
 }
+#app-template.home .main-btn .line {
+  background-color: $black;
+}
+#app-template.project .main-btn .line {
+  background-color: $white;
+}
+#app-template.about .main-btn .line {
+  background-color: $black;
+}
 .link {
   color: $black;
   position: relative;
@@ -145,6 +154,16 @@ a {
   &--hidden {
     opacity: 0;
   }
+  @include simpleAnim(.8s, .0s, $easeOutCirc, opacity);
+}
+#app-template.home .link {
+  color: $black;
+}
+#app-template.project .link {
+  color: $white;
+}
+#app-template.about .link {
+  color: $black;
 }
 .preview-link {
   position: fixed;
@@ -191,6 +210,7 @@ a {
   top: 100%;
   margin: 0 auto;
   margin-top: - $globalFontSize - $globalMargin;
+  font-weight: bold;
 }
 .bottom-project-informations {
   position: absolute;

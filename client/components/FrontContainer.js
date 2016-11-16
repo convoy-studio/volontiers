@@ -14,17 +14,11 @@ export default class FrontContainer extends BaseComponent {
     this.onLogoClick = this.onLogoClick.bind(this)
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
-    this.didPageChange = this.didPageChange.bind(this)
-    Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
-
-    this.state = {
-      currentPage: ''
-    }
     this.content = Store.getContent('navigation')
   }
   render() {
     return (
-      <header id='front-container' ref='front-container' className={`navigation ${this.state.currentPage}`}>
+      <header id='front-container' ref='front-container' className="navigation">
         <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
         <div className="navigation__center">
           <h1><MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle></h1>
@@ -51,13 +45,6 @@ export default class FrontContainer extends BaseComponent {
   }
   changeLangClick() {
     Actions.changeLang()
-  }
-  didPageChange() {
-    const newRoute = Router.getNewRoute()
-    const state = {
-      currentPage: newRoute.type.toLowerCase()
-    }
-    this.setState(state)
   }
   aboutClick() {
     Router.setRoute('/about')

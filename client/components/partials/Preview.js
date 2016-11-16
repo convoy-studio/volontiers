@@ -43,6 +43,7 @@ class Preview extends BaseComponent {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
+    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })

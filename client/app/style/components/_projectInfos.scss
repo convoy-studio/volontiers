@@ -29,3 +29,14 @@
     }
   }
 }
+#app-template {
+  &.home .project-infos__description {
+    color: $black;
+  }
+  &.project .project-infos__description {
+    color: $white;
+  }
+  &.about .project-infos__description {
+    color: $black;
+  }
+}

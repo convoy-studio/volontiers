@@ -46,8 +46,9 @@ class App {
       this.animationHasEnded = true
       if (this.route.type !== Constants.HOME) {
         const landing = dom.select('.landing')
-        TweenMax.to(landing, 0.5, { opacity: 0, ease: Circ.easeOut})
-        dom.classes.add(landing, 'behind')
+        TweenMax.to(landing, 0.5, { opacity: 0, ease: Circ.easeOut, onComplete: () => {
+          dom.classes.add(landing, 'behind')
+        }})
       }
     } })
   }

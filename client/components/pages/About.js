@@ -22,6 +22,7 @@ export default class About extends Page {
   }
   componentDidMount() {
     super.componentDidMount()
+    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
   }
   setupAnimations() {
     const parent = this.refs['page-wrapper']
