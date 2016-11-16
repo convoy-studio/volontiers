@@ -63,8 +63,9 @@ function _getDeviceRatio() {
   const scale = (window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio
   return (scale > 1) ? 2 : 1
 }
-function _getMenuContent() {
-  return data.routing
+function _getContent(item) {
+  let lang = Store.getLang()
+  return data.content[lang][item]
 }
 function _getGlobalContent() {
   return data.content
@@ -170,8 +171,8 @@ const Store = assign({}, EventEmitter2.prototype, {
   emitChange: (type, item) => {
     Store.emit(type, item)
   },
-  menuContent: () => {
-    return _getMenuContent()
+  getContent: (item) => {
+    return _getContent(item)
   },
   appData: () => {
     return _getAppData()

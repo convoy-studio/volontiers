@@ -2,6 +2,44 @@ import Constants from '../constants'
 
 export default {
   'default-route': '/home',
+  'content': {
+    en: {
+      navigation: {
+        projects: 'Projects',
+        about: 'About'
+      },
+      preview: {
+        discover: 'Discover Project',
+        viewMore: 'View More'
+      },
+      project: {
+        viewInfos: 'View Informations',
+        closeInfos: 'Close Informations',
+        back: 'Back',
+        previousImg: 'Previous Image',
+        nextImg: 'Next Image',
+        discover: 'Discover Next Project'
+      }
+    },
+    fr: {
+      navigation: {
+        projects: 'Projets',
+        about: 'À propos'
+      },
+      preview: {
+        discover: 'Découvrir le project',
+        viewMore: 'En savoir plus'
+      },
+      project: {
+        viewInfos: 'Voir les Informations',
+        closeInfos: 'Fermer les Informations',
+        back: 'Retour',
+        previousImg: 'Image Précédente',
+        nextImg: 'Image Suivante',
+        discover: 'Découvrir le Projet Suivant'
+      }
+    }
+  },
   'routing': {
     '/about': {
       name: 'About',

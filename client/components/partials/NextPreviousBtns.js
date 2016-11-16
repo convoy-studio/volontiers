@@ -21,6 +21,7 @@ class NextPreviousBtns extends BaseComponent {
     this.scrollTriggered = this.scrollTriggered.bind(this)
     this.isActive = false
     this.currentProject = Store.getCurrentProject()
+    this.content = Store.getContent('project')
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
@@ -30,8 +31,8 @@ class NextPreviousBtns extends BaseComponent {
   render() {
     return (
       <div className='next-previous-container'>
-        <MainTitle ref='previousBtn' rotation='-90deg' title='Previous Image' eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
-        <MainTitle ref='nextBtn' rotation='90deg' title='Next Image' eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainTitle>
+        <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
+        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainTitle>
       </div>
     )
   }
@@ -88,29 +89,29 @@ class NextPreviousBtns extends BaseComponent {
   slideshowStateChanged(state) {
     if (state === Constants.SLIDESHOW.BEGIN) {
       this.refs.previousBtn.updateState({
-        title: 'back',
+        title: this.content.back,
         eventId: BACK
       })
     } else if (state === Constants.SLIDESHOW.END) {
       if (this.currentProject.assets.length <= 1) {
         this.refs.previousBtn.updateState({
-          title: 'back',
+          title: this.content.back,
           eventId: BACK
         })
       }
       dom.classes.add(this.refs.nextBtn.refs.parent, 'last')
       this.refs.nextBtn.updateState({
-        title: 'Discover next project',
+        title: this.content.discover,
         eventId: NEXT_PROJECT
       })
     } else {
       if (dom.classes.has(this.refs.nextBtn.refs.parent, 'last')) dom.classes.remove(this.refs.nextBtn.refs.parent, 'last')
       this.refs.previousBtn.updateState({
-        title: 'previous image',
+        title: this.content.previousImg,
         eventId: PREVIOUS_IMAGE
       })
       this.refs.nextBtn.updateState({
-        title: 'next image',
+        title: this.content.nextImg,
         eventId: NEXT_IMAGE
       })
     }

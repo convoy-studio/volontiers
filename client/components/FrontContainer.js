@@ -20,11 +20,12 @@ export default class FrontContainer extends BaseComponent {
     this.state = {
       currentPage: ''
     }
+    this.content = Store.getContent('navigation')
   }
   render() {
     return (
       <header id='front-container' ref='front-container' className={`navigation ${this.state.currentPage}`}>
-        <MainTitle ref='projectsTitle' title={'Projects'} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
+        <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
         <div className="navigation__center">
           <h1><MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle></h1>
         </div>
@@ -34,7 +35,7 @@ export default class FrontContainer extends BaseComponent {
               <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={false} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <MainTitle ref='aboutTitle' title={'About'} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
           </ul>
         </div>
