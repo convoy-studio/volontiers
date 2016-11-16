@@ -13,6 +13,7 @@ class PreviewLink extends BaseComponent {
     this.data = {
       slug: '/project/' + this.projects[0].slug
     }
+    this.content = Store.getContent('preview')
   }
   componentDidMount() {
     this.update = this.update.bind(this)
@@ -25,7 +26,7 @@ class PreviewLink extends BaseComponent {
   }
   render() {
     return (
-      <MainTitle ref='previewLink' rotation='90deg' title='View more' onClick={this.onPreviewClicked} className='link preview-link'></MainTitle>
+      <MainTitle ref='previewLink' rotation='90deg' title={this.content.viewMore} onClick={this.onPreviewClicked} className='link preview-link'></MainTitle>
     )
   }
   update() {

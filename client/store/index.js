@@ -63,8 +63,9 @@ function _getDeviceRatio() {
   const scale = (window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio
   return (scale > 1) ? 2 : 1
 }
-function _getMenuContent() {
-  return data.routing
+function _getContent(item) {
+  let lang = Store.getLang()
+  return data.content[lang][item]
 }
 function _getGlobalContent() {
   return data.content
@@ -170,8 +171,8 @@ const Store = assign({}, EventEmitter2.prototype, {
   emitChange: (type, item) => {
     Store.emit(type, item)
   },
-  menuContent: () => {
-    return _getMenuContent()
+  getContent: (item) => {
+    return _getContent(item)
   },
   appData: () => {
     return _getAppData()
@@ -265,6 +266,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
+  AllPreviewsLoaded: false,
   IndexIsOpened: false,
   ProjectInfoIsOpened: false,
   AppIsStarted: false,
@@ -304,6 +306,10 @@ const Store = assign({}, EventEmitter2.prototype, {
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
       Store.emitChange(action.actionType, action.item)
+      break
+    case Constants.PREVIEWS_LOADED:
+      Store.AllPreviewsLoaded = true
+      Store.emitChange(action.actionType)
       break
     case Constants.PROJECT_SLIDE_CHANGED:
       Store.CurrentProjectSlideIndex = action.item.projectSlideIdx

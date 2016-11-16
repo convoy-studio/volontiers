@@ -120,7 +120,7 @@ export default {
     new CopyWebpackPlugin([
       { from: 'static' }
     ],
-    { ignore: ['.DS_Store', '.keep', 'assets/images/*'] }),
+    { ignore: ['.DS_Store', '.keep'] }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,

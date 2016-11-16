@@ -109,6 +109,12 @@ const Actions = {
       item: undefined
     })
   },
+  startIntroAnimation: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.START_INTRO_ANIMATION,
+      item: undefined
+    })
+  },
   addToCanvas: (child, background) => {
     Dispatcher.handleViewAction({
       actionType: Constants.ADD_TO_CANVAS,
@@ -119,12 +125,6 @@ const Actions = {
     Dispatcher.handleViewAction({
       actionType: Constants.REMOVE_FROM_CANVAS,
       item: {child}
-    })
-  },
-  changeRendererColor: (color) => {
-    Dispatcher.handleViewAction({
-      actionType: Constants.CHANGE_RENDERER_COLOR,
-      item: {color}
     })
   },
   openProject: () => {

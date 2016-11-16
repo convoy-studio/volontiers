@@ -88,6 +88,9 @@ img {
 a {
   text-decoration: none;
 }
+#app-container {
+  position: absolute 0 0;
+}
 #page-a, #page-b {
   overflow: hidden;
   & > div {
@@ -129,6 +132,15 @@ a {
     }
   }
 }
+#app-template.home .main-btn .line {
+  background-color: $black;
+}
+#app-template.project .main-btn .line {
+  background-color: $white;
+}
+#app-template.about .main-btn .line {
+  background-color: $black;
+}
 .link {
   color: $black;
   position: relative;
@@ -142,6 +154,16 @@ a {
   &--hidden {
     opacity: 0;
   }
+  @include simpleAnim(.8s, .0s, $easeOutCirc, opacity);
+}
+#app-template.home .link {
+  color: $black;
+}
+#app-template.project .link {
+  color: $white;
+}
+#app-template.about .link {
+  color: $black;
 }
 .preview-link {
   position: fixed;
@@ -175,7 +197,7 @@ a {
         top: 36px;
         transform-origin: center center;
         @include opacity(0);
-        transform: rotate(-90deg);
+        transform: translateX(-50%) rotate(-90deg);
       }
       &.hover:before {
         @include opacity(1);
@@ -188,6 +210,7 @@ a {
   top: 100%;
   margin: 0 auto;
   margin-top: - $globalFontSize - $globalMargin;
+  font-weight: bold;
 }
 .bottom-project-informations {
   position: absolute;
@@ -198,4 +221,7 @@ a {
   position: absolute;
   bottom: $globalMargin;
   left: $globalMargin;
+}
+#canvas-container {
+  // background-color: $white;
 }

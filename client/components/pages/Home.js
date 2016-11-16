@@ -3,7 +3,6 @@ import Store from '../../store'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
-import Landing from '../partials/Landing'
 import Preview from '../partials/Preview'
 import PreviewLink from '../partials/PreviewLink'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
@@ -17,6 +16,7 @@ export default class Home extends Page {
     this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
     this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
     this.projects = Store.getHomeProjects()
+    this.content = Store.getContent('preview')
   }
   render() {
     return (
@@ -24,7 +24,7 @@ export default class Home extends Page {
         <Preview ref='preview'/>
         <PreviewLink ref='previewLink'/>
         <MainTitle ref='projectTitle' title={''} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
-        <MainTitle ref='projectDiscover' title={'Discover Project'} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-informations'></MainTitle>
+        <MainTitle ref='projectDiscover' title={this.content.discover} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-informations'></MainTitle>
         <MainTitle ref='projectCounter' title={`1/${this.projects.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
       </div>
     )
@@ -34,9 +34,16 @@ export default class Home extends Page {
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     this.previewComponent = this.refs.preview
-    this.refs.preview.loadFirstSlide(() => {
-      super.componentDidMount()
-    })
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute === undefined) { // First load
+      this.refs.preview.loadSlides(() => {
+        super.componentDidMount()
+      })
+    } else {
+      this.refs.preview.loadFirstSlide(() => {
+        super.componentDidMount()
+      })
+    }
   }
   willTransitionOut() {
     this.refs.projectTitle.hide()

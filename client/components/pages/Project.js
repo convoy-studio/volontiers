@@ -4,12 +4,7 @@ import dom from 'dom-hand'
 import Constants from '../../constants'
 import Actions from '../../actions'
 import Router from '../../services/router'
-import Landing from '../partials/Landing'
-import ProjectImage from '../partials/ProjectImage'
-import ProjectFooter from '../partials/ProjectFooter'
 import ProjectInfos from '../partials/ProjectInfos'
-import ProjectPreviousLink from '../partials/ProjectPreviousLink'
-import ProjectNextLink from '../partials/ProjectNextLink'
 import slideshow from '../partials/Slideshow'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
 import MainTitle from '../partials/MainTitle'
@@ -27,11 +22,12 @@ export default class Project extends Page {
     Store.on(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
+    this.content = Store.getContent('project')
   }
   render() {
     const content = Store.getCurrentProject()
     const infoContent = Store.getCurrentAboutContent()
-    const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={'View Informations'} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
+    const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
     const projectInfo = infoButton ? (<ProjectInfos />) : undefined
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
@@ -46,7 +42,7 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    setTimeout(() => {Actions.changeRendererColor('0xefefef')})
+    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#000000', delay: 0.2 })
     this.slideshow = slideshow(this.container).load(() => {
       super.componentDidMount()
     })
@@ -84,11 +80,11 @@ export default class Project extends Page {
       this.refs['next-previous-btns'].hide()
       this.refs['next-previous-btns'].isActive = false
       setTimeout(() => {
-        if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'close informations'})
+        if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: this.content.closeInfos})
       }, 400)
     } else {
       this.slideshow.showCurrentSlide()
-      if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: 'view informations'})
+      if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: this.content.viewInfos})
       this.refs['next-previous-btns'].show()
       this.refs['next-previous-btns'].isActive = true
     }
@@ -96,12 +92,14 @@ export default class Project extends Page {
   projectOverviewOpened() {
     this.refs.projectTitle.hide()
     this.refs.projectCounter.hide()
+    if (this.refs.projectInformations) this.refs.projectInformations.hide()
     this.refs['next-previous-btns'].hide()
     this.refs['next-previous-btns'].isActive = false
   }
   projectOverviewClosed() {
     this.refs.projectTitle.show()
     this.refs.projectCounter.show()
+    if (this.refs.projectInformations) this.refs.projectInformations.show()
     this.refs['next-previous-btns'].show()
     this.refs['next-previous-btns'].isActive = true
   }

@@ -1,16 +1,33 @@
 .landing {
   height: 100vh;
   position: relative;
+  z-index: 9999999;
+  background: $white;
 
+  &.behind {
+    z-index: -1;
+  }
   &__hero {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 0 10%;
+    box-sizing: border-box;
     text-align: center;
-
-    p {
-      margin-top: 26px;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &__logo {
+    @extend .full;
+    svg {
+      @extend .full;
     }
+  }
+
+  &__baseline {
+    margin-top: 35px;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    opacity: 0;
   }
 }
