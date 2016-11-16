@@ -4,6 +4,7 @@ import Actions from '../../actions'
 import Constants from '../../constants'
 import dom from 'dom-hand'
 import Router from '../../services/router'
+import SVGComponent from './SVGComponent'
 
 class MainTitle extends BaseComponent {
   constructor(props) {
@@ -20,6 +21,14 @@ class MainTitle extends BaseComponent {
   render() {
     let classNames = this.props.className + ' main-btn'
     if (this.props.onClick) classNames +=  ' btn'
+    const nextArrow = this.props.arrow ? (
+      <SVGComponent width="18px" height="11px" viewBox="1357 507 18 11" className="next-arrow">
+        <g id="Arrow" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform="translate(1357.000000, 507.000000)">
+          <polygon id="Path" fill="#000000" points="0.615999976 4.694 17 4.694 17 5.882 0.615999976 5.882"></polygon>
+          <polygon id="Path" fill="#000000" points="17.37146 5.43377686 16.822 6.274 15.202 8.884 14.5052993 10.0079257 12.52 10 12.52 8.884 13.726 8.884 16.084 5.32 13.798 1.81 12.52 1.81 12.52 0.694 14.6321411 0.729248047 15.328 1.8192749 16.93 4.384 17.37146 4.97611937"></polygon>
+        </g>
+      </SVGComponent>) : undefined
+
     return (
       <div ref='parent' onClick={(e) => { e.preventDefault(); this.props.onClick(this.state.eventId) }} className={classNames}>
         <div ref='holder' className="holder">
@@ -27,6 +36,7 @@ class MainTitle extends BaseComponent {
           <div ref='background' className="background"></div>
           <div ref='line' className="line"></div>
         </div>
+        {nextArrow}
       </div>
     )
   }

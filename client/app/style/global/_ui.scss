@@ -185,25 +185,33 @@ a {
     &.previous {
       transform: rotateZ(-90deg) translate(-100%, -100%) !important;
     }
-    &.next.last {
-      &:before {
-        content: '';
-        width: 18px;
-        height: 11px;
-        background-image: url('/assets/images/arrow.svg');
-        background-repeat: no-repeat;
+    &.next {
+      .next-arrow {
         position: absolute;
         left: 50%;
         top: 36px;
         transform-origin: center center;
         @include opacity(0);
         transform: translateX(-50%) rotate(-90deg);
+
+        polygon {
+          fill: $black;
+        }
       }
-      &.hover:before {
+      &.hover.last .next-arrow {
         @include opacity(1);
       }
     }
   }
+}
+#app-template.home .next-previous-container .main-btn.next.last polygon {
+  fill: $black;
+}
+#app-template.project .next-previous-container .main-btn.next.last polygon {
+  fill: $white;
+}
+#app-template.about .next-previous-container .main-btn.next.last polygon {
+  fill: $black;
 }
 .bottom-project-title {
   position: relative;
@@ -221,7 +229,4 @@ a {
   position: absolute;
   bottom: $globalMargin;
   left: $globalMargin;
-}
-#canvas-container {
-  // background-color: $white;
 }

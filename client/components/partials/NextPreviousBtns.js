@@ -32,7 +32,7 @@ class NextPreviousBtns extends BaseComponent {
     return (
       <div className='next-previous-container'>
         <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
-        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next'></MainTitle>
+        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' arrow='true'></MainTitle>
       </div>
     )
   }

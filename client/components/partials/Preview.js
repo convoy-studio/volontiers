@@ -43,7 +43,8 @@ class Preview extends BaseComponent {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute !== undefined) TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
@@ -190,7 +191,7 @@ class Preview extends BaseComponent {
     let tl = new TimelineMax()
     tl.to(this.container.position, 1.5, {y: 0, ease: Circ.easeOut})
     tl.to(this.container.position, 1, {y: -position, ease: Expo.easeOut})
-    tl.to(landing, 0.7, { opacity: 0, ease: Circ.easeOut }, '+=0.2')
+    tl.to(landing, 0.7, { opacity: 0, ease: Circ.easeOut })
   }
   transitionIn() {
     if (!this.currentSlide) return

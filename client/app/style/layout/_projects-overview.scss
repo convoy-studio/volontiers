@@ -80,7 +80,6 @@
 			}
 			.title-holder {
 				z-index: 2;
-				background-color: $white;
 				@include opacity(0);
       			@include anim(.8s, .0s, $easeOutExpo, scale(1));
 				p {
@@ -110,10 +109,10 @@
 #app-template.project {
 	#projects-overview {
 		&:before {
-			background: linear-gradient(to bottom, rgba($black, 1) 0%,rgba($black, 0) 100%);
+			background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
 		}
 		&:after {
-			background: linear-gradient(to top, rgba($black, 1) 0%,rgba($black, 0) 100%);
+			background: linear-gradient(to top, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
 		}
 	}
 }
