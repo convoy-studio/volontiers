@@ -63,7 +63,6 @@ export default class ProjectsOverview extends BaseComponent {
   }
   pageTransitionOut() {
     const newRoute = Router.getNewRoute()
-    console.log(newRoute)
     const state = {
       currentPage: newRoute.type.toLowerCase()
     }
