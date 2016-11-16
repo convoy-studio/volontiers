@@ -1,7 +1,7 @@
 #about-page {
   @extend .full;
   position: absolute;
-  
+
   // @include opacity(0);
   // @include anim(.0s, .0s, $easeOutCirc, translateY(0));
 
@@ -9,13 +9,14 @@
   //   @include opacity(1);
   //   @include anim(.8s, .0s, $easeOutCirc, translateY(0));
   // }
-  
+
   .description {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
+    text-align: center;
 
     br {
       line-height: 2;
