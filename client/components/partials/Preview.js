@@ -56,7 +56,6 @@ class Preview extends BaseComponent {
       done()
     })
     this.counter.set(currentSlide.index)
-    this.firstPreviewLoaded = true
   }
   loadSlides(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
@@ -86,6 +85,7 @@ class Preview extends BaseComponent {
     if (!this.needIntroAnimation) this.loadNextPreviousSlide()
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
     dom.event.on(this.refs.preview, 'click', this.goToProject)
+    this.firstPreviewLoaded = true
   }
   loadNextPreviousSlide() {
     const slides = this.getNextPreviousSlide()
