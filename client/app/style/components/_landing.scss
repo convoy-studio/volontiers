@@ -1,9 +1,11 @@
 .landing {
   height: 100vh;
   position: relative;
+  z-index: 9999999;
+  background: $white;
 
-  &.hide {
-    display: none;
+  &.behind {
+    z-index: -1;
   }
   &__hero {
     padding: 0 10%;
@@ -22,7 +24,7 @@
   }
 
   &__baseline {
-    margin-top: 44px;
+    margin-top: 35px;
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.3px;

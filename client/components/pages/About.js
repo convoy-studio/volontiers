@@ -21,7 +21,6 @@ export default class About extends Page {
     )
   }
   componentDidMount() {
-    setTimeout(() => {Actions.changeRendererColor('0xffffff')})
     super.componentDidMount()
   }
   setupAnimations() {

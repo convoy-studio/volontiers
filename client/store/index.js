@@ -266,6 +266,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   ProjectsSlugs: [],
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
+  AllPreviewsLoaded: false,
   IndexIsOpened: false,
   ProjectInfoIsOpened: false,
   AppIsStarted: false,
@@ -305,6 +306,10 @@ const Store = assign({}, EventEmitter2.prototype, {
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
       Store.emitChange(action.actionType, action.item)
+      break
+    case Constants.PREVIEWS_LOADED:
+      Store.AllPreviewsLoaded = true
+      Store.emitChange(action.actionType)
       break
     case Constants.PROJECT_SLIDE_CHANGED:
       Store.CurrentProjectSlideIndex = action.item.projectSlideIdx

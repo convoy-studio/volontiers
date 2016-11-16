@@ -18,16 +18,21 @@ class Preview extends BaseComponent {
     this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
     this.keyboardTriggered = this.keyboardTriggered.bind(this)
     this.onScroll = this.onScroll.bind(this)
+    this.introAnimation = this.introAnimation.bind(this)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
+    Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
     this.oldSlide = undefined
     this.currentSlide = undefined
     this.slides = []
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
+    this.needIntroAnimation = false
+    this.allPreviewsLoaded = Store.AllPreviewsLoaded
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
+    this.loadingCounter = counter(this.projects.length)
   }
   render() {
     return (
@@ -38,7 +43,6 @@ class Preview extends BaseComponent {
     this.parent = this.refs.preview
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    setTimeout(() => {Actions.changeRendererColor('0xffffff')})
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })
@@ -46,31 +50,40 @@ class Preview extends BaseComponent {
   loadFirstSlide(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
     this.slides[currentSlide.index].load(() => {
-      this.onFirstSlideLoaded()
+      this.slidesLoaded()
       done()
     })
     this.counter.set(currentSlide.index)
-    dom.event.on(this.refs.preview, 'click', this.goToProject)
+    this.firstPreviewLoaded = true
+  }
+  loadSlides(done) {
+    const currentSlide = this.getSlideById(Router.getNewRoute().target)
+    this.counter.set(currentSlide.index)
+    this.firstPreviewLoaded = true
+    this.projects.forEach((project, i) => {
+      this.loadSlide(this.slides[i])
+    })
+    this.previewsLoadedCb = done
+    this.needIntroAnimation = true
   }
   goToProject() {
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
     if (Store.Mouse.x > bounds.x - 50 && Store.Mouse.x < boundsWidth + 50 && Store.Mouse.y > bounds.y - 50 && Store.Mouse.y < boundsHeight + 50) {
-      console.log('in')
       if (activityHandler.isReady === false) return
       activityHandler.count()
       Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
     }
   }
-  onFirstSlideLoaded() {
+  slidesLoaded() {
     const oldRoute = Router.getOldRoute()
     this.resize()
     this.updateCurrentSlide()
-    Actions.previewsLoaded()
-    this.loadNextPreviousSlide()
+    if (this.needIntroAnimation) Actions.previewsLoaded()
+    if (!this.needIntroAnimation) this.loadNextPreviousSlide()
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
-    this.firstPreviewLoaded = true
+    dom.event.on(this.refs.preview, 'click', this.goToProject)
   }
   loadNextPreviousSlide() {
     const slides = this.getNextPreviousSlide()
@@ -78,6 +91,13 @@ class Preview extends BaseComponent {
     this.loadSlide(slides.next)
   }
   completeLoader() {
+    if (this.needIntroAnimation) {
+      if (this.loadingCounter.props.index === 4) {
+        this.slidesLoaded()
+        this.previewsLoadedCb()
+      }
+      this.loadingCounter.inc()
+    }
     this.resize()
   }
   loadSlide(s) {
@@ -152,13 +172,24 @@ class Preview extends BaseComponent {
     if (this.firstPreviewLoaded) this.currentSlide.activate()
     this.animateContainer()
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
-    if (this.firstPreviewLoaded) this.loadNextPreviousSlide()
+    if (this.firstPreviewLoaded && !this.needIntroAnimation) this.loadNextPreviousSlide()
   }
   animateContainer() {
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
     if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
     else this.container.position.y = -position
+  }
+  introAnimation() {
+    const windowH = Store.Window.h
+    const position = this.counter.props.index * windowH
+    this.container.position.y = -this.projects.length * windowH
+    const landing = dom.select('.landing')
+    dom.classes.add(landing, 'behind')
+    let tl = new TimelineMax()
+    tl.to(this.container.position, 1.5, {y: 0, ease: Circ.easeOut})
+    tl.to(this.container.position, 1, {y: -position, ease: Expo.easeOut})
+    tl.to(landing, 0.7, { opacity: 0, ease: Circ.easeOut }, '+=0.2')
   }
   transitionIn() {
     if (!this.currentSlide) return

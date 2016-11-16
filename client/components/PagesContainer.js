@@ -52,7 +52,6 @@ export default class PagesContainer extends BasePager {
     } else {
       this.setupNewComponent(newRoute, type)
     }
-
     if (oldRoute && oldRoute.type === Constants.HOME && newRoute.type === Constants.HOME || (newRoute.type === Constants.HOME && newRoute.parts.length > 1)) {
       setTimeout(() => { Actions.updatePreviewSlide(newRoute.target) })
     }

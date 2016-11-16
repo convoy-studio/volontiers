@@ -88,6 +88,9 @@ img {
 a {
   text-decoration: none;
 }
+#app-container {
+  position: absolute 0 0;
+}
 #page-a, #page-b {
   overflow: hidden;
   & > div {
@@ -198,4 +201,7 @@ a {
   position: absolute;
   bottom: $globalMargin;
   left: $globalMargin;
+}
+#canvas-container {
+  // background-color: $white;
 }

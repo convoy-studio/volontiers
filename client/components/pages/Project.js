@@ -4,12 +4,7 @@ import dom from 'dom-hand'
 import Constants from '../../constants'
 import Actions from '../../actions'
 import Router from '../../services/router'
-import Landing from '../partials/Landing'
-import ProjectImage from '../partials/ProjectImage'
-import ProjectFooter from '../partials/ProjectFooter'
 import ProjectInfos from '../partials/ProjectInfos'
-import ProjectPreviousLink from '../partials/ProjectPreviousLink'
-import ProjectNextLink from '../partials/ProjectNextLink'
 import slideshow from '../partials/Slideshow'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
 import MainTitle from '../partials/MainTitle'
@@ -47,7 +42,6 @@ export default class Project extends Page {
   componentDidMount() {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
-    setTimeout(() => {Actions.changeRendererColor('0xefefef')})
     this.slideshow = slideshow(this.container).load(() => {
       super.componentDidMount()
     })
@@ -97,7 +91,6 @@ export default class Project extends Page {
   projectOverviewOpened() {
     this.refs.projectTitle.hide()
     this.refs.projectCounter.hide()
-    this.refs.projectInformations.hide()
     if (this.refs.projectInformations) this.refs.projectInformations.hide()
     this.refs['next-previous-btns'].hide()
     this.refs['next-previous-btns'].isActive = false

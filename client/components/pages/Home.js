@@ -3,7 +3,6 @@ import Store from '../../store'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
-import Landing from '../partials/Landing'
 import Preview from '../partials/Preview'
 import PreviewLink from '../partials/PreviewLink'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
@@ -35,9 +34,16 @@ export default class Home extends Page {
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     this.previewComponent = this.refs.preview
-    this.refs.preview.loadFirstSlide(() => {
-      super.componentDidMount()
-    })
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute === undefined) { // First load
+      this.refs.preview.loadSlides(() => {
+        super.componentDidMount()
+      })
+    } else {
+      this.refs.preview.loadFirstSlide(() => {
+        super.componentDidMount()
+      })
+    }
   }
   willTransitionOut() {
     this.refs.projectTitle.hide()
