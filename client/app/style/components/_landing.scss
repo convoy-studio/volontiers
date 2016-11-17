@@ -27,7 +27,9 @@
   &__baseline {
     margin-top: 35px;
     font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 0.3px;
+
+    @media (max-width: $MQ_SMALL) {
+      margin-top: 13px;
+    }
   }
 }

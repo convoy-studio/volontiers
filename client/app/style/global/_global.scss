@@ -6,10 +6,13 @@ html, body {
   color: $black;
   font-size: $globalFontSize;
   line-height: $globalLineHeight;
+  letter-spacing: $globalLetterSpacing;
   overflow: hidden;
 
   @media (max-width: $MQ_SMALL) {
     font-size: $mobileFontSize;
+    line-height: $mobileLineHeight;
+    letter-spacing: $mobileLetterSpacing;
   }
 }
 

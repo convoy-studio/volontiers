@@ -224,6 +224,16 @@ a {
   position: absolute;
   bottom: $globalFontSize;
   right: $globalMargin;
+
+  .title {
+    @media (max-width: $MQ_SMALL) {
+      transform-origin: right center;
+      position: absolute;
+      right: $mobileMargin;
+      bottom: 0;
+      transform: rotate(90deg) translateY(-50%) !important;
+    }
+  }
 }
 .bottom-project-counter {
   position: absolute;

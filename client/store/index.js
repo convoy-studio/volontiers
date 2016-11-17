@@ -87,8 +87,8 @@ function _getUserLanguage() {
       return lang
     }
   } else {
-    lang = navigator.language || navigator.userLanguage
-    if (lang.toLocaleLowerCase() === Constants.LANG.FR) lang = Constants.LANG.FR
+    let navLang = navigator.language || navigator.userLanguage
+    if (navLang.toLocaleLowerCase() === Constants.LANG.FR) lang = Constants.LANG.FR
   }
   return lang
 }

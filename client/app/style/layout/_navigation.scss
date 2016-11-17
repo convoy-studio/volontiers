@@ -53,24 +53,9 @@
           transform-origin: right center;
           &:nth-child(1) {
             position: absolute;
-            right: 22px;
+            right: 42px;
             top: 70px;
             transform: rotate(90deg) translateY(-50%)
-          }
-          &:nth-child(2) {
-            position: absolute;
-            right: 22px;
-            top: 85px;
-            transform: rotate(90deg) translateY(-50%)
-          }
-          &:nth-child(3) {
-            position: absolute;
-            right: 22px;
-            top: 105px;
-            transform: rotate(90deg) translateY(-50%)
-          }
-          &:last-child() a {
-            padding-right: 0;
           }
         }
       }
