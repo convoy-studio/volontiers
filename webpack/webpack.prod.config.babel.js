@@ -9,7 +9,11 @@ import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 export default {
   context: path.resolve(__dirname, '..'),
-  entry: ['gsap', './client/index.js'],
+  entry: [
+    'gsap',
+    'pixi.js',
+    './client/index.js'
+  ],
   output: {
     path: path.join(__dirname, '..', 'dist'),
     filename: '[name]-[hash].min.js'

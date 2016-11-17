@@ -8,11 +8,16 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 export default {
   context: path.resolve(__dirname, '..'),
   devtool: 'inline-source-map',
-  entry: [
-    'gsap',
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-    './client/index.js'
-  ],
+  entry: {
+    vendor: [
+      'gsap',
+      'pixi.js'
+    ],
+    js: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+      './client/index.js'
+    ]
+  },
   output: {
     path: __dirname,
     publicPath: '/',
@@ -34,7 +39,7 @@ export default {
     preLoaders: [
       {
         test: /\.js?$/,
-        exclude: [/node_modules/, /client\/vendor/, /static\/lib/],
+        exclude: [/node_modules/, /client\/vendor/, /static\/libs/],
         loader: 'eslint'
       }
     ],
@@ -91,6 +96,7 @@ export default {
       inject: 'body',
       filename: 'index.html'
     }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
