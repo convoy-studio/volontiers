@@ -7,8 +7,16 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export default {
   context: path.resolve(__dirname, '..'),
+  externals: {
+    'TweenLite': 'TweenLite'
+  },
   devtool: 'inline-source-map',
-  entry: ['gsap', 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true', './client/index.js'],
+  entry: [
+    'gsap', 
+    './static/lib/SplitText.min.js',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+    './client/index.js'
+  ],
   output: {
     path: __dirname,
     publicPath: '/',
@@ -30,7 +38,7 @@ export default {
     preLoaders: [
       {
         test: /\.js?$/,
-        exclude: [/node_modules/, /client\/vendor/],
+        exclude: [/node_modules/, /client\/vendor/, /static\/lib/],
         loader: 'eslint'
       }
     ],

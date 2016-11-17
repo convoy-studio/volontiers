@@ -6,6 +6,7 @@ import Router from '../services/router'
 import ProjectsOverview from './partials/ProjectsOverview'
 import MainTitle from './partials/MainTitle'
 import dom from 'dom-hand'
+import {PagerStore, PagerActions, PagerConstants} from './../pager/Pager'
 
 export default class FrontContainer extends BaseComponent {
   constructor(props) {
@@ -14,7 +15,9 @@ export default class FrontContainer extends BaseComponent {
     this.onLogoClick = this.onLogoClick.bind(this)
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
+    this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
     this.content = Store.getContent('navigation')
+    PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
   }
   render() {
     return (
@@ -38,10 +41,15 @@ export default class FrontContainer extends BaseComponent {
     )
   }
   componentDidMount() {
-    this.refs.projectsTitle.show()
-    this.refs.logoTitle.show()
-    this.refs.langTitle.show()
-    this.refs.aboutTitle.show()
+  }
+  onTransitionInCompleted() {
+    PagerStore.off(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
+    setTimeout(() => {
+      this.refs.projectsTitle.show()
+      this.refs.logoTitle.show()
+      this.refs.langTitle.show()
+      this.refs.aboutTitle.show()
+    }, 200)
   }
   changeLangClick() {
     Actions.changeLang()

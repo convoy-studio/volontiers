@@ -15,10 +15,6 @@ const activityHandler = Utils.countActivityHandler(650)
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
-    this.onUpdatePreviewSlide = this.onUpdatePreviewSlide.bind(this)
-    this.keyboardTriggered = this.keyboardTriggered.bind(this)
-    this.onScroll = this.onScroll.bind(this)
-    this.introAnimation = this.introAnimation.bind(this)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
@@ -29,6 +25,7 @@ class Preview extends BaseComponent {
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
     this.needIntroAnimation = false
+    this.introAnimationFinished = false
     this.allPreviewsLoaded = Store.AllPreviewsLoaded
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
@@ -177,6 +174,7 @@ class Preview extends BaseComponent {
     if (this.firstPreviewLoaded && !this.needIntroAnimation) this.loadNextPreviousSlide()
   }
   animateContainer() {
+    if (!this.introAnimationFinished && Router.getOldRoute() === undefined) return
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
     if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
@@ -186,12 +184,16 @@ class Preview extends BaseComponent {
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
     this.container.position.y = -this.projects.length * windowH
-    const landing = dom.select('.landing')
-    dom.classes.add(landing, 'behind')
-    let tl = new TimelineMax()
-    tl.to(this.container.position, 1.5, {y: 0, ease: Circ.easeOut})
-    tl.to(this.container.position, 1, {y: -position, ease: Expo.easeOut})
-    tl.to(landing, 0.7, { opacity: 0, ease: Circ.easeOut })
+    this.introAnimationFinished = true
+    const tl = new TimelineMax({ onComplete: () => {
+      tl.clear()
+      this.introAnimationCompleted()
+    }})
+    tl.to(this.container.position, 2.5, {y: 0, force3D: true, ease: Expo.easeInOut}, 0)
+    tl.to(this.container.position, 1, {y: -position, ease: Expo.easeInOut}, 2.3)
+  }
+  introAnimationCompleted() {
+    setTimeout(Actions.introAnimationCompleted)
   }
   transitionIn() {
     if (!this.currentSlide) return
@@ -225,6 +227,7 @@ class Preview extends BaseComponent {
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
+    Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     this.slides.length = 0
     this.slides = undefined

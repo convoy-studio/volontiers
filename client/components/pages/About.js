@@ -22,16 +22,20 @@ export default class About extends Page {
   }
   componentDidMount() {
     super.componentDidMount()
-    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
   }
   setupAnimations() {
     const parent = this.refs['page-wrapper']
     this.scaleTl = new TimelineMax()
     this.scaleTl.to(parent, 1, { scale: 0.8, rotation: '4deg', force3D: true, ease: Circ.easeInOut }, 0)
     this.tlIn.from(parent, 1, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOut.to(parent, 1, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 }, 0)
+    this.tlOut.to(parent, 0.6, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.scaleTl.pause(0)
     super.setupAnimations()
+  }
+  didTransitionInComplete() {
+    setTimeout(Actions.introAnimationCompleted)
+    super.didTransitionInComplete()
   }
   onOverviewOpen() {
     this.scaleTl.timeScale(1.8).play()

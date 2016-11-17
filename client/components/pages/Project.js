@@ -48,7 +48,7 @@ export default class Project extends Page {
     })
   }
   willTransitionIn() {
-    setTimeout(() => { super.willTransitionIn() }, 300)
+    setTimeout(() => { super.willTransitionIn() }, 400)
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
@@ -57,6 +57,7 @@ export default class Project extends Page {
     this.refs['next-previous-btns'].isActive = true
     this.refs['next-previous-btns'].show()
     super.didTransitionInComplete()
+    setTimeout(Actions.introAnimationCompleted)
   }
   willTransitionOut() {
     this.refs.projectTitle.hide()

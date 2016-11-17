@@ -17,6 +17,18 @@ class Utils {
     objWrapper.y = posy
     return objWrapper
   }
+  static tranformArrayFromMiddleAndOut(array) {
+    const newArray = []
+    let i = Math.ceil(array.length / 2)
+    let j = i - 1
+    while (j >= 0) {
+      newArray.push(array[j--])
+      if (i < array.length) {
+        newArray.push(array[i++])
+      }
+    }
+    return newArray
+  }
   static resizePositionProportionally(windowW, windowH, contentW, contentH, orientation) {
     const aspectRatio = contentW / contentH
     let scale

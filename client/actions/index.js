@@ -204,6 +204,12 @@ const Actions = {
       actionType: Constants.SCROLL_TRIGGERED,
       item: direction
     })
+  },
+  introAnimationCompleted: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.START_INTRO_ANIMATION_COMPLETED,
+      item: undefined
+    })
   }
 }
 

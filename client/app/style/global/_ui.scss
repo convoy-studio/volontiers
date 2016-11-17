@@ -128,7 +128,7 @@ a {
   &.show {
     .holder {
       @include opacity(1);
-      @include anim(.8s, .0s, $easeOutCirc, scale(1));
+      @include anim(1.8s, .0s, $easeOutCirc, scale(1));
     }
   }
 }

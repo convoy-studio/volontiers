@@ -3,6 +3,7 @@
   position: relative;
   z-index: 9999999;
   background: $white;
+  opacity: 0;
 
   &.behind {
     z-index: -1;
@@ -28,6 +29,5 @@
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.3px;
-    opacity: 0;
   }
 }
