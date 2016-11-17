@@ -84,13 +84,13 @@ export default class Home extends Page {
     this.refs.projectTitle.hide()
     this.refs.projectDiscover.hide()
     this.refs.projectCounter.hide()
-    this.refs.previewLink.hideLink()
+    this.refs.previewLink.hideLink(true)
   }
   projectOverviewClosed() {
     this.refs.projectTitle.show()
     this.refs.projectDiscover.show()
     this.refs.projectCounter.show()
-    this.refs.previewLink.showLink()
+    this.refs.previewLink.showLink(true)
   }
   update() {
     this.previewComponent.update()

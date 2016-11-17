@@ -35,10 +35,12 @@ class PreviewLink extends BaseComponent {
   onPreviewClicked() {
     Router.setRoute(this.data.slug)
   }
-  showLink() {
+  showLink(overview) {
+    if (overview) Store.on(Constants.MOUSEENTER_PREVIEW, this.showLink)
     this.refs.previewLink.show()
   }
-  hideLink() {
+  hideLink(overview) {
+    if (overview) Store.off(Constants.MOUSEENTER_PREVIEW, this.showLink)
     this.refs.previewLink.hide()
   }
   resize() {
