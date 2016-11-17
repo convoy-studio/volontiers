@@ -43,6 +43,7 @@ export default class Project extends Page {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
     TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#bbbbbb', delay: 0.2 })
+    TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#bbbbbb', delay: 0.2 })
     this.slideshow = slideshow(this.container).load(() => {
       super.componentDidMount()
     })

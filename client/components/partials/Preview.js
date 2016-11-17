@@ -41,7 +41,10 @@ class Preview extends BaseComponent {
     this.container = new PIXI.Container()
     setTimeout(() => {Actions.addToCanvas(this.container)})
     const oldRoute = Router.getOldRoute()
-    if (oldRoute !== undefined) TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+    if (oldRoute !== undefined) {
+      TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+      TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+    }
     this.projects.forEach((project, i) => {
       this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
     })

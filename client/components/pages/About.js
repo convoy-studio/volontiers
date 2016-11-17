@@ -29,6 +29,7 @@ export default class About extends Page {
     this.scaleTl.to(parent, 1, { scale: 0.8, rotation: '4deg', force3D: true, ease: Circ.easeInOut }, 0)
     this.tlIn.from(parent, 1, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.tlIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 }, 0)
+    this.tlIn.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 }, 0)
     this.tlOut.to(parent, 0.6, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.scaleTl.pause(0)
     super.setupAnimations()

@@ -7,13 +7,9 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export default {
   context: path.resolve(__dirname, '..'),
-  externals: {
-    'TweenLite': 'TweenLite'
-  },
   devtool: 'inline-source-map',
   entry: [
-    'gsap', 
-    './static/lib/SplitText.min.js',
+    'gsap',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
     './client/index.js'
   ],

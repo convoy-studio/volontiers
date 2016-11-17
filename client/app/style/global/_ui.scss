@@ -215,15 +215,11 @@ a {
   fill: $black;
 }
 .bottom-project-title {
-  position: relative;
-  top: 100%;
-  margin: 0 auto;
-  margin-top: - $globalFontSize - $globalMargin;
+  position: fixed;
+  bottom: $globalMargin;
+  left: 0;
+  right: 0;
   font-weight: bold;
-
-  @media (max-width: $MQ_SMALL) {
-    margin-top: - $mobileLineHeight - $globalMargin;
-  }
 
   .title {
     left: 0;
@@ -232,7 +228,7 @@ a {
   }
 }
 .bottom-project-informations {
-  position: absolute;
+  position: fixed;
   bottom: $globalFontSize;
   right: $globalMargin;
 
@@ -247,7 +243,11 @@ a {
   }
 }
 .bottom-project-counter {
-  position: absolute;
+  position: fixed;
   bottom: $globalMargin;
   left: $globalMargin;
+}
+#canvas-container {
+  position: fixed;
+  @extend .full;
 }
