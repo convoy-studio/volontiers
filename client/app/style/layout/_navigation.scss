@@ -53,8 +53,8 @@
           transform-origin: right center;
           &:nth-child(1) {
             position: absolute;
-            right: 42px;
-            top: 70px;
+            right: $mobileFontSize + $globalMargin;
+            top: 30px;
             transform: rotate(90deg) translateY(-50%)
           }
         }

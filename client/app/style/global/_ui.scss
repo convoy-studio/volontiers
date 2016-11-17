@@ -144,12 +144,13 @@ a {
 .link {
   color: $black;
   position: relative;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: $globalFontSize;
+  line-height: $globalLineHeight;
   box-sizing: border-box;
   text-transform: capitalize;
   @media (max-width: $MQ_SMALL) {
-    // font-size: $mobileFontSize;
+    font-size: $mobileFontSize;
+    line-height: $mobileLineHeight;
   }
   &--hidden {
     opacity: 0;
@@ -219,6 +220,16 @@ a {
   margin: 0 auto;
   margin-top: - $globalFontSize - $globalMargin;
   font-weight: bold;
+
+  @media (max-width: $MQ_SMALL) {
+    margin-top: - $mobileLineHeight - $globalMargin;
+  }
+
+  .title {
+    left: 0;
+    right: 0;
+    text-align: center !important;
+  }
 }
 .bottom-project-informations {
   position: absolute;

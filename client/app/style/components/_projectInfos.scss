@@ -15,17 +15,13 @@
     }
 
     @media (max-width: $MQ_SMALL) {
-      font-size: $mobileFontSize;
-      $p: $mobileMargin * 1.5;
-      padding: $p 12.5%;
-      position: relative;
-      top: initial;
-      left: initial;
-      width: auto;
-      transform: none;
+      $p: $globalMargin * 1.5;
+      padding: 0 $p;
+      width: 100%;
+      box-sizing: border-box;
 
       br {
-        display: none;
+        line-height: 1;
       }
     }
   }
