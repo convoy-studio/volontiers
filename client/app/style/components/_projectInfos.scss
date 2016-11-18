@@ -16,6 +16,8 @@
 
     @media (max-width: $MQ_SMALL) {
       $p: $globalMargin * 1.5;
+      font-size: $mobileFontSize;
+      line-height: $mobileLineHeight;
       padding: 0 $p;
       width: 100%;
       box-sizing: border-box;
