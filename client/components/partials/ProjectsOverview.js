@@ -135,6 +135,8 @@ export default class ProjectsOverview extends BaseComponent {
     transitionHideTime = 0
     this.eventProjects.pos[0] = -initialPos
     this.retailProjects.pos[0] = initialPos
+    this.eventProjects.pos[1] = 0
+    this.retailProjects.pos[1] = 0
     this.animationsState = STATE.TRANSITION_IN
     dom.classes.add(this.refs.parent, 'open')
     clearTimeout(showTitlesTimeout)
@@ -217,8 +219,13 @@ export default class ProjectsOverview extends BaseComponent {
     case STATE.TRANSITION_OUT:
       transitionHideTime += 0.02
       const easeOut = transitionHideBezier(transitionHideTime)
-      this.eventProjects.pos[0] += (-initialPos - this.eventProjects.pos[0]) * easeOut
-      this.retailProjects.pos[0] += (initialPos - this.retailProjects.pos[0]) * easeOut
+      if (Store.Detector.isMobile) {
+        this.eventProjects.pos[1] += (-initialPos - this.eventProjects.pos[1]) * easeOut
+        this.retailProjects.pos[1] += (initialPos - this.retailProjects.pos[1]) * easeOut
+      } else {
+        this.eventProjects.pos[0] += (-initialPos - this.eventProjects.pos[0]) * easeOut
+        this.retailProjects.pos[0] += (initialPos - this.retailProjects.pos[0]) * easeOut
+      }
       if (transitionHideTime > 1) this.animationsState = STATE.DEACTIVE
       break
     default:

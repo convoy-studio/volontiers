@@ -49,9 +49,6 @@
 	}
 
 	&.project {
-		.projects-container {
-			background-color: $lightGrey;
-		}
 		&:before {
 			background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
 			@media (max-width: $MQ_SMALL) {
@@ -109,7 +106,6 @@
 	.projects-container {
 		position: absolute;
 		z-index: 3;
-		background-color: $white;
 		& > li {
 			list-style-type: none;
 			width: $thumbW * $thumbScale;

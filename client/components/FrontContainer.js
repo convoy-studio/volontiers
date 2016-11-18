@@ -16,8 +16,12 @@ export default class FrontContainer extends BaseComponent {
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
     this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
+    this.onOverviewOpen = this.onOverviewOpen.bind(this)
+    this.onOverviewClose = this.onOverviewClose.bind(this)
     this.content = Store.getContent('navigation')
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
+    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
+    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.onOverviewClose)
   }
   render() {
     return (
@@ -50,6 +54,12 @@ export default class FrontContainer extends BaseComponent {
       this.refs.langTitle.show()
       this.refs.aboutTitle.show()
     }, 200)
+  }
+  onOverviewOpen() {
+    this.refs.langTitle.hide()
+  }
+  onOverviewClose() {
+    this.refs.langTitle.show()
   }
   changeLangClick() {
     Actions.changeLang()
