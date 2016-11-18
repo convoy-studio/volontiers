@@ -5,12 +5,14 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import Utils from '../../utils/Utils'
 import dom from 'dom-hand'
+import Hammer from 'hammerjs'
 import counter from 'ccounter'
 import slide from './Slide'
 import slideshow from './Slideshow'
 import {PagerActions} from '../../pager/Pager'
 
 const activityHandler = Utils.countActivityHandler(650)
+const hammer = new Hammer(dom.select('html'))
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -67,13 +69,22 @@ class Preview extends BaseComponent {
     this.previewsLoadedCb = done
     this.needIntroAnimation = true
   }
-  goToProject() {
+  goToProject(e) {
+    if (activityHandler.isReady === false) return
+    activityHandler.count()
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
-    if (Store.Mouse.x > bounds.x - 50 && Store.Mouse.x < boundsWidth + 50 && Store.Mouse.y > bounds.y - 50 && Store.Mouse.y < boundsHeight + 50) {
-      if (activityHandler.isReady === false) return
-      activityHandler.count()
+    let posX = 0
+    let posY = 0
+    if (Store.Detector.isMobile) {
+      posX = e.center.x
+      posY = e.center.y
+    } else {
+      posX = Store.Mouse.x
+      posY = Store.Mouse.y
+    }
+    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
       Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
     }
   }
@@ -84,7 +95,11 @@ class Preview extends BaseComponent {
     if (this.needIntroAnimation) Actions.previewsLoaded()
     if (!this.needIntroAnimation) this.loadNextPreviousSlide()
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
-    dom.event.on(this.refs.preview, 'click', this.goToProject)
+    if (Store.Detector.isMobile) {
+      hammer.on('tap', this.goToProject)
+    } else {
+      dom.event.on(this.refs.preview, 'click', this.goToProject)
+    }
     this.firstPreviewLoaded = true
   }
   loadNextPreviousSlide() {
@@ -231,6 +246,8 @@ class Preview extends BaseComponent {
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
+    dom.event.off(this.refs.preview, 'click', this.goToProject)
+    hammer.off('tap', this.goToProject)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     this.slides.length = 0
     this.slides = undefined

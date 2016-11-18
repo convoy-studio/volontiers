@@ -56,6 +56,7 @@
     "file-loader": "^0.8.5",
     "flux": "^2.1.1",
     "gsap": "^1.18.5",
+    "hammerjs": "^2.0.8",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.22.0",
     "ify-loader": "^1.0.3",
