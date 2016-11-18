@@ -72,10 +72,10 @@ function pan(e) {
   const direction = e.additionalEvent
   switch (direction) {
   case 'panup':
-    Actions.triggerKeyboard(Constants.UP)
+    Actions.triggerKeyboard(Constants.DOWN)
     break
   case 'pandown':
-    Actions.triggerKeyboard(Constants.DOWN)
+    Actions.triggerKeyboard(Constants.UP)
     break
   case 'panright':
     Actions.triggerKeyboard(Constants.RIGHT)
