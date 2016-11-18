@@ -75,7 +75,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       break
     case STATE.SCALE_DOWN:
       scaleDownTime += 0.02
-      const scaleDown = Math.min(scaleDownBezier(scaleDownTime), 1)
+      const scaleDown = Math.max(0, Math.min(scaleDownBezier(scaleDownTime), 1))
       Utils.planeTransition(currentSlide, scaleDown, scope.direction)
       break
     case STATE.TRANSITION_IN:

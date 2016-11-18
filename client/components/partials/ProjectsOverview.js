@@ -7,6 +7,7 @@ import Router from '../../services/router'
 import Img from './Img'
 import MainTitle from './MainTitle'
 import dom from 'dom-hand'
+import hammer from 'hammerjs'
 import bezier from 'cubic-bezier'
 import {PagerStore, PagerActions, PagerConstants} from '../../pager/Pager'
 
@@ -22,6 +23,9 @@ const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 1000)
 let transitionHideTime = 0
 let transitionShowTime = 0
 const initialPos = 400
+const thumbW = 238
+const thumbH = 159
+const mobileScale = 0.75
 
 let showTitlesTimeout = undefined
 
@@ -30,9 +34,15 @@ export default class ProjectsOverview extends BaseComponent {
     super(props)
     this.animationsState = STATE.DEACTIVE
     this.activeProject = ''
+    this.projects = {
+      EVENT: Store.getProjectsByType(Constants.TYPE.EVENT),
+      RETAIL: Store.getProjectsByType(Constants.TYPE.RETAIL)
+    }
     this.state = {
       currentPage: ''
     }
+    this.currentEventPos = 0
+    this.currentRetailPos = 0
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -69,6 +79,22 @@ export default class ProjectsOverview extends BaseComponent {
     this.setState(state)
   }
   componentDidMount() {
+    if (Store.Detector.isMobile) {
+      const eventProjectsEl = this.refs['event-projects']
+      const retailProjectsEl = this.refs['retail-projects']
+      this.eventProjectsLength = this.projects.EVENT.length * thumbW * mobileScale
+      this.retailProjectsLength = this.projects.RETAIL.length * thumbW * mobileScale
+      eventProjectsEl.style.width = this.eventProjectsLength + 'px'
+      retailProjectsEl.style.width = this.retailProjectsLength + 'px'
+      this.eventHammer = new Hammer(eventProjectsEl)
+      this.eventHammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+      this.retailHammer = new Hammer(retailProjectsEl)
+      this.retailHammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+      this.panEvent = this.panEvent.bind(this)
+      this.panRetail = this.panRetail.bind(this)
+      this.eventHammer.on('pan', this.panEvent)
+      this.retailHammer.on('pan', this.panRetail)
+    }
     this.direction = Constants.LEFT
     this.eventProjects = {
       el: this.refs['event-projects'],
@@ -86,7 +112,7 @@ export default class ProjectsOverview extends BaseComponent {
     }
   }
   getMappedProjects(id) {
-    const projects = Store.getProjectsByType(id)
+    const projects = this.projects[id]
     return projects.map((project, index) => {
       return (
         <li key={`${id}_${index}`} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`}>
@@ -132,6 +158,20 @@ export default class ProjectsOverview extends BaseComponent {
       if (dom.select('#projects-overview .btn.hide') !== null) dom.classes.remove(dom.select('#projects-overview .btn.hide'), 'hide')
       dom.classes.add(dom.select(`#projects-overview .btn.${route.target}`), 'hide')
     }
+  }
+  panEvent(e) {
+    let newPos = this.currentEventPos + (e.deltaX * 0.1)
+    if (newPos > 0) this.currentEventPos = 0
+    else if (newPos < -(this.eventProjectsLength - thumbW * 1.5)) this.currentEventPos = -(this.eventProjectsLength - thumbW * 1.5)
+    else this.currentEventPos = newPos
+    this.refs['event-projects'].style.left = this.currentEventPos + 'px'
+  }
+  panRetail(e) {
+    let newPos = this.currentRetailPos + (-e.deltaX * 0.1)
+    if (newPos > 0) this.currentRetailPos = 0
+    else if (newPos < -(this.retailProjectsLength - thumbW * 1.5)) this.currentRetailPos = -(this.retailProjectsLength - thumbW * 1.5)
+    else this.currentRetailPos = newPos
+    this.refs['retail-projects'].style.right = this.currentRetailPos + 'px'
   }
   onBackgroundClick(e) {
     e.preventDefault()
@@ -197,6 +237,7 @@ export default class ProjectsOverview extends BaseComponent {
     const windowH = Store.Window.h
     this.refs.parent.style.width = windowW + 'px'
     this.refs.parent.style.height = windowH + 'px'
+    if (Store.Detector.isMobile) return
     this.eventProjects.el.style.top = (windowH >> 1) - (this.eventProjects.size[1] >> 1) + 'px'
     this.retailProjects.el.style.top = (windowH >> 1) - (this.retailProjects.size[1] >> 1) + 'px'
     setTimeout(() => {

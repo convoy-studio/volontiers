@@ -1,11 +1,15 @@
 #projects-overview {
 	$thumbScale: 1;
+	$thumbMobileScale: 0.75;
 	$thumbW: 238px;
 	$thumbH: 159px;
 	position: fixed;
+	z-index: 6;
 	@extend .top-left;
 	@include anim(.0s, .0s, $easeOutExpo, translateY(-99999px) translateZ(1px));
-
+	@media (max-width: $MQ_SMALL) {
+		margin-top: $globalMargin * 1.5;
+	}
 	&:before {
 		content: '';
 		position: absolute;
@@ -14,8 +18,15 @@
 		height: 10%;
 		width: 100%;
 		background: linear-gradient(to bottom, rgba($white, 1) 0%,rgba($white, 0) 100%);
-		margin-top: -20px;
+		margin-top: -$globalMargin;
 		z-index: 4;
+
+		@media (max-width: $MQ_SMALL) {
+			margin-top: 0;
+			height: $thumbH * $thumbMobileScale;
+			width: 20%;
+			background: linear-gradient(to right, rgba($white, 1) 0%,rgba($white, 0) 100%);
+		}
 	}
 
 	&:after {
@@ -27,14 +38,31 @@
 		width: 100%;
 		background: linear-gradient(to top, rgba($white, 1) 0%,rgba($white, 0) 100%);
 		z-index: 4;
+		@media (max-width: $MQ_SMALL) {
+			bottom: $mobileLineHeight + $globalMargin * 3.2;
+			right: 0;
+			left: auto;
+			height: $thumbH * $thumbMobileScale;
+			width: 20%;
+			background: linear-gradient(to left, rgba($white, 1) 0%,rgba($white, 0) 100%);
+		}
 	}
 
 	&.project {
+		.projects-container {
+			background-color: $lightGrey;
+		}
 		&:before {
 			background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+			@media (max-width: $MQ_SMALL) {
+				background: linear-gradient(to right, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+			}
 		}
 		&:after {
 			background: linear-gradient(to top, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+			@media (max-width: $MQ_SMALL) {
+				background: linear-gradient(to left, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+			}
 		}
 	}
 
@@ -52,6 +80,22 @@
 		z-index: 1;
 		@extend .top-left;
 		@extend .full;
+		@media (max-width: $MQ_SMALL) {
+			z-index: 5;
+			pointer-events: none;
+
+			.event-title {
+				left: $mobileMargin !important;
+				top: ($thumbH * $thumbMobileScale) / 2;
+				margin-top: $globalMargin / 2 !important;
+			}
+			.retail-title {
+				right: 0 !important;
+				bottom: $thumbH * $thumbMobileScale;
+				margin-bottom: $globalMargin !important;
+				margin-right: -($globalMargin);
+			}
+		}
 		.event-title, .retail-title {
 			position: absolute;
 		}
@@ -65,12 +109,21 @@
 	.projects-container {
 		position: absolute;
 		z-index: 3;
+		background-color: $white;
 		& > li {
 			list-style-type: none;
 			width: $thumbW * $thumbScale;
 			height: $thumbH * $thumbScale;
 			position: relative;
 			margin: ($globalMargin / 2) 0;
+
+			@media (max-width: $MQ_SMALL) {
+				display: inline-block;
+				margin: 0 ($mobileMargin / 2);
+				$w: $thumbW * $thumbMobileScale - $mobileMargin;
+				width: $w;
+				height: $thumbH * $thumbMobileScale;
+			}
 
 			&.hide {
 				display: none;
@@ -108,9 +161,19 @@
 		}
 		&.event {
 			left: $globalMargin;
+
+			@media (max-width: $MQ_SMALL) {
+				left: 0;
+				top: 0;
+			}
 		}
 		&.retail {
 			right: $globalMargin;
+
+			@media (max-width: $MQ_SMALL) {
+				right: 0;
+				bottom: $mobileLineHeight + $globalMargin * 3;
+			}
 		}
 	}
 }

@@ -67,7 +67,7 @@ function keypress(e) {
 }
 
 function pan(e) {
-  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH) return
+  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
   activityHandler.count()
   const direction = e.additionalEvent
   switch (direction) {
