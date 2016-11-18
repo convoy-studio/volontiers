@@ -61,6 +61,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const currentSlide = scope.plane
     switch (scope.state) {
     case STATE.ACTIVE:
+      if (Store.Detector.isMobile) break
       const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
       const offsetX = nextNx * 500
       const offsetY = nextNx * 300
