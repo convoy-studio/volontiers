@@ -24,6 +24,7 @@ class App {
   }
   init() {
     this.landingEl = dom.select('.landing')
+    this.landingHeroEl = dom.select('.landing__hero')
     this.logoAnimation()
   }
   setup() {
@@ -42,10 +43,10 @@ class App {
   }
   logoAnimation() {
     const baselineEl = dom.select('.landing__baseline')
-    const delayLetters = 0.5
+    const delayLetters = 0.7
     this.logoAnim = new TimelineMax({onComplete: this.setup})
-    this.logoAnim.to(this.landingEl, 0.4, { opacity: 1, ease: Expo.easeInOut}, 0)
-    this.logoAnim.from(this.landingEl, 0.8, { scale: 0.8, ease: Expo.easeInOut}, 0)
+    this.logoAnim.to(this.landingHeroEl, 0.4, { opacity: 1, ease: Expo.easeInOut}, 0)
+    this.logoAnim.from(this.landingHeroEl, 0.8, { scale: 0.8, ease: Expo.easeInOut}, 0)
     this.logoAnim.fromTo(dom.select('.letter-v'), 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: -400, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.fromTo(dom.select('.letter-o_1'), 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: -306, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.fromTo(dom.select('.letter-l'), 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: -204, rotation: 0, ease: Expo.easeInOut}, delayLetters)
@@ -55,8 +56,8 @@ class App {
     this.logoAnim.fromTo(dom.select('.letter-e'), 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 234, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.fromTo(dom.select('.letter-r'), 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: 336, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.fromTo(dom.select('.letter-s'), 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 439, rotation: 0, ease: Expo.easeInOut}, delayLetters)
-    this.logoAnim.from(baselineEl, 0.6, { opacity: 0, y: 10, transformOrigin: '50% 50%', ease: Expo.easeOut}, delayLetters + 0.8)
-    this.logoAnim.timeScale(1.2)
+    this.logoAnim.from(baselineEl, 0.6, { opacity: 0, y: 10, transformOrigin: '50% 50%', ease: Expo.easeOut}, delayLetters + 1)
+    this.logoAnim.timeScale(0.7)
   }
   introAnimation() {
     dom.classes.add(this.landingEl, 'behind')
@@ -66,12 +67,12 @@ class App {
     Store.off(Constants.PREVIEWS_LOADED, this.removeLanding)
     Store.off(Constants.START_INTRO_ANIMATION_COMPLETED, this.introAnimationCompleted)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
-    TweenMax.to(this.landingEl, 0.8, { opacity: 0, ease: Expo.easeOut, onComplete: () => {
-      dom.tree.remove(this.landingEl)
-    }})
+    dom.tree.remove(this.landingEl)
   }
   removeLanding() {
-    setTimeout(Actions.startIntroAnimation)
+    TweenMax.to(this.landingHeroEl, 1.7, { opacity: 0, ease: Expo.easeOut, onComplete: () => {
+      setTimeout(Actions.startIntroAnimation)
+    }})
   }
   onAssetsLoaded() {
     ReactDOM.render(<AppTemplate />, document.getElementById('app-container')) // Render the app

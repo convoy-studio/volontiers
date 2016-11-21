@@ -2,13 +2,13 @@
   height: 100vh;
   position: relative;
   z-index: 9999999;
-  background: $white;
-  opacity: 0;
+  background: $lightGrey;
 
   &.behind {
     z-index: -1;
   }
   &__hero {
+    opacity: 0;
     padding: 0 10%;
     box-sizing: border-box;
     text-align: center;
