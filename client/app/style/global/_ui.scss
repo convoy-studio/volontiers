@@ -149,7 +149,6 @@ a {
   font-size: $globalFontSize;
   line-height: $globalLineHeight;
   box-sizing: border-box;
-  text-transform: capitalize;
   @media (max-width: $MQ_SMALL) {
     font-size: $mobileFontSize;
     line-height: $mobileLineHeight;
@@ -222,6 +221,7 @@ a {
   left: 0;
   right: 0;
   font-weight: bold;
+  text-transform: uppercase;
 
   .title {
     left: 0;
@@ -233,6 +233,8 @@ a {
   position: fixed;
   bottom: $globalFontSize;
   right: $globalMargin;
+  font-weight: bold;
+  text-transform: uppercase;
 
   .title {
     @media (max-width: $MQ_SMALL) {
@@ -248,6 +250,7 @@ a {
   position: fixed;
   bottom: $globalMargin;
   left: $globalMargin;
+  font-weight: bold;
 }
 #canvas-container {
   position: fixed;

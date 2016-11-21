@@ -9,16 +9,16 @@ export default {
         about: 'About'
       },
       preview: {
-        discover: 'Discover Project',
-        viewMore: 'View More'
+        discover: 'Discover project',
+        viewMore: 'View more'
       },
       project: {
-        viewInfos: 'View Informations',
-        closeInfos: 'Close Informations',
+        viewInfos: 'View informations',
+        closeInfos: 'Close informations',
         back: 'Back',
-        previousImg: 'Previous Image',
-        nextImg: 'Next Image',
-        discover: 'Discover Next Project'
+        previousImg: 'Previous image',
+        nextImg: 'Next image',
+        discover: 'Discover next project'
       }
     },
     fr: {
@@ -31,12 +31,12 @@ export default {
         viewMore: 'En savoir plus'
       },
       project: {
-        viewInfos: 'Voir les Informations',
-        closeInfos: 'Fermer les Informations',
+        viewInfos: 'Voir les informations',
+        closeInfos: 'Fermer les informations',
         back: 'Retour',
-        previousImg: 'Image Précédente',
-        nextImg: 'Image Suivante',
-        discover: 'Découvrir le Projet Suivant'
+        previousImg: 'Image précédente',
+        nextImg: 'Image suivante',
+        discover: 'Découvrir le projet suivant'
       }
     }
   },

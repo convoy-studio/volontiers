@@ -41,7 +41,7 @@
         display: inline-block;
 
         &:last-child() {
-          padding-left: 24px;
+          padding-left: $globalFontSize * 5;
         }
 
         a {
