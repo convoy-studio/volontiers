@@ -95,8 +95,8 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   }
   const show = (dir) => {
     scope.direction = dir
-    scope.activate()
     transitionShowTime = 0
+    scope.activate()
     Utils.updateGoToPlanePositions(scope.plane, dir.to)
     scope.state = STATE.TRANSITION_IN
   }

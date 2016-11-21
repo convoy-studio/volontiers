@@ -181,26 +181,25 @@ class Utils {
     plane.verts[7] += nbry
   }
   static setDefaultPlanePositions(plane, position) {
-    const windowW = Store.Window.w
-    const windowH = Store.Window.h
+    const windowShift = Store.Orientation === Constants.ORIENTATION.PORTRAIT === true ? Store.Window.h * 1.5 : Store.Window.w
     if (position === Constants.RIGHT) {
-      plane.verts[0] = plane.iverts[0] + (windowW * Utils.rand(8, 12, 1))
-      plane.verts[1] = plane.iverts[1] - (windowW >> 1)
-      plane.verts[2] = plane.iverts[2] + (windowW * Utils.rand(3.2, 4, 1))
-      plane.verts[3] = plane.iverts[3] - (windowW >> 1)
-      plane.verts[4] = plane.iverts[4] + (windowW * Utils.rand(8, 12, 1))
-      plane.verts[5] = plane.iverts[5] + (windowW >> 1)
-      plane.verts[6] = plane.iverts[6] + (windowW * Utils.rand(3.2, 4, 1))
-      plane.verts[7] = plane.iverts[7] + (windowW >> 1)
+      plane.verts[0] = plane.iverts[0] + (windowShift * Utils.rand(8, 12, 1))
+      plane.verts[1] = plane.iverts[1] - (windowShift >> 1)
+      plane.verts[2] = plane.iverts[2] + (windowShift * Utils.rand(3.2, 4, 1))
+      plane.verts[3] = plane.iverts[3] - (windowShift >> 1)
+      plane.verts[4] = plane.iverts[4] + (windowShift * Utils.rand(8, 12, 1))
+      plane.verts[5] = plane.iverts[5] + (windowShift >> 1)
+      plane.verts[6] = plane.iverts[6] + (windowShift * Utils.rand(3.2, 4, 1))
+      plane.verts[7] = plane.iverts[7] + (windowShift >> 1)
     } else if (position === Constants.LEFT) {
-      plane.verts[0] = plane.iverts[0] - (windowW * Utils.rand(8, 12, 1))
-      plane.verts[1] = plane.iverts[1] + (windowW >> 1)
-      plane.verts[2] = plane.iverts[2] - (windowW * Utils.rand(3.2, 4, 1))
-      plane.verts[3] = plane.iverts[3] + (windowW >> 1)
-      plane.verts[4] = plane.iverts[4] - (windowW * Utils.rand(8, 12, 1))
-      plane.verts[5] = plane.iverts[5] - (windowW >> 1)
-      plane.verts[6] = plane.iverts[6] - (windowW * Utils.rand(3.2, 4, 1))
-      plane.verts[7] = plane.iverts[7] - (windowW >> 1)
+      plane.verts[0] = plane.iverts[0] - (windowShift * Utils.rand(8, 12, 1))
+      plane.verts[1] = plane.iverts[1] + (windowShift >> 1)
+      plane.verts[2] = plane.iverts[2] - (windowShift * Utils.rand(3.2, 4, 1))
+      plane.verts[3] = plane.iverts[3] + (windowShift >> 1)
+      plane.verts[4] = plane.iverts[4] - (windowShift * Utils.rand(8, 12, 1))
+      plane.verts[5] = plane.iverts[5] - (windowShift >> 1)
+      plane.verts[6] = plane.iverts[6] - (windowShift * Utils.rand(3.2, 4, 1))
+      plane.verts[7] = plane.iverts[7] - (windowShift >> 1)
     }
   }
   static updateGoToPlanePositions(plane, dir) {
@@ -236,13 +235,13 @@ class Utils {
       break
     case Constants.TOP:
       plane.fverts[0] = plane.verts[0] + (windowH >> 1)
-      plane.fverts[1] = plane.verts[1] - (windowH * Utils.rand(20, 30, 1))
+      plane.fverts[1] = plane.verts[1] - (windowH * Utils.rand(30, 30, 1))
       plane.fverts[2] = plane.verts[2] - (windowH >> 1)
-      plane.fverts[3] = plane.verts[3] - (windowH * Utils.rand(20, 30, 1))
+      plane.fverts[3] = plane.verts[3] - (windowH * Utils.rand(30, 40, 1))
       plane.fverts[4] = plane.verts[4] + (windowH >> 1)
-      plane.fverts[5] = plane.verts[5] - (windowH * Utils.rand(3.2, 4, 1))
+      plane.fverts[5] = plane.verts[5] - (windowH * Utils.rand(5.2, 6, 1))
       plane.fverts[6] = plane.verts[6] - (windowH >> 1)
-      plane.fverts[7] = plane.verts[7] - (windowH * Utils.rand(3.2, 4, 1))
+      plane.fverts[7] = plane.verts[7] - (windowH * Utils.rand(5.2, 6, 1))
       break
     case Constants.LEFT:
       plane.fverts[0] = plane.verts[0] - (windowW * Utils.rand(3.2, 4, 1))
