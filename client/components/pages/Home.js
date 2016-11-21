@@ -58,6 +58,7 @@ export default class Home extends Page {
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
+    this.refs.projectDiscover.onUpdate()
     this.refs.projectDiscover.show()
     this.refs.projectCounter.show()
     super.didTransitionInComplete()
