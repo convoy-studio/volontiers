@@ -28,6 +28,7 @@ class Preview extends BaseComponent {
     this.firstPreviewLoaded = false
     this.needIntroAnimation = false
     this.introAnimationFinished = false
+    this.cursor = 'auto'
     this.allPreviewsLoaded = Store.AllPreviewsLoaded
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
@@ -35,7 +36,7 @@ class Preview extends BaseComponent {
   }
   render() {
     return (
-      <div ref="preview" className="preview"></div>
+      <div ref="preview" className="preview" onClick={this.goToProject}></div>
     )
   }
   componentDidMount() {
@@ -84,8 +85,13 @@ class Preview extends BaseComponent {
       posX = Store.Mouse.x
       posY = Store.Mouse.y
     }
-    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
-      Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+    if (posX > bounds.x - 50 && posY > bounds.y - 50) {
+      if (this.cursor === 'down') {
+        this.counter.inc()
+        Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+      } else {
+        Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+      }
     }
   }
   slidesLoaded() {
@@ -97,8 +103,6 @@ class Preview extends BaseComponent {
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
     if (Store.Detector.isMobile) {
       hammer.on('tap', this.goToProject)
-    } else {
-      dom.event.on(this.refs.preview, 'click', this.goToProject)
     }
     this.firstPreviewLoaded = true
   }
@@ -125,6 +129,7 @@ class Preview extends BaseComponent {
     if (this.currentSlide === undefined) return
     const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
     this.mousePreviewActionHandler(nextNx)
+    this.mouseMoveHandler()
     this.currentSlide.animate()
   }
   onUpdatePreviewSlide(id) {
@@ -165,6 +170,35 @@ class Preview extends BaseComponent {
       if (!this.isEnteredPreview) return // return is it's already not entered, so avoid to send multiple actions
       Actions.mouseLeavePreview()
       this.isEnteredPreview = false
+    }
+  }
+  mouseMoveHandler(val) {
+    if (this.currentSlide.plane === undefined || activityHandler.isReady === false) return
+    const bounds = this.currentSlide.plane.mesh.getBounds()
+    const boundsWidth = bounds.width + bounds.x
+    const boundsHeight = bounds.height + bounds.y
+    const boundsTop = boundsHeight * 0.7
+    const posX = Store.Mouse.x
+    const posY = Store.Mouse.y
+    if (posX > bounds.x - 50 && posY > bounds.y - 50) {
+      if (posY < boundsTop && this.cursor !== 'right') {
+        this.cursor = 'right'
+        dom.style(this.refs.preview, {
+          'cursor': 'e-resize'
+        })
+      } else if (posY > boundsTop && !this.cursor !== 'down') {
+        this.cursor = 'down'
+        dom.style(this.refs.preview, {
+          'cursor': 's-resize'
+        })
+      } else {
+        return
+      }
+    } else {
+      this.cursor = 'auto'
+      dom.style(this.refs.preview, {
+        'cursor': 'auto'
+      })
     }
   }
   onScroll(direction) {
