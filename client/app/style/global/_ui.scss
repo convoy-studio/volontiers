@@ -135,13 +135,13 @@ a {
   }
 }
 #app-template.home .main-btn .line {
-  background-color: $black;
-}
-#app-template.project .main-btn .line {
   background-color: $white;
 }
-#app-template.about .main-btn .line {
+#app-template.project .main-btn .line {
   background-color: $black;
+}
+#app-template.about .main-btn .line {
+  background-color: $white;
 }
 .link {
   color: $black;
@@ -159,13 +159,13 @@ a {
   @include simpleAnim(.8s, .0s, $easeOutCirc, opacity);
 }
 #app-template.home .link {
-  color: $black;
-}
-#app-template.project .link {
   color: $white;
 }
-#app-template.about .link {
+#app-template.project .link {
   color: $black;
+}
+#app-template.about .link {
+  color: $white;
 }
 .preview-link {
   position: fixed;
@@ -206,15 +206,6 @@ a {
     }
   }
 }
-#app-template.home .next-previous-container .main-btn.next.last polygon {
-  fill: $black;
-}
-#app-template.project .next-previous-container .main-btn.next.last polygon {
-  fill: $white;
-}
-#app-template.about .next-previous-container .main-btn.next.last polygon {
-  fill: $black;
-}
 .bottom-project-title {
   position: fixed;
   bottom: $globalMargin;
@@ -254,5 +245,8 @@ a {
 }
 #canvas-container {
   position: fixed;
+  background-color: $lightGrey;
   @extend .full;
 }
+.st0{fill:#F7A0F9;}
+.st1{fill:#FFFFFF;}

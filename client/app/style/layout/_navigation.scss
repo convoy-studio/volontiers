@@ -63,11 +63,26 @@
   }
 
   &__center {
-    display: block;
-    position: absolute;
+    display: inline-block;
+    position: relative;
     left: 50%;
     top: 0;
     transform: translateX(-50%);
     z-index: 5;
+
+    .top-logo-title {
+      text-align: center;
+      cursor: pointer;
+      opacity: 0;
+      display: inline-block;
+      &.show {
+        opacity: 1;
+        @include anim(1.8s, .0s, $easeOutCirc, scale(1));
+      }
+      svg {
+        height: $globalLineHeight;
+      }
+    }
+
   }
 }

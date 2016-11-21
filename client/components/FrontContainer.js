@@ -5,6 +5,7 @@ import Actions from '../actions'
 import Router from '../services/router'
 import ProjectsOverview from './partials/ProjectsOverview'
 import MainTitle from './partials/MainTitle'
+import Logo from './partials/Logo'
 import dom from 'dom-hand'
 import {PagerStore, PagerActions, PagerConstants} from './../pager/Pager'
 
@@ -12,7 +13,6 @@ export default class FrontContainer extends BaseComponent {
   constructor(props) {
     super(props)
     this.onProjectsClick = this.onProjectsClick.bind(this)
-    this.onLogoClick = this.onLogoClick.bind(this)
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
     this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
@@ -28,7 +28,7 @@ export default class FrontContainer extends BaseComponent {
       <header id='front-container' ref='front-container' className="navigation">
         <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
         <div className="navigation__center">
-          <h1><MainTitle ref='logoTitle' title={'Volontiers'} hasMouseEnterLeave={false} onClick={this.onLogoClick} className='link top-logo-title'></MainTitle></h1>
+          <Logo ref='logo' className='top-logo-title'/>
         </div>
         <div className="navigation__right">
           <ul>
@@ -50,7 +50,7 @@ export default class FrontContainer extends BaseComponent {
     PagerStore.off(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
     setTimeout(() => {
       this.refs.projectsTitle.show()
-      this.refs.logoTitle.show()
+      this.refs.logo.show()
       this.refs.langTitle.show()
       this.refs.aboutTitle.show()
     }, 200)
@@ -70,9 +70,6 @@ export default class FrontContainer extends BaseComponent {
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
     else setTimeout(Actions.openProjectsOverview)
-  }
-  onLogoClick() {
-    Router.setRoute(Store.defaultRoute())
   }
   update() {
     this.refs['projects-overview'].update()
