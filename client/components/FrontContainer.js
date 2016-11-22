@@ -19,6 +19,7 @@ export default class FrontContainer extends BaseComponent {
     this.onOverviewOpen = this.onOverviewOpen.bind(this)
     this.onOverviewClose = this.onOverviewClose.bind(this)
     this.content = Store.getContent('navigation')
+    this.langRotation = Store.Detector.isMobile === true ? '90deg' : '0deg'
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.onOverviewClose)
@@ -33,10 +34,10 @@ export default class FrontContainer extends BaseComponent {
         <div className="navigation__right">
           <ul>
             <li>
-              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={false} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={false} rotation={this.langRotation} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
             </li>
           </ul>
         </div>

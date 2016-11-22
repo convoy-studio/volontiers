@@ -40,8 +40,9 @@
       li {
         display: inline-block;
 
-        &:last-child() {
-          padding-left: $globalFontSize * 5;
+        &:last-child() { // lang btn
+          float: left;
+          padding-right: $globalFontSize * 3;
         }
 
         a {
@@ -51,11 +52,14 @@
 
         @media (max-width: $MQ_SMALL) {
           transform-origin: right center;
-          &:nth-child(1) {
+          &:nth-child(1) { // about btn
             position: absolute;
-            right: $mobileFontSize + $globalMargin;
-            top: 30px;
-            transform: rotate(90deg) translateY(-50%)
+            right: 0;
+            top: 0;
+          }
+          &:last-child { // lang btn
+            position: absolute;
+            top: $globalMargin + $mobileLineHeight;
           }
         }
       }

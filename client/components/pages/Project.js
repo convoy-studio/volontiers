@@ -53,7 +53,10 @@ export default class Project extends Page {
   }
   didTransitionInComplete() {
     this.refs.projectTitle.show()
-    if (this.refs.projectInformations) this.refs.projectInformations.show()
+    if (this.refs.projectInformations) {
+      this.refs.projectInformations.onUpdate()
+      this.refs.projectInformations.show()
+    }
     this.refs.projectCounter.show()
     this.refs['next-previous-btns'].isActive = true
     this.refs['next-previous-btns'].show()
