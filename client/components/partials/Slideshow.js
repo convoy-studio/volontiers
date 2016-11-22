@@ -11,9 +11,10 @@ export default (container)=> {
   let scope
   const load = (done) => {
     const content = Store.getCurrentProject()
+    const projectContent = JSON.parse(JSON.stringify(content))
     const newRoute = Router.getNewRoute()
     const oldRoute = Router.getOldRoute()
-    const assets = content.assets
+    const assets = projectContent.assets.slice(0)
     if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) assets.unshift(content.preview)
     scope.counter = counter(assets.length, 0, false)
     assets.forEach((asset, i) => {

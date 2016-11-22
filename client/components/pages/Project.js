@@ -26,15 +26,19 @@ export default class Project extends Page {
   }
   render() {
     const content = Store.getCurrentProject()
+    const projectContent = JSON.parse(JSON.stringify(content))
+    const newRoute = Router.getNewRoute()
+    const oldRoute = Router.getOldRoute()
+    if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) projectContent.assets.unshift(content.preview)
     const infoContent = Store.getCurrentAboutContent()
     const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
     const projectInfo = infoButton ? (<ProjectInfos />) : undefined
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
-        <MainTitle ref='projectTitle' title={content.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
+        <MainTitle ref='projectTitle' title={projectContent.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
         {infoButton}
-        <MainTitle ref='projectCounter' title={`1/${content.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
+        <MainTitle ref='projectCounter' title={`1/${projectContent.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
         {projectInfo}
       </div>
     )
