@@ -29,6 +29,7 @@ class Preview extends BaseComponent {
     this.needIntroAnimation = false
     this.introAnimationFinished = false
     this.cursor = 'auto'
+    this.pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
     this.allPreviewsLoaded = Store.AllPreviewsLoaded
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
@@ -79,11 +80,11 @@ class Preview extends BaseComponent {
     let posX = 0
     let posY = 0
     if (Store.Detector.isMobile) {
-      posX = e.center.x
-      posY = e.center.y
+      posX = e.center.x * this.pixelRatio
+      posY = e.center.y * this.pixelRatio
     } else {
-      posX = Store.Mouse.x
-      posY = Store.Mouse.y
+      posX = Store.Mouse.x * this.pixelRatio
+      posY = Store.Mouse.y * this.pixelRatio
     }
     if (posX > bounds.x - 50 && posY > bounds.y - 50) {
       if (this.cursor === 'down') {
@@ -178,8 +179,8 @@ class Preview extends BaseComponent {
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
     const boundsTop = boundsHeight * 0.7
-    const posX = Store.Mouse.x
-    const posY = Store.Mouse.y
+    const posX = Store.Mouse.x * this.pixelRatio
+    const posY = Store.Mouse.y * this.pixelRatio
     if (posX > bounds.x - 50 && posY > bounds.y - 50) {
       if (posY < boundsTop && this.cursor !== 'right') {
         this.cursor = 'right'
@@ -227,7 +228,7 @@ class Preview extends BaseComponent {
   }
   animateContainer() {
     if (!this.introAnimationFinished && Router.getOldRoute() === undefined) return
-    const windowH = Store.Window.h
+    const windowH = Store.Window.h * this.pixelRatio
     const position = this.counter.props.index * windowH
     if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
     else this.container.position.y = -position
@@ -235,7 +236,7 @@ class Preview extends BaseComponent {
   introAnimation() {
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    this.container.position.y = -this.projects.length * windowH
+    this.container.position.y = -this.projects.length * windowH * this.pixelRatio
     this.introAnimationFinished = true
     const tl = new TimelineMax({ onComplete: () => {
       tl.clear()
@@ -264,8 +265,8 @@ class Preview extends BaseComponent {
   }
   resize() {
     if (!this.slides || this.slides.length < 1) return
-    const windowW = Store.Window.w
-    const windowH = Store.Window.h
+    const windowW = Store.Window.w * this.pixelRatio
+    const windowH = Store.Window.h * this.pixelRatio
     this.slides.forEach((item, i) => {
       const resizeVars = item.resize()
       if (item.isLoaded) {

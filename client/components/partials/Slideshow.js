@@ -7,7 +7,6 @@ import counter from 'ccounter'
 import Utils from '../../utils/Utils'
 
 const activityHandler = Utils.countActivityHandler(650)
-
 export default (container)=> {
   let scope
   const load = (done) => {
@@ -65,8 +64,9 @@ export default (container)=> {
     updateSlideshowState()
   }
   const resize = () => {
-    const windowW = Store.Window.w
-    const windowH = Store.Window.h
+    const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
+    const windowW = Store.Window.w * pixelRatio
+    const windowH = Store.Window.h * pixelRatio
     scope.slides.forEach((item) => {
       const resizeVars = item.resize()
       if (item.isLoaded) {
