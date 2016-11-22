@@ -13,8 +13,8 @@ export default {
         viewMore: 'View more'
       },
       project: {
-        viewInfos: 'View infos',
-        closeInfos: 'Close infos',
+        viewInfos: 'Project info',
+        closeInfos: 'Back to pictures',
         back: 'Back',
         previousImg: 'Previous image',
         nextImg: 'Next image',
@@ -31,8 +31,8 @@ export default {
         viewMore: 'En savoir plus'
       },
       project: {
-        viewInfos: 'Voir les infos',
-        closeInfos: 'Fermer les infos',
+        viewInfos: 'Info',
+        closeInfos: 'Photos',
         back: 'Retour',
         previousImg: 'Image précédente',
         nextImg: 'Image suivante',
