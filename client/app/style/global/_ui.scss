@@ -134,15 +134,15 @@ a {
     }
   }
 }
-#app-template.home .main-btn .line {
-  background-color: $white;
-}
-#app-template.project .main-btn .line {
-  background-color: $black;
-}
-#app-template.about .main-btn .line {
-  background-color: $white;
-}
+// #app-template.home .main-btn .line {
+//   background-color: $black;
+// }
+// #app-template.project .main-btn .line {
+//   background-color: $black;
+// }
+// #app-template.about .main-btn .line {
+//   background-color: $black;
+// }
 .link {
   color: $black;
   position: relative;
@@ -158,15 +158,15 @@ a {
   }
   @include simpleAnim(.8s, .0s, $easeOutCirc, opacity);
 }
-#app-template.home .link {
-  color: $white;
-}
-#app-template.project .link {
-  color: $black;
-}
-#app-template.about .link {
-  color: $black;
-}
+// #app-template.home .link {
+//   color: $white;
+// }
+// #app-template.project .link {
+//   color: $black;
+// }
+// #app-template.about .link {
+//   color: $black;
+// }
 .preview-link {
   position: fixed;
   right: 200px;
