@@ -78,10 +78,10 @@ function pan(e) {
     Actions.triggerKeyboard(Constants.UP)
     break
   case 'panright':
-    Actions.triggerKeyboard(Constants.RIGHT)
+    Actions.triggerKeyboard(Constants.LEFT)
     break
   case 'panleft':
-    Actions.triggerKeyboard(Constants.LEFT)
+    Actions.triggerKeyboard(Constants.RIGHT)
     break
   default:
   }
