@@ -9,6 +9,7 @@
     width: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    color: $black;
 
     br {
       line-height: 2;
@@ -26,16 +27,5 @@
         line-height: 1;
       }
     }
-  }
-}
-#app-template {
-  &.home .project-infos__description {
-    color: $black;
-  }
-  &.project .project-infos__description {
-    color: $white;
-  }
-  &.about .project-infos__description {
-    color: $black;
   }
 }
