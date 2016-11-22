@@ -88,8 +88,11 @@
         @include anim(1.8s, .0s, $easeOutCirc, scale(1));
       }
       svg {
-        margin-top: -($globalLineHeight / 2);
-        height: $globalLineHeight * 2;
+        height: $globalLineHeight;
+        @media (min-width: $MQ_SMALL) {
+          margin-top: -($globalLineHeight / 2);
+          height: $globalLineHeight * 2;
+        }
       }
     }
 
