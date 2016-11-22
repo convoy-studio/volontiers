@@ -81,6 +81,7 @@ export default {
   ESC: 'ESC',
   SPACE: 'SPACE',
 
+  MOBILE_MARGIN: 10,
   GLOBAL_MARGIN: 20,
 
   ENVIRONMENTS: {

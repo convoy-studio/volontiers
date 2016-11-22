@@ -193,18 +193,32 @@ a {
         left: 50%;
         top: 36px;
         transform-origin: center center;
-        @include opacity(0);
+        opacity: 0;
         transform: translateX(-50%) rotate(-90deg);
 
         polygon {
           fill: $black;
         }
       }
+      @media (max-width: $MQ_SMALL) {
+        &.last .next-arrow{
+          opacity: 1;
+        }
+      }
       &.hover.last .next-arrow {
-        @include opacity(1);
+        opacity: 1;
       }
     }
   }
+}
+#app-template.home .next-previous-container .main-btn.next.last polygon {
+  fill: $white;
+}
+#app-template.project .next-previous-container .main-btn.next.last polygon {
+  fill: $black;
+}
+#app-template.about .next-previous-container .main-btn.next.last polygon {
+  fill: $white;
 }
 .bottom-project-title {
   position: fixed;
@@ -231,8 +245,9 @@ a {
     @media (max-width: $MQ_SMALL) {
       transform-origin: right center;
       position: absolute;
-      right: $mobileMargin;
-      bottom: 0;
+      right: $mobileMargin * 2;
+      bottom: -$mobileMargin;
+      padding: $mobileMargin 0 $mobileMargin $mobileMargin;
       transform: rotate(90deg) translateY(-50%) !important;
     }
   }

@@ -22,11 +22,15 @@ class NextPreviousBtns extends BaseComponent {
     this.isActive = false
     this.currentProject = Store.getCurrentProject()
     this.content = Store.getContent('project')
+    this.isMobile = Store.Detector.isMobile
+    this.margin = this.isMobile === true ? Constants.MOBILE_MARGIN : Constants.GLOBAL_MARGIN
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
-    Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
-    Store.on(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+    if (!this.isMobile) {
+      Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
+      Store.on(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+    }
   }
   render() {
     return (
@@ -37,7 +41,13 @@ class NextPreviousBtns extends BaseComponent {
     )
   }
   componentDidMount() {
-    setTimeout(this.resize, 300)
+    setTimeout(() => {
+      this.resize
+      if (this.isMobile) {
+        this.refs.previousBtn.show()
+        this.refs.nextBtn.show()
+      }
+    }, 300)
   }
   goBack() {
     const currentRoute = Router.getNewRoute()
@@ -82,7 +92,7 @@ class NextPreviousBtns extends BaseComponent {
     }
   }
   hide() {
-    if (!this.isActive) return
+    if (!this.isActive || this.isMobile) return
     if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
     if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
   }
@@ -140,16 +150,18 @@ class NextPreviousBtns extends BaseComponent {
   }
   componentWillUnmount() {
     Store.off(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
-    Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
-    Store.off(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+    if (!this.isMobile) {
+      Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
+      Store.off(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+    }
   }
   resize() {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.refs.previousBtn.refs.parent.style.top = (windowH >> 1) - (this.refs.previousBtn.size[0] >> 1) + 'px'
-    this.refs.previousBtn.refs.parent.style.left = Constants.GLOBAL_MARGIN + this.refs.previousBtn.size[1] + 'px'
+    this.refs.previousBtn.refs.parent.style.left = this.margin + this.refs.previousBtn.size[1] + 'px'
     this.refs.nextBtn.refs.parent.style.top = (windowH >> 1) - (this.refs.nextBtn.size[0] >> 1) + 'px'
-    this.refs.nextBtn.refs.parent.style.left = windowW - Constants.GLOBAL_MARGIN + 'px'
+    this.refs.nextBtn.refs.parent.style.left = windowW - this.margin + 'px'
   }
 }
 
