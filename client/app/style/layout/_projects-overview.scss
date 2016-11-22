@@ -63,6 +63,21 @@
 		}
 	}
 
+	&.about {
+		&:before {
+			background: linear-gradient(to bottom, rgba($white, 1) 0%,rgba($white, 0) 100%);
+			@media (max-width: $MQ_SMALL) {
+				background: linear-gradient(to right, rgba($white, 1) 0%,rgba($white, 0) 100%);
+			}
+		}
+		&:after {
+			background: linear-gradient(to top, rgba($white, 1) 0%,rgba($white, 0) 100%);
+			@media (max-width: $MQ_SMALL) {
+				background: linear-gradient(to left, rgba($white, 1) 0%,rgba($white, 0) 100%);
+			}
+		}
+	}
+
 	&.open {
 		@include anim(.0s, .0s, $easeOutExpo, translateY(0px) translateZ(0px));
 	}
