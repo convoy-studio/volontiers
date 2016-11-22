@@ -12,11 +12,13 @@ export default (container)=> {
   let scope
   const load = (done) => {
     const content = Store.getCurrentProject()
-    const route = Router.getNewRoute()
+    const newRoute = Router.getNewRoute()
+    const oldRoute = Router.getOldRoute()
     const assets = content.assets
+    if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) assets.unshift(content.preview)
     scope.counter = counter(assets.length, 0, false)
     assets.forEach((asset, i) => {
-      scope.slides.push(slide(route.target, scope.container, `images/${route.target}/${asset}`, i, 'slide'))
+      scope.slides.push(slide(newRoute.target, scope.container, `images/${newRoute.target}/${asset}`, i, 'slide'))
     })
     loadFirstSlide(done)
     return scope
