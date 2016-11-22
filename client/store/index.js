@@ -79,6 +79,14 @@ function _getDefaultRoute() {
 }
 function _getUserLanguage() {
   let lang = Constants.LANG.EN
+  if (typeof localStorage === 'object') {
+    try {
+      localStorage.setItem('localStorage', 1)
+      localStorage.removeItem('localStorage')
+    } catch (e) {
+      return lang
+    }
+  }
   if (localStorage.getItem('volontiers-lang') !== null) {
     let item = localStorage.getItem('volontiers-lang')
     if (item.toLocaleLowerCase() === Constants.LANG.FR) {
@@ -316,6 +324,15 @@ const Store = assign({}, EventEmitter2.prototype, {
       Store.emitChange(action.actionType)
       break
     case Constants.LANGUAGE_CHANGED:
+      if (typeof localStorage === 'object') {
+        try {
+          localStorage.setItem('localStorage', 1)
+          localStorage.removeItem('localStorage')
+        } catch (e) {
+          alert('Your web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.')
+          break
+        }
+      }
       const currentLang = Store.getLang()
       const langToStore = currentLang === Constants.LANG.FR ? Constants.LANG.EN : Constants.LANG.FR
       localStorage.setItem('volontiers-lang', langToStore)
