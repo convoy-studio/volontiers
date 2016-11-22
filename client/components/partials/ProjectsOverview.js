@@ -25,7 +25,7 @@ let transitionShowTime = 0
 const initialPos = 400
 const thumbW = 238
 const thumbH = 159
-const mobileScale = 0.75
+const mobileScale = 0.6
 
 let showTitlesTimeout = undefined
 

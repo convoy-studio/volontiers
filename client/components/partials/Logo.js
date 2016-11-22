@@ -97,8 +97,10 @@ class Logo extends BaseComponent {
     )
   }
   componentDidMount() {
-    dom.event.on(this.refs.logo, 'mouseenter', this.onMouseEnter)
-    dom.event.on(this.refs.logo, 'mouseleave', this.onMouseLeave)
+    if (!Store.Detector.isMobile) {
+      dom.event.on(this.refs.logo, 'mouseenter', this.onMouseEnter)
+      dom.event.on(this.refs.logo, 'mouseleave', this.onMouseLeave)
+    }
     this.setup()
   }
   setup() {
@@ -131,8 +133,10 @@ class Logo extends BaseComponent {
     this.logoAnim.timeScale(1.4).reverse()
   }
   componentWillUnmount() {
-    dom.event.off(this.refs.logo, 'mouseenter', this.onMouseEnter)
-    dom.event.off(this.refs.logo, 'mouseleave', this.onMouseLeave)
+    if (!Store.Detector.isMobile) {
+      dom.event.off(this.refs.logo, 'mouseenter', this.onMouseEnter)
+      dom.event.off(this.refs.logo, 'mouseleave', this.onMouseLeave)
+    }
   }
 }
 
