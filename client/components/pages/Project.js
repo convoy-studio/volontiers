@@ -17,11 +17,13 @@ export default class Project extends Page {
     this.onSlideshowUpdated = this.onSlideshowUpdated.bind(this)
     this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
     this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
+    this.updateButtons = this.updateButtons.bind(this)
     Store.on(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     Store.on(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.on(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
+    Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
     this.content = Store.getContent('project')
   }
   render() {
@@ -81,6 +83,13 @@ export default class Project extends Page {
   }
   onProjectInformationsClick() {
     Actions.toggleProjectInfos()
+  }
+  updateButtons() {
+    this.refs.projectTitle.onUpdate()
+    if (this.refs.projectInformations) {
+      this.refs.projectInformations.onUpdate()
+    }
+    this.refs.projectCounter.onUpdate()
   }
   onToggleProjectInfos() {
     if (Store.ProjectInfoIsOpened) {

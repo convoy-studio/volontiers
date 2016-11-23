@@ -4,6 +4,9 @@ export default {
   'default-route': '/home',
   'content': {
     en: {
+      help: {
+        orientation: 'Please change the orientation of your phone to fully enjoy the website'
+      },
       navigation: {
         projects: 'Projects',
         about: 'About'
@@ -22,6 +25,9 @@ export default {
       }
     },
     fr: {
+      help: {
+        orientation: 'Veuillez changer l\'orientation de votre téléphone pour profiter pleinement du site'
+      },
       navigation: {
         projects: 'Projets',
         about: 'À propos'

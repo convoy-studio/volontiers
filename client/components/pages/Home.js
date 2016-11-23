@@ -15,6 +15,7 @@ export default class Home extends Page {
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
     this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
     this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
+    this.updateButtons = this.updateButtons.bind(this)
     this.projects = Store.getHomeProjects()
     this.content = Store.getContent('preview')
   }
@@ -33,6 +34,7 @@ export default class Home extends Page {
     Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
+    Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
     this.previewComponent = this.refs.preview
     const oldRoute = Router.getOldRoute()
     if (oldRoute === undefined) { // First load
@@ -96,6 +98,11 @@ export default class Home extends Page {
   update() {
     this.previewComponent.update()
   }
+  updateButtons() {
+    this.refs.projectTitle.onUpdate()
+    this.refs.projectDiscover.onUpdate()
+    this.refs.projectCounter.onUpdate()
+  }
   resize() {
     this.refs.preview.resize()
     this.refs.previewLink.resize()
@@ -105,6 +112,7 @@ export default class Home extends Page {
     Store.off(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
+    Store.off(Constants.WINDOW_RESIZE, this.updateButtons)
     super.componentWillUnmount()
   }
 }
