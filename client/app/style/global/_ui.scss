@@ -114,7 +114,8 @@ a {
   }
   .line {
     background-color: $black;
-    @include anim(.8s, .0s, $easeInOutCirc, scaleY(0), 0%, 0%);
+    @include opacity(0);
+    @include anim(.8s, .0s, $easeInOutCirc, translateY(150%), 0%, 0%);
   }
   .holder {
     @include opacity(0);
@@ -123,7 +124,8 @@ a {
   @media (min-width: $MQ_SMALL) {
     &.hover {
       .line {
-        @include anim(.4s, .0s, cubic-bezier(0,.63,0,1.07), scaleY(1), 0%, 0%);
+        @include opacity(1);
+        @include anim(.4s, .0s, cubic-bezier(0,.63,0,1.07), translateY(0), 0%, 0%);
       }
     }
   }
@@ -169,25 +171,28 @@ a {
 // }
 .preview-link {
   position: fixed;
-  right: 200px;
-  top: 0;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 .next-previous-container {
   position: fixed;
   @extend .top-left;
   .main-btn {
+    text-transform: uppercase;
     position: fixed;
     &:after {
       content: '';
       position: absolute -40px 50%;
       width: 80vh;
-      height: 30vw;
+      height: 51vw;
       transform: translate(-50%);
     }
     &.previous {
+      cursor: w-resize;
       transform: rotateZ(-90deg) translate(-100%, -100%) !important;
     }
     &.next {
+      cursor: e-resize;
       .next-arrow {
         position: absolute;
         left: 50%;
@@ -238,7 +243,6 @@ a {
   position: fixed;
   bottom: $globalFontSize;
   right: $globalMargin;
-  font-weight: bold;
   text-transform: uppercase;
 
   .title {
@@ -256,7 +260,6 @@ a {
   position: fixed;
   bottom: $globalMargin;
   left: $globalMargin;
-  font-weight: bold;
 }
 #canvas-container {
   position: fixed;

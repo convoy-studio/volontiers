@@ -18,6 +18,10 @@
     width: 50%;
     text-align: center;
 
+    @media (min-width: $MQ_SMALL) {
+      line-height: 24px;
+    }
+
     br {
       line-height: 2;
     }

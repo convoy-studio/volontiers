@@ -35,8 +35,8 @@ class NextPreviousBtns extends BaseComponent {
   render() {
     return (
       <div className='next-previous-container'>
-        <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous'></MainTitle>
-        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' arrow='true'></MainTitle>
+        <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous' hasMouseEnterLeave={false}></MainTitle>
+        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' arrow='true' hasMouseEnterLeave={false}></MainTitle>
       </div>
     )
   }
@@ -91,10 +91,22 @@ class NextPreviousBtns extends BaseComponent {
     default:
     }
   }
-  hide() {
+  hide(side) {
     if (!this.isActive || this.isMobile) return
-    if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
-    if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
+    if (side) {
+      switch (side) {
+      case Constants.LEFT:
+        if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
+        break
+      case Constants.RIGHT:
+        if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
+        break
+      default:
+      }
+    } else {
+      if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
+      if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
+    }
   }
   slideshowStateChanged(state) {
     if (state === Constants.SLIDESHOW.BEGIN) {

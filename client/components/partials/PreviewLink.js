@@ -26,7 +26,7 @@ class PreviewLink extends BaseComponent {
   }
   render() {
     return (
-      <MainTitle ref='previewLink' rotation='90deg' title={this.content.viewMore} onClick={this.onPreviewClicked} className='link preview-link'></MainTitle>
+      <MainTitle ref='previewLink' rotation='90deg' title={this.content.viewMore} onClick={this.onPreviewClicked} className='link preview-link' hasMouseEnterLeave={false}></MainTitle>
     )
   }
   update() {

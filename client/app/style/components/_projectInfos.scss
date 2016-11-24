@@ -1,6 +1,6 @@
 .project-infos {
   @extend .full;
-  cursor: pointer;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px;"><text y="15">×</text></svg>'), auto;
 
   &__description {
     position: absolute;
@@ -10,6 +10,10 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: $black;
+
+    @media (min-width: $MQ_SMALL) {
+      line-height: 24px;
+    }
 
     br {
       line-height: 2;

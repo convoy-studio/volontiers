@@ -70,7 +70,7 @@ class App {
     dom.tree.remove(this.landingEl)
   }
   removeLanding() {
-    TweenMax.to(this.landingHeroEl, 1.7, { opacity: 0, ease: Expo.easeOut, onComplete: () => {
+    TweenMax.to(this.landingHeroEl, 1.7, { opacity: 0, ease: Expo.easeIn, onComplete: () => {
       setTimeout(Actions.startIntroAnimation)
     }})
   }

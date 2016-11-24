@@ -105,15 +105,15 @@ class Logo extends BaseComponent {
   }
   setup() {
     this.logoAnim = new TimelineMax()
-    this.logoAnim.fromTo(this.refs['letter-v'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: -400, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-o_1'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: -306, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-l'], 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: -204, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-o_2'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: -102, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-t'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 100, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-i'], 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: 167, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-e'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 234, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-r'], 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: 336, rotation: 0, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-s'], 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 439, rotation: 0, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-v'], 1, { x: -400, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-o_1'], 1, { x: -306, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-l'], 1, { x: -204, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-o_2'], 1, { x: -102, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-t'], 1, { x: 100, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-i'], 1, { x: 167, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-e'], 1, { x: 234, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-r'], 1, { x: 336, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnim.fromTo(this.refs['letter-s'], 1, { x: 439, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
     this.logoAnim.pause(0)
   }
   onLogoClick() {

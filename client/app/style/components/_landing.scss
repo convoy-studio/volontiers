@@ -26,10 +26,12 @@
 
   &__baseline {
     margin-top: 35px;
-    font-size: 18px;
+    font-size: $globalFontSize;
+    text-transform: uppercase;
 
     @media (max-width: $MQ_SMALL) {
       margin-top: 13px;
+      font-size: $mobileFontSize;
     }
   }
 }

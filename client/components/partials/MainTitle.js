@@ -65,8 +65,8 @@ class MainTitle extends BaseComponent {
     this.refs.parent.style.width = this.size[0] + 'px'
     this.refs.parent.style.height = this.size[1] + 'px'
     this.refs.line.style.width = this.size[0] + 'px'
-    this.refs.line.style.height = 6 + 'px'
-    this.refs.line.style.top = this.size[1] + 'px'
+    this.refs.line.style.height = 1 + 'px'
+    this.refs.line.style.top = this.size[1] + 2 + 'px'
   }
   updateState(state) {
     this.setState(state)

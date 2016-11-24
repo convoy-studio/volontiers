@@ -129,11 +129,15 @@ export default class Project extends Page {
     })
   }
   update() {
-    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-    const prevNx = Math.min(Store.Mouse.nX + 0.4, 0) * 0.2
-    if (nextNx > 0) this.refs['next-previous-btns'].show(Constants.RIGHT)
-    else if (prevNx < 0) this.refs['next-previous-btns'].show(Constants.LEFT)
-    else this.refs['next-previous-btns'].hide()
+    const nextNx = Math.max(Store.Mouse.nX, 0)
+    const prevNx = Math.min(Store.Mouse.nX, 0)
+    if (nextNx > 0) {
+      this.refs['next-previous-btns'].show(Constants.RIGHT)
+      this.refs['next-previous-btns'].hide(Constants.LEFT)
+    } else if (prevNx < 0) {
+      this.refs['next-previous-btns'].show(Constants.LEFT)
+      this.refs['next-previous-btns'].hide(Constants.RIGHT)
+    } else this.refs['next-previous-btns'].hide()
     if (this.slideshow) this.slideshow.update()
   }
   resize() {

@@ -34,10 +34,10 @@ export default class FrontContainer extends BaseComponent {
         <div className="navigation__right">
           <ul>
             <li>
-              <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={false} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={true} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={false} rotation={this.langRotation} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={true} rotation={this.langRotation} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
             </li>
           </ul>
         </div>
