@@ -34,7 +34,6 @@ class MainTitle extends BaseComponent {
         <div ref='holder' className="holder">
           <div ref='title' className="title">{this.state.title}</div>
           <div ref='background' className="background"></div>
-          <div ref='line' className="line"></div>
         </div>
         {nextArrow}
       </div>
@@ -64,9 +63,6 @@ class MainTitle extends BaseComponent {
     }
     this.refs.parent.style.width = this.size[0] + 'px'
     this.refs.parent.style.height = this.size[1] + 'px'
-    this.refs.line.style.width = this.size[0] + 'px'
-    this.refs.line.style.height = 1 + 'px'
-    this.refs.line.style.top = this.size[1] + 2 + 'px'
   }
   updateState(state) {
     this.setState(state)

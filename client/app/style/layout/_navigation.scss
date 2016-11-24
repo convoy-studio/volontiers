@@ -23,6 +23,11 @@
     left: $globalMargin;
     position: absolute;
     z-index: 5;
+    @media (min-width: $MQ_SMALL) {
+      margin-top: -$globalMargin;
+      left: 0;
+      padding: $globalMargin;
+    }
   }
   &__right {
     position: absolute;
@@ -30,16 +35,26 @@
     top: 0;
     display: inline-block;
     z-index: 5;
-    .navigation__spacer {
-      margin: 0 8px;
-      position: relative;
-      top: -4px;
-    }
     ul {
       display: inline-block;
       li {
         display: inline-block;
-
+        @media (min-width: $MQ_SMALL) {
+          &:first-child { // about btn
+            margin-top: -($globalMargin);
+            margin-right: -($globalMargin);
+            .title {
+              padding: $globalMargin;
+            }
+          }
+          &:last-child { // about btn
+            margin-top: -($globalMargin);
+            .title {
+              $r: $globalFontSize * 2;
+              padding: $globalMargin $r $globalMargin $globalMargin;
+            }
+          }
+        }
         &:last-child() { // lang btn
           float: left;
           padding-right: $globalFontSize * 3;
@@ -80,7 +95,7 @@
 
     .top-logo-title {
       text-align: center;
-      cursor: pointer;
+      cursor: url('/assets/images/cursor-hover.svg'), auto;
       opacity: 0;
       display: inline-block;
       &.show {

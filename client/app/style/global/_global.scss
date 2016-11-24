@@ -28,8 +28,7 @@ html {
 
   // disable text-selection & text cursor
   // @include user-select(none);
-  cursor: default;
-
+  cursor: url('/assets/images/cursor.svg'), auto !important;
   // overall text params
   font-size: $globalFontSize;
 

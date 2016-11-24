@@ -56,7 +56,7 @@ img {
   zoom: 1;
 }
 .btn {
-  cursor: pointer;
+  cursor: url('/assets/images/cursor-hover.svg'), auto;
 }
 .relative {
   position: relative;
@@ -108,26 +108,16 @@ a {
     white-space: nowrap;
     z-index: 2;
   }
+  &.hover .title {
+    color: $pink;
+  }
   .background {
     @extend .full;
     // background-color: red;
   }
-  .line {
-    background-color: $black;
-    @include opacity(0);
-    @include anim(.8s, .0s, $easeInOutCirc, translateY(150%), 0%, 0%);
-  }
   .holder {
     @include opacity(0);
     @include anim(.8s, .0s, $easeOutCirc, scale(1));
-  }
-  @media (min-width: $MQ_SMALL) {
-    &.hover {
-      .line {
-        @include opacity(1);
-        @include anim(.4s, .0s, cubic-bezier(0,.63,0,1.07), translateY(0), 0%, 0%);
-      }
-    }
   }
   &.show {
     .holder {
@@ -136,15 +126,6 @@ a {
     }
   }
 }
-// #app-template.home .main-btn .line {
-//   background-color: $black;
-// }
-// #app-template.project .main-btn .line {
-//   background-color: $black;
-// }
-// #app-template.about .main-btn .line {
-//   background-color: $black;
-// }
 .link {
   color: $black;
   position: relative;
@@ -188,11 +169,11 @@ a {
       transform: translate(-50%);
     }
     &.previous {
-      cursor: w-resize;
+      cursor: url('/assets/images/arrow-left.svg'), auto;
       transform: rotateZ(-90deg) translate(-100%, -100%) !important;
     }
     &.next {
-      cursor: e-resize;
+      cursor: url('/assets/images/arrow-right.svg'), auto;
       .next-arrow {
         position: absolute;
         left: 50%;
@@ -213,6 +194,9 @@ a {
       &.hover.last .next-arrow {
         opacity: 1;
       }
+    }
+    .title {
+      color: $black !important;
     }
   }
 }
@@ -241,11 +225,17 @@ a {
 }
 .bottom-project-informations {
   position: fixed;
-  bottom: $globalFontSize;
-  right: $globalMargin;
+  bottom: 0;
+  right: 0;
   text-transform: uppercase;
+  @media (max-width: $MQ_SMALL) {
+    bottom: $globalMargin;
+    right: $globalMargin;
+  }
+
 
   .title {
+    padding: $globalMargin;
     @media (max-width: $MQ_SMALL) {
       transform-origin: right center;
       position: absolute;

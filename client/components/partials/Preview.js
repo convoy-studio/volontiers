@@ -185,12 +185,12 @@ class Preview extends BaseComponent {
       if (posY < boundsTop && this.cursor !== 'right') {
         this.cursor = 'right'
         dom.style(this.refs.preview, {
-          'cursor': 'e-resize'
+          'cursor': 'url(assets/images/arrow-right.svg), auto'
         })
       } else if (posY > boundsTop && !this.cursor !== 'down') {
         this.cursor = 'down'
         dom.style(this.refs.preview, {
-          'cursor': 's-resize'
+          'cursor': 'url(assets/images/arrow-down.svg), auto'
         })
       } else {
         return
@@ -198,7 +198,7 @@ class Preview extends BaseComponent {
     } else {
       this.cursor = 'auto'
       dom.style(this.refs.preview, {
-        'cursor': 'auto'
+        'cursor': 'url(assets/images/cursor.svg), auto'
       })
     }
   }

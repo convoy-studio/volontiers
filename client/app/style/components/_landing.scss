@@ -3,7 +3,7 @@
   position: relative;
   z-index: 9999999;
   background: $lightGrey;
-
+  cursor: url('/assets/images/cursor.svg'), auto !important;
   &.behind {
     z-index: -1;
   }
