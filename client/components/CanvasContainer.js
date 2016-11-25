@@ -21,7 +21,7 @@ export default class CanvasContainer extends BaseComponent {
   componentDidMount() {
     this.el = this.refs['canvas-container']
     this.pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
-    this.renderer = new PIXI.WebGLRenderer(1, 1, {antialias: true, roundPixels: true, transparent: true, resolution: this.pixelRatio})
+    this.renderer = new PIXI.autoDetectRenderer(1, 1, {antialias: true, roundPixels: true, transparent: true, resolution: this.pixelRatio})
     this.el.appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
   }
