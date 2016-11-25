@@ -119,14 +119,19 @@ export default (container)=> {
   const hideCurrentSlide = () => {
     scope.currentSlide.hide({from: Constants.CENTER, to: Constants.TOP})
   }
+  const togglePlayVideo = () => {
+    scope.currentSlide.togglePlayVideo()
+  }
   const clear = () => {
     removeSlides()
     Store.off(Constants.NEXT_SLIDE, next)
     Store.off(Constants.PREVIOUS_SLIDE, previous)
+    Store.off(Constants.TOGGLE_PLAY_VIDEO, togglePlayVideo)
     scope.slides.length = 0
   }
   Store.on(Constants.NEXT_SLIDE, next)
   Store.on(Constants.PREVIOUS_SLIDE, previous)
+  Store.on(Constants.TOGGLE_PLAY_VIDEO, togglePlayVideo)
   scope = {
     container,
     load,

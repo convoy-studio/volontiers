@@ -1,5 +1,6 @@
 import Utils from '../../utils/Utils'
 import Store from '../../store'
+import Actions from '../../actions'
 import Constants from '../../constants'
 import bezier from 'cubic-bezier'
 
@@ -19,6 +20,7 @@ const transitionHideBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 let transitionHideTime = 0
 let transitionShowTime = 0
+let playing = true
 
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
@@ -30,16 +32,35 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     plane.fverts = undefined
     return plane
   }
+  const preparePlane = (done, texture) => {
+    scope.plane = createPlane(texture)
+    scope.plane.size = scope.size
+    scope.mesh = scope.plane.mesh
+    scope.container.addChild(scope.mesh)
+    scope.isLoaded = true
+    done(scope.plane, scope.index)
+  }
   const load = (done) => {
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
-      scope.size[0] = data.texture.width
-      scope.size[1] = data.texture.height
-      scope.plane = createPlane(data.texture)
-      scope.plane.size = scope.size
-      scope.mesh = scope.plane.mesh
-      scope.container.addChild(scope.mesh)
-      scope.isLoaded = true
-      done(scope.plane, scope.index)
+      scope.ext = data.ext
+      if (data.ext === 'mp4') {
+        data.texture.baseTexture.source.volume = 0
+        data.texture.baseTexture.source.pause()
+        let interval
+        interval = setInterval(() => {
+          if (data.texture.baseTexture.width !== 0) {
+            scope.size[0] = data.texture.baseTexture.width
+            scope.size[1] = data.texture.baseTexture.height
+            data.texture.baseTexture.source.loop = true
+            clearInterval(interval)
+            preparePlane(done, data.texture)
+          }
+        }, 100)
+      } else {
+        scope.size[0] = data.texture.width
+        scope.size[1] = data.texture.height
+        preparePlane(done, data.texture)
+      }
     })
   }
   const resize = () => {
@@ -102,6 +123,12 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     scope.state = STATE.TRANSITION_IN
   }
   const hide = (dir) => {
+    if (scope.ext === 'mp4') {
+      setTimeout(() => {Actions.slideVideoLeave()})
+      TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
+        scope.mesh.texture.baseTexture.source.pause()
+      }})
+    }
     removeEvents()
     scope.direction = dir
     transitionHideTime = 0
@@ -124,10 +151,25 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       scope.activate()
     }, 500)
   }
+  const togglePlayVideo = () => {
+    if (playing) {
+      playing = false
+      scope.mesh.texture.baseTexture.source.pause()
+    } else {
+      playing = true
+      scope.mesh.texture.baseTexture.source.play()
+    }
+    setTimeout(() => {Actions.toggleIconVideo()})
+  }
   const activate = () => {
     removeEvents()
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, onProjectsOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
+    if (scope.ext === 'mp4') {
+      scope.mesh.texture.baseTexture.source.play()
+      TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 1})
+      setTimeout(() => {Actions.slideVideoEnter()})
+    }
     scope.state = STATE.ACTIVE
   }
   const deactivate = () => {
@@ -148,6 +190,11 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       scope.plane.iverts = null
       scope.plane.fverts = null
     }
+    if (scope.ext === 'mp4') {
+      TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
+        scope.mesh.texture.baseTexture.source.pause()
+      }})
+    }
   }
   scope = {
     plane: undefined,
@@ -156,6 +203,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     delta: 0,
     state: STATE.DEACTIVE,
     size: [0, 0],
+    ext: undefined,
     id,
     defaultPosition,
     direction,
@@ -163,6 +211,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     deactivate,
     show,
     hide,
+    togglePlayVideo,
     animate,
     resize,
     imgFilename,

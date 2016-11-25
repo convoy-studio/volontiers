@@ -210,6 +210,30 @@ const Actions = {
       actionType: Constants.START_INTRO_ANIMATION_COMPLETED,
       item: undefined
     })
+  },
+  slideVideoEnter: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SLIDE_VIDEO_ENTER,
+      item: undefined
+    })
+  },
+  slideVideoLeave: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SLIDE_VIDEO_LEAVE,
+      item: undefined
+    })
+  },
+  togglePlayVideo: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.TOGGLE_PLAY_VIDEO,
+      item: undefined
+    })
+  },
+  toggleIconVideo: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.TOGGLE_ICON_VIDEO,
+      item: undefined
+    })
   }
 }
 

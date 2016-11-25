@@ -5,6 +5,7 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
 import MainTitle from './MainTitle'
+import {PagerStore, PagerActions, PagerConstants} from '../../pager/Pager'
 
 const NEXT_IMAGE = 'NEXT_IMAGE'
 const PREVIOUS_IMAGE = 'PREVIOUS_IMAGE'
@@ -19,23 +20,35 @@ class NextPreviousBtns extends BaseComponent {
     this.slideshowStateChanged = this.slideshowStateChanged.bind(this)
     this.keyboardTriggered = this.keyboardTriggered.bind(this)
     this.scrollTriggered = this.scrollTriggered.bind(this)
+    this.activateVideoButton = this.activateVideoButton.bind(this)
+    this.desactivateVideoButton = this.desactivateVideoButton.bind(this)
+    this.onVideoClick = this.onVideoClick.bind(this)
+    this.changeIconVideo = this.changeIconVideo.bind(this)
+    this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
     this.isActive = false
+    this.isVideoPlaying = true
+    this.ready = false
     this.currentProject = Store.getCurrentProject()
     this.content = Store.getContent('project')
     this.isMobile = Store.Detector.isMobile
     this.margin = this.isMobile === true ? Constants.MOBILE_MARGIN : Constants.GLOBAL_MARGIN
+    this.state = {
+      videoClass: 'playing'
+    }
   }
   componentWillMount() {
     Store.on(Constants.SLIDESHOW_STATE_CHANGED, this.slideshowStateChanged)
     if (!this.isMobile) {
       Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
       Store.on(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+      PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
     }
   }
   render() {
     return (
       <div className='next-previous-container'>
         <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous' hasMouseEnterLeave={false}></MainTitle>
+        <div ref='videoBtn' className={`video-btn ${this.state.videoClass}`} onClick={this.onVideoClick}></div>
         <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' arrow='true' hasMouseEnterLeave={false}></MainTitle>
       </div>
     )
@@ -46,8 +59,44 @@ class NextPreviousBtns extends BaseComponent {
       if (this.isMobile) {
         this.refs.previousBtn.show()
         this.refs.nextBtn.show()
+      } else {
+        Store.on(Constants.TOGGLE_ICON_VIDEO, this.changeIconVideo)
       }
+      Store.on(Constants.SLIDE_VIDEO_ENTER, this.activateVideoButton)
+      Store.on(Constants.SLIDE_VIDEO_LEAVE, this.desactivateVideoButton)
     }, 300)
+  }
+  onTransitionInCompleted() {
+    this.ready = true
+  }
+  activateVideoButton() {
+    dom.style(this.refs.videoBtn, {
+      'pointer-events': 'auto'
+    })
+    dom.classes.add(this.refs.videoBtn, 'playing')
+  }
+  desactivateVideoButton() {
+    dom.style(this.refs.videoBtn, {
+      'pointer-events': 'none'
+    })
+    dom.classes.remove(this.refs.videoBtn, 'playing')
+  }
+  changeIconVideo() {
+    let videoClass = ''
+    if (this.isVideoPlaying) {
+      this.isVideoPlaying = false
+    } else {
+      videoClass = 'playing'
+      this.isVideoPlaying = true
+    }
+    const state = {
+      videoClass: videoClass
+    }
+    this.setState(state)
+  }
+  onVideoClick() {
+    if (!this.ready) return
+    Actions.togglePlayVideo()
   }
   goBack() {
     const currentRoute = Router.getNewRoute()
@@ -165,7 +214,10 @@ class NextPreviousBtns extends BaseComponent {
     if (!this.isMobile) {
       Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
       Store.off(Constants.SCROLL_TRIGGERED, this.scrollTriggered)
+      Store.off(Constants.TOGGLE_ICON_VIDEO, this.changeIconVideo)
     }
+    Store.off(Constants.SLIDE_VIDEO_ENTER, this.activateVideoButton)
+    Store.off(Constants.SLIDE_VIDEO_LEAVE, this.desactivateVideoButton)
   }
   resize() {
     const windowW = Store.Window.w

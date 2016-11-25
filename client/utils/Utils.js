@@ -112,19 +112,26 @@ class Utils {
     folder.add(vec3, 'z', vec3.z - offsetZ, vec3.z + offsetZ).onChange((value) => { vec3.z = value })
     if (opened) folder.open()
   }
+  static getFileExtension(filename) {
+    return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : undefined
+  }
   static pixiLoadTexture(id, url, cb) {
     let scope
     const loader = new PIXI.loaders.Loader()
     loader.add(id, url)
     loader.load()
     loader.once('complete', (data, resources) => {
-      scope.texture = resources[scope.id].texture
+      scope.ext = this.getFileExtension(resources[scope.id].url)
+      if (scope.ext === 'mp4') scope.texture = new PIXI.Texture.fromVideoUrl(resources[scope.id].url)
+      else scope.texture = resources[scope.id].texture
       cb(scope)
+      loader.reset()
     })
     scope = {
       loader,
       id,
-      url
+      url,
+      ext: undefined
     }
     return scope
   }
