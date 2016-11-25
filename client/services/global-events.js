@@ -34,13 +34,13 @@ function mouseWheel(dx, dy) {
 }
 
 function onScroll(direction) {
-  if (PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH) return
+  if (PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
   Actions.triggerScroll(direction)
 }
 
 function keypress(e) {
   e.preventDefault()
-  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH) return
+  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
   activityHandler.count()
   const char = e.which || e.keyCode
   switch (char) {
