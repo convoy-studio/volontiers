@@ -162,14 +162,14 @@ export default class ProjectsOverview extends BaseComponent {
     }
   }
   panEvent(e) {
-    let newPos = this.currentEventPos + (e.deltaX * 0.1)
+    let newPos = this.currentEventPos + (e.deltaX * 0.2)
     if (newPos > 0) this.currentEventPos = 0
     else if (newPos < -(this.eventProjectsLength - thumbW * 1.5)) this.currentEventPos = -(this.eventProjectsLength - thumbW * 1.5)
     else this.currentEventPos = newPos
     this.refs['event-projects'].style.left = this.currentEventPos + 'px'
   }
   panRetail(e) {
-    let newPos = this.currentRetailPos + (-e.deltaX * 0.1)
+    let newPos = this.currentRetailPos + (-e.deltaX * 0.2)
     if (newPos > 0) this.currentRetailPos = 0
     else if (newPos < -(this.retailProjectsLength - thumbW * 1.5)) this.currentRetailPos = -(this.retailProjectsLength - thumbW * 1.5)
     else this.currentRetailPos = newPos
