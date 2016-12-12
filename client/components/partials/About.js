@@ -26,38 +26,32 @@ export default class About extends BaseComponent {
     )
   }
   componentDidMount() {
+    this.parent = this.refs['page-wrapper']
     this.setupAnimations()
   }
   setupAnimations() {
-    const parent = this.refs['page-wrapper']
     this.scaleTl = new TimelineMax()
-    this.scaleTl.to(parent, 1, { scale: 0.8, force3D: true, ease: Circ.easeInOut }, 0)
+    this.scaleTl.to(this.parent, 1, { scale: 0.8, force3D: true, ease: Circ.easeInOut }, 0)
     this.scaleTl.pause(0)
-    this.tlIn = new TimelineMax({ onComplete: () => {
-      dom.classes.add(parent, 'show')
-    }})
-    this.tlIn.fromTo(parent, 1, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlIn.timeScale(1.8)
-    this.tlIn.pause(0)
-    this.tlOut = new TimelineMax({ onComplete: () => {
-      dom.classes.remove(parent, 'show')
-    }})
-    this.tlOut.fromTo(parent, 1, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOut.timeScale(2.5)
-    this.tlOut.pause(0)
   }
   toggleOverlay() {
     if (this.hidden) {
       this.hidden = false
-      this.tlIn.play(0)
+      TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+      TweenMax.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut, onComplete: () => {
+        dom.classes.add(this.parent, 'show')
+      }})
     } else {
       this.hidden = true
-      this.tlOut.play(0)
+      TweenMax.fromTo(this.parent, 0.4, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut, onComplete: () => {
+        dom.classes.remove(this.parent, 'show')
+      }})
     }
   }
   hideOverlay() {
     this.hidden = true
-    this.tlOut.play(0)
+    TweenMax.set(this.parent, { opacity: 0 })
+    if (dom.classes.has(this.parent, 'show')) dom.classes.remove(this.parent, 'show')
   }
   onOverviewOpen() {
     this.scaleTl.timeScale(1.8).play()
