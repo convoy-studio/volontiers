@@ -219,8 +219,8 @@ class Utils {
       const size = 500
       const orientation = plane.size[0] > plane.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
       const resizeVars = Utils.resizePositionProportionally(windowW, windowH, plane.size[0], plane.size[1], orientation)
-      const w = (plane.size[0] * resizeVars.scale) * 0.3
-      const h = (plane.size[1] * resizeVars.scale) * 0.3
+      const w = (plane.size[0] * resizeVars.scale) * scale
+      const h = (plane.size[1] * resizeVars.scale) * scale
       plane.fverts[0] = plane.fverts[0] + (w)
       plane.fverts[1] = plane.fverts[1] + (h)
       plane.fverts[2] = plane.fverts[2] - (w)
