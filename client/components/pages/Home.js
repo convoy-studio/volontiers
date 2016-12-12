@@ -4,7 +4,6 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
 import Preview from '../partials/Preview'
-import PreviewLink from '../partials/PreviewLink'
 import NextPreviousBtns from '../partials/NextPreviousBtns'
 import MainTitle from '../partials/MainTitle'
 
@@ -23,7 +22,6 @@ export default class Home extends Page {
     return (
       <div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <Preview ref='preview'/>
-        <PreviewLink ref='previewLink'/>
         <MainTitle ref='projectTitle' title={''} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
         <MainTitle ref='projectDiscover' title={this.content.discover} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-informations'></MainTitle>
         <MainTitle ref='projectCounter' title={`1/${this.projects.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
@@ -87,13 +85,11 @@ export default class Home extends Page {
     this.refs.projectTitle.hide()
     this.refs.projectDiscover.hide()
     this.refs.projectCounter.hide()
-    this.refs.previewLink.hideLink(true)
   }
   projectOverviewClosed() {
     this.refs.projectTitle.show()
     this.refs.projectDiscover.show()
     this.refs.projectCounter.show()
-    this.refs.previewLink.showLink(true)
   }
   update() {
     this.previewComponent.update()
@@ -105,7 +101,6 @@ export default class Home extends Page {
   }
   resize() {
     this.refs.preview.resize()
-    this.refs.previewLink.resize()
     super.resize()
   }
   componentWillUnmount() {
