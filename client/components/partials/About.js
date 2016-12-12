@@ -29,7 +29,6 @@ export default class About extends BaseComponent {
     this.setupAnimations()
   }
   setupAnimations() {
-    console.log('setup about')
     const parent = this.refs['page-wrapper']
     this.scaleTl = new TimelineMax()
     this.scaleTl.to(parent, 1, { scale: 0.8, force3D: true, ease: Circ.easeInOut }, 0)

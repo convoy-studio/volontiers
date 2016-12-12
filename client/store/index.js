@@ -11,6 +11,7 @@ import Utils from '../utils/Utils'
 const slideshowActivityHandler = Utils.countActivityHandler(1000)
 const projectOpenOverviewActivityHandler = Utils.countActivityHandler(1200)
 const projectCloseOverviewActivityHandler = Utils.countActivityHandler(1200)
+let aboutIsVisible = false
 
 function _getContentScope(route) {
   return Store.getRoutePathScopeById(route.path)
@@ -364,6 +365,16 @@ const Store = assign({}, EventEmitter2.prototype, {
       if (projectCloseOverviewActivityHandler.isReady === false && (oldRoute && oldRoute.type !== Constants.ABOUT)) return
       projectCloseOverviewActivityHandler.count()
       Store.State = Constants.STATE.NORMAL
+      Store.emitChange(action.actionType)
+      break
+    case Constants.TOGGLE_ABOUT:
+      if (aboutIsVisible) {
+        aboutIsVisible = false
+        Store.State = Constants.STATE.NORMAL
+      } else {
+        aboutIsVisible = true
+        Store.State = Constants.STATE.ABOUT
+      }
       Store.emitChange(action.actionType)
       break
     case Constants.KEYBOARD_TRIGGERED:

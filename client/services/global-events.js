@@ -34,13 +34,13 @@ function mouseWheel(dx, dy) {
 }
 
 function onScroll(direction) {
-  if (PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
+  if (PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
   Actions.triggerScroll(direction)
 }
 
 function keypress(e) {
   e.preventDefault()
-  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
+  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
   activityHandler.count()
   const char = e.which || e.keyCode
   switch (char) {
@@ -67,7 +67,7 @@ function keypress(e) {
 }
 
 function pan(e) {
-  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS) return
+  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
   activityHandler.count()
   const direction = e.additionalEvent
   switch (direction) {
