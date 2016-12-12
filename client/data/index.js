@@ -37,7 +37,7 @@ export default {
         viewMore: 'En savoir plus'
       },
       project: {
-        viewInfos: 'Info',
+        viewInfos: 'Descriptif',
         closeInfos: 'Photos',
         back: 'Retour',
         previousImg: 'Image précédente',
