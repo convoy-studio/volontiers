@@ -103,7 +103,7 @@
         @include anim(1.8s, .0s, $easeOutCirc, scale(1));
       }
       svg {
-        height: $globalLineHeight;
+        height: $mobileFontSize;
         @media (min-width: $MQ_SMALL) {
           margin-top: -($globalLineHeight / 2);
           height: $globalLineHeight * 2;

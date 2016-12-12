@@ -157,6 +157,10 @@
       			@include anim(.8s, .0s, $easeOutExpo, scale(1));
 				p {
 					padding: 20px;
+					@media (max-width: $MQ_SMALL) {
+						font-size: $mobileFontSize;
+						line-height: $mobileLineHeight;
+					}
 				}
 			}
 			&:hover {
