@@ -25,6 +25,7 @@ export default class Project extends Page {
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
     this.content = Store.getContent('project')
+    this.type = Store.Detector.isMobile ? Constants.MOBILE : Constants.DESKTOP
   }
   render() {
     const content = Store.getCurrentProject()
@@ -73,7 +74,7 @@ export default class Project extends Page {
     this.refs.projectTitle.hide()
     if (this.refs.projectInformations) this.refs.projectInformations.hide()
     this.refs.projectCounter.hide()
-    this.refs['next-previous-btns'].hide()
+    this.refs['next-previous-btns'].hide(this.type)
     this.refs['next-previous-btns'].isActive = false
     setTimeout(() => { super.willTransitionOut() }, 200)
   }
@@ -95,7 +96,7 @@ export default class Project extends Page {
     if (Store.ProjectInfoIsOpened) {
       this.slideshow.hideCurrentSlide()
       this.refs.projectInformations.onMouseLeave()
-      this.refs['next-previous-btns'].hide()
+      this.refs['next-previous-btns'].hide(undefined, this.type)
       this.refs['next-previous-btns'].isActive = false
       setTimeout(() => {
         if (this.refs.projectInformations) this.refs.projectInformations.updateState({title: this.content.closeInfos})
@@ -111,7 +112,7 @@ export default class Project extends Page {
     this.refs.projectTitle.hide()
     this.refs.projectCounter.hide()
     if (this.refs.projectInformations) this.refs.projectInformations.hide()
-    this.refs['next-previous-btns'].hide()
+    this.refs['next-previous-btns'].hide(undefined, this.type)
     this.refs['next-previous-btns'].isActive = false
   }
   projectOverviewClosed() {

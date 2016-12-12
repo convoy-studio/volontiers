@@ -129,6 +129,10 @@ class NextPreviousBtns extends BaseComponent {
     }
   }
   show(side) {
+    if (this.isMobile) {
+      if (!this.refs.previousBtn.isVisible) this.refs.previousBtn.show()
+      if (!this.refs.nextBtn.isVisible) this.refs.nextBtn.show()
+    }
     if (!this.isActive) return
     switch (side) {
     case Constants.LEFT:
@@ -140,7 +144,11 @@ class NextPreviousBtns extends BaseComponent {
     default:
     }
   }
-  hide(side) {
+  hide(side, type) {
+    if (type && type === Constants.MOBILE) {
+      if (this.refs.previousBtn.isVisible) this.refs.previousBtn.hide()
+      if (this.refs.nextBtn.isVisible) this.refs.nextBtn.hide()
+    }
     if (!this.isActive || this.isMobile) return
     if (side) {
       switch (side) {

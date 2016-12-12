@@ -84,6 +84,8 @@ export default {
   SMALL: 'SMALL',
   ESC: 'ESC',
   SPACE: 'SPACE',
+  DESKTOP: 'DESKTOP',
+  MOBILE: 'MOBILE',
 
   MOBILE_MARGIN: 10,
   GLOBAL_MARGIN: 20,
