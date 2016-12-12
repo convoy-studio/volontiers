@@ -69,7 +69,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const windowH = Store.Window.h
     const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
     let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.63
-    if (Store.Detector.isMobile) marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5
+    if (Store.Detector.isMobile) marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.4
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale * pixelRatio, windowH * marginScale * pixelRatio, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)

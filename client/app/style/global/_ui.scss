@@ -171,9 +171,16 @@ a {
     &.previous {
       cursor: url('/assets/images/arrow-left.svg'), auto;
       transform: rotateZ(-90deg) translate(-100%, -100%) !important;
+      @media (max-width: $MQ_SMALL) {
+        transform: rotateZ(-90deg) translate(-100%, -50%) !important;
+      }
     }
     &.next {
       cursor: url('/assets/images/arrow-right.svg'), auto;
+      @media (max-width: $MQ_SMALL) {
+        transform: rotateZ(90deg) translate(0%, 50%) !important;
+      }
+
       .next-arrow {
         position: absolute;
         left: 50%;
