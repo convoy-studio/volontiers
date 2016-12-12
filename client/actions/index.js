@@ -234,6 +234,12 @@ const Actions = {
       actionType: Constants.TOGGLE_ICON_VIDEO,
       item: undefined
     })
+  },
+  toggleAbout: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.TOGGLE_ABOUT,
+      item: undefined
+    })
   }
 }
 

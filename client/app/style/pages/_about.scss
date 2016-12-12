@@ -1,14 +1,15 @@
 #about-page {
   @extend .full;
   position: absolute;
+  transform: translateY(-100%);
+  z-index: 11;
+  background-color: $white;
+  pointer-events: none;
 
-  // @include opacity(0);
-  // @include anim(.0s, .0s, $easeOutCirc, translateY(0));
-
-  // &.show {
-  //   @include opacity(1);
-  //   @include anim(.8s, .0s, $easeOutCirc, translateY(0));
-  // }
+  &.show {
+    pointer-events: auto;
+    cursor: url('/assets/images/close.svg'), auto;
+  }
 
   .description {
     position: absolute;

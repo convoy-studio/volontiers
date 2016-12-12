@@ -63,10 +63,10 @@ export default class FrontContainer extends BaseComponent {
     this.refs.langTitle.show()
   }
   changeLangClick() {
-    Actions.changeLang()
+    setTimeout(() => { Actions.changeLang() })
   }
   aboutClick() {
-    Router.setRoute('/about')
+    setTimeout(() => { Actions.toggleAbout() })
   }
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)

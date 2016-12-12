@@ -4,6 +4,9 @@ export default {
   'default-route': '/home',
   'content': {
     en: {
+      about: {
+        text: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.'
+      },
       help: {
         orientation: 'Please change the orientation of your phone to fully enjoy the website'
       },
@@ -25,6 +28,9 @@ export default {
       }
     },
     fr: {
+      about: {
+        text: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.'
+      },
       help: {
         orientation: 'Veuillez changer l\'orientation de votre téléphone pour profiter pleinement du site'
       },
@@ -47,14 +53,6 @@ export default {
     }
   },
   'routing': {
-    '/about': {
-      name: 'About',
-      assets: [],
-      content: {
-        en: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.',
-        fr: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.'
-      }
-    }
   },
   projects: {
     'nike-olivier-rousteing': {

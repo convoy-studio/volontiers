@@ -5,7 +5,6 @@ import {PagerActions} from '../pager/Pager'
 import Store from '../store'
 import Router from '../services/router'
 import Home from './pages/Home'
-import About from './pages/About'
 import Project from './pages/Project'
 
 export default class PagesContainer extends BasePager {
@@ -36,9 +35,6 @@ export default class PagesContainer extends BasePager {
     switch (newRoute.type) {
     	case Constants.HOME:
       type = Home
-      break
-    	case Constants.ABOUT:
-      type = About
       break
     	case Constants.PROJECT:
       type = Project
