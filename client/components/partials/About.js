@@ -29,6 +29,7 @@ export default class About extends BaseComponent {
     this.setupAnimations()
   }
   setupAnimations() {
+    console.log('setup about')
     const parent = this.refs['page-wrapper']
     this.scaleTl = new TimelineMax()
     this.scaleTl.to(parent, 1, { scale: 0.8, force3D: true, ease: Circ.easeInOut }, 0)
@@ -36,14 +37,14 @@ export default class About extends BaseComponent {
     this.tlIn = new TimelineMax({ onComplete: () => {
       dom.classes.add(parent, 'show')
     }})
-    this.tlIn.fromTo(parent, 1, { y: -window.innerHeight }, { y: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlIn.fromTo(parent, 1, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
     this.tlIn.timeScale(1.8)
     this.tlIn.pause(0)
     this.tlOut = new TimelineMax({ onComplete: () => {
       dom.classes.remove(parent, 'show')
     }})
-    this.tlOut.fromTo(parent, 1, { y: 0 }, { y: -window.innerHeight, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOut.timeScale(1.5)
+    this.tlOut.fromTo(parent, 1, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlOut.timeScale(2.5)
     this.tlOut.pause(0)
   }
   toggleOverlay() {

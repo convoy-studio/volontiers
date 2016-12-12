@@ -1,10 +1,10 @@
 #about-page {
   @extend .full;
   position: absolute;
-  transform: translateY(-100%);
   z-index: 11;
   background-color: $white;
   pointer-events: none;
+  opacity: 0;
 
   &.show {
     pointer-events: auto;
