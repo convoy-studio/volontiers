@@ -50,6 +50,7 @@ export default class ProjectsOverview extends BaseComponent {
     this.onImgLoad = this.onImgLoad.bind(this)
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
+    this.previewProject = this.previewProject.bind(this)
     this.didPageChange = this.didPageChange.bind(this)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
@@ -115,7 +116,7 @@ export default class ProjectsOverview extends BaseComponent {
     const projects = this.projects[id]
     return projects.map((project, index) => {
       return (
-        <li key={`${id}_${index}`} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`}>
+        <li key={`${id}_${index}`} onMouseEnter={this.previewProject} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`} data-slug={project.slug}>
           <div className="project-container">
             <div className="title-holder">
               <div className="vertical-center-parent">
@@ -129,6 +130,10 @@ export default class ProjectsOverview extends BaseComponent {
         </li>
       )
     })
+  }
+  previewProject(e) {
+    const slug = e.target.getAttribute('data-slug')
+    setTimeout(() => { Actions.changeProjectsPreview(slug) })
   }
   open() {
     transitionShowTime = 0

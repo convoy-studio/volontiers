@@ -76,6 +76,14 @@ export default (container)=> {
       }
     })
   }
+  const resizePreview = () => {
+    const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
+    const windowW = Store.Window.w * pixelRatio
+    const windowH = Store.Window.h * pixelRatio
+    const resizeVars = scope.currentSlide.resize()
+    scope.currentSlide.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
+    scope.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1)
+  }
   const next = () => {
     if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened) return
     activityHandler.count()
@@ -137,6 +145,7 @@ export default (container)=> {
     load,
     removeSlides,
     resize,
+    resizePreview,
     next,
     previous,
     update,

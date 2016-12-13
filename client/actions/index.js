@@ -181,6 +181,18 @@ const Actions = {
       item: undefined
     })
   },
+  changeProjectsPreview: (path) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CHANGE_PROJECTS_PREVIEW,
+      item: path
+    })
+  },
+  resizeProjectsPreview: (preview) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.RESIZE_PROJECTS_PREVIEW,
+      item: preview
+    })
+  },
   unBlockInteractivity: () => {
     Dispatcher.handleViewAction({
       actionType: Constants.UN_BLOCK_INTERACTIVITY,

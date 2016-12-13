@@ -107,6 +107,9 @@ function _windowWidthHeight() {
     h: window.innerHeight
   }
 }
+function _getProjectPreview(slug) {
+  return data.projects[slug].preview
+}
 function _getCurrentProject() {
   const route = Router.getNewRoute()
   return data.projects[route.target]
@@ -200,6 +203,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   },
   getRoutePathScopeById: (id) => {
     return data.routing[id]
+  },
+  getProjectPreview: (slug) => {
+    return _getProjectPreview(slug)
   },
   getCurrentProject: () => {
     return _getCurrentProject()

@@ -21,6 +21,7 @@ class Preview extends BaseComponent {
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
+    Store.on(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     this.oldSlide = undefined
     this.currentSlide = undefined
     this.slides = []
@@ -275,12 +276,20 @@ class Preview extends BaseComponent {
       }
     })
   }
+  resizePreview() {
+    const windowW = Store.Window.w * this.pixelRatio
+    const windowH = Store.Window.h * this.pixelRatio
+    const resizeVars = this.currentSlide.resize()
+    this.currentSlide.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
+    this.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1)
+  }
   componentWillUnmount() {
     this.slides.forEach((item) => { item.clear() })
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
+    Store.off(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     dom.event.off(this.refs.preview, 'click', this.goToProject)
     hammer.off('tap', this.goToProject)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
