@@ -28,6 +28,7 @@ export default class Project extends Page {
     Store.on(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     this.content = Store.getContent('project')
     this.type = Store.Detector.isMobile ? Constants.MOBILE : Constants.DESKTOP
+    this.projectInfo = undefined
   }
   render() {
     const content = Store.getCurrentProject()
@@ -37,14 +38,14 @@ export default class Project extends Page {
     if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) projectContent.assets.unshift(content.preview)
     const infoContent = Store.getCurrentAboutContent()
     const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
-    const projectInfo = infoButton ? (<ProjectInfos />) : undefined
+    this.projectInfo = infoButton ? (<ProjectInfos />) : undefined
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
         <MainTitle ref='projectTitle' title={projectContent.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
         {infoButton}
         <MainTitle ref='projectCounter' title={`1/${projectContent.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
-        {projectInfo}
+        {this.projectInfo}
       </div>
     )
   }
@@ -95,6 +96,7 @@ export default class Project extends Page {
     this.refs.projectCounter.onUpdate()
   }
   onToggleProjectInfos() {
+    if (this.projectInfo === undefined) return
     if (Store.ProjectInfoIsOpened) {
       this.slideshow.hideCurrentSlide()
       this.refs.projectInformations.onMouseLeave()
