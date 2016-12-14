@@ -11,13 +11,33 @@
     cursor: url('/assets/images/close.svg'), auto;
   }
 
-  .description {
+  .wrapper {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 77%;
     text-align: center;
+  }
+
+  .description {
+    p {
+      display: inline-block;
+      width: 33%;
+      text-align: left;
+      box-sizing: border-box;
+      vertical-align: top;
+
+      &:nth-child(1) {
+        padding-right: 2.5%;
+      }
+      &:nth-child(2) {
+        padding: 0 1.25%;
+      }
+      &:nth-child(3) {
+        padding-left: 2.5%;
+      }
+    }
 
     @media (min-width: $MQ_SMALL) {
       line-height: 24px;
@@ -38,6 +58,24 @@
       br {
         line-height: 1;
       }
+    }
+  }
+
+  .catchline {
+    margin-top: 5%;
+  }
+  .details {
+    margin-top: 5%;
+  }
+  .rs {
+    position: absolute;
+    right: $globalMargin;
+    bottom: $globalMargin;
+    text-transform: uppercase;
+
+    @media (max-width: $MQ_SMALL) {
+      right: $mobileMargin;
+      bottom: $mobileMargin;
     }
   }
 }

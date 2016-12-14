@@ -98,15 +98,18 @@
       cursor: url('/assets/images/cursor-hover.svg'), auto;
       opacity: 0;
       display: inline-block;
+      height: $globalLineHeight * 2;
+      overflow-y: visible;
       &.show {
         opacity: 1;
         @include anim(1.8s, .0s, $easeOutCirc, scale(1));
       }
       svg {
+        pointer-events: none;
         height: $mobileFontSize;
         @media (min-width: $MQ_SMALL) {
           margin-top: -($globalLineHeight / 2);
-          height: $globalLineHeight * 2;
+          height: $globalLineHeight * 10;
         }
       }
     }

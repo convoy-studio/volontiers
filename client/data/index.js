@@ -5,7 +5,12 @@ export default {
   'content': {
     en: {
       about: {
-        text: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.'
+        text: [
+          'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables. A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.',
+          'Pour se démarquer des nombreux évènements auxquels est invité un public toujours plus exigeant, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuelle recherche des innovations liées de près ou de loin au monde de l\'évènementiel.',
+          'Bien qu’éphémères, nos décors ont l\'exigence de la qualité dans leur réalisation. C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel : l’agencement d\'espaces retail (vitrines, corners, pop up, etc).',
+          'Volontiers est notre réponse face à vos ambitions les plus folles.'
+        ]
       },
       help: {
         orientation: 'Please change the orientation of your phone to fully enjoy the website'
@@ -29,7 +34,12 @@ export default {
     },
     fr: {
       about: {
-        text: 'VOLONTIERS conçoit et réalise des évènements originaux, esthétiques et inoubliables.<br>A chaque brief, les acteurs de l\'agence se plongent dans l\'univers de la marque et de son produit pour proposer des solutions parfaitement adaptées aux attentes du client.<br>Pour créer la surprise, être différent des nombreux évènements auxquels est invité un public toujours plus blasé, qu\'il faut en permanence étonner, séduire et convaincre, VOLONTIERS est en perpétuel recherche des nouveautés et des créations liées ou non au monde de l\'évènementiel.<br>Bien qu’éphémère, nos décors ont l\'exigence de la qualité dans leur réalisation.<br>C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel, l\'agencement d\'espaces retail (vitrines, corners, pop up, etc).<br>Volontiers est notre réponse face à vos ambitions les plus folles.'
+        text: [
+          'VOLONTIERS conceives and produces original, aesthetic and unforgettable events. With each brief, the elements within the agency immerse themselves into the universe of the brand and its product to offer solutions perfectly adapted to the expectations of the customer.',
+          'To differentiate itself from the numerous events to which the increasingly demanding audience are invited, a crowd which must constantly be surprised, seduced and convinced, VOLONTIERS is in a constant quest for newsworthy products and creations linked to the world of events.',
+          'Although ephemeral, our sets involved high requirements of quality in their realization. With that in mind, VOLONTIERS has developed a second activity in synergy with event production : the layout of retail spaces (showcases, corners, pop ups, etc.).',
+          'VOLONTIERS is our answer to your craziest ambitions.'
+        ]
       },
       help: {
         orientation: 'Veuillez changer l\'orientation de votre téléphone pour profiter pleinement du site'

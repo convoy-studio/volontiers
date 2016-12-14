@@ -8,31 +8,37 @@ export default class About extends BaseComponent {
   constructor(props) {
     super(props)
     this.onOverviewOpen = this.onOverviewOpen.bind(this)
-    this.onOverviewClose = this.onOverviewClose.bind(this)
     this.toggleOverlay = this.toggleOverlay.bind(this)
     this.hideOverlay = this.hideOverlay.bind(this)
     this.hidden = true
     Store.on(Constants.TOGGLE_ABOUT, this.toggleOverlay)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
-    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.onOverviewClose)
     Store.on(Constants.ROUTE_CHANGED, this.hideOverlay)
   }
   render() {
     const content = Store.getContent('about')
     return (
-      <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={this.toggleOverlay}>
-        <p className="description" dangerouslySetInnerHTML={{__html: content.text}}></p>
+      <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={() => { setTimeout(() => { Actions.toggleAbout() }) }}>
+        <div className='wrapper'>
+          <div className='description'>
+            <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
+            <p dangerouslySetInnerHTML={{__html: content.text[1]}}></p>
+            <p dangerouslySetInnerHTML={{__html: content.text[2]}}></p>
+          </div>
+          <p className='catchline'>{content.text[3]}</p>
+          <div className='details'>
+            <p><a className='link' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue coquillière 75001 Paris - France</a></p>
+            <p>+ 33 (0) 1 53 69 63 87 | <a className='link' href='mailto:contact@volontiers.fr'>contact@volontiers.fr</a></p>
+          </div>
+        </div>
+        <div className='rs'>
+          <p><a className='link' href='https://www.google.fr' target='_blank'>Facebook</a> | <a className='link' href='https://www.google.fr' target='_blank'>Instagram</a></p>
+        </div>
       </div>
     )
   }
   componentDidMount() {
     this.parent = this.refs['page-wrapper']
-    this.setupAnimations()
-  }
-  setupAnimations() {
-    this.scaleTl = new TimelineMax()
-    this.scaleTl.to(this.parent, 1, { scale: 0.8, force3D: true, ease: Circ.easeInOut }, 0)
-    this.scaleTl.pause(0)
   }
   toggleOverlay() {
     if (this.hidden) {
@@ -54,10 +60,8 @@ export default class About extends BaseComponent {
     if (dom.classes.has(this.parent, 'show')) dom.classes.remove(this.parent, 'show')
   }
   onOverviewOpen() {
-    this.scaleTl.timeScale(1.8).play()
-  }
-  onOverviewClose() {
-    this.scaleTl.timeScale(2).reverse()
+    this.hidden = false
+    this.toggleOverlay()
   }
   componentWillUnmount() {
     Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)

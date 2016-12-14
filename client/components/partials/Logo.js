@@ -1,5 +1,6 @@
 import BaseComponent from '../../pager/components/BaseComponent'
 import Store from '../../store'
+import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
 import SVGComponent from './SVGComponent'
@@ -9,14 +10,19 @@ class Logo extends BaseComponent {
     super(props)
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
-    this.isAnimating = false
     this.onLogoClick = this.onLogoClick.bind(this)
+    this.playAboutAnim = this.playAboutAnim.bind(this)
+    this.toggleOutAnim = this.toggleOutAnim.bind(this)
+    this.hoverable = true
+    this.about = false
+    Store.on(Constants.TOGGLE_ABOUT, this.playAboutAnim)
+    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.toggleOutAnim)
   }
   render() {
     let classNames = this.props.className
     return (
       <div ref="logo" className={classNames} onClick={this.onLogoClick}>
-        <SVGComponent viewBox="0 0 952.4 121.1">
+        <SVGComponent viewBox="0 0 952.4 531.1">
           <g className="letter-s" ref="letter-s">
             <g>
               <path d="M509.9,95.5c0-28.2-22.8-51-51-51V19h-44.2c-4.3,7.5-6.8,16.2-6.8,25.5c0,28.2,22.8,51,51,51v25.5h44.2
@@ -60,27 +66,12 @@ class Logo extends BaseComponent {
             <circle className="st0" cx="492.9" cy="36" r="17"/>
             <circle cx="492.9" cy="36" r="12.8"/>
           </g>
-          <g className="letter-i" ref="letter-i">
-            <rect x="441.9" y="19" width="34" height="102"/>
-            <circle className="st0" cx="458.9" cy="19" r="17"/>
-            <circle cx="458.9" cy="19" r="12.8"/>
-          </g>
           <g className="letter-l" ref="letter-l">
             <rect x="407.9" y="19" width="34" height="102"/>
             <rect x="433.4" y="61.5" transform="matrix(4.497209e-11 -1 1 4.497209e-11 346.3337 554.4282)" width="34" height="85"/>
             <g>
               <circle className="st0" cx="492.9" cy="104" r="17"/>
               <circle cx="492.9" cy="104" r="12.8"/>
-            </g>
-          </g>
-          <g className="letter-o_1" ref="letter-o_1">
-            <path className="st0" d="M458.9,19c-28.2,0-51,22.8-51,51c0,28.2,22.8,51,51,51s51-22.8,51-51C509.9,41.9,487.1,19,458.9,19z M458.9,87
-              c-9.4,0-17-7.6-17-17c0-9.4,7.6-17,17-17s17,7.6,17,17C475.9,79.4,468.3,87,458.9,87z"/>
-            <g>
-              <path d="M458.9,85.3c-8.4,0-15.3-6.8-15.3-15.3c0-8.4,6.8-15.3,15.3-15.3s15.3,6.8,15.3,15.3C474.1,78.4,467.3,85.3,458.9,85.3z"
-                />
-              <path className="st1" d="M458.9,57.3c7,0,12.8,5.7,12.8,12.8s-5.7,12.8-12.8,12.8s-12.8-5.7-12.8-12.8S451.8,57.3,458.9,57.3
-                 M458.9,52.3c-9.8,0-17.8,8-17.8,17.8s8,17.8,17.8,17.8c9.8,0,17.8-8,17.8-17.8S468.7,52.3,458.9,52.3L458.9,52.3z"/>
             </g>
           </g>
           <g className="letter-o_2" ref="letter-o_2">
@@ -90,6 +81,21 @@ class Logo extends BaseComponent {
               <path d="M459.2,85.3c-8.4,0-15.3-6.8-15.3-15.3s6.8-15.3,15.3-15.3c8.4,0,15.3,6.8,15.3,15.3S467.6,85.3,459.2,85.3z"/>
               <path className="st1" d="M459.2,57.3c7,0,12.8,5.7,12.8,12.8s-5.7,12.8-12.8,12.8s-12.8-5.7-12.8-12.8S452.2,57.3,459.2,57.3
                  M459.2,52.3c-9.8,0-17.8,8-17.8,17.8s8,17.8,17.8,17.8c9.8,0,17.8-8,17.8-17.8S469,52.3,459.2,52.3L459.2,52.3z"/>
+            </g>
+          </g>
+          <g className="letter-i" ref="letter-i">
+            <rect x="441.9" y="19" width="34" height="102"/>
+            <circle className="st0" cx="458.9" cy="19" r="17"/>
+            <circle cx="458.9" cy="19" r="12.8"/>
+          </g>
+          <g className="letter-o_1" ref="letter-o_1">
+            <path className="st0" d="M458.9,19c-28.2,0-51,22.8-51,51c0,28.2,22.8,51,51,51s51-22.8,51-51C509.9,41.9,487.1,19,458.9,19z M458.9,87
+              c-9.4,0-17-7.6-17-17c0-9.4,7.6-17,17-17s17,7.6,17,17C475.9,79.4,468.3,87,458.9,87z"/>
+            <g>
+              <path d="M458.9,85.3c-8.4,0-15.3-6.8-15.3-15.3c0-8.4,6.8-15.3,15.3-15.3s15.3,6.8,15.3,15.3C474.1,78.4,467.3,85.3,458.9,85.3z"
+                />
+              <path className="st1" d="M458.9,57.3c7,0,12.8,5.7,12.8,12.8s-5.7,12.8-12.8,12.8s-12.8-5.7-12.8-12.8S451.8,57.3,458.9,57.3
+                 M458.9,52.3c-9.8,0-17.8,8-17.8,17.8s8,17.8,17.8,17.8c9.8,0,17.8-8,17.8-17.8S468.7,52.3,458.9,52.3L458.9,52.3z"/>
             </g>
           </g>
         </SVGComponent>
@@ -104,17 +110,29 @@ class Logo extends BaseComponent {
     this.setup()
   }
   setup() {
-    this.logoAnim = new TimelineMax()
-    this.logoAnim.fromTo(this.refs['letter-v'], 1, { x: -400, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-o_1'], 1, { x: -306, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-l'], 1, { x: -204, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-o_2'], 1, { x: -102, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-t'], 1, { x: 100, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-i'], 1, { x: 167, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-e'], 1, { x: 234, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-r'], 1, { x: 336, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.fromTo(this.refs['letter-s'], 1, { x: 439, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
-    this.logoAnim.pause(0)
+    this.logoAnimHover = new TimelineMax()
+    this.logoAnimHover.fromTo(this.refs['letter-v'], 1, { x: -400, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-o_1'], 1, { x: -306, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-l'], 1, { x: -204, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-o_2'], 1, { x: -102, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-t'], 1, { x: 100, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-i'], 1, { x: 167, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-e'], 1, { x: 234, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-r'], 1, { x: 336, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.fromTo(this.refs['letter-s'], 1, { x: 439, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimHover.pause(0)
+    this.logoAnimAbout = new TimelineMax()
+    this.logoAnimAbout.fromTo(this.refs['letter-v'], 1, { x: -400, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-o_1'], 1, { x: -306, rotation: 0, transformOrigin: '50% 50%' }, { x: 102, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-l'], 1, { x: -204, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: -102, y: 102, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-o_2'], 1, { x: -102, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, y: 102, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-n'], 1, { x: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: 102, y: 102, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-t'], 1, { x: 100, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: -71, y: 204, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-i'], 1, { x: 167, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, y: 204, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-e'], 1, { x: 234, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, y: 306, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-r'], 1, { x: 336, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: 102, y: 306, rotation: -360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.fromTo(this.refs['letter-s'], 1, { x: 439, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, y: 408, rotation: 360, ease: Expo.easeInOut}, 0)
+    this.logoAnimAbout.pause(0)
   }
   onLogoClick() {
     Router.setRoute(Store.defaultRoute())
@@ -124,13 +142,28 @@ class Logo extends BaseComponent {
   }
   onMouseEnter(e) {
     if (e) e.preventDefault()
-    this.isAnimating = true
-    this.logoAnim.timeScale(1.4).play()
+    if (this.about) return
+    this.logoAnimHover.timeScale(1.4).play()
   }
   onMouseLeave(e) {
     if (e) e.preventDefault()
-    this.isAnimating = true
-    this.logoAnim.timeScale(1.4).reverse()
+    if (this.about) return
+    this.logoAnimHover.timeScale(1.4).reverse()
+  }
+  playAboutAnim() {
+    if (this.about) {
+      this.about = false
+      this.logoAnimAbout.timeScale(1.8).reverse()
+    } else {
+      this.about = true
+      this.logoAnimAbout.timeScale(1.4).play()
+    }
+  }
+  toggleOutAnim() {
+    if (this.about) {
+      this.about = false
+      this.logoAnimAbout.timeScale(1.8).reverse()
+    }
   }
   componentWillUnmount() {
     if (!Store.Detector.isMobile) {

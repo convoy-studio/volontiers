@@ -139,6 +139,9 @@ a {
   &--hidden {
     opacity: 0;
   }
+  &:visited {
+    color: $black;
+  }
   @include simpleAnim(.8s, .0s, $easeOutCirc, opacity);
 }
 // #app-template.home .link {
