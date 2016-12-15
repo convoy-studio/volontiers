@@ -5,10 +5,12 @@
   background-color: $white;
   pointer-events: none;
   opacity: 0;
+  visibility: hidden;
 
   &.show {
     pointer-events: auto;
     cursor: url('/assets/images/close.svg'), auto;
+    visibility: visible;
   }
 
   .wrapper {
