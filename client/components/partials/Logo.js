@@ -11,12 +11,15 @@ class Logo extends BaseComponent {
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
     this.onLogoClick = this.onLogoClick.bind(this)
-    this.playAboutAnim = this.playAboutAnim.bind(this)
     this.toggleOutAnim = this.toggleOutAnim.bind(this)
     this.hoverable = true
     this.about = false
-    Store.on(Constants.TOGGLE_ABOUT, this.playAboutAnim)
-    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.toggleOutAnim)
+    this.isMobile = Store.Detector.isMobile
+    if (!this.isMobile) {
+      this.playAboutAnim = this.playAboutAnim.bind(this)
+      Store.on(Constants.TOGGLE_ABOUT, this.playAboutAnim)
+      Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.toggleOutAnim)
+    }
   }
   render() {
     let classNames = this.props.className
@@ -170,6 +173,8 @@ class Logo extends BaseComponent {
     if (!Store.Detector.isMobile) {
       dom.event.off(this.refs.logo, 'mouseenter', this.onMouseEnter)
       dom.event.off(this.refs.logo, 'mouseleave', this.onMouseLeave)
+      Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.toggleOutAnim)
+      Store.off(Constants.TOGGLE_ABOUT, this.playAboutAnim)
     }
   }
 }

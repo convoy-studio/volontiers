@@ -198,15 +198,17 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     }, 500)
   }
   const onAboutToggle = () => {
-    if (Store.State === Constants.STATE.ABOUT) {
+    if (Store.State === Constants.STATE.ABOUT && scope.ext === 'mp4') {
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
         currentVideoTime = scope.mesh.texture.baseTexture.source.currentTime
         scope.mesh.texture.baseTexture.source.pause()
       }})
-    } else {
+    } else if (scope.ext === 'mp4') {
       setTimeout(() => {
         scope.activate()
       }, 500)
+    } else {
+      return
     }
   }
   const togglePlayVideo = () => {
