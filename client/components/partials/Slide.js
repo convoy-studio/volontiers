@@ -26,6 +26,7 @@ let playing = true
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
   let initial = {}
+  let currentVideoTime = 0
   const createPlane = (texture) => {
     initial.texture = texture
     const plane = {}
@@ -48,11 +49,11 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
       scope.ext = data.ext
       if (data.ext === 'mp4') {
-        data.texture.baseTexture.source.volume = 0
-        data.texture.baseTexture.source.pause()
         let interval
         interval = setInterval(() => {
           if (data.texture.baseTexture.width !== 0) {
+            data.texture.baseTexture.source.volume = 0
+            data.texture.baseTexture.source.pause()
             scope.size[0] = data.texture.baseTexture.width
             scope.size[1] = data.texture.baseTexture.height
             data.texture.baseTexture.source.loop = true
@@ -144,7 +145,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const show = (dir) => {
     scope.direction = dir
     transitionShowTime = 0
-    scope.activate()
+    // scope.activate()
     Utils.updateGoToPlanePositions(scope.plane, dir.to)
     scope.state = STATE.TRANSITION_IN
   }
@@ -165,6 +166,12 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     changeTexture(path)
   }
   const onProjectsOverviewOpen = () => {
+    if (scope.ext === 'mp4') {
+      TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
+        currentVideoTime = scope.mesh.texture.baseTexture.source.currentTime
+        scope.mesh.texture.baseTexture.source.pause()
+      }})
+    }
     scope.direction = { from: Constants.CENTER, to: Constants.SMALL }
     scaleDownTime = 0
     if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
@@ -200,12 +207,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     }
     setTimeout(() => {Actions.toggleIconVideo()})
   }
-  const activate = () => {
+  const activate = (overview) => {
     removeEvents()
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, onProjectsOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     Store.on(Constants.CHANGE_PROJECTS_PREVIEW, onProjectsPreviewChange)
     if (scope.ext === 'mp4') {
+      scope.mesh.texture.baseTexture.source.currentTime = currentVideoTime
       scope.mesh.texture.baseTexture.source.play()
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 1})
       setTimeout(() => {Actions.slideVideoEnter()})
