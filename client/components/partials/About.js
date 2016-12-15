@@ -27,12 +27,12 @@ export default class About extends BaseComponent {
           </div>
           <p className='catchline' ref='catchline'>{content.text[3]}</p>
           <div className='details' ref='details'>
-            <p><a className='link' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue coquillière 75001 Paris - France</a></p>
-            <p>+ 33 (0) 1 53 69 63 87 | <a className='link' href='mailto:contact@volontiers.fr'>contact@volontiers.fr</a></p>
+            <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue coquillière 75001 Paris - France</a></p>
+            <p>+ 33 (0) 1 53 69 63 87 | <a className='link btn' href='mailto:contact@volontiers.fr' ref='mail'>contact@volontiers.fr</a></p>
           </div>
         </div>
         <div className='rs' ref='rs'>
-          <p><a className='link' href='https://www.google.fr' target='_blank'>Facebook</a> | <a className='link' href='https://www.google.fr' target='_blank'>Instagram</a></p>
+          <p><a className='link btn' href='https://www.google.fr' target='_blank' ref='fb'>Facebook</a> | <a className='link btn' href='https://www.google.fr' target='_blank' ref='insta'>Instagram</a></p>
         </div>
       </div>
     )
@@ -42,8 +42,18 @@ export default class About extends BaseComponent {
     this.setupAnimations()
   }
   setupAnimations() {
+    this.tlBlink = new TimelineMax()
+    const lengthBlink = 0.3
+    this.tlBlink.to(this.refs.mail, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, 0)
+    this.tlBlink.to(this.refs.mail, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, lengthBlink)
+    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (2 * lengthBlink) - 0.1)
+    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 3 * lengthBlink )
+    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (4 * lengthBlink) - 0.1 )
+    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 5 * lengthBlink )
+    this.tlBlink.pause(0)
     this.tlOverlayIn = new TimelineMax({ onComplete: () => {
       dom.classes.add(this.parent, 'show')
+      this.tlBlink.play(0)
     }})
     this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
@@ -56,10 +66,9 @@ export default class About extends BaseComponent {
 
     this.tlOverlayOut = new TimelineMax({ onComplete: () => {
       dom.classes.remove(this.parent, 'show')
-      TweenMax.set(this.parent, { visibility: 'hidden' }, 0)
+      TweenMax.set(this.parent, { visibility: 'hidden' })
     }})
-    this.tlOverlayOut.fromTo(this.parent, 1, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOverlayOut.timeScale(0.9)
+    this.tlOverlayOut.fromTo(this.parent, 0.5, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayOut.pause(0)
   }
   toggleOverlay() {

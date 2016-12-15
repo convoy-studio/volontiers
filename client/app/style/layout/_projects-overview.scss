@@ -10,6 +10,7 @@
 	@media (max-width: $MQ_SMALL) {
 		margin-top: $globalMargin * 1.5;
 	}
+	pointer-events: all;
 	.btn > * {
 		pointer-events: none;
 	}

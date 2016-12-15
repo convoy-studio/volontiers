@@ -13,6 +13,12 @@
     visibility: visible;
   }
 
+  .btn {
+    &:hover {
+      color: $pink;
+    }
+  }
+
   .wrapper {
     position: absolute;
     top: 60%;
