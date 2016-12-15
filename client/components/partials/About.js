@@ -45,10 +45,17 @@ export default class About extends BaseComponent {
     this.tlOverlayIn = new TimelineMax({ onComplete: () => {
       dom.classes.add(this.parent, 'show')
     }})
-    this.tlOverlayIn.set(this.parent, { visibility: 'visible' })
+    this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff' }, 0)
     this.tlOverlayIn.pause(0)
+
+    this.tlOverlayOut = new TimelineMax({ onComplete: () => {
+      dom.classes.remove(this.parent, 'show')
+      TweenMax.set(this.parent, { visibility: 'hidden' }, 0)
+    }})
+    this.tlOverlayOut.fromTo(this.parent, 0.4, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlOverlayOut.pause(0)
   }
   toggleOverlay() {
     if (this.hidden) {
@@ -56,9 +63,7 @@ export default class About extends BaseComponent {
       this.tlOverlayIn.play(0)
     } else {
       this.hidden = true
-      TweenMax.fromTo(this.parent, 0.4, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut, onComplete: () => {
-        dom.classes.remove(this.parent, 'show')
-      }})
+      this.tlOverlayOut.play(0)
     }
   }
   hideOverlay() {
