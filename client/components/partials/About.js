@@ -20,18 +20,18 @@ export default class About extends BaseComponent {
     return (
       <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={() => { setTimeout(() => { Actions.toggleAbout() }) }}>
         <div className='wrapper'>
-          <div className='description'>
+          <div className='description' ref='description'>
             <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
             <p dangerouslySetInnerHTML={{__html: content.text[1]}}></p>
             <p dangerouslySetInnerHTML={{__html: content.text[2]}}></p>
           </div>
-          <p className='catchline'>{content.text[3]}</p>
-          <div className='details'>
+          <p className='catchline' ref='catchline'>{content.text[3]}</p>
+          <div className='details' ref='details'>
             <p><a className='link' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue coquillière 75001 Paris - France</a></p>
             <p>+ 33 (0) 1 53 69 63 87 | <a className='link' href='mailto:contact@volontiers.fr'>contact@volontiers.fr</a></p>
           </div>
         </div>
-        <div className='rs'>
+        <div className='rs' ref='rs'>
           <p><a className='link' href='https://www.google.fr' target='_blank'>Facebook</a> | <a className='link' href='https://www.google.fr' target='_blank'>Instagram</a></p>
         </div>
       </div>
@@ -48,13 +48,18 @@ export default class About extends BaseComponent {
     this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff' }, 0)
+    this.tlOverlayIn.staggerFromTo(this.refs.description.children, 0.7, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 0.2, 0.5)
+    this.tlOverlayIn.fromTo(this.refs.catchline, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1)
+    this.tlOverlayIn.fromTo(this.refs.details, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.2)
+    this.tlOverlayIn.fromTo(this.refs.rs, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.4)
     this.tlOverlayIn.pause(0)
 
     this.tlOverlayOut = new TimelineMax({ onComplete: () => {
       dom.classes.remove(this.parent, 'show')
       TweenMax.set(this.parent, { visibility: 'hidden' }, 0)
     }})
-    this.tlOverlayOut.fromTo(this.parent, 0.4, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlOverlayOut.fromTo(this.parent, 1, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
+    this.tlOverlayOut.timeScale(0.9)
     this.tlOverlayOut.pause(0)
   }
   toggleOverlay() {

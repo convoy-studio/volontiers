@@ -122,6 +122,7 @@ class Logo extends BaseComponent {
     this.logoAnimHover.fromTo(this.refs['letter-s'], 1, { x: 439, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
     this.logoAnimHover.pause(0)
     this.logoAnimAbout = new TimelineMax()
+    this.logoAnimAbout.set(this.refs.logo, {pointerEvents: 'none'})
     this.logoAnimAbout.fromTo(this.refs['letter-v'], 1, { x: -400, rotation: 0, transformOrigin: '50% 50%' }, { x: 0, rotation: 360, ease: Expo.easeInOut}, 0)
     this.logoAnimAbout.fromTo(this.refs['letter-o_1'], 1, { x: -306, rotation: 0, transformOrigin: '50% 50%' }, { x: 102, rotation: 360, ease: Expo.easeInOut}, 0)
     this.logoAnimAbout.fromTo(this.refs['letter-l'], 1, { x: -204, y: 0, rotation: 0, transformOrigin: '50% 50%' }, { x: -102, y: 102, rotation: -360, ease: Expo.easeInOut}, 0)

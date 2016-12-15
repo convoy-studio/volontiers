@@ -2,9 +2,11 @@
   position: fixed;
   z-index: 999999;
   width: 100%;
+  height: $globalLineHeight * 2;
   text-transform: uppercase;
   box-sizing: border-box;
   margin-top: $globalMargin;
+  pointer-events: none;
   @include anim(.8s, .5s, $easeOutExpo, translateY(0));
   &.hide {
     @include anim(.8s, .0s, $easeOutExpo, translateY(-($globalMargin * 4)));
@@ -14,6 +16,7 @@
     z-index: 5;
   }
   @media (max-width: $MQ_SMALL) {
+    height: $mobileLineHeight * 2;
     > .link {
       padding-left: 0;
     }
@@ -23,6 +26,7 @@
     left: $globalMargin;
     position: absolute;
     z-index: 5;
+    pointer-events: all;
     @media (min-width: $MQ_SMALL) {
       margin-top: -$globalMargin;
       left: 0;
@@ -39,6 +43,7 @@
       display: inline-block;
       li {
         display: inline-block;
+        pointer-events: all;
         @media (min-width: $MQ_SMALL) {
           &:first-child { // about btn
             margin-top: -($globalMargin);
@@ -58,11 +63,6 @@
         &:last-child() { // lang btn
           float: left;
           padding-right: $globalFontSize * 3;
-        }
-
-        a {
-          display: inline-block;
-          vertical-align: middle;
         }
 
         @media (max-width: $MQ_SMALL) {
@@ -92,6 +92,10 @@
     top: 0;
     transform: translateX(-50%);
     z-index: 7;
+    height: $globalLineHeight * 2;
+    @media (max-width: $MQ_SMALL) {
+      height: $mobileLineHeight * 2;
+    }
 
     .top-logo-title {
       text-align: center;
@@ -100,13 +104,17 @@
       display: inline-block;
       height: $globalLineHeight * 2;
       overflow-y: visible;
+      pointer-events: all;
+      @media (max-width: $MQ_SMALL) {
+        height: $mobileLineHeight * 2;
+      }
       &.show {
         opacity: 1;
         @include anim(1.8s, .0s, $easeOutCirc, scale(1));
       }
       svg {
         pointer-events: none;
-        height: $mobileFontSize;
+        height: $mobileFontSize * 5;
         @media (min-width: $MQ_SMALL) {
           margin-top: -($globalLineHeight / 2);
           height: $globalLineHeight * 10;
