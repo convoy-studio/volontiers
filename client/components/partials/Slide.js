@@ -92,7 +92,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
-    let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.63
+    let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.6
     if (Store.Detector.isMobile) marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.4
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale * pixelRatio, windowH * marginScale * pixelRatio, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
@@ -197,6 +197,18 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       scope.activate()
     }, 500)
   }
+  const onAboutToggle = () => {
+    if (Store.State === Constants.STATE.ABOUT) {
+      TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
+        currentVideoTime = scope.mesh.texture.baseTexture.source.currentTime
+        scope.mesh.texture.baseTexture.source.pause()
+      }})
+    } else {
+      setTimeout(() => {
+        scope.activate()
+      }, 500)
+    }
+  }
   const togglePlayVideo = () => {
     if (playing) {
       playing = false
@@ -212,6 +224,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, onProjectsOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     Store.on(Constants.CHANGE_PROJECTS_PREVIEW, onProjectsPreviewChange)
+    Store.on(Constants.TOGGLE_ABOUT, onAboutToggle)
     if (scope.ext === 'mp4') {
       scope.mesh.texture.baseTexture.source.currentTime = currentVideoTime
       scope.mesh.texture.baseTexture.source.play()
@@ -228,6 +241,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     Store.off(Constants.OPEN_PROJECTS_OVERVIEW, onProjectsOverviewOpen)
     Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     Store.off(Constants.CHANGE_PROJECTS_PREVIEW, onProjectsPreviewChange)
+    Store.off(Constants.TOGGLE_ABOUT, onAboutToggle)
   }
   const clear = () => {
     removeEvents()

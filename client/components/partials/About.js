@@ -10,6 +10,7 @@ export default class About extends BaseComponent {
     this.onOverviewOpen = this.onOverviewOpen.bind(this)
     this.toggleOverlay = this.toggleOverlay.bind(this)
     this.hideOverlay = this.hideOverlay.bind(this)
+    this.toggleAbout = this.toggleAbout.bind(this)
     this.hidden = true
     Store.on(Constants.TOGGLE_ABOUT, this.toggleOverlay)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
@@ -18,7 +19,7 @@ export default class About extends BaseComponent {
   render() {
     const content = Store.getContent('about')
     return (
-      <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={() => { setTimeout(() => { Actions.toggleAbout() }) }}>
+      <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={this.toggleAbout}>
         <div className='wrapper'>
           <div className='description' ref='description'>
             <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
@@ -28,7 +29,7 @@ export default class About extends BaseComponent {
           <p className='catchline' ref='catchline'>{content.text[3]}</p>
           <div className='details' ref='details'>
             <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue coquillière 75001 Paris - France</a></p>
-            <p>+ 33 (0) 1 53 69 63 87 | <a className='link btn' href='mailto:contact@volontiers.fr' ref='mail'>contact@volontiers.fr</a></p>
+            <p>+ 33 (0) 1 53 69 63 87 | <a className='link btn mail' href='mailto:contact@volontiers.fr' ref='mail'>contact@volontiers.fr</a></p>
           </div>
         </div>
         <div className='rs' ref='rs'>
@@ -70,6 +71,10 @@ export default class About extends BaseComponent {
     }})
     this.tlOverlayOut.fromTo(this.parent, 0.5, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayOut.pause(0)
+  }
+  toggleAbout(e) {
+    if (dom.classes.has(e.target, 'link')) return
+    setTimeout(() => { Actions.toggleAbout() })
   }
   toggleOverlay() {
     if (this.hidden) {
