@@ -20,33 +20,40 @@
   }
 
   .wrapper {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 77%;
+    position: absolute 0 0;
+    width: 100%;
     text-align: center;
 
     @media (max-width: $MQ_SMALL) {
-      transform: translateY(-50%);
-      top: 50%;
+      transform: none;
+      top: $mobileLineHeight * 3;
+      bottom: $mobileFontSize * 3;
       left: 0;
+      right: 0;
       width: 100%;
       $p: $globalMargin * 1.5;
-      padding: 0 $p;
+      padding: 0 $p 0 $globalMargin;
       box-sizing: border-box;
       font-size: $mobileFontSize;
       line-height: $mobileLineHeight;
+      overflow-y: scroll;
     }
   }
 
   .description {
+    padding: 0 11.5%;
+    margin-top: 30%;
+    @media (max-width: $MQ_SMALL) {
+      padding: 0;
+      margin-top: 0;
+    }
     p {
       display: inline-block;
       width: 33%;
       text-align: left;
       box-sizing: border-box;
       vertical-align: top;
+      font-weight: 600;
 
       @media (min-width: $MQ_SMALL) {
         &:nth-child(1) {
@@ -74,6 +81,7 @@
 
   .catchline {
     margin-top: 5%;
+    text-transform: uppercase;
   }
   .details {
     margin-top: 5%;
@@ -87,6 +95,37 @@
     @media (max-width: $MQ_SMALL) {
       right: $mobileMargin;
       bottom: $mobileMargin;
+    }
+  }
+  .credits {
+    position: absolute;
+    left: $globalMargin;
+    bottom: 0;
+
+    @media (max-width: $MQ_SMALL) {
+      position: relative;
+      left: 0;
+      bottom: 0;
+    }
+
+    &__btn {
+      display: inline-block;
+      vertical-align: middle;
+      text-transform: uppercase;
+
+      .title {
+        padding: $globalMargin;
+      }
+    }
+    &__list {
+      display: none;
+      opacity: 0;
+      .link {
+        line-height: $globalFontSize;
+        @media (max-width: $MQ_SMALL) {
+          line-height: $mobileFontSize;
+        }
+      }
     }
   }
 }
