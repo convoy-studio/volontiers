@@ -11,6 +11,7 @@ class MainTitle extends BaseComponent {
     super(props)
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
+    this.onClick = this.onClick.bind(this)
     this.size = [0, 0]
     this.isVisible = false
     this.state = {
@@ -30,7 +31,7 @@ class MainTitle extends BaseComponent {
       </SVGComponent>) : undefined
 
     return (
-      <div ref='parent' onClick={(e) => { e.preventDefault(); this.props.onClick(this.state.eventId) }} className={classNames}>
+      <div ref='parent' onClick={this.onClick} className={classNames}>
         <div ref='holder' className="holder">
           <div ref='title' className="title">{this.state.title}</div>
           <div ref='background' className="background"></div>
@@ -48,6 +49,11 @@ class MainTitle extends BaseComponent {
   }
   componentDidUpdate() {
     this.onUpdate()
+  }
+  onClick(e) {
+    e.preventDefault()
+    if (this.props.onClick === undefined) return
+    this.props.onClick(this.state.eventId)
   }
   onUpdate() {
     const rotation = this.props.rotation || '0deg'
