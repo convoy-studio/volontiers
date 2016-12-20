@@ -88,8 +88,30 @@ export default {
         'timelapse-wording.mp4'
       ]
     },
-    'nikelab-x-ricardo-tisci-training': {
+    'ikea-ps-2017': {
       'inHome': true,
+      'name': 'ikea ps 2017',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the launch of the PS 2017 collection from Ikea, Zmirov agency commissioned VOLONTIERS to design and produce an event that would immerse the guests into the digital world of a millennial. The journalists were able to discover the collection through the social networks widely used by the millennials that are the main target of this collection.',
+        fr: 'A l’occasion du lancement de la collection PS 2017 d’IKEA, l’agence Zmirov a chargé VOLONTIERS de scénographier et produire un événement qui plongeraient les invités dans l\'univers digital d’un millenial.<br>Les journalistes ont donc pu découvrir la collection à travers les réseaux sociaux préférés de cette génération; cible principale de cette nouvelle collection PS.'
+      },
+      preview: '01_IKEA-83.jpg',
+      assets: [
+        '02_IKEA-11.jpg',
+        '03_IKEA-17.jpg',
+        '04_IKEA-7.jpg',
+        '05_IKEA-5.jpg',
+        '06_IKEA-88.jpg',
+        '09_IKEA-78.jpg',
+        '10_IKEA-31.jpg',
+        '13_IKEA-2.jpg',
+        '14_IKEA-27.jpg',
+        '15_IKEA-38.jpg'
+      ]
+    },
+    'nikelab-x-ricardo-tisci-training': {
+      'inHome': false,
       'name': 'nike r.t. and training',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -128,7 +150,7 @@ export default {
       ]
     },
     'airbnb-london': {
-      'inHome': true,
+      'inHome': false,
       'name': 'airbnb london - la maison',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -150,7 +172,7 @@ export default {
       ]
     },
     'pok-fete-de-la-musique': {
-      'inHome': true,
+      'inHome': false,
       'name': 'pok fete de la musique × coca',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -181,27 +203,8 @@ export default {
         '04_3I3A4289.jpg'
       ]
     },
-    'google-curiocite': {
-      'inHome': false,
-      'name': 'google curiocité',
-      'type': Constants.TYPE.EVENT,
-      'about': {
-        en: 'For the launch of the Google Curio-cité project, helmed by AKQA Paris, VOLONTIERS imagined an urban and immersive experience in an unknown location usually closed to the public<br>The first leg of the Curio-Cité project was themed around Urbex which consists in the exploration of abandoned places and whose captured images are a true photographic trend.<br>Guided by David de Rueda, the leading photographer of the movement, journalists, bloggers and the general public were able to learn Urbex by losing themselves within the corridors of an abandoned hospital in the center of Paris and by watching the Curio-cité film in 360° thanks to a new tool launched by Google: the Cardboard Glasses.',
-        fr: 'A l\'occasion du lancement du projet Curio-cité de Google piloté par AKQA, VOLONTIERS a imaginé une expérience urbaine et immersive dans un lieu inédit et habituellement fermé au public.<br>Le premier volet de ce projet avait pour thématique l’Urbex qui consiste en l’exploration de lieux abandonnés et dont les images capturées sont un véritable courant photographique.<br>Guidés par David de Rueda, photographe leader de ce mouvement, journalistes, bloggueurs et grand public ont pu s’initier à l’Urbex en se perdant dans les couloirs d’un hôpital abandonné du 14ème arrondissement et en visionnant le film Curio-cité en 360° grâce à un nouvel outil lancé par Google : les cardboards glasses.'
-      },
-      preview: '01_Ro-Curiocite-day2--3.jpg',
-      assets: [
-        '02_Ro-Curiocite-day2--73.jpg',
-        '03_Ro-Google-Urbex-60.jpg',
-        '04_Ro-Google-Urbex-50.jpg',
-        '05_Ro-Curiocite-day2--78.jpg',
-        '06_Ro-Google-Urbex-38.jpg',
-        '07_Ro-Google-Urbex-4.jpg',
-        'google-curiocite.mp4'
-      ]
-    },
     'nike-acg-2016': {
-      'inHome': false,
+      'inHome': true,
       'name': 'nike acg 2016',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -220,26 +223,23 @@ export default {
         '10_3I3A0482.jpg'
       ]
     },
-    'ikea-ps-2017': {
-      'inHome': false,
-      'name': 'ikea ps 2017',
+    'google-curiocite': {
+      'inHome': true,
+      'name': 'google curiocité',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: 'For the launch of the PS 2017 collection from Ikea, Zmirov agency commissioned VOLONTIERS to design and produce an event that would immerse the guests into the digital world of a millennial. The journalists were able to discover the collection through the social networks widely used by the millennials that are the main target of this collection.',
-        fr: 'A l’occasion du lancement de la collection PS 2017 d’IKEA, l’agence Zmirov a chargé VOLONTIERS de scénographier et produire un événement qui plongeraient les invités dans l\'univers digital d’un millenial.<br>Les journalistes ont donc pu découvrir la collection à travers les réseaux sociaux préférés de cette génération; cible principale de cette nouvelle collection PS.'
+        en: 'For the launch of the Google Curio-cité project, helmed by AKQA Paris, VOLONTIERS imagined an urban and immersive experience in an unknown location usually closed to the public<br>The first leg of the Curio-Cité project was themed around Urbex which consists in the exploration of abandoned places and whose captured images are a true photographic trend.<br>Guided by David de Rueda, the leading photographer of the movement, journalists, bloggers and the general public were able to learn Urbex by losing themselves within the corridors of an abandoned hospital in the center of Paris and by watching the Curio-cité film in 360° thanks to a new tool launched by Google: the Cardboard Glasses.',
+        fr: 'A l\'occasion du lancement du projet Curio-cité de Google piloté par AKQA, VOLONTIERS a imaginé une expérience urbaine et immersive dans un lieu inédit et habituellement fermé au public.<br>Le premier volet de ce projet avait pour thématique l’Urbex qui consiste en l’exploration de lieux abandonnés et dont les images capturées sont un véritable courant photographique.<br>Guidés par David de Rueda, photographe leader de ce mouvement, journalistes, bloggueurs et grand public ont pu s’initier à l’Urbex en se perdant dans les couloirs d’un hôpital abandonné du 14ème arrondissement et en visionnant le film Curio-cité en 360° grâce à un nouvel outil lancé par Google : les cardboards glasses.'
       },
-      preview: '01_IKEA-83.jpg',
+      preview: '03_Ro-Google-Urbex-60.jpg',
       assets: [
-        '02_IKEA-11.jpg',
-        '03_IKEA-17.jpg',
-        '04_IKEA-7.jpg',
-        '05_IKEA-5.jpg',
-        '06_IKEA-88.jpg',
-        '09_IKEA-78.jpg',
-        '10_IKEA-31.jpg',
-        '13_IKEA-2.jpg',
-        '14_IKEA-27.jpg',
-        '15_IKEA-38.jpg'
+        '02_Ro-Curiocite-day2--73.jpg',
+        '01_Ro-Curiocite-day2--3.jpg',
+        '04_Ro-Google-Urbex-50.jpg',
+        '05_Ro-Curiocite-day2--78.jpg',
+        '06_Ro-Google-Urbex-38.jpg',
+        '07_Ro-Google-Urbex-4.jpg',
+        'google-curiocite.mp4'
       ]
     },
     'nikelab-lunar': {
