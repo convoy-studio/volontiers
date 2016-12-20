@@ -281,7 +281,7 @@ class Preview extends BaseComponent {
     const windowH = Store.Window.h * this.pixelRatio
     const resizeVars = this.currentSlide.resize()
     this.currentSlide.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-    this.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1)
+    this.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1) + (this.currentSlide.index * windowH)
   }
   componentWillUnmount() {
     this.slides.forEach((item) => { item.clear() })
