@@ -112,6 +112,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       const offsetX = nextNx * 500
       const offsetY = nextNx * 300
       const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
+      if (pre === 'slide' && index > 0) break
       Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
       break
     case STATE.SCALE_UP:
@@ -128,13 +129,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeTransition(currentSlide, 1, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.02
+      transitionShowTime += 0.01
       const easeIn = transitionShowBezier(transitionShowTime)
       if (transitionShowTime >= 0.8) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.024
+      transitionHideTime += 0.015
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)

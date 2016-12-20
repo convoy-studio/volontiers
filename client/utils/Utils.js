@@ -158,17 +158,17 @@ class Utils {
     let rFactor = 1
     let lFactor = 1
     if (direction.from === Constants.RIGHT && direction.to === Constants.CENTER) {
-      rFactor = 0.4
+      rFactor = 0.75
       lFactor = 1
     } else if (direction.from === Constants.CENTER && direction.to === Constants.LEFT) {
-      rFactor = 0.4
+      rFactor = 0.75
       lFactor = 1
     } else if (direction.from === Constants.LEFT && direction.to === Constants.CENTER) {
       rFactor = 1
-      lFactor = 0.4
+      lFactor = 0.75
     } else if (direction.from === Constants.CENTER && direction.to === Constants.RIGHT) {
       rFactor = 1
-      lFactor = 0.4
+      lFactor = 0.75
     }
     const ntlx = (plane.fverts[0] - plane.verts[0]) * (easing * lFactor)
     const ntly = (plane.fverts[1] - plane.verts[1]) * (easing * lFactor)
