@@ -183,26 +183,8 @@ a {
       @media (max-width: $MQ_SMALL) {
         transform: rotateZ(90deg) translate(0%, 50%) !important;
       }
-
-      .next-arrow {
-        position: absolute;
-        left: 50%;
-        top: 36px;
-        transform-origin: center center;
-        opacity: 0;
-        transform: translateX(-50%) rotate(-90deg);
-
-        polygon {
-          fill: $black;
-        }
-      }
-      @media (max-width: $MQ_SMALL) {
-        &.last .next-arrow{
-          opacity: 0;
-        }
-      }
-      &.hover.last .next-arrow {
-        opacity: 1;
+      &.last .title {
+        color: $pink !important;
       }
     }
     .title {

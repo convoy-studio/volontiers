@@ -49,7 +49,7 @@ class NextPreviousBtns extends BaseComponent {
       <div className='next-previous-container'>
         <MainTitle ref='previousBtn' rotation='-90deg' title={this.content.previousImg} eventId={PREVIOUS_IMAGE} onClick={this.onPreviousClicked} className='link previous' hasMouseEnterLeave={false}></MainTitle>
         <div ref='videoBtn' className={`video-btn ${this.state.videoClass}`} onClick={this.onVideoClick}></div>
-        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' arrow='true' hasMouseEnterLeave={false}></MainTitle>
+        <MainTitle ref='nextBtn' rotation='90deg' title={this.content.nextImg} eventId={NEXT_IMAGE} onClick={this.onNextClicked} className='link next' hasMouseEnterLeave={false}></MainTitle>
       </div>
     )
   }
