@@ -85,7 +85,7 @@ export default (container)=> {
     scope.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1)
   }
   const next = () => {
-    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened) return
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened || Store.State === Constants.STATE.ABOUT) return
     activityHandler.count()
     scope.counter.inc()
     updateCurrentSlide()
@@ -94,7 +94,7 @@ export default (container)=> {
     updateSlideshowState()
   }
   const previous = () => {
-    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened) return
+    if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened || Store.State === Constants.STATE.ABOUT) return
     activityHandler.count()
     scope.counter.dec()
     updateCurrentSlide()

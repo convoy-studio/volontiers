@@ -73,7 +73,7 @@ class Preview extends BaseComponent {
     this.needIntroAnimation = true
   }
   goToProject(e) {
-    if (activityHandler.isReady === false) return
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT) return
     activityHandler.count()
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
