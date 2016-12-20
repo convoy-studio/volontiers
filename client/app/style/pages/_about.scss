@@ -6,6 +6,24 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
+  $h: $mobileLineHeight + 2 * $globalMargin;
+  @media (max-width: $MQ_SMALL) {
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      background-color: $white;
+      height: $h;
+      z-index: -1;
+    }
+    &:before {
+      top: 0;
+    }
+    &:after {
+      bottom: 0;
+    }
+  }
 
   &.show {
     pointer-events: auto;
@@ -23,11 +41,12 @@
     position: absolute 0 0;
     width: 100%;
     text-align: center;
+    z-index: -2 !important;
 
     @media (max-width: $MQ_SMALL) {
       transform: none;
-      top: $mobileLineHeight * 3;
-      bottom: $mobileFontSize * 3;
+      top: $h;
+      bottom: auto;
       left: 0;
       right: 0;
       width: 100%;
@@ -36,13 +55,12 @@
       box-sizing: border-box;
       font-size: $mobileFontSize;
       line-height: $mobileLineHeight;
-      overflow-y: scroll;
     }
   }
 
   .description {
     padding: 0 11.5%;
-    margin-top: 30%;
+    margin-top: 23%;
     @media (max-width: $MQ_SMALL) {
       padding: 0;
       margin-top: 0;
@@ -91,11 +109,6 @@
     right: $globalMargin;
     bottom: $globalMargin;
     text-transform: uppercase;
-
-    @media (max-width: $MQ_SMALL) {
-      right: $mobileMargin;
-      bottom: $mobileMargin;
-    }
   }
   .credits {
     position: absolute;

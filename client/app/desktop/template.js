@@ -28,10 +28,10 @@ export default class AppTemplate extends React.Component {
       <div id='app-template' className={this.state.currentPage}>
         <HelperLayer />
         <BlockInteractionLayer />
-        <About />
         <FrontContainer ref='front-container' />
         <PagesContainer ref='pages-container' />
         <CanvasContainer ref='canvas-container'/>
+        <About />
       </div>
     )
   }

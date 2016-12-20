@@ -12,10 +12,14 @@ export default class About extends BaseComponent {
     this.toggleOverlay = this.toggleOverlay.bind(this)
     this.hideOverlay = this.hideOverlay.bind(this)
     this.toggleAbout = this.toggleAbout.bind(this)
-    this.toggleList = this.toggleList.bind(this)
+    this.toggleCredits = this.toggleCredits.bind(this)
+    this.onPan = this.onPan.bind(this)
     this.isMobile = Store.Detector.isMobile
+    this.pos = 0
     this.hidden = true
     this.listHidden = true
+    const headerHeight = Constants.MOBILE_LINEHEIGHT + 2 * Constants.GLOBAL_MARGIN
+    this.visibleHeight = window.innerHeight - (2 * headerHeight)
     Store.on(Constants.TOGGLE_ABOUT, this.toggleOverlay)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
     Store.on(Constants.ROUTE_CHANGED, this.hideOverlay)
@@ -36,8 +40,8 @@ export default class About extends BaseComponent {
             <p>+ 33 (0) 1 53 69 63 83 | <a className='link btn mail' href='mailto:hello@volontiers.fr' ref='mail'>hello@volontiers.fr</a></p>
           </div>
           <div className='credits' ref='credits'>
-            <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleList} className='link credits__btn'></MainTitle>
-            <p className='credits__list' ref='list'> Design: <a className='link btn' href='https://vimeo.com/volontiersproduction' target='_blank'>M/M Paris</a>, Website: <a className='link btn' href='https://convoy.me' target='_blank'>Convoy</a>, Photography: <a className='link btn' href='https://convoy.me' target='_blank'>Henry Paul</a></p>
+            <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleCredits} className='link credits__btn'></MainTitle>
+            <p className='credits__list' ref='list'> Design: <a className='link btn' href='https://vimeo.com/volontiersproduction' target='_blank'>M/M Paris</a>, Website: <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, Photography: <a className='link btn' href='https://convoy.me' target='_blank'>Henry Paul</a></p>
           </div>
         </div>
         <div className='rs' ref='rs'>
@@ -48,7 +52,13 @@ export default class About extends BaseComponent {
   }
   componentDidMount() {
     this.parent = this.refs['page-wrapper']
+    this.wrapperHeight = dom.size(this.refs.wrapper)[1]
     this.setupAnimations()
+    if (this.isMobile) {
+      this.hammer = new Hammer(this.refs.wrapper)
+      this.hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
+      this.hammer.on('pan', this.onPan)
+    }
   }
   setupAnimations() {
     this.tlBlink = new TimelineMax()
@@ -85,18 +95,31 @@ export default class About extends BaseComponent {
     this.tlOverlayOut.fromTo(this.parent, 0.5, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayOut.pause(0)
   }
+  onPan(e) {
+    if (this.wrapperHeight -  this.visibleHeight < 0) return
+    let newPos = this.pos + (-e.deltaY * 0.1)
+    if (newPos < 0) this.pos = 0
+    else if (newPos > (this.wrapperHeight - this.visibleHeight)) this.pos = this.wrapperHeight - this.visibleHeight
+    else this.pos = newPos
+    TweenMax.set(this.refs.wrapper, { y: -this.pos })
+  }
   toggleAbout(e) {
     if (dom.classes.has(e.target, 'link') || dom.classes.has(e.target, 'title')) return
     setTimeout(() => { Actions.toggleAbout() })
   }
-  toggleList() {
+  toggleCredits() {
     if (this.listHidden) {
       TweenMax.set(this.refs.list, { 'display': 'inline-block' })
+      this.wrapperHeight = dom.size(this.refs.wrapper)[1]
       TweenMax.fromTo(this.refs.list, 0.6, { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: Expo.easeOut })
-      if (this.isMobile) TweenMax.to(this.refs.wrapper, 1, { scrollTop: this.refs.list.getBoundingClientRect().top })
       this.listHidden = false
+      if (this.isMobile && (this.wrapperHeight -  this.visibleHeight > 0)) {
+        this.pos = this.wrapperHeight - this.visibleHeight
+        TweenMax.to(this.refs.wrapper, 0.2, { y: -this.pos })
+      }
     } else {
       TweenMax.set(this.refs.list, { 'display': 'none' })
+      this.wrapperHeight = dom.size(this.refs.wrapper)[1]
       TweenMax.fromTo(this.refs.list, 0.6, { opacity: 1, y: 0 }, { opacity: 0, y: 10, ease: Expo.easeOut })
       this.listHidden = true
     }
