@@ -232,7 +232,7 @@ a {
       transform-origin: right center;
       position: absolute;
       right: $mobileMargin * 2;
-      bottom: -$mobileMargin;
+      bottom: -$mobileMargin * 1.5;
       padding: $mobileMargin 0 $mobileMargin $mobileMargin;
       transform: rotate(90deg) translateY(-50%) !important;
     }
