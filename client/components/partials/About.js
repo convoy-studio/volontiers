@@ -29,15 +29,17 @@ export default class About extends BaseComponent {
     return (
       <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={this.toggleAbout}>
         <div className='wrapper' ref='wrapper'>
-          <div className='description' ref='description'>
-            <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
-            <p dangerouslySetInnerHTML={{__html: content.text[1]}}></p>
-            <p dangerouslySetInnerHTML={{__html: content.text[2]}}></p>
-          </div>
-          <p className='catchline' ref='catchline'>{content.text[3]}</p>
-          <div className='details' ref='details'>
-            <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue Coquillière 75001 Paris - France</a></p>
-            <p>+ 33 (0) 1 53 69 63 83 | <a className='link btn mail' href='mailto:hello@volontiers.fr' ref='mail'>hello@volontiers.fr</a></p>
+          <div className='content'>
+            <div className='description' ref='description'>
+              <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
+              <p dangerouslySetInnerHTML={{__html: content.text[1]}}></p>
+              <p dangerouslySetInnerHTML={{__html: content.text[2]}}></p>
+            </div>
+            <p className='catchline' ref='catchline'>{content.text[3]}</p>
+            <div className='details' ref='details'>
+              <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue Coquillière 75001 Paris - France</a></p>
+              <p>+ 33 (0) 1 53 69 63 83 | <a className='link btn mail' href='mailto:hello@volontiers.fr' ref='mail'>hello@volontiers.fr</a></p>
+            </div>
           </div>
           <div className='credits' ref='credits'>
             <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleCredits} className='link credits__btn'></MainTitle>

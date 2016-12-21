@@ -58,12 +58,21 @@
     }
   }
 
+  .content {
+    display: inline-block;
+    width: 100%;
+    @media (min-width: $MQ_SMALL) {
+      position: absolute;
+      top: 60%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+
   .description {
     padding: 0 11.5%;
-    margin-top: 23%;
     @media (max-width: $MQ_SMALL) {
       padding: 0;
-      margin-top: 0;
     }
     p {
       display: inline-block;
