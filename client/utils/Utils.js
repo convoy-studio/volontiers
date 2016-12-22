@@ -116,22 +116,34 @@ class Utils {
     return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : undefined
   }
   static pixiLoadTexture(id, url, cb) {
-    let scope
-    const loader = new PIXI.loaders.Loader()
-    loader.add(id, url)
-    loader.load()
-    loader.once('complete', (data, resources) => {
-      scope.ext = this.getFileExtension(resources[scope.id].url)
-      if (scope.ext === 'mp4') scope.texture = new PIXI.Texture.fromVideoUrl(resources[scope.id].url)
-      else scope.texture = resources[scope.id].texture
+    let scope = {}
+    let loader
+    const ext = this.getFileExtension(url)
+    if (ext === 'mp4') {
+      loader = undefined
+      scope = {
+        loader,
+        id,
+        url,
+        ext
+      }
+      scope.texture = new PIXI.Texture.fromVideo(url)
       cb(scope)
-      loader.reset()
-    })
-    scope = {
-      loader,
-      id,
-      url,
-      ext: undefined
+    } else {
+      loader = new PIXI.loaders.Loader()
+      scope = {
+        loader,
+        id,
+        url,
+        ext
+      }
+      loader.add(id, url)
+      loader.load()
+      loader.once('complete', (data, resources) => {
+        scope.texture = resources[scope.id].texture
+        cb(scope)
+        loader.reset()
+      })
     }
     return scope
   }

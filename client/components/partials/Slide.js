@@ -46,6 +46,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     done(scope.plane, scope.index)
   }
   const load = (done) => {
+    const ext = Utils.getFileExtension(scope.imgFilename)
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
       scope.ext = data.ext
       if (data.ext === 'mp4') {
