@@ -200,7 +200,8 @@ export default {
       assets: [
         '02_3I3A4006.jpg',
         '03_3I3A4140.jpg',
-        '04_3I3A4289.jpg'
+        '04_3I3A4289.jpg',
+        'ACG-HO15-NIKELAB-P75-LAUNCH-EVENT-HD.mp4'
       ]
     },
     'nike-acg-2016': {
