@@ -127,7 +127,11 @@ class Utils {
         url,
         ext
       }
-      scope.texture = new PIXI.Texture.fromVideo(url)
+      let newUrl = ''
+      if (Store.Detector.isMobile) {
+        newUrl = url.substring(0, url.lastIndexOf('.')) + '-mobile' + url.substring(url.lastIndexOf('.'))
+      } else newUrl = url
+      scope.texture = new PIXI.Texture.fromVideo(newUrl)
       cb(scope)
     } else {
       loader = new PIXI.loaders.Loader()

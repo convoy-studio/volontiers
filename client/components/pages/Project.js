@@ -29,13 +29,16 @@ export default class Project extends Page {
     this.content = Store.getContent('project')
     this.type = Store.Detector.isMobile ? Constants.MOBILE : Constants.DESKTOP
     this.projectInfo = undefined
+    this.state = {
+      assets: undefined
+    }
   }
   render() {
     const content = Store.getCurrentProject()
     const projectContent = JSON.parse(JSON.stringify(content))
     const newRoute = Router.getNewRoute()
     const oldRoute = Router.getOldRoute()
-    if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) projectContent.assets.unshift(content.preview)
+    // if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) projectContent.assets.unshift(content.preview)
     const infoContent = Store.getCurrentAboutContent()
     const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
     this.projectInfo = infoButton ? (<ProjectInfos />) : undefined
@@ -44,7 +47,7 @@ export default class Project extends Page {
         <NextPreviousBtns ref='next-previous-btns' />
         <MainTitle ref='projectTitle' title={projectContent.name} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
         {infoButton}
-        <MainTitle ref='projectCounter' title={`1/${projectContent.assets.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
+        <MainTitle ref='projectCounter' title='' hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
         {this.projectInfo}
       </div>
     )
@@ -55,6 +58,9 @@ export default class Project extends Page {
     TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
     TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
     this.slideshow = slideshow(this.container).load(() => {
+      this.refs.projectCounter.updateState({
+        title: `${this.slideshow.counter.props.index + 1}/${this.slideshow.slides.length}`
+      })
       super.componentDidMount()
     })
   }

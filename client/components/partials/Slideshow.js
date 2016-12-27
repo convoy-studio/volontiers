@@ -16,10 +16,11 @@ export default (container)=> {
     const oldRoute = Router.getOldRoute()
     const assets = projectContent.assets.slice(0)
     if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) assets.unshift(content.preview)
-    scope.counter = counter(assets.length, 0, false)
     assets.forEach((asset, i) => {
+      if (Store.Detector.isMobile && Utils.getFileExtension(asset) === 'mp4') return
       scope.slides.push(slide(newRoute.target, scope.container, `images/${newRoute.target}/${asset}`, i, 'slide'))
     })
+    scope.counter = counter(scope.slides.length, 0, false)
     loadFirstSlide(done)
     return scope
   }
