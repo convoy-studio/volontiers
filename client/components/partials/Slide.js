@@ -17,8 +17,8 @@ const scaleUpBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 const scaleDownBezier = bezier(1, 0.01, 0.14, 1.01, 500)
 let scaleUpTime = 0
 let scaleDownTime = 0
-const transitionHideBezier = bezier(1, 0.01, 0.14, 1.01, 500)
-const transitionShowBezier = bezier(1, 0.01, 0.14, 1.01, 500)
+const transitionHideBezier = bezier(1, 0.13, 0.7, 0.89, 500)
+const transitionShowBezier = bezier(1, 0.13, 0.7, 0.89, 500)
 let transitionHideTime = 0
 let transitionShowTime = 0
 let playing = true
@@ -130,13 +130,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       Utils.planeTransition(currentSlide, 1, scope.direction)
       break
     case STATE.TRANSITION_IN:
-      transitionShowTime += 0.01
+      transitionShowTime += 0.008
       const easeIn = transitionShowBezier(transitionShowTime)
       if (transitionShowTime >= 0.8) scope.activate()
       Utils.planeTransition(currentSlide, easeIn, scope.direction)
       break
     case STATE.TRANSITION_OUT:
-      transitionHideTime += 0.015
+      transitionHideTime += 0.008
       const easeOut = transitionHideBezier(transitionHideTime)
       if (transitionHideTime >= 1) scope.deactivate()
       Utils.planeTransition(currentSlide, easeOut, scope.direction)
