@@ -77,7 +77,7 @@
     p {
       display: inline-block;
       width: 33%;
-      text-align: left;
+      text-align: justify;
       box-sizing: border-box;
       vertical-align: top;
       font-weight: 600;
@@ -88,9 +88,11 @@
         }
         &:nth-child(2) {
           padding: 0 1.25%;
+          padding-top: $globalLineHeight;
         }
         &:nth-child(3) {
           padding-left: 2.5%;
+          padding-top: 2 * $globalLineHeight;
         }
       }
       @media (max-width: $MQ_SMALL) {
@@ -98,7 +100,11 @@
         width: 100%;
         padding: 0;
         margin-bottom: $mobileMargin / 2;
+        &:nth-child(2) {
+          padding-top: $mobileLineHeight;
+        }
         &:nth-child(3) {
+          padding-top: 2 * $mobileLineHeight;
           margin-bottom: 0;
         }
       }

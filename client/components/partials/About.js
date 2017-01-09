@@ -43,7 +43,7 @@ export default class About extends BaseComponent {
           </div>
           <div className='credits' ref='credits'>
             <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleCredits} className='link credits__btn'></MainTitle>
-            <p className='credits__list' ref='list'> Design: <a className='link btn' href='https://vimeo.com/volontiersproduction' target='_blank'>M/M Paris</a>, Website: <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, Photography: <a className='link btn' href='https://convoy.me' target='_blank'>Henry Paul</a></p>
+            <p className='credits__list' ref='list'><a className='link btn' href='https://vimeo.com/volontiersproduction' target='_blank'>M/M Paris</a>, <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, <a className='link btn' href='http://www.vabestudio.com/' target='_blank'>Bertrand Vallé</a>, <a className='link btn' href='http://www.le-studiowhite.com/' target='_blank'>Studio White</a>, <a className='link btn' href='http://www.romainmayoussier.com/' target='_blank'>Romain Mayoussier</a></p>
           </div>
         </div>
         <div className='rs' ref='rs'>
