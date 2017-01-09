@@ -84,7 +84,7 @@ export default {
         '08_SW16043_NIKE_NSW_OR_JJ1153_PR.jpg',
         '09_SW16043_NIKE_NSW_OR_JJ1175_PR.jpg',
         '10_ SW16043_NIKE_NSW_OR_RG1073_PR.jpg',
-        'nike-360-nike-lab-x-Olivier-Rousteing_1.mp4',
+        'nike_lion.mp4',
         'timelapse-wording.mp4'
       ]
     },
