@@ -38,6 +38,7 @@ export default class Project extends Page {
     const projectContent = JSON.parse(JSON.stringify(content))
     const newRoute = Router.getNewRoute()
     const oldRoute = Router.getOldRoute()
+    if (Store.Detector.isMobile) projectContent.name = projectContent.name.substr(0, 25) + '...'
     // if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) projectContent.assets.unshift(content.preview)
     const infoContent = Store.getCurrentAboutContent()
     const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined

@@ -137,7 +137,12 @@ function _getAllHomeProjects() {
   const projects = _getAllProjects()
   const filteredProjects = []
   projects.forEach((item) => {
-    if (item.inHome) filteredProjects.push(item)
+    if (item.inHome !== 0) filteredProjects.push(item)
+  })
+  filteredProjects.sort((a, b) => {
+    if (a.inHome < b.inHome) return -1
+    if (a.inHome > b.inHome) return 1
+    return 0
   })
   return filteredProjects
 }
