@@ -116,10 +116,10 @@
 			position: absolute;
 		}
 		.event-title {
-			left: $globalFontSize + ($thumbW * $thumbScale) + ($globalMargin * 3);
+			left: ($thumbW * $thumbScale) + ($globalMargin * 2);
 		}
 		.retail-title {
-			right: (-$globalFontSize*2) + ($thumbW * $thumbScale) + ($globalMargin * 3);
+			right: (-$globalLineHeight*3) + ($thumbW * $thumbScale) + ($globalMargin * 2);
 		}
 	}
 	.projects-container {

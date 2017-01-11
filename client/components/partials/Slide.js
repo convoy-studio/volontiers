@@ -25,7 +25,7 @@ let playing = true
 
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
-  let initial = {}
+  const initial = {}
   let currentVideoTime = 0
   const createPlane = (texture) => {
     initial.texture = texture
@@ -33,6 +33,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     plane.mesh = new PIXI.mesh.Plane(texture, 2, 2)
     plane.verts = plane.mesh.vertices
     plane.iverts = plane.verts.slice(0)
+    initial.vertices = plane.iverts.slice(0)
     plane.fverts = undefined
     return plane
   }
@@ -72,7 +73,13 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const changeTexture = (path) => {
     const preview = Store.getProjectPreview(path)
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/images/${path}/${preview}`, (data) => {
-      TweenMax.to(scope.plane.mesh, 0.2, { alpha: 0, ease: Sine.easeInOut, onComplete: () => {
+      let tl = undefined
+      tl = new TimelineMax({ onComplete: () => {
+        tl.clear()
+      }})
+      tl.to(scope.plane.mesh, 0.2, { alpha: 0, ease: Sine.easeInOut, onComplete: () => {
+      }})
+      tl.add(() => {
         scope.size[0] = data.texture.width
         scope.size[1] = data.texture.height
         scope.plane.size = scope.size
@@ -84,8 +91,8 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
         scaleDownTime = 0
         scope.state = STATE.SCALE_DOWN_PREVIEW
         if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
-        TweenMax.to(scope.plane.mesh, 0.2, { alpha: 1, ease: Sine.easeInOut })
-      }})
+      })
+      tl.to(scope.plane.mesh, 0.2, { alpha: 1, ease: Sine.easeInOut })
     })
   }
   const resize = () => {
@@ -180,20 +187,25 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     scope.state = STATE.SCALE_DOWN
   }
   const onProjectsOverviewClose = () => {
-    TweenMax.to(scope.plane.mesh, 0.2, { alpha: 0, ease: Sine.easeInOut, onComplete: () => {
+    let tl = undefined
+    tl = new TimelineMax({ onComplete: () => {
+      tl.clear()
+    }})
+    tl.to(scope.plane.mesh, 0.2, { alpha: 0, ease: Sine.easeInOut })
+    tl.add(() => {
       scope.size[0] = initial.texture.width
       scope.size[1] = initial.texture.height
       scope.plane.size = scope.size
       scope.plane.mesh.texture = initial.texture
-      scope.plane.verts = initial.plane.mesh.vertices
-      scope.plane.iverts = scope.plane.verts.slice(0)
+      scope.plane.verts = scope.plane.mesh.vertices
+      scope.plane.iverts = initial.vertices
       setTimeout(() => { Actions.resizeProjectsPreview() })
       scope.direction = { from: Constants.SMALL, to: Constants.CENTER }
       scaleUpTime = 0
-      if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
       scope.state = STATE.SCALE_UP
-      TweenMax.to(scope.plane.mesh, 0.2, { alpha: 1, ease: Sine.easeInOut })
-    }})
+      if (scope.plane) Utils.updateGoToPlanePositions(scope.plane, scope.direction.to)
+    })
+    tl.to(scope.plane.mesh, 0.2, { alpha: 1, ease: Sine.easeInOut })
     removeEvents()
     setTimeout(() => {
       scope.activate()
