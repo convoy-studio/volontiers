@@ -39,10 +39,12 @@ export default class ProjectsOverview extends BaseComponent {
       RETAIL: Store.getProjectsByType(Constants.TYPE.RETAIL)
     }
     this.state = {
-      currentPage: ''
+      currentPage: '',
+      currentProject: ''
     }
     this.currentEventPos = 0
     this.currentRetailPos = 0
+    this.selectedProject = ''
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -75,7 +77,8 @@ export default class ProjectsOverview extends BaseComponent {
   pageTransitionOut() {
     const newRoute = Router.getNewRoute()
     const state = {
-      currentPage: newRoute.type.toLowerCase()
+      currentPage: newRoute.type.toLowerCase(),
+      currentProject: newRoute.target.toLowerCase()
     }
     this.setState(state)
   }
@@ -132,8 +135,8 @@ export default class ProjectsOverview extends BaseComponent {
     })
   }
   previewProject(e) {
-    const slug = e.target.getAttribute('data-slug')
-    setTimeout(() => { Actions.changeProjectsPreview(slug) })
+    this.selectedProject = e.target.getAttribute('data-slug')
+    setTimeout(() => { Actions.changeProjectsPreview(this.selectedProject) })
   }
   open() {
     transitionShowTime = 0
@@ -161,10 +164,10 @@ export default class ProjectsOverview extends BaseComponent {
   }
   didPageChange(item) {
     const route = Router.getNewRoute()
-    if (route.type === 'HOME' || route.type === 'PROJECT') {
-      if (dom.select('#projects-overview .btn.hide') !== null) dom.classes.remove(dom.select('#projects-overview .btn.hide'), 'hide')
-      dom.classes.add(dom.select(`#projects-overview .btn.${route.target}`), 'hide')
-    }
+    // if (route.type === 'HOME' || route.type === 'PROJECT') {
+    //   if (dom.select('#projects-overview .btn.hide') !== null) dom.classes.remove(dom.select('#projects-overview .btn.hide'), 'hide')
+    //   dom.classes.add(dom.select(`#projects-overview .btn.${route.target}`), 'hide')
+    // }
   }
   panEvent(e) {
     let newPos = this.currentEventPos + (e.deltaX * 0.2)
@@ -182,7 +185,7 @@ export default class ProjectsOverview extends BaseComponent {
   }
   onBackgroundClick(e) {
     e.preventDefault()
-    setTimeout(Actions.closeProjectsOverview)
+    Router.setRoute(`/project/${this.selectedProject}`)
   }
   onProjectClick(id)  {
     Router.setRoute(`/project/${id}`)
