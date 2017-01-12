@@ -19,12 +19,21 @@ export default class FrontContainer extends BaseComponent {
     this.onOverviewOpen = this.onOverviewOpen.bind(this)
     this.onOverviewClose = this.onOverviewClose.bind(this)
     this.content = Store.getContent('navigation')
+    this.language = Store.getLang()
     this.langRotation = Store.Detector.isMobile === true ? '90deg' : '0deg'
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.onOverviewClose)
   }
   render() {
+    const langState = {}
+    if (this.language === 'fr') {
+      langState.fr = false
+      langState.en = true
+    } else {
+      langState.en = false
+      langState.fr = true
+    }
     return (
       <header id='front-container' ref='front-container' className="navigation">
         <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
@@ -37,7 +46,9 @@ export default class FrontContainer extends BaseComponent {
               <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={true} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <MainTitle ref='langTitle' title={'en | fr'} hasMouseEnterLeave={true} rotation={this.langRotation} onClick={this.changeLangClick} className='link top-logo-title'></MainTitle>
+              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={langState.en} rotation={this.langRotation} onClick={() => { this.changeLangClick('en') }} className='link top-logo-title lang-button lang-button--en'></MainTitle>
+              <span className="lang-separator">|</span>
+              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={langState.fr} rotation={this.langRotation} onClick={() => { this.changeLangClick('fr') }} className='link top-logo-title lang-button lang-button--fr'></MainTitle>
             </li>
           </ul>
         </div>
@@ -52,17 +63,21 @@ export default class FrontContainer extends BaseComponent {
     setTimeout(() => {
       this.refs.projectsTitle.show()
       this.refs.logo.show()
-      this.refs.langTitle.show()
+      this.refs.langTitleEn.show()
+      this.refs.langTitleFr.show()
       this.refs.aboutTitle.show()
     }, 200)
   }
   onOverviewOpen() {
-    this.refs.langTitle.hide()
+    this.refs.langTitleEn.hide()
+    this.refs.langTitleFr.hide()
   }
   onOverviewClose() {
-    this.refs.langTitle.show()
+    this.refs.langTitleEn.show()
+    this.refs.langTitleFr.show()
   }
-  changeLangClick() {
+  changeLangClick(lang) {
+    if (lang === this.language) return
     setTimeout(() => { Actions.changeLang() })
   }
   aboutClick() {
