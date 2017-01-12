@@ -22,7 +22,7 @@ export default class Home extends Page {
     return (
       <div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <Preview ref='preview'/>
-        <MainTitle ref='projectTitle' title={''} hasMouseEnterLeave={false} className='link bottom-project-title'></MainTitle>
+        <MainTitle ref='projectTitle' title={''} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-title'></MainTitle>
         <MainTitle ref='projectDiscover' title={this.content.discover} hasMouseEnterLeave={true} onClick={this.onDiscoverProjectClick} className='link bottom-project-informations'></MainTitle>
         <MainTitle ref='projectCounter' title={`1/${this.projects.length}`} hasMouseEnterLeave={false} className='link bottom-project-counter'></MainTitle>
       </div>
