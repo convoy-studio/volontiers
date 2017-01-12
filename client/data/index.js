@@ -213,8 +213,8 @@ export default {
       'name': 'NIKELAB ACG 2016',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: 'A "black box" generally refers to the data recorder of a trip. The artist NS DOS traveled to Alaska - equipped with NIKE ACG gear - to record in 3D the unapproachable and hostile nature of the American North. Returning from his journey, the artist has linked the different sensory aspects of his journey through an original composition that immerses the listener in an organic, experimental and unusual musical installation designed by VOLONTIERS.<br>In the NikeLab showroom, we transformed the main room into a modular labyrinth to present the adventure and allow the deepening of the experience of NS DOS, allowing the guests to be immersed in his universe during an acoustic journey . Each guest could play with the modular and portable studio created for the occasion.',
-        fr: 'Une “boite noire” désigne généralement l’enregistreur des données d’un voyage. L’artiste NS DOS a voyagé jusqu’en Alaska - équipé de NIKE ACG - pour y enregistrer la nature inapprivoisée et hostile du grand Nord américain. Revenu de son périple, l’artiste a relié les différents aspects sensoriels de son voyage à travers une composition originale qui immerge l’auditeur dans une installation musicale en 3D, organique et expérimentale mise en scène par VOLONTIERS.<br>Dans le showroom NikeLab, nous avons transformé la salle principale en labyrinthe modulable pour y présenter l’aventure et permettre l’approfondissement de l’expérience de NS DOS, permettant aux invités de se retrouver plongés dans son univers le temps d’un voyage acoustique. Chaque invité pouvait jouer avec le studio modulable et portable créé pour l’occasion.'
+        en: 'A "black box" generally refers to the data recorder of a trip. The artist NS DOS traveled to Alaska - equipped with NIKE ACG gear - to record in 3D the unapproachable and hostile nature of the American North. Returning from his journey, the artist has linked the different sensory aspects of his journey through an original composition that immerses the listener in an organic, experimental and unusual musical installation designed by VOLONTIERS.<br>In the NikeLab showroom, VOLONTIERS transformed the main room into a modular labyrinth to present the adventure and allow the deepening of the experience of NS DOS, allowing the guests to be immersed in his universe during an acoustic journey . Each guest could play with the modular and portable studio created for the occasion.',
+        fr: 'Une “boite noire” désigne généralement l’enregistreur des données d’un voyage. L’artiste NS DOS a voyagé jusqu’en Alaska - équipé de NIKE ACG - pour y enregistrer la nature inapprivoisée et hostile du grand Nord américain. Revenu de son périple, l’artiste a relié les différents aspects sensoriels de son voyage à travers une composition originale qui immerge l’auditeur dans une installation musicale en 3D, organique et expérimentale mise en scène par VOLONTIERS.<br>Dans le showroom NikeLab, VOLONTIERS a transformé la salle principale en labyrinthe modulable pour y présenter l’aventure et permettre l’approfondissement de l’expérience de NS DOS, permettant aux invités de se retrouver plongés dans son univers le temps d’un voyage acoustique. Chaque invité pouvait jouer avec le studio modulable et portable créé pour l’occasion.'
       },
       preview: '01_3I3A0465.jpg',
       assets: [
@@ -244,6 +244,94 @@ export default {
         'ACG-HO15-NIKELAB-P75-LAUNCH-EVENT-HD.mp4'
       ]
     },
+    'nike-acg-2016': {
+      'inHome': 0,
+      'name': 'nike acg 2016',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '3I3A0145.jpg',
+      assets: [
+        '3I3A0160.jpg',
+        '3I3A0206.jpg',
+        '3I3A0509.jpg',
+        '3I3A0550.jpg',
+        '3I3A0567.jpg'
+      ]
+    },
+    'nikelab-x-kim-jones': {
+      'inHome': 0,
+      'name': 'nikelab × kim jones',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '3I3A8050.jpg',
+      assets: [
+        '3I3A8072.jpg',
+        '3I3A8086.jpg'
+      ]
+    },
+    'nikelab-x-kim-jones-at-the-broken-arm': {
+      'inHome': 0,
+      'name': 'nikelab × kim jones @ the broken arm',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'Kim_Jones-TBA_Window.jpg',
+      assets: [
+      ]
+    },
+    'nikelab-x-riccardo-tisci-floral-at-colette': {
+      'inHome': 0,
+      'name': 'nikelab × riccardo tisci floral @ colette',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'Unknown-1.jpg',
+      assets: [
+      ]
+    },
+    'nikelab-x-riccardo-tisci-floral': {
+      'inHome': 0,
+      'name': 'nikelab × riccardo tisci floral',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '3I3A8210.jpg',
+      assets: [
+        '3I3A8219.jpg',
+        '3I3A8238.jpg',
+        '3I3A8241.jpg',
+        '3I3A8287.jpg',
+        '3I3A8324.jpg',
+        '3I3A8376.jpg'
+      ]
+    },
+    'ami-at-bon-marche': {
+      'inHome': 0,
+      'name': 'ami @bon marché',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'DSC02095.jpg',
+      assets: [
+        'DSC02108.jpg',
+        'DSC02145.jpg',
+        'DSC02151.jpg'
+      ]
+    },
     'nikelab-lunar': {
       'inHome': 0,
       'name': 'nikelab lunar',
@@ -270,19 +358,6 @@ export default {
         '3I3A3793.jpg'
       ]
     },
-    'nikelab-ricardo-tisci-bw': {
-      'inHome': 0,
-      'name': 'nikelab ricardo tisci bw',
-      'type': Constants.TYPE.RETAIL,
-      'about': {
-        en: '',
-        fr: ''
-      },
-      preview: '3I3A7786.jpg',
-      assets: [
-        '3I3A7794.jpg'
-      ]
-    },
     'nikelab-olivier-rousteing': {
       'inHome': 0,
       'name': 'nikelab × olivier rousteing',
@@ -291,26 +366,158 @@ export default {
         en: '',
         fr: ''
       },
-      preview: 'OR KEYSHOT-1.jpg',
+      preview: '01_Q0A2713.jpg',
       assets: [
-        '_Q0A2713 copie.jpg',
-        '3I3A4346.jpg',
-        '3I3A4361.jpg',
-        'NIKE_OR3339.jpg'
+        '02_NIKE_X_OR3339.jpg',
+        '03_OR_KEYSHOT-1.jpg',
+        '3I3A4275.jpg',
+        '3I3A4276.jpg',
+        '3I3A4287.jpg',
+        '3I3A4300.jpg',
+        '3I3A4313.jpg',
+        '3I3A4361.jpg'
       ]
     },
-    'nikelab-x-kim-jones': {
+    'nikelab-x-riccardo-tisci-bw': {
       'inHome': 0,
-      'name': 'nikelab × kim jones',
+      'name': 'nikelab × riccardo tisci bw',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
         fr: ''
       },
-      preview: '3I3A8050.jpg',
+      preview: '3I3A7782.jpg',
       assets: [
-        'IMG_0865.jpg',
-        'IMG_0869.jpg'
+        '3I3A7789.jpg',
+        '3I3A7810.jpg'
+      ]
+    },
+    'nikelab-x-stone-island': {
+      'inHome': 0,
+      'name': 'nikelab × stone island',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '3I3A8596.jpg',
+      assets: [
+      ]
+    },
+    'nike-air-max-day-at-citadium': {
+      'inHome': 0,
+      'name': 'nike air max day @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '20160304-Nike-AirMaxBWUltra-16.jpg',
+      assets: [
+        'IMG_2682.jpg',
+        'IMG_2684.jpg'
+      ]
+    },
+    'nike-air-force-1-flyknit-at-citadium': {
+      'inHome': 0,
+      'name': 'nike air force 1 flyknit @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'NIKE-Citadium-24.jpg',
+      assets: [
+        'NIKE-Citadium-30.jpg',
+        'NIKE-Citadium-35.jpg'
+      ]
+    },
+    'nike-beautiful-at-citadium': {
+      'inHome': 0,
+      'name': 'nike beautiful @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '77.jpg',
+      assets: [
+        '78.jpg',
+        '87.jpg'
+      ]
+    },
+    'nike-airmax-bw-ultra-at-citadium': {
+      'inHome': 0,
+      'name': 'nike airmax bw ultra @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '20160304-Nike-AirMaxBWUltra-5.jpg',
+      assets: [
+      ]
+    },
+    'nike-roshe-2-at-citadium': {
+      'inHome': 0,
+      'name': 'nike roshe 2 @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '142.jpg',
+      assets: [
+      ]
+    },
+    'nike-presto-at-citadium': {
+      'inHome': 0,
+      'name': 'nike roshe 2 @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'SU16_PRESTOFLYNKNIT_CITADIUM_8.jpg',
+      assets: [
+        'SU16_PRESTOFLYNKNIT_CITADIUM_9.jpg'
+      ]
+    },
+    'nike-fc-at-citadium': {
+      'inHome': 0,
+      'name': 'nike fc @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '3_1.jpg',
+      assets: [
+      ]
+    },
+    'nike-cortez-liberty-at-citadium': {
+      'inHome': 0,
+      'name': 'nike cortez liberty @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'IMG_1780.jpg',
+      assets: [
+      ]
+    },
+    'nike-lunarcharge-at-citadium': {
+      'inHome': 0,
+      'name': 'nike lunarcharge @citadium',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '70.jpg',
+      assets: [
+        '86.jpg'
       ]
     }
   }
