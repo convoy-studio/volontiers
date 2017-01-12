@@ -66,7 +66,7 @@ export default {
   },
   projects: {
     'nikelab-x-olivier-rousteing': {
-      'inHome': 2,
+      'inHome': 1,
       'name': 'nikelab × olivier rousteing',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -167,7 +167,7 @@ export default {
       ]
     },
     'google-curiocite': {
-      'inHome': 4,
+      'inHome': 5,
       'name': 'GOOGLE - Curio-cité',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -186,7 +186,7 @@ export default {
       ]
     },
     'ikea-ps-2017': {
-      'inHome': 1,
+      'inHome': 2,
       'name': 'IKEA - Collection PS 2017',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -209,7 +209,7 @@ export default {
       ]
     },
     'nikelab-acg-2016': {
-      'inHome': 5,
+      'inHome': 4,
       'name': 'NIKELAB ACG 2016',
       'type': Constants.TYPE.EVENT,
       'about': {
