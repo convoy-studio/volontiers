@@ -99,8 +99,13 @@ class NextPreviousBtns extends BaseComponent {
     Actions.togglePlayVideo()
   }
   goBack() {
+    const oldRoute = Router.getOldRoute()
     const currentRoute = Router.getNewRoute()
-    Router.setRoute(`/home/${currentRoute.target}`)
+    if (oldRoute !== undefined && oldRoute.type === Constants.PROJECT) {
+      Router.setRoute(`/project/${oldRoute.target}`)
+    } else {
+      Router.setRoute(`/home/${currentRoute.target}`)
+    }
   }
   goNext() {
     const next = Store.nextProject()
