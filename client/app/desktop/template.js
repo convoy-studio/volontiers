@@ -7,7 +7,7 @@ import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
 import CanvasContainer from '../../components/CanvasContainer'
 import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
-import HelperLayer from '../../components/partials/HelperLayer'
+// import HelperLayer from '../../components/partials/HelperLayer'
 import About from '../../components/partials/About'
 import raf from 'raf'
 
@@ -26,7 +26,6 @@ export default class AppTemplate extends React.Component {
   render() {
     return (
       <div id='app-template' className={this.state.currentPage}>
-        <HelperLayer />
         <BlockInteractionLayer />
         <FrontContainer ref='front-container' />
         <PagesContainer ref='pages-container' />

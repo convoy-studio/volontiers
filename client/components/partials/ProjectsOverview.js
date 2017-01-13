@@ -52,11 +52,13 @@ export default class ProjectsOverview extends BaseComponent {
     this.onImgLoad = this.onImgLoad.bind(this)
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
+    this.testOrientation = this.testOrientation.bind(this)
     this.previewProject = this.previewProject.bind(this)
     this.didPageChange = this.didPageChange.bind(this)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
+    Store.on(Constants.WINDOW_RESIZE, this.testOrientation)
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.pageTransitionOut)
   }
   render() {
@@ -133,6 +135,11 @@ export default class ProjectsOverview extends BaseComponent {
         </li>
       )
     })
+  }
+  testOrientation() {
+    if (Store.Orientation === Constants.ORIENTATION.LANDSCAPE && Store.Detector.isMobile) {
+      setTimeout(Actions.closeProjectsOverview)
+    }
   }
   previewProject(e) {
     this.selectedProject = e.target.getAttribute('data-slug')

@@ -170,6 +170,7 @@ export default class Project extends Page {
     Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     Store.off(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
+    Store.off(Constants.WINDOW_RESIZE, this.updateButtons)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()
   }

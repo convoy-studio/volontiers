@@ -40,7 +40,6 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const preparePlane = (done, texture) => {
     scope.plane = createPlane(texture)
     scope.plane.size = scope.size
-    initial.plane = scope.plane
     scope.mesh = scope.plane.mesh
     scope.container.addChild(scope.mesh)
     scope.isLoaded = true
@@ -101,7 +100,8 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const windowH = Store.Window.h
     const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
     let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.6
-    if (Store.Detector.isMobile) marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5
+    // Test if mobile : if landscape set to 1 for fullscreen OR test image orientation for set scale
+    if (Store.Detector.isMobile) marginScale = Store.Orientation === Constants.ORIENTATION.LANDSCAPE ? 1 : (orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5)
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale * pixelRatio, windowH * marginScale * pixelRatio, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)

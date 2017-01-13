@@ -73,7 +73,7 @@ class Preview extends BaseComponent {
     this.needIntroAnimation = true
   }
   goToProject(e) {
-    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT) return
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT || (Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE)) return
     activityHandler.count()
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
@@ -235,9 +235,9 @@ class Preview extends BaseComponent {
     else this.container.position.y = -position
   }
   introAnimation() {
-    const windowH = Store.Window.h
+    const windowH = Store.Window.h  * this.pixelRatio
     const position = this.counter.props.index * windowH
-    this.container.position.y = -this.projects.length * windowH * this.pixelRatio
+    this.container.position.y = -this.projects.length * windowH
     this.introAnimationFinished = true
     const tl = new TimelineMax({ onComplete: () => {
       tl.clear()
@@ -260,9 +260,9 @@ class Preview extends BaseComponent {
     this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
   }
   keyboardTriggered(key) {
-    if (key === Constants.RIGHT || key === Constants.DOWN) this.onScroll(1)
-    else if (key === Constants.LEFT || key === Constants.UP) this.onScroll(-1)
-    else Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+    if (key === Constants.DOWN) this.onScroll(1)
+    else if (key === Constants.UP) this.onScroll(-1)
+    else if (!((Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE))) Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
   }
   resize() {
     if (!this.slides || this.slides.length < 1) return
@@ -272,7 +272,7 @@ class Preview extends BaseComponent {
       const resizeVars = item.resize()
       if (item.isLoaded) {
         item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+        item.mesh.position.y = (Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE) ? i * windowH : ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
       }
     })
   }

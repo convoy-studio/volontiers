@@ -205,29 +205,31 @@ class Utils {
   }
   static setDefaultPlanePositions(plane, position) {
     const windowShift = Store.Orientation === Constants.ORIENTATION.PORTRAIT === true ? Store.Window.h * 1.5 : Store.Window.w
+    const mobileShift = Store.Detector.isMobile ? 3 : 1
     if (position === Constants.RIGHT) {
-      plane.verts[0] = plane.iverts[0] + (windowShift * 5)
+      plane.verts[0] = plane.iverts[0] + (windowShift * 5 * mobileShift)
       plane.verts[1] = plane.iverts[1] - (windowShift >> 1)
-      plane.verts[2] = plane.iverts[2] + (windowShift * 3)
+      plane.verts[2] = plane.iverts[2] + (windowShift * 3 * mobileShift)
       plane.verts[3] = plane.iverts[3] - (windowShift >> 1)
-      plane.verts[4] = plane.iverts[4] + (windowShift * 5)
+      plane.verts[4] = plane.iverts[4] + (windowShift * 5 * mobileShift)
       plane.verts[5] = plane.iverts[5] + (windowShift >> 1)
-      plane.verts[6] = plane.iverts[6] + (windowShift * 3)
+      plane.verts[6] = plane.iverts[6] + (windowShift * 3 * mobileShift)
       plane.verts[7] = plane.iverts[7] + (windowShift >> 1)
     } else if (position === Constants.LEFT) {
-      plane.verts[0] = plane.iverts[0] - (windowShift * 5)
+      plane.verts[0] = plane.iverts[0] - (windowShift * 5 * mobileShift)
       plane.verts[1] = plane.iverts[1] + (windowShift >> 1)
-      plane.verts[2] = plane.iverts[2] - (windowShift * 3)
+      plane.verts[2] = plane.iverts[2] - (windowShift * 3 * mobileShift)
       plane.verts[3] = plane.iverts[3] + (windowShift >> 1)
-      plane.verts[4] = plane.iverts[4] - (windowShift * 5)
+      plane.verts[4] = plane.iverts[4] - (windowShift * 5 * mobileShift)
       plane.verts[5] = plane.iverts[5] - (windowShift >> 1)
-      plane.verts[6] = plane.iverts[6] - (windowShift * 3)
+      plane.verts[6] = plane.iverts[6] - (windowShift * 3 * mobileShift)
       plane.verts[7] = plane.iverts[7] - (windowShift >> 1)
     }
   }
   static updateGoToPlanePositions(plane, dir) {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
+    const mobileShift = Store.Detector.isMobile ? 3 : 1
     plane.fverts = plane.verts.slice(0)
     switch (dir) {
     case Constants.SMALL:
@@ -267,23 +269,23 @@ class Utils {
       plane.fverts[7] = plane.verts[7] - (windowH * Utils.rand(5.2, 6, 1))
       break
     case Constants.LEFT:
-      plane.fverts[0] = plane.verts[0] - (windowW * 3)
+      plane.fverts[0] = plane.verts[0] - (windowW * 3 * mobileShift)
       plane.fverts[1] = plane.verts[1] + (windowW >> 1)
-      plane.fverts[2] = plane.verts[2] - (windowW * 5)
+      plane.fverts[2] = plane.verts[2] - (windowW * 5 * mobileShift)
       plane.fverts[3] = plane.verts[3] + (windowW >> 1)
-      plane.fverts[4] = plane.verts[4] - (windowW * 3)
+      plane.fverts[4] = plane.verts[4] - (windowW * 3 * mobileShift)
       plane.fverts[5] = plane.verts[5] - (windowW >> 1)
-      plane.fverts[6] = plane.verts[6] - (windowW * 5)
+      plane.fverts[6] = plane.verts[6] - (windowW * 5 * mobileShift)
       plane.fverts[7] = plane.verts[7] - (windowW >> 1)
       break
     case Constants.RIGHT:
-      plane.fverts[0] = plane.verts[0] + (windowW * 5)
+      plane.fverts[0] = plane.verts[0] + (windowW * 5 * mobileShift)
       plane.fverts[1] = plane.verts[1] + (windowW >> 1)
-      plane.fverts[2] = plane.verts[2] + (windowW * 3)
+      plane.fverts[2] = plane.verts[2] + (windowW * 3 * mobileShift)
       plane.fverts[3] = plane.verts[3] + (windowW >> 1)
-      plane.fverts[4] = plane.verts[4] + (windowW * 5)
+      plane.fverts[4] = plane.verts[4] + (windowW * 5 * mobileShift)
       plane.fverts[5] = plane.verts[5] - (windowW >> 1)
-      plane.fverts[6] = plane.verts[6] + (windowW * 3)
+      plane.fverts[6] = plane.verts[6] + (windowW * 3 * mobileShift)
       plane.fverts[7] = plane.verts[7] - (windowW >> 1)
       break
     default:

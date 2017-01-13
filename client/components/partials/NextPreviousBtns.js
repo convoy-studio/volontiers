@@ -202,8 +202,8 @@ class NextPreviousBtns extends BaseComponent {
     this.resize()
   }
   keyboardTriggered(key) {
-    if ((key === Constants.LEFT || key === Constants.DOWN) && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
-    else if ((key === Constants.RIGHT || key === Constants.UP) && this.currentState === Constants.SLIDESHOW.END) this.goNext()
+    if ((key === Constants.LEFT) && this.currentState === Constants.SLIDESHOW.BEGIN) this.goBack()
+    else if ((key === Constants.RIGHT) && this.currentState === Constants.SLIDESHOW.END) this.goNext()
   }
   scrollTriggered(direction) {
     if (Store.State === Constants.STATE.PROJECTS) return
