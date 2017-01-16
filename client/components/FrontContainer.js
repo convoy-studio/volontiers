@@ -9,6 +9,7 @@ import Logo from './partials/Logo'
 import dom from 'dom-hand'
 import {PagerStore, PagerActions, PagerConstants} from './../pager/Pager'
 
+
 export default class FrontContainer extends BaseComponent {
   constructor(props) {
     super(props)
@@ -81,9 +82,12 @@ export default class FrontContainer extends BaseComponent {
     setTimeout(() => { Actions.changeLang() })
   }
   aboutClick() {
-    setTimeout(() => { Actions.toggleAbout() })
+    if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) {
+      setTimeout(() => { Actions.toggleAbout() })
+    }
   }
   onProjectsClick() {
+    if (Store.CurrentSlide.state !== Constants.STATE.ACTIVE) return
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
     else setTimeout(Actions.openProjectsOverview)
   }

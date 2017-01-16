@@ -284,6 +284,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   AllHomeProjects: _getAllHomeProjects(), // cache home projects array
   State: Constants.STATE.NORMAL,
   ProjectsSlugs: [],
+  CurrentSlide: {},
   CurrentPreviewIndex: 0,
   CurrentProjectSlideIndex: 0,
   AllPreviewsLoaded: false,
@@ -325,6 +326,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
+      Store.emitChange(action.actionType, action.item)
+      break
+    case Constants.CURRENT_SLIDE_CHANGED:
+      Store.CurrentSlide = action.item
       Store.emitChange(action.actionType, action.item)
       break
     case Constants.PREVIEWS_LOADED:

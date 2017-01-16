@@ -221,6 +221,7 @@ class Preview extends BaseComponent {
   updateCurrentSlide() {
     this.oldSlide = this.currentSlide
     this.currentSlide = this.slides[this.counter.props.index]
+    setTimeout(() => { Actions.currentSlideChanged(this.currentSlide) })
     if (this.oldSlide) this.oldSlide.deactivate()
     if (this.firstPreviewLoaded) this.currentSlide.activate()
     this.animateContainer()

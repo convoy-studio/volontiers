@@ -111,6 +111,7 @@ export default (container)=> {
   const updateCurrentSlide = () => {
     scope.oldSlide = scope.currentSlide
     scope.currentSlide = scope.slides[scope.counter.props.index]
+    setTimeout(() => { Actions.currentSlideChanged(scope.currentSlide) })
   }
   const update = () => {
     scope.slides.forEach((item) => {
