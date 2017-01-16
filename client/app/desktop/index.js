@@ -57,7 +57,7 @@ class App {
     this.logoAnim.fromTo(dom.select('.letter-r'), 1, { x: 0, rotation: -360, transformOrigin: '50% 50%' }, { x: 336, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.fromTo(dom.select('.letter-s'), 1, { x: 0, rotation: 360, transformOrigin: '50% 50%' }, { x: 439, rotation: 0, ease: Expo.easeInOut}, delayLetters)
     this.logoAnim.from(baselineEl, 0.6, { opacity: 0, y: 10, transformOrigin: '50% 50%', ease: Expo.easeOut}, delayLetters + 1)
-    this.logoAnim.timeScale(0.7)
+    this.logoAnim.timeScale(1.2)
   }
   introAnimation() {
     dom.classes.add(this.landingEl, 'behind')
