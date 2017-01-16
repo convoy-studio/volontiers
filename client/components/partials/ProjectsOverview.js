@@ -28,6 +28,7 @@ const thumbH = 159
 const mobileScale = 0.6
 
 let showTitlesTimeout = undefined
+let changeTextureTimeout = undefined
 
 export default class ProjectsOverview extends BaseComponent {
   constructor(props) {
@@ -53,7 +54,8 @@ export default class ProjectsOverview extends BaseComponent {
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
     this.testOrientation = this.testOrientation.bind(this)
-    this.previewProject = this.previewProject.bind(this)
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseLeave = this.onMouseLeave.bind(this)
     this.didPageChange = this.didPageChange.bind(this)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
@@ -121,7 +123,7 @@ export default class ProjectsOverview extends BaseComponent {
     const projects = this.projects[id]
     return projects.map((project, index) => {
       return (
-        <li key={`${id}_${index}`} onMouseEnter={this.previewProject} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`} data-slug={project.slug}>
+        <li key={`${id}_${index}`} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`} data-slug={project.slug}>
           <div className="project-container">
             <div className="title-holder">
               <div className="vertical-center-parent">
@@ -141,9 +143,16 @@ export default class ProjectsOverview extends BaseComponent {
       setTimeout(Actions.closeProjectsOverview)
     }
   }
-  previewProject(e) {
-    this.selectedProject = e.target.getAttribute('data-slug')
-    setTimeout(() => { Actions.changeProjectsPreview(this.selectedProject) })
+  onMouseEnter(e) {
+    clearTimeout(changeTextureTimeout)
+    const hovered = e.target.getAttribute('data-slug')
+    if (this.selectedProject !== hovered) {
+      this.selectedProject = hovered
+      changeTextureTimeout = setTimeout(() => { Actions.changeProjectsPreview(this.selectedProject) }, 500)
+    }
+  }
+  onMouseLeave() {
+    clearTimeout(changeTextureTimeout)
   }
   open() {
     transitionShowTime = 0
@@ -249,8 +258,9 @@ export default class ProjectsOverview extends BaseComponent {
   positionContainerDependsMousePosition(project, windowH) {
     project.norm[0] += (project.nx - project.norm[0]) * 0.1
     const nY = Store.Mouse.nY - 2
+    // const remain = (project.size[1] - windowH) * project.norm[0]
     const remain = (project.size[1] - windowH) * project.norm[0]
-    const posY = (nY / 1) * (-remain)
+    const posY = (nY / 1.35) * (-remain)
     project.pos[1] += (posY - project.pos[1]) * 0.1
     Utils.translate(project.el, project.pos[0], project.pos[1], 1)
   }
