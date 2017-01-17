@@ -17,14 +17,10 @@ export default class FrontContainer extends BaseComponent {
     this.changeLangClick = this.changeLangClick.bind(this)
     this.aboutClick = this.aboutClick.bind(this)
     this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
-    this.onOverviewOpen = this.onOverviewOpen.bind(this)
-    this.onOverviewClose = this.onOverviewClose.bind(this)
     this.content = Store.getContent('navigation')
     this.language = Store.getLang()
     this.langRotation = Store.Detector.isMobile === true ? '90deg' : '0deg'
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
-    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.onOverviewOpen)
-    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.onOverviewClose)
   }
   render() {
     const langState = {}
@@ -68,14 +64,6 @@ export default class FrontContainer extends BaseComponent {
       this.refs.langTitleFr.show()
       this.refs.aboutTitle.show()
     }, 200)
-  }
-  onOverviewOpen() {
-    this.refs.langTitleEn.hide()
-    this.refs.langTitleFr.hide()
-  }
-  onOverviewClose() {
-    this.refs.langTitleEn.show()
-    this.refs.langTitleFr.show()
   }
   changeLangClick(lang) {
     if (lang === this.language) return
