@@ -71,7 +71,7 @@ export default class Home extends Page {
   didPreviewChange(item) {
     const project = this.projects[item.previewIdx]
     this.refs.projectTitle.updateState({
-      title: project.title
+      title: project.brand + project.separator + project.project
     })
     setTimeout(() => {
       if (this.refs.projectCounter) {

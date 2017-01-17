@@ -67,7 +67,9 @@ export default {
   projects: {
     'nikelab-x-olivier-rousteing': {
       'inHome': 1,
-      'name': 'nikelab × olivier rousteing',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'olivier rousteing',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To unveil collaboration between Nike and the artistic director of Balmain, Olivier Rousteing, VOLONTIERS has designed and produced a show of great magnitude.<br>The castle of the Cité Universitaire de Paris was invested and transformed to welcome the numerous guests around a cocktail during which they were able to discover a set featuring the football heritage of the brand. The doors were then opened onto the outside garden, revealing an impressive dome with 30 meter in diameter, erected for the occasion.<br>Inside, a 360° mapping projection served as a backdrop to a fashion show featuring the collection. Organized to an inch, this show blends mannequins evolving around a pyramid structure and dancers whose movements interacted with projected images. From a towering golden Dj booth, perched at the top of the pyramid, A-Chal & several famous DJs performed live until the late hours of the night.',
@@ -90,7 +92,9 @@ export default {
     },
     'airbnb-london': {
       'inHome': 0,
-      'name': 'Airbnb - The London #LiveThere House',
+      'brand': 'Airbnb',
+      'separator': ' - ',
+      'project': 'The London #LiveThere House',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To breathe life into the “Don’t go there, live there" AIRBNB campaign, orchestrated by the AKQA Paris agency, which purpose was to urge tourists to take possession of the cities they visited as only locals would, VOLONTIERS took up residency in an Airbnb house in London, and imagined many workshops to pace said house during 4 days.<br>In London, a magnificent home was redecorated for the occasion, each room offering its audience an immersive and authentic experience of London’s extremely vibrant local life through the themes of music, culture, gastronomy and sports.',
@@ -112,7 +116,9 @@ export default {
     },
     'airbnb-paris': {
       'inHome': 3,
-      'name': 'airbnb paris - la maison parisienne',
+      'brand': 'Airbnb PARIS',
+      'separator': ' - ',
+      'project': 'la maison parisienne',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To breathe life into the “Don’t go there, live there" AIRBNB campaign, orchestrated by the AKQA Paris agency, which purpose was to urge tourists to take possession of the cities they visited as only locals would, VOLONTIERS took up residency in an AirBNB house and imagined many workshops to pace the house during 4 days.<br>In Paris, a magnificent home was redecorated for the occasion, each room offering its audience an immersive and authentic experience of Parisian local life through different thematic such as music, culture, gastronomy and sports.',
@@ -134,7 +140,9 @@ export default {
     },
     'pok-fete-de-la-musique': {
       'inHome': 0,
-      'name': 'COCA-COLA - Fête de la Musique by Pain O choKolat',
+      'brand': 'COCA-COLA',
+      'separator': ' - ',
+      'project': 'Fête de la Musique by Pain O choKolat',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'In order to reinforce its presence on social networks, Coca Cola wanted to invited for the first time 20 international influencers to a dream weekend in Paris. Their program: watch a European Football Cup match from a private box at the stadium, culinary experiences and a box including a t-shirt designed for the occasion as well as a bottle bearing the effigy of each guest. This weekend was punctuated by La Fete de la Musique organized by Pain O choKolat in which were participating artists such as Asap Rocky.',
@@ -151,7 +159,9 @@ export default {
     },
     'nikelab-x-ricardo-tisci-training': {
       'inHome': 0,
-      'name': 'NIKELAB x RICCARDO TISCI - Training',
+      'brand': 'NIKELAB',
+      'separator': ' x ',
+      'project': 'RICCARDO TISCI - Training',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'VOLONTIERS staged the NIKELAB x RICCARDO TISCI collection through a training session attended by a group of Parisian influencers.<br>This session, led by the multimedia artist NS DOS, offered to redefine the concept of training, both physically and psychologically, through endurance and adaptability exercises derived from Systema, a Russian martial art. A video tracking device captured the participants\' movements, translating them into data and creating imagery and sounds broadcast in our space, in real time.',
@@ -168,7 +178,9 @@ export default {
     },
     'google-curiocite': {
       'inHome': 5,
-      'name': 'GOOGLE - Curio-cité',
+      'brand': 'GOOGLE',
+      'separator': ' - ',
+      'project': 'Curio-cité',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the launch of the Google Curio-cité project, helmed by AKQA Paris, VOLONTIERS imagined an urban and immersive experience in an unknown location usually closed to the public<br>The first leg of the Curio-Cité project was themed around Urbex which consists in the exploration of abandoned places and whose captured images are a true photographic trend.<br>Guided by David de Rueda, the leading photographer of the movement, journalists, bloggers and the general public were able to learn Urbex by losing themselves within the corridors of an abandoned hospital in the center of Paris and by watching the Curio-cité film in 360° thanks to a new tool launched by Google: the Cardboard Glasses.',
@@ -187,7 +199,9 @@ export default {
     },
     'ikea-ps-2017': {
       'inHome': 2,
-      'name': 'IKEA - Collection PS 2017',
+      'brand': 'IKEA',
+      'separator': ' - ',
+      'project': 'Collection PS 2017',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the launch of the PS 2017 collection from Ikea, Zmirov agency commissioned VOLONTIERS to design and produce an event that would immerse the guests into the digital world of a millennial. The journalists were able to discover the collection through the social networks widely used by the millennials that are the main target of this collection.',
@@ -210,7 +224,9 @@ export default {
     },
     'nikelab-acg-2016': {
       'inHome': 4,
-      'name': 'NIKELAB ACG 2016',
+      'brand': 'NIKELAB',
+      'separator': ' ',
+      'project': 'ACG 2016',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'A "black box" generally refers to the data recorder of a trip. The artist NS DOS traveled to Alaska - equipped with NIKE ACG gear - to record in 3D the unapproachable and hostile nature of the American North. Returning from his journey, the artist has linked the different sensory aspects of his journey through an original composition that immerses the listener in an organic, experimental and unusual musical installation designed by VOLONTIERS.<br>In the NikeLab showroom, VOLONTIERS transformed the main room into a modular labyrinth to present the adventure and allow the deepening of the experience of NS DOS, allowing the guests to be immersed in his universe during an acoustic journey . Each guest could play with the modular and portable studio created for the occasion.',
@@ -230,7 +246,9 @@ export default {
     },
     'nikelab-acg-2015': {
       'inHome': 0,
-      'name': 'NIKELAB ACG 2015',
+      'brand': 'NIKELAB',
+      'separator': ' ',
+      'project': 'ACG 2015',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To celebrate the 2015 Nike ACG collection, VOLONTIERS has imagined, inside the Parisian NikeLab store, a set-up of the visuals created by the teams of Novembre magazine. A set-up that shouldn’t take up more of the limited space of the shop which had to also host a DJ booth as well as a bar which cocktails were directly inspired by the collection.',
@@ -246,7 +264,9 @@ export default {
     },
     'nike-acg-2016': {
       'inHome': 0,
-      'name': 'nike acg 2016',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'acg 2016',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -263,7 +283,9 @@ export default {
     },
     'nikelab-x-kim-jones': {
       'inHome': 0,
-      'name': 'nikelab × kim jones',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'kim jones',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -277,7 +299,9 @@ export default {
     },
     'nikelab-x-kim-jones-at-the-broken-arm': {
       'inHome': 0,
-      'name': 'nikelab × kim jones @ the broken arm',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'kim jones @the broken arm',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -289,7 +313,9 @@ export default {
     },
     'nikelab-x-riccardo-tisci-floral-at-colette': {
       'inHome': 0,
-      'name': 'nikelab × riccardo tisci floral @ colette',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'riccardo tisci floral @colette',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -301,7 +327,9 @@ export default {
     },
     'nikelab-x-riccardo-tisci-floral': {
       'inHome': 0,
-      'name': 'nikelab × riccardo tisci floral',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'riccardo tisci floral',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -319,7 +347,9 @@ export default {
     },
     'ami-at-bon-marche': {
       'inHome': 0,
-      'name': 'ami @bon marché',
+      'brand': 'ami',
+      'separator': ' ',
+      'project': '@bon marché',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -334,7 +364,9 @@ export default {
     },
     'nikelab-lunar': {
       'inHome': 0,
-      'name': 'nikelab lunar',
+      'brand': 'nikelab',
+      'separator': ' ',
+      'project': 'lunar',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -347,7 +379,9 @@ export default {
     },
     'nikelab-talaria': {
       'inHome': 0,
-      'name': 'nikelab talaria',
+      'brand': 'nikelab',
+      'separator': ' ',
+      'project': 'talaria',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -360,7 +394,9 @@ export default {
     },
     'nikelab-olivier-rousteing': {
       'inHome': 0,
-      'name': 'nikelab × olivier rousteing',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'olivier rousteing',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -380,7 +416,9 @@ export default {
     },
     'nikelab-x-riccardo-tisci-bw': {
       'inHome': 0,
-      'name': 'nikelab × riccardo tisci bw',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'riccardo tisci bw',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -394,7 +432,9 @@ export default {
     },
     'nikelab-x-stone-island': {
       'inHome': 0,
-      'name': 'nikelab × stone island',
+      'brand': 'nikelab',
+      'separator': ' × ',
+      'project': 'stone island',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -406,7 +446,9 @@ export default {
     },
     'nike-air-max-day-at-citadium': {
       'inHome': 0,
-      'name': 'nike air max day @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'air max day @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -420,7 +462,9 @@ export default {
     },
     'nike-air-force-1-flyknit-at-citadium': {
       'inHome': 0,
-      'name': 'nike air force 1 flyknit @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'air force 1 flyknit @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -434,7 +478,9 @@ export default {
     },
     'nike-beautiful-at-citadium': {
       'inHome': 0,
-      'name': 'nike beautiful @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'beautiful @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -448,7 +494,9 @@ export default {
     },
     'nike-airmax-bw-ultra-at-citadium': {
       'inHome': 0,
-      'name': 'nike airmax bw ultra @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'airmax bw ultra @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -460,7 +508,9 @@ export default {
     },
     'nike-roshe-2-at-citadium': {
       'inHome': 0,
-      'name': 'nike roshe 2 @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'roshe 2 @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -472,7 +522,9 @@ export default {
     },
     'nike-presto-at-citadium': {
       'inHome': 0,
-      'name': 'nike roshe 2 @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'presto @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -485,7 +537,9 @@ export default {
     },
     'nike-fc-at-citadium': {
       'inHome': 0,
-      'name': 'nike fc @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'fc @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -497,7 +551,9 @@ export default {
     },
     'nike-cortez-liberty-at-citadium': {
       'inHome': 0,
-      'name': 'nike cortez liberty @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'cortez liberty @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -509,7 +565,9 @@ export default {
     },
     'nike-lunarcharge-at-citadium': {
       'inHome': 0,
-      'name': 'nike lunarcharge @citadium',
+      'brand': 'nike',
+      'separator': ' ',
+      'project': 'lunarcharge @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',

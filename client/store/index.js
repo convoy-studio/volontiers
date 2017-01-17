@@ -124,7 +124,9 @@ function _getAllProjects() {
     if ({}.hasOwnProperty.call(data.projects, k)) {
       projects.push({
         slug: k,
-        title: data.projects[k].name,
+        brand: data.projects[k].brand,
+        separator: data.projects[k].separator,
+        project: data.projects[k].project,
         type: data.projects[k].type,
         inHome: data.projects[k].inHome,
         image: `images/${k}/${data.projects[k].preview}`

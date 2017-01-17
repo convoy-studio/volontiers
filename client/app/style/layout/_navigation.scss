@@ -39,11 +39,18 @@
     top: 0;
     display: inline-block;
     z-index: 7;
+    pointer-events: none;
     ul {
       display: inline-block;
+      pointer-events: none;
       li {
         display: inline-block;
-        pointer-events: all;
+        pointer-events: none;
+
+        .btn {
+          pointer-events: all;
+        }
+
         @media (min-width: $MQ_SMALL) {
           &:first-child { // about btn
             margin-top: -($globalMargin);

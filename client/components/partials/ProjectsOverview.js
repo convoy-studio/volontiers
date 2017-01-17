@@ -25,6 +25,7 @@ let transitionShowTime = 0
 const initialPos = 400
 const thumbW = 238
 const thumbH = 159
+const thumbHFull = 179
 const mobileScale = 0.6
 
 let showTitlesTimeout = undefined
@@ -87,6 +88,8 @@ export default class ProjectsOverview extends BaseComponent {
     this.setState(state)
   }
   componentDidMount() {
+    this.eventProjectsHeight = (this.projects.EVENT.length + 3) * thumbHFull
+    this.retailProjectsHeight = (this.projects.RETAIL.length + 3) * thumbHFull
     if (Store.Detector.isMobile) {
       const eventProjectsEl = this.refs['event-projects']
       const retailProjectsEl = this.refs['retail-projects']
@@ -127,7 +130,7 @@ export default class ProjectsOverview extends BaseComponent {
           <div className="project-container">
             <div className="title-holder">
               <div className="vertical-center-parent">
-                <p className="vertical-center-child">{project.title}</p>
+                <p className="vertical-center-child"><span>{project.brand}</span><br/>{project.project}</p>
               </div>
             </div>
             <div className="thumbnail-holder">
@@ -230,8 +233,8 @@ export default class ProjectsOverview extends BaseComponent {
     this.direction = Store.Mouse.x > (windowW >> 1) ? Constants.RIGHT : Constants.LEFT
     this.eventProjects.nx = Math.abs(Math.min(0, Store.Mouse.nX))
     this.retailProjects.nx = Math.abs(Math.max(0, Store.Mouse.nX))
-    this.positionContainerDependsMousePosition(this.eventProjects, windowH)
-    this.positionContainerDependsMousePosition(this.retailProjects, windowH)
+    this.positionContainerDependsMousePosition(this.eventProjects, windowH, this.eventProjectsHeight)
+    this.positionContainerDependsMousePosition(this.retailProjects, windowH, this.retailProjectsHeight)
     switch (this.animationsState) {
     case STATE.TRANSITION_IN:
       transitionShowTime += 0.02
@@ -255,13 +258,12 @@ export default class ProjectsOverview extends BaseComponent {
     default:
     }
   }
-  positionContainerDependsMousePosition(project, windowH) {
+  positionContainerDependsMousePosition(project, windowH, height) {
     project.norm[0] += (project.nx - project.norm[0]) * 0.1
     const nY = Store.Mouse.nY - 2
-    // const remain = (project.size[1] - windowH) * project.norm[0]
-    const remain = (project.size[1] - windowH) * project.norm[0]
-    const posY = (nY / 1.35) * (-remain)
-    project.pos[1] += (posY - project.pos[1]) * 0.1
+    const remain = (height - windowH) * project.norm[0]
+    const posY = (nY / 2) * (-remain)
+    project.pos[1] += (posY - project.pos[1]) * 0.05
     Utils.translate(project.el, project.pos[0], project.pos[1], 1)
   }
   resize() {

@@ -167,6 +167,9 @@
 						font-size: $mobileFontSize;
 						line-height: $mobileLineHeight;
 					}
+					span {
+						text-transform: uppercase;
+					}
 				}
 			}
 			&:hover {
