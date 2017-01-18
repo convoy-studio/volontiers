@@ -74,12 +74,14 @@ export default class About extends BaseComponent {
     this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (6 * lengthBlink) - 0.1)
     this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 7 * lengthBlink )
     this.tlBlink.pause(0)
-    this.tlOverlayIn = new TimelineMax({ onComplete: () => {
-      dom.classes.add(this.parent, 'show')
-      this.tlBlink.play(0)
-    }})
+    this.tlOverlayIn = new TimelineMax({
+      paused: true,
+      onComplete: () => {
+        dom.classes.add(this.parent, 'show')
+        this.tlBlink.play(0)
+      }
+    })
     this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
-    this.tlOverlayIn.set(this.refs.list, { opacity: '0' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
     this.tlOverlayIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff' }, 0)
     this.tlOverlayIn.staggerFromTo(this.refs.description.children, 0.7, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 0.2, 0.5)
@@ -87,15 +89,16 @@ export default class About extends BaseComponent {
     this.tlOverlayIn.fromTo(this.refs.details, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.2)
     this.tlOverlayIn.addCallback(this.refs.creditsBtn.show, 1.4)
     this.tlOverlayIn.fromTo(this.refs.rs, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.4)
-    this.tlOverlayIn.pause(0)
 
-    this.tlOverlayOut = new TimelineMax({ onComplete: () => {
-      dom.classes.remove(this.parent, 'show')
-      this.refs.creditsBtn.hide()
-      TweenMax.set(this.parent, { visibility: 'hidden' })
-    }})
+    this.tlOverlayOut = new TimelineMax({
+      paused: true,
+      onComplete: () => {
+        dom.classes.remove(this.parent, 'show')
+        this.refs.creditsBtn.hide()
+        TweenMax.set(this.parent, { visibility: 'hidden' })
+      }
+    })
     this.tlOverlayOut.fromTo(this.parent, 0.5, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOverlayOut.pause(0)
   }
   onPan(e) {
     if (this.wrapperHeight -  this.visibleHeight < 0) return

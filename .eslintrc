@@ -137,7 +137,7 @@
     "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
     "padded-blocks": [2, "never"],   // http://eslint.org/docs/rules/padded-blocks
-    "semi": [2, "never"],
+    "semi": [1, "never"],
     "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
         "before": false,
         "after": true

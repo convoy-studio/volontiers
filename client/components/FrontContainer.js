@@ -19,6 +19,7 @@ export default class FrontContainer extends BaseComponent {
     this.onTransitionInCompleted = this.onTransitionInCompleted.bind(this)
     this.content = Store.getContent('navigation')
     this.language = Store.getLang()
+    this.toggleAboutInterval = undefined
     this.langRotation = Store.Detector.isMobile === true ? '90deg' : '0deg'
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
   }
@@ -70,9 +71,19 @@ export default class FrontContainer extends BaseComponent {
     setTimeout(() => { Actions.changeLang() })
   }
   aboutClick() {
+    clearInterval(this.toggleAboutInterval)
     if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) {
-      setTimeout(() => { Actions.toggleAbout() })
+      setTimeout(Actions.toggleAbout)
+      return
+    } else if (Store.State === Constants.STATE.PROJECTS) {
+      setTimeout(Actions.closeProjectsOverview)
     }
+    this.toggleAboutInterval = setInterval(() => {
+      if (Store.CurrentSlide.state === Constants.STATE.ACTIVE && Store.State !== Constants.STATE.PROJECTS) {
+        clearInterval(this.toggleAboutInterval)
+        setTimeout(Actions.toggleAbout)
+      }
+    }, 100)
   }
   onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
