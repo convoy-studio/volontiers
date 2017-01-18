@@ -47,6 +47,7 @@ export default class ProjectsOverview extends BaseComponent {
     this.currentEventPos = 0
     this.currentRetailPos = 0
     this.selectedProject = ''
+    this.isMobile = Store.Detector.isMobile
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -90,7 +91,7 @@ export default class ProjectsOverview extends BaseComponent {
   componentDidMount() {
     this.eventProjectsHeight = (this.projects.EVENT.length + 3) * thumbHFull
     this.retailProjectsHeight = (this.projects.RETAIL.length + 6) * thumbHFull
-    if (Store.Detector.isMobile) {
+    if (this.isMobile) {
       const eventProjectsEl = this.refs['event-projects']
       const retailProjectsEl = this.refs['retail-projects']
       this.eventProjectsLength = this.projects.EVENT.length * thumbW * mobileScale
@@ -125,12 +126,13 @@ export default class ProjectsOverview extends BaseComponent {
   getMappedProjects(id) {
     const projects = this.projects[id]
     return projects.map((project, index) => {
+      const projectName = this.isMobile ? project.project.substr(0, 15) + '...' : project.project
       return (
         <li key={`${id}_${index}`} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`} data-slug={project.slug}>
           <div className="project-container">
             <div className="title-holder">
               <div className="vertical-center-parent">
-                <p className="vertical-center-child"><span>{project.brand}</span><br/>{project.project}</p>
+                <p className="vertical-center-child"><span>{project.brand}</span><br/>{projectName}</p>
               </div>
             </div>
             <div className="thumbnail-holder">
@@ -142,7 +144,7 @@ export default class ProjectsOverview extends BaseComponent {
     })
   }
   testOrientation() {
-    if (Store.Orientation === Constants.ORIENTATION.LANDSCAPE && Store.Detector.isMobile) {
+    if (Store.Orientation === Constants.ORIENTATION.LANDSCAPE && this.isMobile) {
       setTimeout(Actions.closeProjectsOverview)
     }
   }
@@ -246,7 +248,7 @@ export default class ProjectsOverview extends BaseComponent {
     case STATE.TRANSITION_OUT:
       transitionHideTime += 0.02
       const easeOut = transitionHideBezier(transitionHideTime)
-      if (Store.Detector.isMobile) {
+      if (this.isMobile) {
         this.eventProjects.pos[1] += (-initialPos - this.eventProjects.pos[1]) * easeOut
         this.retailProjects.pos[1] += (initialPos - this.retailProjects.pos[1]) * easeOut
       } else {
@@ -271,7 +273,7 @@ export default class ProjectsOverview extends BaseComponent {
     const windowH = Store.Window.h
     this.refs.parent.style.width = windowW + 'px'
     this.refs.parent.style.height = windowH + 'px'
-    if (Store.Detector.isMobile) return
+    if (this.isMobile) return
     this.eventProjects.el.style.top = (windowH >> 1) - (this.eventProjects.size[1] >> 1) + 'px'
     this.retailProjects.el.style.top = (windowH >> 1) - (this.retailProjects.size[1] >> 1) + 'px'
     setTimeout(() => {

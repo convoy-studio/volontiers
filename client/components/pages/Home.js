@@ -70,8 +70,10 @@ export default class Home extends Page {
   }
   didPreviewChange(item) {
     const project = this.projects[item.previewIdx]
+    let projectTitle = project.brand + project.separator + project.project
+    projectTitle = Store.Detector.isMobile ? projectTitle.substr(0, 25) + '...' : projectTitle
     this.refs.projectTitle.updateState({
-      title: project.brand + project.separator + project.project
+      title: projectTitle
     })
     setTimeout(() => {
       if (this.refs.projectCounter) {
