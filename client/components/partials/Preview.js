@@ -175,7 +175,7 @@ class Preview extends BaseComponent {
     }
   }
   mouseMoveHandler(val) {
-    if (this.currentSlide.plane === undefined || activityHandler.isReady === false) return
+    if (this.currentSlide.plane === undefined || activityHandler.isReady === false || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y

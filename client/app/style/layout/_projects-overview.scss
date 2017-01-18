@@ -14,15 +14,16 @@
 	.btn > * {
 		pointer-events: none;
 	}
+	$desktopGradientH: (2 * $globalMargin) + $globalLineHeight;
 	&:before {
 		pointer-events: none;
 		content: '';
 		position: absolute;
 		left: 0;
 		top: 0;
-		height: 10%;
+		height: 15%;
 		width: 100%;
-		background: linear-gradient(to bottom, rgba($lightGrey, 1) 0%,rgba($lightGrey, 0) 100%);
+		background: linear-gradient(to bottom, rgba($lightGrey, 1) $desktopGradientH,rgba($lightGrey, 0) 100%);
 		margin-top: -$globalMargin;
 		z-index: 4;
 
@@ -56,22 +57,7 @@
 
 	&.project {
 		&:before {
-			background: linear-gradient(to bottom, rgba($white, 1) 0%,rgba($white, 0) 100%);
-			@media (max-width: $MQ_SMALL) {
-				background: linear-gradient(to right, rgba($white, 1) 0%,rgba($white, 0) 100%);
-			}
-		}
-		&:after {
-			background: linear-gradient(to top, rgba($white, 1) 0%,rgba($white, 0) 100%);
-			@media (max-width: $MQ_SMALL) {
-				background: linear-gradient(to left, rgba($white, 1) 0%,rgba($white, 0) 100%);
-			}
-		}
-	}
-
-	&.about {
-		&:before {
-			background: linear-gradient(to bottom, rgba($white, 1) 0%,rgba($white, 0) 100%);
+			background: linear-gradient(to bottom, rgba($white, 1) $desktopGradientH,rgba($white, 0) 100%);
 			@media (max-width: $MQ_SMALL) {
 				background: linear-gradient(to right, rgba($white, 1) 0%,rgba($white, 0) 100%);
 			}
@@ -99,29 +85,32 @@
 		@extend .top-left;
 		@extend .full;
 		@media (max-width: $MQ_SMALL) {
-			z-index: 5;
+			z-index: 7;
 			pointer-events: none;
 
 			.event-title {
 				left: $mobileMargin !important;
-				top: ($thumbH * $thumbMobileScale) / 2;
-				margin-top: $globalMargin / 2 !important;
+				top: (($thumbH * $thumbMobileScale) / 2) - ($mobileLineHeight / 2);
+				// margin-top: $globalMargin / 2 !important;
 			}
 			.retail-title {
-				right: 0 !important;
-				bottom: $thumbH * $thumbMobileScale;
+				right: $mobileMargin !important;
+				bottom: ($thumbH * $thumbMobileScale);
 				margin-bottom: $globalMargin !important;
 				margin-right: -($globalMargin);
 			}
 		}
 		.event-title, .retail-title {
 			position: absolute;
+			transform-origin: center center !important;
 		}
 		.event-title {
 			left: ($thumbW * $thumbScale) + ($globalMargin * 2);
+			margin-left: -$globalLineHeight;
 		}
 		.retail-title {
-			right: (-$globalLineHeight*3) + ($thumbW * $thumbScale) + ($globalMargin * 2);
+			right: ($thumbW * $thumbScale) + ($globalMargin * 2);
+			margin-right: -$globalLineHeight;
 		}
 	}
 	.projects-container {

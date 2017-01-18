@@ -72,8 +72,8 @@ export default class ProjectsOverview extends BaseComponent {
         <div ref="event-projects" className="event projects-container">{eventProjects}</div>
         <div ref="retail-projects" className="retail projects-container">{retailProjects}</div>
         <div className="titles-container">
-          <MainTitle ref='eventTitle' rotation='-90deg' title='event' className='link event-title'></MainTitle>
-          <MainTitle ref='retailTitle' rotation='90deg' title='retail' className='link retail-title'></MainTitle>
+          <MainTitle ref='eventTitle' rotation='90deg' title='event' className='link event-title'></MainTitle>
+          <MainTitle ref='retailTitle' rotation='-90deg' title='retail' className='link retail-title'></MainTitle>
         </div>
         <div ref='background' className="background btn"></div>
       </div>
@@ -89,7 +89,7 @@ export default class ProjectsOverview extends BaseComponent {
   }
   componentDidMount() {
     this.eventProjectsHeight = (this.projects.EVENT.length + 3) * thumbHFull
-    this.retailProjectsHeight = (this.projects.RETAIL.length + 3) * thumbHFull
+    this.retailProjectsHeight = (this.projects.RETAIL.length + 6) * thumbHFull
     if (Store.Detector.isMobile) {
       const eventProjectsEl = this.refs['event-projects']
       const retailProjectsEl = this.refs['retail-projects']
@@ -277,7 +277,7 @@ export default class ProjectsOverview extends BaseComponent {
     setTimeout(() => {
       const eventT = this.refs.eventTitle
       const retailT = this.refs.retailTitle
-      eventT.refs.parent.style.top = (eventT.size[0]) + (windowH >> 1) - (eventT.size[0] >> 1) + 'px'
+      eventT.refs.parent.style.top = (windowH >> 1) - (eventT.size[0] >> 1) + 'px'
       retailT.refs.parent.style.top = (windowH >> 1) - (retailT.size[0] >> 1) + 'px'
     }, 100)
   }
