@@ -168,8 +168,10 @@ export default (container)=> {
     Store.off(Constants.NEXT_SLIDE, next)
     Store.off(Constants.PREVIOUS_SLIDE, previous)
     Store.off(Constants.TOGGLE_PLAY_VIDEO, togglePlayVideo)
-    hammer.off('tap', playVideo)
-    document.body.removeChild(video)
+    if (Store.Detector.isMobile) {
+      hammer.off('tap', playVideo)
+      document.body.removeChild(video)
+    }
     scope.slides.length = 0
   }
   Store.on(Constants.NEXT_SLIDE, next)

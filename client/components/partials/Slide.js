@@ -23,6 +23,7 @@ let transitionHideTime = 0
 let transitionShowTime = 0
 let playing = true
 let ext = ''
+const isMobile = Store.Detector.isMobile
 
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
@@ -49,7 +50,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const load = (done) => {
     ext = Utils.getFileExtension(scope.imgFilename)
     scope.ext = ext
-    if (pre === 'slide' && ext === 'mp4') {
+    if (pre === 'slide' && ext === 'mp4' && isMobile) {
       scope.originalFile = scope.imgFilename.substring(0, scope.imgFilename.lastIndexOf('.')) + '-mobile' + scope.imgFilename.substring(scope.imgFilename.lastIndexOf('.'))
       scope.imgFilename = '/images/video-placeholder.jpg'
       ext = 'jpg'
@@ -107,7 +108,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
     let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.6
     // Test if mobile : if landscape set to 1 for fullscreen OR test image orientation for set scale
-    if (Store.Detector.isMobile) marginScale = Store.Orientation === Constants.ORIENTATION.LANDSCAPE ? 1 : (orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5)
+    if (isMobile) marginScale = Store.Orientation === Constants.ORIENTATION.LANDSCAPE ? 1 : (orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5)
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale * pixelRatio, windowH * marginScale * pixelRatio, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
@@ -121,7 +122,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const currentSlide = scope.plane
     switch (scope.state) {
     case STATE.ACTIVE:
-      if (Store.Detector.isMobile) break
+      if (isMobile) break
       const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
       const offsetX = nextNx * 500
       const offsetY = nextNx * 300
