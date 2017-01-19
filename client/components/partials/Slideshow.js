@@ -5,10 +5,17 @@ import Router from '../../services/router'
 import slide from './Slide'
 import counter from 'ccounter'
 import Utils from '../../utils/Utils'
+import Hammer from 'hammerjs'
+import dom from 'dom-hand'
+
+const hammer = new Hammer(dom.select('html'))
+let video = undefined
+let first = true
 
 const activityHandler = Utils.countActivityHandler(650)
 export default (container)=> {
   let scope
+  const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
   const load = (done) => {
     const content = Store.getCurrentProject()
     const projectContent = JSON.parse(JSON.stringify(content))
@@ -17,12 +24,38 @@ export default (container)=> {
     const assets = projectContent.assets.slice(0)
     if (oldRoute === undefined || oldRoute.type === Constants.ABOUT || oldRoute.type === Constants.PROJECT || !(oldRoute.type === Constants.HOME && oldRoute.target === newRoute.target)) assets.unshift(content.preview)
     assets.forEach((asset, i) => {
-      if (Store.Detector.isMobile && Utils.getFileExtension(asset) === 'mp4') return
+      // if (Store.Detector.isMobile && Utils.getFileExtension(asset) === 'mp4') return
       scope.slides.push(slide(newRoute.target, scope.container, `images/${newRoute.target}/${asset}`, i, 'slide'))
     })
     scope.counter = counter(scope.slides.length, 0, false)
+    if (Store.Detector.isMobile) {
+      video = document.createElement('video')
+      video.autoplay = false
+      video.loop = true
+      document.body.appendChild(video)
+      hammer.on('tap', playVideo)
+    }
     loadFirstSlide(done)
     return scope
+  }
+  const playVideo = (e) => {
+    if (scope.currentSlide.ext !== 'mp4') return
+    const bounds = scope.currentSlide.plane.mesh.getBounds()
+    const boundsWidth = bounds.width + bounds.x
+    const boundsHeight = bounds.height + bounds.y
+    const posX = e.center.x * pixelRatio
+    const posY = e.center.y * pixelRatio
+    if (posX > bounds.x && posX < boundsWidth && posY > bounds.y && posY < boundsHeight) {
+      video.src = '/assets/' + scope.currentSlide.originalFile
+      video.play()
+      if (video.requestFullscreen) {
+        video.requestFullscreen()
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen()
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen()
+      }
+    }
   }
   const loadFirstSlide = (done) => {
     scope.slides[0].load((plane, index) => {
@@ -66,7 +99,6 @@ export default (container)=> {
     updateSlideshowState()
   }
   const resize = () => {
-    const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
     const windowW = Store.Window.w * pixelRatio
     const windowH = Store.Window.h * pixelRatio
     scope.slides.forEach((item) => {
@@ -78,7 +110,6 @@ export default (container)=> {
     })
   }
   const resizePreview = () => {
-    const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
     const windowW = Store.Window.w * pixelRatio
     const windowH = Store.Window.h * pixelRatio
     const resizeVars = scope.currentSlide.resize()
@@ -137,6 +168,8 @@ export default (container)=> {
     Store.off(Constants.NEXT_SLIDE, next)
     Store.off(Constants.PREVIOUS_SLIDE, previous)
     Store.off(Constants.TOGGLE_PLAY_VIDEO, togglePlayVideo)
+    hammer.off('tap', playVideo)
+    document.body.removeChild(video)
     scope.slides.length = 0
   }
   Store.on(Constants.NEXT_SLIDE, next)
@@ -155,6 +188,7 @@ export default (container)=> {
     transitionOut,
     showCurrentSlide,
     hideCurrentSlide,
+    playVideo,
     firstItemLoaded: false,
     currentSlide: undefined,
     oldSlide: undefined,

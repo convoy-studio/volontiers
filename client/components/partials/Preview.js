@@ -35,6 +35,7 @@ class Preview extends BaseComponent {
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
     this.loadingCounter = counter(this.projects.length)
+    this.isMobile = Store.Detector.isMobile
   }
   render() {
     return (
@@ -73,14 +74,14 @@ class Preview extends BaseComponent {
     this.needIntroAnimation = true
   }
   goToProject(e) {
-    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT || (Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE)) return
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT || (this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE)) return
     activityHandler.count()
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
     let posX = 0
     let posY = 0
-    if (Store.Detector.isMobile) {
+    if (this.isMobile) {
       posX = e.center.x * this.pixelRatio
       posY = e.center.y * this.pixelRatio
     } else {
@@ -103,7 +104,7 @@ class Preview extends BaseComponent {
     if (this.needIntroAnimation) Actions.previewsLoaded()
     if (!this.needIntroAnimation) this.loadNextPreviousSlide()
     if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
-    if (Store.Detector.isMobile) {
+    if (this.isMobile) {
       hammer.on('tap', this.goToProject)
     }
     this.firstPreviewLoaded = true
@@ -263,7 +264,7 @@ class Preview extends BaseComponent {
   keyboardTriggered(key) {
     if (key === Constants.DOWN) this.onScroll(1)
     else if (key === Constants.UP) this.onScroll(-1)
-    else if (!((Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE))) Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+    else if (!((this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE))) Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
   }
   resize() {
     if (!this.slides || this.slides.length < 1) return
@@ -273,7 +274,7 @@ class Preview extends BaseComponent {
       const resizeVars = item.resize()
       if (item.isLoaded) {
         item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = (Store.Detector.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE) ? i * windowH : ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+        item.mesh.position.y = (this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE) ? i * windowH : ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
       }
     })
   }

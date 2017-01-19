@@ -170,6 +170,9 @@ a {
       width: 80vh;
       height: 51vw;
       transform: translate(-50%);
+      @media (max-width: $MQ_SMALL) {
+        height: (2 * $globalMargin) + $mobileLineHeight;
+      }
     }
     &.previous {
       cursor: url('/assets/images/arrow-left.svg'), auto;
@@ -265,4 +268,11 @@ a {
   &.playing {
     cursor: url('/assets/images/pause.svg'), auto;
   }
+}
+
+video {
+  position: fixed 0 0;
+  width: 100%;
+  height: 100%;
+  display: none;
 }

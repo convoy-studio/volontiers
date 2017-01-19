@@ -22,6 +22,7 @@ const transitionShowBezier = bezier(1, 0.13, 0.7, 0.89, 500)
 let transitionHideTime = 0
 let transitionShowTime = 0
 let playing = true
+let ext = ''
 
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
@@ -46,10 +47,15 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     done(scope.plane, scope.index)
   }
   const load = (done) => {
-    const ext = Utils.getFileExtension(scope.imgFilename)
+    ext = Utils.getFileExtension(scope.imgFilename)
+    scope.ext = ext
+    if (pre === 'slide' && ext === 'mp4') {
+      scope.originalFile = scope.imgFilename.substring(0, scope.imgFilename.lastIndexOf('.')) + '-mobile' + scope.imgFilename.substring(scope.imgFilename.lastIndexOf('.'))
+      scope.imgFilename = '/images/video-placeholder.jpg'
+      ext = 'jpg'
+    }
     Utils.pixiLoadTexture(`${pre}-${scope.index}`, `assets/${scope.imgFilename}`, (data) => {
-      scope.ext = data.ext
-      if (data.ext === 'mp4') {
+      if (ext === 'mp4') {
         let interval
         interval = setInterval(() => {
           if (data.texture.baseTexture.width !== 0) {
@@ -159,7 +165,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     scope.state = STATE.TRANSITION_IN
   }
   const hide = (dir) => {
-    if (scope.ext === 'mp4') {
+    if (ext === 'mp4') {
       setTimeout(() => {Actions.slideVideoLeave()})
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
         scope.mesh.texture.baseTexture.source.pause()
@@ -175,7 +181,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     changeTexture(path)
   }
   const onProjectsOverviewOpen = () => {
-    if (scope.ext === 'mp4') {
+    if (ext === 'mp4') {
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
         currentVideoTime = scope.mesh.texture.baseTexture.source.currentTime
         scope.mesh.texture.baseTexture.source.pause()
@@ -212,12 +218,12 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     }, 500)
   }
   const onAboutToggle = () => {
-    if (Store.State === Constants.STATE.ABOUT && scope.ext === 'mp4') {
+    if (Store.State === Constants.STATE.ABOUT && ext === 'mp4') {
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
         currentVideoTime = scope.mesh.texture.baseTexture.source.currentTime
         scope.mesh.texture.baseTexture.source.pause()
       }})
-    } else if (scope.ext === 'mp4') {
+    } else if (ext === 'mp4') {
       setTimeout(() => {
         scope.activate()
       }, 500)
@@ -241,7 +247,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     Store.on(Constants.CHANGE_PROJECTS_PREVIEW, onProjectsPreviewChange)
     Store.on(Constants.TOGGLE_ABOUT, onAboutToggle)
-    if (scope.ext === 'mp4') {
+    if (ext === 'mp4') {
       scope.mesh.texture.baseTexture.source.currentTime = currentVideoTime
       scope.mesh.texture.baseTexture.source.play()
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 1})
@@ -269,7 +275,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
       scope.plane.iverts = null
       scope.plane.fverts = null
     }
-    if (scope.ext === 'mp4') {
+    if (ext === 'mp4') {
       TweenMax.to(scope.mesh.texture.baseTexture.source, 0.3, {volume: 0, onComplete: () => {
         scope.mesh.texture.baseTexture.source.pause()
       }})
@@ -283,6 +289,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     state: STATE.DEACTIVE,
     size: [0, 0],
     ext: undefined,
+    originalFile: undefined,
     id,
     defaultPosition,
     direction,
