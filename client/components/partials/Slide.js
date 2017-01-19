@@ -22,11 +22,11 @@ const transitionShowBezier = bezier(1, 0.13, 0.7, 0.89, 500)
 let transitionHideTime = 0
 let transitionShowTime = 0
 let playing = true
-let ext = ''
 const isMobile = Store.Detector.isMobile
 
 export default (id, container, imgFilename, index, pre = 'preview', direction = { from: Constants.RIGHT, to: Constants.CENTER }, defaultPosition = Constants.CENTER)=> {
   let scope
+  let ext = ''
   const initial = {}
   let currentVideoTime = 0
   const createPlane = (texture) => {
@@ -248,6 +248,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, onProjectsOverviewClose)
     Store.on(Constants.CHANGE_PROJECTS_PREVIEW, onProjectsPreviewChange)
     Store.on(Constants.TOGGLE_ABOUT, onAboutToggle)
+    console.log(ext)
     if (ext === 'mp4') {
       scope.mesh.texture.baseTexture.source.currentTime = currentVideoTime
       scope.mesh.texture.baseTexture.source.play()

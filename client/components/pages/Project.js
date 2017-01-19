@@ -164,7 +164,6 @@ export default class Project extends Page {
     super.resize()
   }
   componentWillUnmount() {
-    console.log('unmount')
     this.slideshow.clear()
     Store.off(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
