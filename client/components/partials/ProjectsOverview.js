@@ -126,7 +126,10 @@ export default class ProjectsOverview extends BaseComponent {
   getMappedProjects(id) {
     const projects = this.projects[id]
     return projects.map((project, index) => {
-      const projectName = this.isMobile ? project.project.substr(0, 15) + '...' : project.project
+      let projectName = project.project
+      if (this.isMobile) {
+        projectName = projectName.length > 25 ? projectName.substr(0, 25) + '...' : projectName
+      }
       return (
         <li key={`${id}_${index}`} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={(e) => {e.preventDefault(); this.onProjectClick(project.slug)}} className={`btn ${project.slug}`} data-slug={project.slug}>
           <div className="project-container">

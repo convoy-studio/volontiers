@@ -11,7 +11,9 @@ export default class BlockInteractionLayer extends Component {
   }
   render() {
     return (
-      <div ref='parent' id='block-interaction-layer'></div>
+      <div ref='parent' id='block-interaction-layer'>
+        <h1>Volontiers</h1>
+      </div>
     )
   }
   onBlock() {

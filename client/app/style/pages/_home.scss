@@ -1,3 +1,83 @@
 #home-page {
   @extend .full;
+
+  .home-helper {
+    position: absolute;
+    top: 40%;
+    left: 13%;
+    opacity: 0;
+
+    @media (max-width: $MQ_SMALL) {
+      top: 0;
+      left: $globalMargin;
+      height: 100%;
+    }
+  }
+  .home-navigation {
+    @media (max-width: $MQ_SMALL) {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .home-navigation__dot {
+    padding: 6px 10px;
+    width: 10px;
+    @include simpleAnim(.3s, .05s, $easeInOutSine, background-color);
+
+    span {
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: $pink;
+      border-radius: 50%;
+    }
+
+    &--active span {
+      background-color: $black;
+    }
+  }
+  .home-overflow {
+    overflow: hidden;
+  }
+  .home-infos {
+    padding-top: $globalMargin;
+    @media (min-width: $MQ_SMALL) {
+      &:hover {
+        .home-title, .home-label {
+          color: $pink;
+        }
+      }
+    }
+    @media (max-width: $MQ_SMALL) {
+      padding-top: 0;
+      position: absolute;
+      bottom: 2 * $globalMargin;
+      left: 0;
+    }
+  }
+  .home-title {
+    font-size: 3 * $globalFontSize;
+    letter-spacing: 3 * $globalLetterSpacing;
+    text-transform: uppercase;
+    line-height: 1;
+    @media (max-width: $MQ_SMALL) {
+      font-size: 1.5 * $mobileFontSize;
+      letter-spacing: 1.5 * $mobileLetterSpacing;
+      white-space: nowrap;
+    }
+    @include simpleAnim(.3s, .0s, $easeInOutSine, color);
+  }
+
+  .home-label {
+    text-transform: uppercase;
+    margin-top: $globalMargin / 2;
+    @include simpleAnim(.3s, .0s, $easeInOutSine, color);
+    @media (max-width: $MQ_SMALL) {
+      font-size: $mobileFontSize;
+      margin-top: $mobileMargin / 2;
+      white-space: nowrap;
+    }
+  }
 }

@@ -88,12 +88,15 @@ class Preview extends BaseComponent {
       posX = Store.Mouse.x * this.pixelRatio
       posY = Store.Mouse.y * this.pixelRatio
     }
-    if (posX > bounds.x - 50 && posY > bounds.y - 50) {
+    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
       if (this.cursor === 'down') {
         this.counter.inc()
         Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+      } else if (this.cursor === 'up') {
+        this.counter.dec()
+        Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
       } else {
-        Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+        return
       }
     }
   }
@@ -180,14 +183,14 @@ class Preview extends BaseComponent {
     const bounds = this.currentSlide.plane.mesh.getBounds()
     const boundsWidth = bounds.width + bounds.x
     const boundsHeight = bounds.height + bounds.y
-    const boundsTop = boundsHeight * 0.7
+    const boundsTop = boundsHeight * 0.55
     const posX = Store.Mouse.x * this.pixelRatio
     const posY = Store.Mouse.y * this.pixelRatio
-    if (posX > bounds.x - 50 && posY > bounds.y - 50) {
-      if (posY < boundsTop && this.cursor !== 'right') {
-        this.cursor = 'right'
+    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
+      if (posY < boundsTop && this.cursor !== 'up') {
+        this.cursor = 'up'
         dom.style(this.refs.preview, {
-          'cursor': 'url(assets/images/arrow-right.svg), auto'
+          'cursor': 'url(assets/images/arrow-up.svg), auto'
         })
       } else if (posY > boundsTop && !this.cursor !== 'down') {
         this.cursor = 'down'
@@ -274,7 +277,7 @@ class Preview extends BaseComponent {
       const resizeVars = item.resize()
       if (item.isLoaded) {
         item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = (this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE) ? i * windowH : ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
+        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
       }
     })
   }

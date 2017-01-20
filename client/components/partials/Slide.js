@@ -2,6 +2,7 @@ import Utils from '../../utils/Utils'
 import Store from '../../store'
 import Actions from '../../actions'
 import Constants from '../../constants'
+import Router from '../../services/router'
 import bezier from 'cubic-bezier'
 
 const STATE = {
@@ -29,6 +30,7 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
   const initial = {}
   let currentVideoTime = 0
   const isMobile = Store.Detector.isMobile
+  const route = Router.getNewRoute()
   const createPlane = (texture) => {
     initial.texture = texture
     const plane = {}
@@ -108,7 +110,11 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     const orientation = scope.size[0] > scope.size[1] ? undefined : Constants.ORIENTATION.PORTRAIT
     let marginScale = orientation === Constants.ORIENTATION.PORTRAIT ? 0.8 : 0.6
     // Test if mobile : if landscape set to 1 for fullscreen OR test image orientation for set scale
-    if (isMobile) marginScale = Store.Orientation === Constants.ORIENTATION.LANDSCAPE ? 1 : (orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5)
+
+    if (isMobile) {
+      if (route.type === Constants.HOME && Store.Orientation === Constants.ORIENTATION.LANDSCAPE) marginScale * 0.7
+      else marginScale = Store.Orientation === Constants.ORIENTATION.LANDSCAPE && route.type !== Constants.HOME ? 1 : (orientation === Constants.ORIENTATION.PORTRAIT ? marginScale * 0.8  : marginScale * 0.5)
+    }
     const resizeVars = Utils.resizePositionProportionally(windowW * marginScale * pixelRatio, windowH * marginScale * pixelRatio, scope.size[0], scope.size[1], orientation)
     if (scope.isLoaded) {
       scope.mesh.scale.set(resizeVars.scale, resizeVars.scale)
@@ -121,14 +127,14 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     scope.delta += 0.012
     const currentSlide = scope.plane
     switch (scope.state) {
-    case STATE.ACTIVE:
-      if (isMobile || pre === 'slide' && index > 0) break
-      const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-      const offsetX = nextNx * 500
-      const offsetY = nextNx * 300
-      const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
-      Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
-      break
+    // case STATE.ACTIVE:
+    //   if (isMobile || pre === 'slide' && index > 0) break
+    //   const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
+    //   const offsetX = nextNx * 500
+    //   const offsetY = nextNx * 300
+    //   const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
+    //   Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
+    //   break
     case STATE.SCALE_UP:
       scaleUpTime += 0.02
       const scaleUp = Math.min(scaleUpBezier(scaleUpTime), 1)

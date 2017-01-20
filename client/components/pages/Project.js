@@ -43,7 +43,9 @@ export default class Project extends Page {
     const infoButton = infoContent.length > 10 ? (<MainTitle ref='projectInformations' title={this.content.viewInfos} hasMouseEnterLeave={true} onClick={this.onProjectInformationsClick} className='link bottom-project-informations'></MainTitle>) : undefined
     this.projectInfo = infoButton ? (<ProjectInfos />) : undefined
     let projectTitle = projectContent.brand + projectContent.separator + projectContent.project
-    projectTitle = Store.Detector.isMobile ? projectTitle.substr(0, 25) + '...' : projectTitle
+    if (Store.Detector.isMobile) {
+      projectTitle = projectTitle.length > 25 ? projectTitle.substr(0, 25) + '...' : projectTitle
+    }
     return (
       <div id='project-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <NextPreviousBtns ref='next-previous-btns' />
