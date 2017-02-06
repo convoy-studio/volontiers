@@ -181,17 +181,23 @@ a {
         transform: rotateZ(-90deg) translate(-100%, -50%) !important;
       }
     }
+    @keyframes blink {
+      0% { color: $black; }
+      80% { color: $black; }
+      100% { color: $pink; }
+    }
     &.next {
       cursor: url('/assets/images/arrow-right.svg'), auto;
       @media (max-width: $MQ_SMALL) {
         transform: rotateZ(90deg) translate(0%, 50%) !important;
       }
       &.last .title {
-        color: $pink !important;
+        // color: $pink !important;
+        animation: blink 1.5s infinite;
       }
     }
     .title {
-      color: $black !important;
+      // color: $black !important;
     }
   }
 }
