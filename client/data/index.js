@@ -266,7 +266,7 @@ export default {
       'inHome': 0,
       'brand': 'nike',
       'separator': ' ',
-      'project': 'acg 2016',
+      'project': 'ACG 2016',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -418,7 +418,7 @@ export default {
       'inHome': 0,
       'brand': 'nikelab',
       'separator': ' × ',
-      'project': 'riccardo tisci bw',
+      'project': 'riccardo tisci BW',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -442,6 +442,22 @@ export default {
       },
       preview: '3I3A8596.jpg',
       assets: [
+      ]
+    },
+    'lacoste-live-at-bread-butter': {
+      'inHome': 0,
+      'brand': 'LACOSTE LIVE',
+      'separator': ' ',
+      'project': '@Bread & Butter',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'DSC_9169.jpg',
+      assets: [
+        'DSC_9246.jpg',
+        'DSC_9252.jpg'
       ]
     },
     'nike-air-max-day-at-citadium': {
@@ -539,7 +555,7 @@ export default {
       'inHome': 0,
       'brand': 'nike',
       'separator': ' ',
-      'project': 'fc @citadium',
+      'project': 'FC @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
