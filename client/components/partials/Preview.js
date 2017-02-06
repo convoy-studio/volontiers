@@ -36,6 +36,7 @@ class Preview extends BaseComponent {
     this.counter = counter(this.projects.length)
     this.loadingCounter = counter(this.projects.length)
     this.isMobile = Store.Detector.isMobile
+    this.boundsShift = this.isMobile ? 0 : 50
   }
   render() {
     return (
@@ -88,15 +89,20 @@ class Preview extends BaseComponent {
       posX = Store.Mouse.x * this.pixelRatio
       posY = Store.Mouse.y * this.pixelRatio
     }
-    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
-      if (this.cursor === 'down') {
-        this.counter.inc()
-        Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
-      } else if (this.cursor === 'up') {
-        this.counter.dec()
-        Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+    if (posX > bounds.x - this.boundsShift && posX < boundsWidth + this.boundsShift && posY > bounds.y - this.boundsShift && posY < boundsHeight + this.boundsShift) {
+      console.log('in bounds');
+      if (this.isMobile) {
+        Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
       } else {
-        return
+        if (this.cursor === 'down') {
+          this.counter.inc()
+          Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+        } else if (this.cursor === 'up') {
+          this.counter.dec()
+          Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+        } else {
+          return
+        }
       }
     }
   }
