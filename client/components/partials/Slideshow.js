@@ -14,6 +14,10 @@ let first = true
 
 const activityHandler = Utils.countActivityHandler(650)
 export default (container)=> {
+  let startIndex = 0
+  let startLoad = 1
+  let endLoad = 0
+  let initFromBackLink = false
   let scope
   const pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
   const load = (done) => {
@@ -27,7 +31,16 @@ export default (container)=> {
       // if (Store.Detector.isMobile && Utils.getFileExtension(asset) === 'mp4') return
       scope.slides.push(slide(newRoute.target, scope.container, `images/${newRoute.target}/${asset}`, i, 'slide'))
     })
-    scope.counter = counter(scope.slides.length, 0, false)
+    const previousRoutes = Store.getPreviousRoutes()
+    if (previousRoutes.length >= 2 && previousRoutes[previousRoutes.length - 2] === newRoute.path) {
+      initFromBackLink = true
+      startIndex = scope.slides.length - 1
+      startLoad = 0
+      endLoad = scope.slides.length - 1
+    } else {
+      endLoad = scope.slides.length
+    }
+    scope.counter = counter(scope.slides.length, startIndex, false)
     if (Store.Detector.isMobile) {
       video = document.createElement('video')
       video.autoplay = false
@@ -58,7 +71,7 @@ export default (container)=> {
     }
   }
   const loadFirstSlide = (done) => {
-    scope.slides[0].load((plane, index) => {
+    scope.slides[startIndex].load((plane, index) => {
       activityHandler.count()
       scope.firstItemLoaded = true
       onSlideLoaded(plane, index)
@@ -75,13 +88,13 @@ export default (container)=> {
   */
   const loadAllSlides = () => {
     const all = scope.slides
-    for (let i = 1; i < all.length; i++) {
+    for (let i = startLoad; i < endLoad; i++) {
       const s = all[i]
       s.load(onSlideLoaded)
     }
   }
   const onSlideLoaded = (plane, index) => {
-    if (index === 0) { // when first slide loaded
+    if (!initFromBackLink && index === 0 || initFromBackLink && index === scope.slides.length - 1) { // when first or last slide loaded
       Actions.slideshowIsReady()
       loadAllSlides()
       updateCurrentSlide()
@@ -93,7 +106,8 @@ export default (container)=> {
         scope.currentSlide.activate()
       }
     } else { // the rest of the slides goes here
-      Utils.setDefaultPlanePositions(plane, Constants.RIGHT)
+      const dir = initFromBackLink ? Constants.LEFT : Constants.RIGHT
+      Utils.setDefaultPlanePositions(plane, dir)
     }
     resize()
     updateSlideshowState()

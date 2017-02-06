@@ -44,6 +44,8 @@ export default {
     MIDDLE: 'MIDDLE'
   },
 
+  SAVE_ROUTE: 'SAVE_ROUTE',
+
   ORIENTATION: {
     LANDSCAPE: 'LANDSCAPE',
     PORTRAIT: 'PORTRAIT'

@@ -258,6 +258,12 @@ const Actions = {
       actionType: Constants.CURRENT_SLIDE_CHANGED,
       item: slide
     })
+  },
+  saveRoute: (path) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.SAVE_ROUTE,
+      item: path
+    })
   }
 }
 

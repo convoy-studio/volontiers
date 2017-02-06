@@ -276,6 +276,9 @@ const Store = assign({}, EventEmitter2.prototype, {
   Window: () => {
     return _windowWidthHeight()
   },
+  getPreviousRoutes: () => {
+    return Store.PreviousRoutes
+  },
   getImageDeviceExtension: _getImageDeviceExtension,
   Mouse: { x: 0, y: 0, nX: 0, nY: 0 },
   Parent: undefined,
@@ -293,6 +296,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   IndexIsOpened: false,
   ProjectInfoIsOpened: false,
   AppIsStarted: false,
+  PreviousRoutes: [],
   dispatcherIndex: Dispatcher.register((payload) => {
     const action = payload.action
     switch (action.actionType) {
@@ -332,6 +336,10 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.CURRENT_SLIDE_CHANGED:
       Store.CurrentSlide = action.item
+      Store.emitChange(action.actionType, action.item)
+      break
+    case Constants.SAVE_ROUTE:
+      Store.PreviousRoutes.push(action.item)
       Store.emitChange(action.actionType, action.item)
       break
     case Constants.PREVIEWS_LOADED:
