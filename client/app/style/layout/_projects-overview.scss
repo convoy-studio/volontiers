@@ -157,8 +157,8 @@
 				p {
 					padding: 20px;
 					@media (max-width: $MQ_SMALL) {
-						font-size: $mobileFontSize;
-						line-height: $mobileLineHeight;
+						font-size: $mobileFontSize * 0.75;
+						line-height: $mobileLineHeight * 0.75;
 					}
 					span {
 						text-transform: uppercase;
