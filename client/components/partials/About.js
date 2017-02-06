@@ -43,11 +43,11 @@ export default class About extends BaseComponent {
           </div>
           <div className='credits' ref='credits'>
             <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleCredits} className='link credits__btn'></MainTitle>
-            <p className='credits__list' ref='list'><a className='link btn' href='https://vimeo.com/volontiersparis' target='_blank'>M/M Paris</a>, <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, <a className='link btn' href='http://www.vabestudio.com/' target='_blank'>Bertrand Vallé</a>, <a className='link btn' href='http://www.le-studiowhite.com/' target='_blank'>Studio White</a>, <a className='link btn' href='http://www.romainmayoussier.com/' target='_blank'>Romain Mayoussier</a></p>
+            <p className='credits__list' ref='list'><a className='link btn' href='https://www.mmparis.com/' target='_blank'>M/M Paris</a>, <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, <a className='link btn' href='http://www.vabestudio.com/' target='_blank'>Bertrand Vallé</a>, <a className='link btn' href='http://www.le-studiowhite.com/' target='_blank'>Studio White</a>, <a className='link btn' href='http://www.romainmayoussier.com/' target='_blank'>Romain Mayoussier</a></p>
           </div>
         </div>
         <div className='rs' ref='rs'>
-          <p><a className='link btn' href='https://www.facebook.com/volontiersparis/' target='_blank' ref='fb'>Facebook</a> | <a className='link btn' href='https://www.instagram.com/volontiers_paris/' target='_blank' ref='insta'>Instagram</a> | <a className='link btn' href='https://vimeo.com/volontiersproduction' target='_blank' ref='vimeo'>Vimeo</a></p>
+          <p><a className='link btn' href='https://www.facebook.com/volontiersparis/' target='_blank' ref='fb'>Facebook</a> | <a className='link btn' href='https://www.instagram.com/volontiers_paris/' target='_blank' ref='insta'>Instagram</a> | <a className='link btn' href='https://vimeo.com/volontiersparis' target='_blank' ref='vimeo'>Vimeo</a></p>
         </div>
       </div>
     )
@@ -65,14 +65,12 @@ export default class About extends BaseComponent {
   setupAnimations() {
     this.tlBlink = new TimelineMax()
     const lengthBlink = 0.3
-    this.tlBlink.to(this.refs.mail, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, 0)
-    this.tlBlink.to(this.refs.mail, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, lengthBlink)
-    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (2 * lengthBlink) - 0.1)
-    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 3 * lengthBlink )
-    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (4 * lengthBlink) - 0.1 )
-    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 5 * lengthBlink )
-    this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (6 * lengthBlink) - 0.1)
-    this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 7 * lengthBlink )
+    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, 0)
+    this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, lengthBlink)
+    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (2 * lengthBlink) - 0.1)
+    this.tlBlink.to(this.refs.insta, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 3 * lengthBlink )
+    this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, (4 * lengthBlink) - 0.1 )
+    this.tlBlink.to(this.refs.vimeo, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, 5 * lengthBlink )
     this.tlBlink.pause(0)
     this.tlOverlayIn = new TimelineMax({
       paused: true,
