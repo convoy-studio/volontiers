@@ -116,6 +116,11 @@
 			right: ($thumbW * $thumbScale) + ($globalMargin * 2);
 			margin-right: -$globalLineHeight;
 		}
+		@media (min-width: $MQ_SMALL) {
+			.retail-title {
+				transform: rotateZ(-90deg) translateX(-25%) !important ;
+			}
+		}
 	}
 	.projects-container {
 		position: absolute;
