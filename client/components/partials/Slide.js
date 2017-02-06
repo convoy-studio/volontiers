@@ -127,14 +127,14 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
     scope.delta += 0.012
     const currentSlide = scope.plane
     switch (scope.state) {
-    // case STATE.ACTIVE:
-    //   if (isMobile || pre === 'slide' && index > 0) break
-    //   const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-    //   const offsetX = nextNx * 500
-    //   const offsetY = nextNx * 300
-    //   const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
-    //   Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
-    //   break
+    case STATE.ACTIVE:
+      if (route.type === Constants.HOME || isMobile || pre === 'slide' && index > 0) break
+      const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
+      const offsetX = nextNx * 500
+      const offsetY = nextNx * 300
+      const easing = Math.max(0.1 * nextNx * 13.6, 0.1)
+      Utils.planeAnim(currentSlide, Store.Mouse, scope.delta, offsetX, offsetY, easing)
+      break
     case STATE.SCALE_UP:
       scaleUpTime += 0.02
       const scaleUp = Math.min(scaleUpBezier(scaleUpTime), 1)
