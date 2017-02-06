@@ -50,6 +50,11 @@ class HomeNavigation extends BaseComponent {
   hide() {
     TweenMax.to(this.refs.navigation, 0.2, { opacity: 0 })
   }
+
+  componentWillUnmount() {
+    Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.hide)
+    Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.show)
+  }
 }
 
 export default HomeNavigation
