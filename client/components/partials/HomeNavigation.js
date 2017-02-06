@@ -1,16 +1,22 @@
 import BaseComponent from '../../pager/components/BaseComponent'
 import Router from '../../services/router/'
+import Store from '../../store/'
+import Constants from '../../constants/'
 import dom from 'dom-hand'
 
 class HomeNavigation extends BaseComponent {
   constructor(props) {
     super(props)
     this.projects = this.props.projects
+    this.hide = this.hide.bind(this)
+    this.show = this.show.bind(this)
+    Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.hide)
+    Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.show)
   }
   render() {
     const projectsLinks = this.getProjectsLinks()
     return (
-      <div className='home-navigation'>
+      <div className='home-navigation' ref='navigation'>
         {projectsLinks}
       </div>
     )
@@ -35,6 +41,14 @@ class HomeNavigation extends BaseComponent {
       dom.classes.remove(dom.select('.home-navigation__dot--active'), 'home-navigation__dot--active')
     }
     dom.classes.add(dom.select(`.home-navigation__dot--${index}`), 'home-navigation__dot--active')
+  }
+
+  show() {
+    TweenMax.to(this.refs.navigation, 0.2, { opacity: 1 })
+  }
+
+  hide() {
+    TweenMax.to(this.refs.navigation, 0.2, { opacity: 0 })
   }
 }
 
