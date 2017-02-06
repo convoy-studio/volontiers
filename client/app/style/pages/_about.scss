@@ -50,8 +50,8 @@
       left: 0;
       right: 0;
       width: 100%;
-      $p: $globalMargin * 1.5;
-      padding: 0 $p 0 $globalMargin;
+      $p: $globalMargin * 2;
+      padding: 0 $p 0 $p;
       box-sizing: border-box;
       font-size: $mobileFontSize;
       line-height: $mobileLineHeight;
