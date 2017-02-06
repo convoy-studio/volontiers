@@ -66,14 +66,10 @@
     letter-spacing: 3 * $globalLetterSpacing;
     text-transform: uppercase;
     line-height: 1;
-    // -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: $pink;
     @media (max-width: $MQ_SMALL) {
       font-size: 1.5 * $mobileFontSize;
       letter-spacing: 1.5 * $mobileLetterSpacing;
       white-space: nowrap;
-      -webkit-text-stroke-width: 1px;
     }
     @include simpleAnim(.3s, .0s, $easeInOutSine, color);
   }
