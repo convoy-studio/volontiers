@@ -175,7 +175,7 @@ export default class ProjectsOverview extends BaseComponent {
     showTitlesTimeout = setTimeout(() => {
       this.refs.eventTitle.show()
       this.refs.retailTitle.show()
-    }, 300)
+    }, 100)
     dom.event.on(this.refs.background, 'click', this.onBackgroundClick)
   }
   close() {

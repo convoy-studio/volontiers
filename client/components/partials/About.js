@@ -63,7 +63,9 @@ export default class About extends BaseComponent {
     }
   }
   setupAnimations() {
-    this.tlBlink = new TimelineMax()
+    this.tlBlink = new TimelineMax({
+      repeat: -1
+    })
     const lengthBlink = 0.3
     this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#f7a1fa', ease: Sine.easeInOut }, 0)
     this.tlBlink.to(this.refs.fb, lengthBlink, { color: '#000000', ease: Sine.easeInOut }, lengthBlink)
