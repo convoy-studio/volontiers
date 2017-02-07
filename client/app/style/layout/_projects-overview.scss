@@ -98,10 +98,10 @@
 				// margin-top: $globalMargin / 2 !important;
 			}
 			.retail-title {
-				right: $mobileMargin !important;
+				right: 0 !important;
 				bottom: ($thumbH * $thumbMobileScale);
 				margin-bottom: $globalMargin !important;
-				margin-right: -($globalMargin);
+				margin-right: -(2 * $globalMargin);
 			}
 		}
 		.event-title, .retail-title {

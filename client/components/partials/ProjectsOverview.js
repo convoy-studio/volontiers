@@ -209,6 +209,7 @@ export default class ProjectsOverview extends BaseComponent {
   }
   onBackgroundClick(e) {
     e.preventDefault()
+    if (this.isMobile) return
     Router.setRoute(`/project/${this.selectedProject}`)
   }
   onProjectClick(id)  {
