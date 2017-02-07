@@ -259,10 +259,16 @@ const Actions = {
       item: slide
     })
   },
-  saveRoute: (path) => {
+  goBack: () => {
     Dispatcher.handleViewAction({
-      actionType: Constants.SAVE_ROUTE,
-      item: path
+      actionType: Constants.GO_BACK,
+      item: undefined
+    })
+  },
+  resetNavigation: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.RESET_NAVIGATION,
+      item: undefined
     })
   }
 }

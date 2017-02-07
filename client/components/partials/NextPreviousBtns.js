@@ -102,6 +102,7 @@ class NextPreviousBtns extends BaseComponent {
     const oldRoute = Router.getOldRoute()
     const currentRoute = Router.getNewRoute()
     if (oldRoute !== undefined && oldRoute.type === Constants.PROJECT) {
+      setTimeout(Actions.goBack)
       Router.setRoute(`/project/${oldRoute.target}`)
     } else {
       Router.setRoute(`/home/${currentRoute.target}`)

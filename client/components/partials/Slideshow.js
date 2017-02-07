@@ -31,12 +31,12 @@ export default (container)=> {
       // if (Store.Detector.isMobile && Utils.getFileExtension(asset) === 'mp4') return
       scope.slides.push(slide(newRoute.target, scope.container, `images/${newRoute.target}/${asset}`, i, 'slide'))
     })
-    const previousRoutes = Store.getPreviousRoutes()
-    if (previousRoutes.length >= 2 && previousRoutes[previousRoutes.length - 2] === newRoute.path) {
+    if (Store.Navigation === Constants.NAVIGATION.BACK) {
       initFromBackLink = true
       startIndex = scope.slides.length - 1
       startLoad = 0
       endLoad = scope.slides.length - 1
+      setTimeout(Actions.resetNavigation)
     } else {
       endLoad = scope.slides.length
     }
