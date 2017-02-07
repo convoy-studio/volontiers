@@ -114,11 +114,12 @@
 		}
 		.retail-title {
 			right: ($thumbW * $thumbScale) + ($globalMargin * 2);
-			margin-right: -$globalLineHeight;
+			// margin-right: -$globalLineHeight;
 		}
 		@media (min-width: $MQ_SMALL) {
 			.retail-title {
-				transform: rotateZ(-90deg) translateX(-25%) !important ;
+				transform: rotateZ(-90deg) translate(50%, -50%) !important;
+				transform-origin: right center !important;
 			}
 		}
 	}

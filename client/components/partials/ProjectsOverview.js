@@ -282,8 +282,8 @@ export default class ProjectsOverview extends BaseComponent {
     setTimeout(() => {
       const eventT = this.refs.eventTitle
       const retailT = this.refs.retailTitle
-      eventT.refs.parent.style.top = (windowH >> 1) - (eventT.size[0] >> 1) + 'px'
-      retailT.refs.parent.style.top = (windowH >> 1) - (retailT.size[0] >> 1) + 'px'
+      eventT.refs.parent.style.top = (windowH >> 1) - (eventT.size[1] >> 1) + 'px'
+      retailT.refs.parent.style.top = (windowH >> 1) - (retailT.size[1] >> 1) + 'px'
     }, 100)
   }
 }
