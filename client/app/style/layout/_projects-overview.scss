@@ -93,7 +93,7 @@
 			pointer-events: none;
 
 			.event-title {
-				left: $mobileMargin !important;
+				left: 0 !important;
 				top: (($thumbH * $thumbMobileScale) / 2) - ($mobileLineHeight / 2);
 				// margin-top: $globalMargin / 2 !important;
 			}
@@ -110,13 +110,17 @@
 		}
 		.event-title {
 			left: ($thumbW * $thumbScale) + ($globalMargin * 2);
-			margin-left: -$globalLineHeight;
+			// margin-left: -$globalLineHeight;
 		}
 		.retail-title {
 			right: ($thumbW * $thumbScale) + ($globalMargin * 2);
 			// margin-right: -$globalLineHeight;
 		}
 		@media (min-width: $MQ_SMALL) {
+			.event-title {
+				transform: rotateZ(90deg) translate(-50%, -50%) !important;
+				transform-origin: left center !important;
+			}
 			.retail-title {
 				transform: rotateZ(-90deg) translate(50%, -50%) !important;
 				transform-origin: right center !important;
