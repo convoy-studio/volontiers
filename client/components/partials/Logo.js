@@ -57,11 +57,8 @@ class Logo extends BaseComponent {
             <circle cx="493.2" cy="36" r="12.8"/>
           </g>
           <g className="letter-e" ref="letter-e">
-            <rect x="407.9" y="19" width="34" height="102"/>
-            <rect x="433.4" y="61.5" transform="matrix(4.502627e-11 -1 1 4.502627e-11 346.3337 554.4282)" width="34" height="85"/>
-            <rect x="433.4" y="-6.5" transform="matrix(4.502627e-11 -1 1 4.502627e-11 414.3652 486.3967)" width="34" height="85"/>
             <circle cx="458.9" cy="70" r="17"/>
-            <rect x="416.4" y="44.5" transform="matrix(4.502627e-11 -1 1 4.502627e-11 363.3416 503.4046)" width="34" height="51"/>
+            <polygon points="492.9,53 492.9,19 407.9,19 407.9,53 407.9,53 407.9,53 407.8,53 407.8,87 407.9,87 407.9,87 407.8,87 407.8,121 492.8,121 492.8,87 441.9,87 441.9,87 458.8,87 458.8,53 441.9,53 441.9,53 	"/>
             <circle className="st0" cx="458.9" cy="70" r="17"/>
             <circle cx="458.9" cy="70" r="12.8"/>
             <circle className="st0" cx="492.9" cy="104" r="17"/>
