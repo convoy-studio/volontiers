@@ -239,8 +239,8 @@ export default class ProjectsOverview extends BaseComponent {
     this.direction = Store.Mouse.x > (windowW >> 1) ? Constants.RIGHT : Constants.LEFT
     this.eventProjects.nx = Math.abs(Math.min(0, Store.Mouse.nX))
     this.retailProjects.nx = Math.abs(Math.max(0, Store.Mouse.nX))
-    this.positionContainerDependsMousePosition(this.eventProjects, windowH, this.eventProjectsHeight)
-    this.positionContainerDependsMousePosition(this.retailProjects, windowH, this.retailProjectsHeight)
+    this.positionContainerDependsMousePosition(this.eventProjects, windowH, this.eventProjectsHeight, 0.05)
+    this.positionContainerDependsMousePosition(this.retailProjects, windowH, this.retailProjectsHeight, 0.02)
     switch (this.animationsState) {
     case STATE.TRANSITION_IN:
       transitionShowTime += 0.02
@@ -264,12 +264,12 @@ export default class ProjectsOverview extends BaseComponent {
     default:
     }
   }
-  positionContainerDependsMousePosition(project, windowH, height) {
+  positionContainerDependsMousePosition(project, windowH, height, smooth) {
     project.norm[0] += (project.nx - project.norm[0]) * 0.1
     const nY = Store.Mouse.nY - 2
     const remain = (height - windowH) * project.norm[0]
     const posY = (nY / 2) * (-remain)
-    project.pos[1] += (posY - project.pos[1]) * 0.05
+    project.pos[1] += (posY - project.pos[1]) * smooth
     Utils.translate(project.el, project.pos[0], project.pos[1], 1)
   }
   resize() {
