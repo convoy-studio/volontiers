@@ -193,11 +193,8 @@ a {
       }
       &.last .title {
         // color: $pink !important;
-        animation: blink 1.5s infinite;
+        animation: blink 0.75s infinite;
       }
-    }
-    .title {
-      // color: $black !important;
     }
   }
 }
