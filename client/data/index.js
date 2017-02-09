@@ -219,7 +219,8 @@ export default {
         '10_IKEA-31.jpg',
         '13_IKEA-2.jpg',
         '14_IKEA-27.jpg',
-        '15_IKEA-38.jpg'
+        '15_IKEA-38.jpg',
+        'IKEA.mp4'
       ]
     },
     'nikelab-acg-2016': {
