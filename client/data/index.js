@@ -111,7 +111,8 @@ export default {
         '09_AirBnb_Selects-239.jpg',
         '10_AirBnb_Selects-26.jpg',
         '11_AirBnb_Selects-38.jpg',
-        '12_AirBnb_Selects-123.jpg'
+        '12_AirBnb_Selects-123.jpg',
+        'AIRBNB.mp4'
       ]
     },
     'airbnb-paris': {
@@ -135,7 +136,8 @@ export default {
         '08_AirBnB-45.jpg',
         '09_DSCF7845.jpg',
         '10_AirBnB-55.jpg',
-        '11_AirBnB-13.jpg'
+        '11_AirBnB-13.jpg',
+        'AIRBNB.mp4'
       ]
     },
     'pok-fete-de-la-musique': {
