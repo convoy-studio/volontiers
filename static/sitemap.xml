@@ -7,10 +7,6 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-  <loc>http://volontiers.fr/</loc>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
   <loc>http://volontiers.fr/project/nikelab-x-olivier-rousteing</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -137,6 +133,30 @@
 </url>
 <url>
   <loc>http://volontiers.fr/project/nike-lunarcharge-at-citadium</loc>
+  <changefreq>monthly</changefreq>
+</url>
+
+
+
+
+<url>
+  <loc>http://volontiers.fr/home/nikelab-x-olivier-rousteing</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://volontiers.fr/home/ikea-ps-2017</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://volontiers.fr/home/airbnb-paris</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://volontiers.fr/home/nikelab-acg-2016</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://volontiers.fr/home/google-curiocite</loc>
   <changefreq>monthly</changefreq>
 </url>
 </urlset>

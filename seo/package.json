@@ -1,0 +1,21 @@
+{
+  "name": "seo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec npm run babel-node -- index.js",
+    "babel-node": "babel-node"
+  },
+  "author": "hellopath <contact@pa-th.com> (http://pa-th.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "create-html": "^3.0.0",
+    "fs": "0.0.1-security",
+    "phantom": "^4.0.2",
+    "xml2js": "^0.4.17"
+  }
+}

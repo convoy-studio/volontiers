@@ -90,7 +90,6 @@ class Preview extends BaseComponent {
       posY = Store.Mouse.y * this.pixelRatio
     }
     if (posX > bounds.x - this.boundsShift && posX < boundsWidth + this.boundsShift && posY > bounds.y - this.boundsShift && posY < boundsHeight + this.boundsShift) {
-      console.log('in bounds');
       if (this.isMobile) {
         Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
       } else {

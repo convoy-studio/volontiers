@@ -35,7 +35,7 @@ export default {
       {
         test: /\.html?$/,
         exclude: /node_modules/,
-        loader: 'html'
+        loader: 'html?minimize=false'
       },
       {
         test: /\.js$/,
