@@ -2,6 +2,8 @@ RewriteEngine On
 
 RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|googlebot|yahoo|bingbot|baiduspider|Twitterbot|Pinterest|Google.*snippet|Google)
 RewriteRule ^project/([A-Za-z0-9-]+)/?$ snapshots/project/$1/index.html [NC,L]
+
+RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|googlebot|yahoo|bingbot|baiduspider|Twitterbot|Pinterest|Google.*snippet|Google)
 RewriteRule ^home/([A-Za-z0-9-]+)/?$ snapshots/home/$1/index.html [NC,L]
 
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
