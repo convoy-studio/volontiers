@@ -30,28 +30,12 @@ The project will be launched at http://localhost:3000
 ```
 $ npm run build
 ```
+### SEO
+Go inside `./seo` and build the project `npm run build`.
+It will create inside `dist/snapshots/` all the pages of the website as the seo optimized content of the website. 
 
 ## Routing
 Add your routes in `client/data/index.js`. If you need nested routes, check out the articles exemple and update `client/app/desktop/index.js`.
 
-
 Also update `client/components/PagesContainer.js`.
 
-## TODO
-### SEO
-- [ ] Fill index.tpl.html head
-- [ ] Add h1 tag
-- [ ] ( Add analytics scripts ? )
-
-### Components
-- [ ] Projects overlay
-
-### Mobile
-- [ ]
-
-### Miscellaneous
-- [ ] Change language ( without reloading ? )
-
-
-### Rendering
-- [ ]

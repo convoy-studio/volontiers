@@ -1,11 +1,10 @@
-var phantom = require('phantom');
 var fs = require('fs');
 var xml2js = require('xml2js')
 var createHTML = require('create-html')
 var data = require('../client/data')
 
-var localUrl = 'http://localhost:3000/'
 var prodUrl = 'http://volontiers.fr/'
+var baseUrl = '../dist/snapshots/'
 const tt = (duration = 0) => {
     return new Promise((resolve, reject) => {
         setTimeout(resolve, duration)
@@ -136,6 +135,9 @@ const createHtml = (id, url, siteLinks) => {
 }
 
 (async () => {
+    await createDir(baseUrl)
+    await createDir(`${baseUrl}project`)
+    await createDir(`${baseUrl}home`)
     const xmlData = await readFile('../static/sitemap.xml')
     const locations = await parseXml(xmlData)
     const urls = locations.map((location) => {
@@ -148,10 +150,9 @@ const createHtml = (id, url, siteLinks) => {
     })
     await Promise.all(locations.map(async (location) => {
         const pageUrl = await location.loc[0].split(prodUrl)[1]
-        const urlToOpen = await localUrl + pageUrl
         const subfolder = await pageUrl.split('/')[0]
         const id = await pageUrl.split('/')[1]
-        await createDir(`./snapshots/${subfolder}/${id}`)
-        await createHtml(id, `./snapshots/${subfolder}/${id}`, urls)
+        await createDir(`${baseUrl}${subfolder}/${id}`)
+        await createHtml(id, `${baseUrl}${subfolder}/${id}`, urls)
     }));
 })()
