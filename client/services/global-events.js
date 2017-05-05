@@ -10,8 +10,6 @@ import raf from 'raf'
 import {PagerStore, PagerConstants} from '../pager/Pager'
 
 const activityHandler = Utils.countActivityHandler(650)
-const hammer = new Hammer(dom.select('html'))
-hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
 
 export function resize() {
   Actions.windowResize(window.innerWidth, window.innerHeight)
@@ -66,36 +64,11 @@ function keypress(e) {
   }
 }
 
-function pan(e) {
-  if (activityHandler.isReady === false || PagerStore.pageTransitionState !== PagerConstants.PAGE_TRANSITION_DID_FINISH || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
-  activityHandler.count()
-  const direction = e.additionalEvent
-  switch (direction) {
-  case 'panup':
-    Actions.triggerKeyboard(Constants.DOWN)
-    break
-  case 'pandown':
-    Actions.triggerKeyboard(Constants.UP)
-    break
-  case 'panright':
-    Actions.triggerKeyboard(Constants.LEFT)
-    break
-  case 'panleft':
-    Actions.triggerKeyboard(Constants.RIGHT)
-    break
-  default:
-  }
-}
-
 export function initGlobalEvents() {
-  if (Store.Detector.isMobile) {
-    hammer.on('pan', pan)
-  } else {
-    dom.event.on(window, 'mousemove', mousemove)
-    dom.event.on(window, 'keydown', keypress)
-    dom.event.on(window, 'keydown', keypress)
-    mouseW(mouseWheel)
-    inertia.addCallback(onScroll)
-  }
+  dom.event.on(window, 'mousemove', mousemove)
+  dom.event.on(window, 'keydown', keypress)
+  dom.event.on(window, 'keydown', keypress)
+  mouseW(mouseWheel)
+  inertia.addCallback(onScroll)
   dom.event.on(window, 'resize', resize)
 }

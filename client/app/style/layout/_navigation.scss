@@ -16,13 +16,15 @@
     z-index: 5;
   }
   @media (max-width: $MQ_SMALL) {
-    height: $mobileLineHeight * 2;
+    height: $mobileMargin * 5 ;
+    margin: 0;
+    padding-top: 20px;
     > .link {
       padding-left: 0;
     }
   }
   .top-projects-title {
-    top: 0;
+    top: 2 * $mobileMargin;
     left: $globalMargin;
     position: absolute;
     z-index: 7;
@@ -31,15 +33,19 @@
       margin-top: -$globalMargin;
       left: 0;
       padding: $globalMargin;
+      top: 0;
     }
   }
   &__right {
     position: absolute;
     right: $globalMargin;
-    top: 0;
+    top: 2 * $mobileMargin;
     display: inline-block;
     z-index: 7;
     pointer-events: none;
+    @media (min-width: $MQ_SMALL) {
+      top: 0;
+    }
     ul {
       display: inline-block;
       pointer-events: none;
@@ -137,4 +143,8 @@
       }
     }
   }
+}
+
+.project .navigation {
+  background-color: $white;
 }

@@ -8,13 +8,17 @@ import NextPreviousBtns from '../partials/NextPreviousBtns'
 import MainTitle from '../partials/MainTitle'
 import HomeNavigation from '../partials/HomeNavigation'
 import SVGComponent from './../partials/SVGComponent'
+import Hammer from 'hammerjs'
+import Utils from './../../utils/Utils'
+
+const activityHandler = Utils.countActivityHandler(650)
 
 export default class Home extends Page {
   constructor(props) {
     super(props)
     this.didPreviewChange = this.didPreviewChange.bind(this)
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
-    // this.updateButtons = this.updateButtons.bind(this)
+    this.pan = this.pan.bind(this)
     this.projects = Store.getHomeProjects()
     this.content = Store.getContent('preview')
     this.oldRoute = Router.getOldRoute()
@@ -55,12 +59,28 @@ export default class Home extends Page {
   }
   componentDidMount() {
     Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
+    this.hammer = new Hammer(this.refs['page-wrapper'])
+    this.hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+    this.hammer.on('pan', this.pan)
     super.componentDidMount()
     // Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
   }
+  pan(e) {
+    if (activityHandler.isReady === false) return
+    activityHandler.count()
+    const direction = e.additionalEvent
+    switch (direction) {
+    case 'panup':
+      this.refs.preview.keyboardTriggered(Constants.DOWN)
+      break
+    case 'pandown':
+      this.refs.preview.keyboardTriggered(Constants.UP)
+      break
+    default:
+    }
+  }
   willTransitionOut() {
-    TweenMax.to(this.refs.helper, 0.3, { opacity: 0, ease: Circ.easeOut })
-    setTimeout(() => { super.willTransitionOut() }, 700)
+    TweenMax.to(this.refs['page-wrapper'], 1, { opacity: 0, ease: Circ.easeOut, onComplete: () => super.willTransitionOut() })
   }
   willTransitionIn() {
     setTimeout(() => { super.willTransitionIn() }, 300)
@@ -113,10 +133,12 @@ export default class Home extends Page {
   update() {
   }
   resize() {
+    this.refs.preview.resize()
     super.resize()
   }
   componentWillUnmount() {
     Store.off(Constants.PREVIEW_CHANGED, this.didPreviewChange)
+    this.hammer.off('pan', this.pan)
     super.componentWillUnmount()
   }
 }

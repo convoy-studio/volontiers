@@ -5,26 +5,21 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import Utils from '../../utils/Utils'
 import dom from 'dom-hand'
-import Hammer from 'hammerjs'
 import counter from 'ccounter'
-import slide from './Slide'
-import slideshow from './Slideshow'
 import {PagerActions} from '../../pager/Pager'
 
 const activityHandler = Utils.countActivityHandler(650)
-const hammer = new Hammer(dom.select('html'))
 
 class Preview extends BaseComponent {
   constructor(props) {
     super(props)
     Store.on(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
-    Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     this.oldSlide = undefined
     this.currentSlide = undefined
     this.slides = []
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
-    this.loadingCounter = counter(this.projects.length)
+    this.pixelRatio = Store.Detector.pixelRatio
   }
   render() {
     const projects = this.projects.map( ( project, i ) => {
@@ -45,6 +40,7 @@ class Preview extends BaseComponent {
     this.projects.forEach( ( project, i ) => {
       this.slides.push({ id: project.slug } )
     } )
+    this.slidesEl = dom.select.all( '.preview__item' )
   }
   onUpdatePreviewSlide(id) {
     for (let i = 0; i < this.slides.length; i++) {
@@ -106,9 +102,15 @@ class Preview extends BaseComponent {
   }
   componentWillUnmount() {
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
-    Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     this.slides.length = 0
     this.slides = undefined
+  }
+  resize() {
+    const windowH = Store.Window.h
+    for ( let slide of this.slidesEl ) {
+      console.log(slide)
+      dom.style( slide, { height: windowH + 'px' } )
+    }
   }
 }
 

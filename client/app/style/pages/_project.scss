@@ -1,3 +1,57 @@
 #project-page {
   @extend .full;
+  overflow-y: hidden;
+  @media (max-width: $MQ_SMALL) {
+    overflow-y: scroll;
+    padding-top: 5 * $mobileMargin;
+  }
+
+  .project {
+    .link {
+      font-size: $mobileFontSize;
+      line-height: $mobileLineHeight;
+      letter-spacing: $mobileLetterSpacing;
+      font-weight: 600;
+    }
+    &__cover {
+      width: 100%;
+      height: auto;
+    }
+    &__content {
+      padding: 2 * $mobileMargin;
+    }
+    &__title {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    &__infos {
+      margin-top: $mobileMargin;
+      font-size: $mobileFontSize;
+      line-height: $mobileLineHeight;
+      letter-spacing: $mobileLetterSpacing;
+      font-weight: 600;
+      br {
+        line-height: 2;
+      }
+    }
+    &__media {
+      margin: 2 * $mobileMargin 0;
+    }
+    &__footer {
+      margin-top: 5 * $mobileMargin;
+      margin-bottom: 8 * $mobileMargin;
+      .link {
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0 auto;
+      }
+    }
+    &__nextProject {
+      font-weight: bold;
+      line-height: 20px;
+    }
+    &__nextProjectTitle {
+      color: $pink;
+    }
+  }
 }

@@ -28,6 +28,7 @@ export default {
         closeInfos: 'Back to pictures',
         back: 'Back',
         previousImg: 'Previous image',
+        nextProject: 'Next project :',
         nextImg: 'Next image',
         discover: 'Discover next project'
       }
@@ -57,6 +58,7 @@ export default {
         closeInfos: 'Photos',
         back: 'Retour',
         previousImg: 'Image précédente',
+        nextProject: 'Projet suivant :',
         nextImg: 'Image suivante',
         discover: 'Découvrir le projet suivant'
       }
