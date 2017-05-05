@@ -90,28 +90,7 @@
             top: 0;
           }
           &:last-child { // lang btn
-            position: absolute;
-            top: $globalMargin + $mobileLineHeight;
-            left: $mobileMargin;
-
-            .title {
-              padding: $mobileMargin / 2;
-            }
-          }
-          .lang-separator {
-            width: 2px;
-            font-size: $mobileFontSize;
-            display: inline-block;
-            transform: translateX(-12px) rotateZ(-90deg);
-            transform-origin: center left;
-          }
-          .lang-button {
-            &.lang-button--en .title {
-              padding-right: 0;
-            }
-            &.lang-button--fr .title {
-              padding-left: 0;
-            }
+            display: none;
           }
         }
         .lang-button {

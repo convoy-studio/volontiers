@@ -15,6 +15,7 @@
       top: 0;
       left: $globalMargin;
       height: 100%;
+      margin-top: 0;
     }
   }
   .home-navigation {
@@ -57,8 +58,14 @@
     @media (max-width: $MQ_SMALL) {
       padding-top: 0;
       position: absolute;
-      bottom: 2 * $globalMargin;
+      top: 10%;
+      bottom: auto;
       left: 0;
+
+      .home-label--discover {
+        color: $pink;
+      }
+      
     }
   }
   .home-title {
@@ -83,5 +90,11 @@
       margin-top: $mobileMargin / 2;
       white-space: nowrap;
     }
+  }
+  .home-scrollHelper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -5.5px;
   }
 }
