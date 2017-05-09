@@ -38,7 +38,7 @@ class Preview extends BaseComponent {
   componentDidMount() {
     this.parent = this.refs.preview
     this.projects.forEach( ( project, i ) => {
-      this.slides.push({ id: project.slug } )
+      this.slides.push({ id: project.slug, state: Constants.STATE.ACTIVE } )
     } )
     this.slidesEl = dom.select.all( '.preview__item' )
   }
@@ -86,7 +86,7 @@ class Preview extends BaseComponent {
   updateCurrentSlide() {
     this.oldSlide = this.currentSlide
     this.currentSlide = this.slides[this.counter.props.index]
-    // setTimeout(() => { Actions.currentSlideChanged(this.currentSlide) })
+    setTimeout(() => { Actions.currentSlideChanged(this.currentSlide) })
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
     TweenMax.to( this.parent, 0.5, { y: -( this.counter.props.index * Store.Window.h ), ease: Expo.easeOut } )
   }
@@ -108,9 +108,9 @@ class Preview extends BaseComponent {
   resize() {
     const windowH = Store.Window.h
     for ( let slide of this.slidesEl ) {
-      console.log(slide)
       dom.style( slide, { height: windowH + 'px' } )
     }
+    TweenMax.set( this.parent, { y: -( this.counter.props.index * Store.Window.h ) } )
   }
 }
 

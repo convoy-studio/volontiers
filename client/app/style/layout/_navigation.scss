@@ -7,7 +7,7 @@
   box-sizing: border-box;
   margin-top: $globalMargin;
   pointer-events: none;
-  @include anim(.8s, .5s, $easeOutExpo, translateY(0));
+  @include anim(.8s, .0s, $easeOutExpo, translateY(0));
   &.hide {
     @include anim(.8s, .0s, $easeOutExpo, translateY(-($globalMargin * 4)));
   }
@@ -116,6 +116,7 @@
     height: $globalLineHeight * 2;
     @media (max-width: $MQ_SMALL) {
       height: $mobileLineHeight * 2;
+      top: -2px;
     }
 
     .top-logo-title {
@@ -144,7 +145,8 @@
     }
   }
 }
-
-.project .navigation {
-  background-color: $white;
+@media (max-width: $MQ_SMALL) {
+  .project .navigation {
+    background-color: $white;
+  }
 }

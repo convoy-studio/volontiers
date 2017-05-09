@@ -66,7 +66,7 @@ export default class Home extends Page {
     // Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
   }
   pan(e) {
-    if (activityHandler.isReady === false) return
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
     activityHandler.count()
     const direction = e.additionalEvent
     switch (direction) {
@@ -86,8 +86,8 @@ export default class Home extends Page {
     setTimeout(() => { super.willTransitionIn() }, 300)
   }
   didTransitionInComplete() {
-    TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut, delay: 1 })
-    TweenMax.to(this.refs.scrollHelper, 1, { opacity: 1, ease: Circ.easeOut, delay: 1 })
+    TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut })
+    TweenMax.to(this.refs.scrollHelper, 1, { opacity: 1, ease: Circ.easeOut })
     super.didTransitionInComplete()
   }
   onDiscoverProjectClick() {

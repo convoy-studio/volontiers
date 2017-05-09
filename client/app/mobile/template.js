@@ -8,7 +8,7 @@ import MobilePagesContainer from '../../components/MobilePagesContainer'
 import CanvasContainer from '../../components/CanvasContainer'
 import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
 // import HelperLayer from '../../components/partials/HelperLayer'
-import About from '../../components/partials/About'
+import About from '../../components/partials/MobileAbout'
 import raf from 'raf'
 
 export default class AppTemplate extends React.Component {
@@ -29,6 +29,7 @@ export default class AppTemplate extends React.Component {
         <BlockInteractionLayer />
         <FrontContainer ref='front-container' />
         <MobilePagesContainer ref='pages-container' />
+        <About ref="about"/>
       </div>
     )
   }

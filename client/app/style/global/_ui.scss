@@ -109,7 +109,9 @@ a {
     z-index: 2;
   }
   &.hover .title {
-    color: $pink;
+    @media (min-width: $MQ_SMALL) {
+      color: $pink;
+    }
   }
   .background {
     @extend .full;

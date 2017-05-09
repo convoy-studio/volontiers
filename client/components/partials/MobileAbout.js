@@ -12,12 +12,11 @@ export default class About extends BaseComponent {
     this.toggleOverlay = this.toggleOverlay.bind(this)
     this.hideOverlay = this.hideOverlay.bind(this)
     this.toggleAbout = this.toggleAbout.bind(this)
-    this.toggleCredits = this.toggleCredits.bind(this)
-    this.onPan = this.onPan.bind(this)
     this.isMobile = Store.Detector.isMobile
     this.pos = 0
     this.hidden = true
     this.listHidden = true
+    this.language = Store.getLang()
     const headerHeight = Constants.MOBILE_LINEHEIGHT + 2 * Constants.GLOBAL_MARGIN
     this.visibleHeight = window.innerHeight - (2 * headerHeight)
     Store.on(Constants.TOGGLE_ABOUT, this.toggleOverlay)
@@ -26,14 +25,29 @@ export default class About extends BaseComponent {
   }
   render() {
     const content = Store.getContent('about')
+    const langState = {}
+    if (this.language === 'fr') {
+      langState.fr = 'active'
+      langState.en = ''
+    } else {
+      langState.en = 'active'
+      langState.fr = ''
+    }
     return (
       <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={this.toggleAbout}>
         <div className='wrapper' ref='wrapper'>
           <div className='content'>
+            <div className="lang" ref="lang">
+              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={false} rotation={this.langRotation} onClick={() => { this.changeLangClick('en') }} className={`link top-logo-title lang-button lang-button--en ${langState.en}`}></MainTitle>
+              <span className="lang-separator">|</span>
+              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={false} rotation={this.langRotation} onClick={() => { this.changeLangClick('fr') }} className={`link top-logo-title lang-button lang-button--fr ${langState.fr}`}></MainTitle>
+            </div>
             <div className='description' ref='description'>
-              <p dangerouslySetInnerHTML={{__html: content.text[0]}}></p>
-              <p dangerouslySetInnerHTML={{__html: content.text[1]}}></p>
-              <p dangerouslySetInnerHTML={{__html: content.text[2]}}></p>
+              <p>
+                {content.text[0]}<br/>
+                {content.text[1]}<br/>
+                {content.text[2]}
+              </p>
             </div>
             <p className='catchline' ref='catchline'>{content.text[3]}</p>
             <div className='details' ref='details'>
@@ -42,7 +56,7 @@ export default class About extends BaseComponent {
             </div>
           </div>
           <div className='credits' ref='credits'>
-            <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={true} onClick={this.toggleCredits} className='link credits__btn'></MainTitle>
+            <MainTitle ref='creditsBtn' title={'Credits'} hasMouseEnterLeave={false}className='link credits__btn'></MainTitle>
             <p className='credits__list' ref='list'><a className='link btn' href='https://www.mmparis.com/' target='_blank'>M/M Paris</a>, <a className='link btn' href='http://convoy.me' target='_blank'>Convoy</a>, <a className='link btn' href='http://www.vabestudio.com/' target='_blank'>Bertrand Vallé</a>, <a className='link btn' href='http://www.le-studiowhite.com/' target='_blank'>Studio White</a>, <a className='link btn' href='http://www.romainmayoussier.com/' target='_blank'>Romain Mayoussier</a></p>
           </div>
         </div>
@@ -56,11 +70,6 @@ export default class About extends BaseComponent {
     this.parent = this.refs['page-wrapper']
     this.wrapperHeight = dom.size(this.refs.wrapper)[1]
     this.setupAnimations()
-    if (this.isMobile) {
-      this.hammer = new Hammer(this.refs.wrapper)
-      this.hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
-      this.hammer.on('pan', this.onPan)
-    }
   }
   setupAnimations() {
     this.tlBlink = new TimelineMax({
@@ -83,7 +92,7 @@ export default class About extends BaseComponent {
     })
     this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOverlayIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff' }, 0)
+    this.tlOverlayIn.fromTo(this.refs.lang, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 0.25)
     this.tlOverlayIn.staggerFromTo(this.refs.description.children, 0.7, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 0.2, 0.5)
     this.tlOverlayIn.fromTo(this.refs.catchline, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1)
     this.tlOverlayIn.fromTo(this.refs.details, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.2)
@@ -101,36 +110,16 @@ export default class About extends BaseComponent {
     })
     this.tlOverlayOut.fromTo(this.parent, 0.5, { opacity: 1 }, { opacity: 0, force3D: true, ease: Expo.easeOut }, 0)
   }
-  onPan(e) {
-    if (this.wrapperHeight -  this.visibleHeight < 0) return
-    let newPos = this.pos + (-e.deltaY * 0.1)
-    if (newPos < 0) this.pos = 0
-    else if (newPos > (this.wrapperHeight - this.visibleHeight)) this.pos = this.wrapperHeight - this.visibleHeight
-    else this.pos = newPos
-    TweenMax.set(this.refs.wrapper, { y: -this.pos })
+  changeLangClick(lang) {
+    if (lang === this.language) return
+    setTimeout(() => { Actions.changeLang() })
   }
   toggleAbout(e) {
     if (dom.classes.has(e.target, 'link') || dom.classes.has(e.target, 'title')) return
     setTimeout(() => { Actions.toggleAbout() })
   }
-  toggleCredits() {
-    if (this.listHidden) {
-      TweenMax.set(this.refs.list, { 'display': 'inline-block' })
-      this.wrapperHeight = dom.size(this.refs.wrapper)[1]
-      TweenMax.fromTo(this.refs.list, 0.6, { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: Expo.easeOut })
-      this.listHidden = false
-      if (this.isMobile && (this.wrapperHeight -  this.visibleHeight > 0)) {
-        this.pos = this.wrapperHeight - this.visibleHeight
-        TweenMax.to(this.refs.wrapper, 0.2, { y: -this.pos })
-      }
-    } else {
-      TweenMax.set(this.refs.list, { 'display': 'none' })
-      this.wrapperHeight = dom.size(this.refs.wrapper)[1]
-      TweenMax.fromTo(this.refs.list, 0.6, { opacity: 1, y: 0 }, { opacity: 0, y: 10, ease: Expo.easeOut })
-      this.listHidden = true
-    }
-  }
   toggleOverlay() {
+    console.log('toggle')
     if (this.hidden) {
       this.hidden = false
       this.tlOverlayIn.play(0)
@@ -143,7 +132,6 @@ export default class About extends BaseComponent {
     this.hidden = true
     this.listHidden = true
     TweenMax.set(this.parent, { opacity: 0 })
-    TweenMax.set(this.refs.list, { 'display': 'none' })
     if (dom.classes.has(this.parent, 'show')) dom.classes.remove(this.parent, 'show')
   }
   onOverviewOpen() {
