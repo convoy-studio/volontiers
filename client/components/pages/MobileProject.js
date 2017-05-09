@@ -63,7 +63,7 @@ export default class Project extends Page {
   setupAnimations() {
     this.tlIn.timeScale(1)
     this.tlIn.fromTo(this.refs['page-wrapper'], 1, { opacity: 0 }, { opacity: 1, ease: Circ.easeIn })
-    this.tlOut.to(this.refs['page-wrapper'], 1, { opacity: 0, ease: Circ.easeOut })
+    this.tlOut.to(this.refs['page-wrapper'], 0.5, { opacity: 0, ease: Circ.easeOut })
     super.setupAnimations()
   }
   willTransitionIn() {

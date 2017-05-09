@@ -19,6 +19,7 @@ html, body {
 html {
   @extend .full;
   overflow: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 #app-container  {

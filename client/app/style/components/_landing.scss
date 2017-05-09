@@ -4,6 +4,9 @@
   z-index: 9999999;
   background: $lightGrey;
   cursor: url('/assets/images/cursor.svg'), auto !important;
+  @media (max-width: $MQ_SMALL) {
+    background-color: $white;
+  }
   &.behind {
     z-index: -1;
   }

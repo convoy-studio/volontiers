@@ -64,7 +64,7 @@ export default class FrontContainer extends BaseComponent {
       this.refs.langTitleEn.show()
       this.refs.langTitleFr.show()
       this.refs.aboutTitle.show()
-    }, 200)
+    }, 0)
   }
   changeLangClick(lang) {
     if (lang === this.language) return

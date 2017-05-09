@@ -34,7 +34,7 @@ export default class About extends BaseComponent {
       langState.fr = ''
     }
     return (
-      <div id='about-page' ref='page-wrapper' className='page-wrapper' onClick={this.toggleAbout}>
+      <div id='about-page' ref='page-wrapper' className='page-wrapper'>
         <div className='wrapper' ref='wrapper'>
           <div className='content'>
             <div className="lang" ref="lang">
@@ -43,11 +43,11 @@ export default class About extends BaseComponent {
               <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={false} onClick={() => { this.changeLangClick('fr') }} className={`link top-logo-title lang-button lang-button--fr ${langState.fr}`}></MainTitle>
             </div>
             <div className='description' ref='description'>
-              <p>
+              <div>
                 {content.text[0]}<br/>
                 {content.text[1]}<br/>
                 {content.text[2]}
-              </p>
+              </div>
             </div>
             <p className='catchline' ref='catchline'>{content.text[3]}</p>
             <div className='details' ref='details'>

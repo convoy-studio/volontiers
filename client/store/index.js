@@ -292,6 +292,7 @@ const Store = assign({}, EventEmitter2.prototype, {
   AllPreviewsLoaded: false,
   IndexIsOpened: false,
   ProjectInfoIsOpened: false,
+  ProjectsDelay: 0,
   AppIsStarted: false,
   Navigation: Constants.NAVIGATION.NORMAL,
   dispatcherIndex: Dispatcher.register((payload) => {
@@ -316,7 +317,7 @@ const Store = assign({}, EventEmitter2.prototype, {
     case Constants.ROUTE_CHANGED:
       if (!Store.AppIsStarted) return
       if (Store.State === Constants.STATE.PROJECTS) {
-        setTimeout(Actions.closeProjectsOverview)
+        setTimeout(Actions.closeProjectsOverview, Store.ProjectsDelay)
         setTimeout(() => { Store.emitChange(action.actionType) }, 600)
       } else {
         if (Store.ProjectInfoIsOpened) {

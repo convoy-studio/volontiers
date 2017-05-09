@@ -273,10 +273,18 @@
     top: 100px;
     left: 0;
     overflow-y: scroll;
+    width: 100%;
     height: calc(100% - 100px);
 
     &__item {
       list-style: none;
+      width: 100%;
+      vertical-align: top;
+
+      @media (orientation: landscape) {
+        display: inline-block;
+        width: 50%;
+      }
     }
     &__infos {
       padding: $mobileMargin (2 * $mobileMargin) (2 * $mobileMargin) (2 * $mobileMargin);

@@ -103,6 +103,7 @@ export default class MobileProjectsOverview extends BaseComponent {
     this.tlOverlayIn.to(this.refs.parent, 1, { opacity: 1, ease: Sine.easeInOut })
     this.tlOverlayIn.fromTo(this.refs.filters, 0.5, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1)
     this.tlOverlayIn.fromTo(this.refs.projects, 0.5, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.25)
+    this.tlOverlayIn.timeScale(1.5)
 
     this.tlOverlayOut = new TimelineMax({ paused: true })
     this.tlOverlayOut.to(this.refs.filters, 0.5, { opacity: 0, ease: Sine.easeInOut }, 0)
