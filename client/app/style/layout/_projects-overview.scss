@@ -204,3 +204,101 @@
 		}
 	}
 }
+
+#mobile-projects-overview {
+  @extend .full;
+  position: absolute;
+  z-index: 10;
+  background-color: $white;
+  opacity: 0;
+  visibility: hidden;
+
+  .filters {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+  }
+  .filter {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+
+    &--active {
+      .filter__bullet {
+        border-color: $pink;
+        background-color: $pink;
+        @include simpleAnim(.2s, .0s, $easeOutCirc, all);
+      }
+      .main-btn .title {
+        color: $pink;
+        @include simpleAnim(.2s, .0s, $easeOutCirc, all);
+      }
+    }
+
+    &__item {
+      display: inline-block;
+    }
+
+    &__bullet {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: solid 1px $black;
+      background: transparent;
+      margin-top: 18px;
+      vertical-align: top;
+      @include simpleAnim(.2s, .0s, $easeOutCirc, all);
+    }
+
+    .main-btn {
+      display: inline-block;
+      .holder {
+        opacity: 1;
+
+        .title {
+          padding: 1.5 * $mobileMargin;
+          font-size: $mobileFontSize;
+          letter-spacing: $mobileLetterSpacing;
+          line-height: 20px;
+          text-transform: uppercase;
+          @include simpleAnim(.2s, .0s, $easeOutCirc, all);
+        }
+      }
+    }
+  }
+
+  .projects {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    overflow-y: scroll;
+    height: calc(100% - 100px);
+
+    &__item {
+      list-style: none;
+    }
+    &__infos {
+      padding: $mobileMargin (2 * $mobileMargin) (2 * $mobileMargin) (2 * $mobileMargin);
+
+      h3 {
+        text-transform: uppercase;
+        font-size: 21px;
+        line-height: 20px;
+        letter-spacing: 0.35px;
+      }
+
+      .main-btn .holder {
+        opacity: 1;
+
+        .title {
+          margin-top: $mobileMargin;
+          color: $pink;
+          text-transform: uppercase;
+          font-size: $mobileFontSize;
+          line-height: $mobileLineHeight;
+        }
+      }
+    }
+  }
+}

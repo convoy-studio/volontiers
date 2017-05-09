@@ -14,7 +14,6 @@ export default class Project extends Page {
     this.device = Store.Detector.isMobile ? Constants.MOBILE : Constants.DESKTOP
     this.projectInfo = undefined
     this.content = Store.getContent('project')
-    console.log( this.content )
     this.projectContent = Store.getCurrentProject()
   }
   render() {
@@ -58,6 +57,7 @@ export default class Project extends Page {
     )
   }
   componentDidMount() {
+    Store.CurrentSlide.state = Constants.STATE.ACTIVE
     super.componentDidMount()
   }
   setupAnimations() {

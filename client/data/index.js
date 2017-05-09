@@ -12,6 +12,9 @@ export default {
           'VOLONTIERS is our answer to your craziest ambitions.'
         ]
       },
+      projectOverview: {
+        discover: 'Discover project'
+      },
       help: {
         orientation: 'Please change the orientation of your phone to fully enjoy the website'
       },
@@ -41,6 +44,9 @@ export default {
           'Bien qu’éphémères, nos décors ont l\'exigence de la qualité dans leur réalisation. C\'est en partant de ce constat que VOLONTIERS a développé une deuxième activité en synergie avec l\'évènementiel : l’agencement d\'espaces retail (vitrines, corners, pop up, etc).',
           'Volontiers est notre réponse face à vos ambitions les plus folles.'
         ]
+      },
+      projectOverview: {
+        discover: 'Découvrir le projet'
       },
       help: {
         orientation: 'Veuillez changer l\'orientation de votre téléphone pour profiter pleinement du site'

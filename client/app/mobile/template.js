@@ -9,6 +9,7 @@ import CanvasContainer from '../../components/CanvasContainer'
 import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
 // import HelperLayer from '../../components/partials/HelperLayer'
 import About from '../../components/partials/MobileAbout'
+import ProjectsOverview from '../../components/partials/MobileProjectsOverview'
 import raf from 'raf'
 
 export default class AppTemplate extends React.Component {
@@ -30,6 +31,7 @@ export default class AppTemplate extends React.Component {
         <FrontContainer ref='front-container' />
         <MobilePagesContainer ref='pages-container' />
         <About ref="about"/>
+        <ProjectsOverview ref="projects-overview"/>
       </div>
     )
   }

@@ -132,6 +132,12 @@
     right: $globalMargin;
     bottom: $globalMargin;
     text-transform: uppercase;
+
+    @media (max-width: $MQ_SMALL) {
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
   }
   .credits {
 

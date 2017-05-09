@@ -20,7 +20,7 @@ export default class FrontContainer extends BaseComponent {
     this.content = Store.getContent('navigation')
     this.language = Store.getLang()
     this.toggleAboutInterval = undefined
-    this.langRotation = Store.Detector.isMobile === true ? '90deg' : '0deg'
+    this.isDesktop = !Store.Detector.isMobile
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
   }
   render() {
@@ -44,13 +44,13 @@ export default class FrontContainer extends BaseComponent {
               <MainTitle ref='aboutTitle' title={this.content.about} hasMouseEnterLeave={true} onClick={this.aboutClick} className='link top-logo-title'></MainTitle>
             </li>
             <li>
-              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={langState.en} rotation={this.langRotation} onClick={() => { this.changeLangClick('en') }} className='link top-logo-title lang-button lang-button--en'></MainTitle>
+              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={langState.en} onClick={() => { this.changeLangClick('en') }} className='link top-logo-title lang-button lang-button--en'></MainTitle>
               <span className="lang-separator">|</span>
-              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={langState.fr} rotation={this.langRotation} onClick={() => { this.changeLangClick('fr') }} className='link top-logo-title lang-button lang-button--fr'></MainTitle>
+              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={langState.fr} onClick={() => { this.changeLangClick('fr') }} className='link top-logo-title lang-button lang-button--fr'></MainTitle>
             </li>
           </ul>
         </div>
-        <ProjectsOverview ref='projects-overview' />
+        { this.isDesktop && <ProjectsOverview ref='projects-overview' /> }
       </header>
     )
   }
@@ -86,13 +86,16 @@ export default class FrontContainer extends BaseComponent {
     }, 100)
   }
   onProjectsClick() {
-    if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
-    if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) setTimeout(Actions.openProjectsOverview)
+    if (Store.State === Constants.STATE.PROJECTS) {
+      setTimeout(Actions.closeProjectsOverview)
+    } else if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) {
+      setTimeout(Actions.openProjectsOverview)
+    }
   }
   update() {
-    this.refs['projects-overview'].update()
+    if ( this.isDesktop ) this.refs['projects-overview'].update()
   }
   resize() {
-    this.refs['projects-overview'].resize()
+    if ( this.isDesktop ) this.refs['projects-overview'].resize()
   }
 }
