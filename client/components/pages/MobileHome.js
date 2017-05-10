@@ -18,6 +18,7 @@ export default class Home extends Page {
     super(props)
     this.didPreviewChange = this.didPreviewChange.bind(this)
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
+    this.scrollDown = this.scrollDown.bind(this)
     this.pan = this.pan.bind(this)
     this.projects = Store.getHomeProjects()
     this.content = Store.getContent('preview')
@@ -33,7 +34,7 @@ export default class Home extends Page {
     return (
       <div id='home-page' ref='page-wrapper' className='page-wrapper page-wrapper--fixed'>
         <Preview ref='preview'/>
-        <div className="home-scrollHelper" ref="scrollHelper">
+        <div className="home-scrollHelper" ref="scrollHelper" onClick={this.scrollDown}>
           <SVGComponent width="11" height="20" viewBox="0 0 11 20">
             <path d="M5.386534 20l5.386533-5.386534h-4.46384V0H4.46384v14.613466H0" fill="#F7A1FA" fillRule="evenodd"/>
           </SVGComponent>
@@ -79,6 +80,11 @@ export default class Home extends Page {
     default:
     }
   }
+  scrollDown() {
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
+    activityHandler.count()
+    this.refs.preview.keyboardTriggered(Constants.DOWN)
+  }
   willTransitionOut() {
     TweenMax.to(this.refs['page-wrapper'], 1, { opacity: 0, ease: Circ.easeOut, onComplete: () => super.willTransitionOut() })
   }
@@ -97,7 +103,7 @@ export default class Home extends Page {
   }
   didPreviewChange(item) {
     this.counter++
-    if ( this.counter === 1 ) TweenMax.to( this.refs.scrollHelper, 0.5, { opacity: 0, ease: Circ.easeOut } )
+    if ( this.counter === 1 ) TweenMax.to( this.refs.scrollHelper, 0.5, { opacity: 0, ease: Circ.easeOut, onComplete: () => { dom.classes.add( this.refs.scrollHelper, 'inactive' ) } } )
     const project = this.projects[item.previewIdx]
     let projectTitle = project.project.length > 25 ? project.project.substr(0, 25) + '...' : project.project
     let tl = undefined
