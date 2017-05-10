@@ -1,6 +1,6 @@
 #about-page {
   @extend .full;
-  position: absolute;
+  position: fixed;
   z-index: 11;
   background-color: $white;
   pointer-events: none;
