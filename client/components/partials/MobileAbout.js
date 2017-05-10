@@ -38,9 +38,9 @@ export default class About extends BaseComponent {
         <div className='wrapper' ref='wrapper'>
           <div className='content'>
             <div className="lang" ref="lang">
-              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={false} onClick={(e) => { e.preventDefault(); this.changeLangClick('en') }} className={`link top-logo-title lang-button lang-button--en ${langState.en}`}></MainTitle>
+              <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={false} onClick={() => { this.changeLangClick('en') }} className={`link top-logo-title lang-button lang-button--en ${langState.en}`}></MainTitle>
               <span className="lang-separator">|</span>
-              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={false} onClick={(e) => { e.preventDefault(); this.changeLangClick('fr') }} className={`link top-logo-title lang-button lang-button--fr ${langState.fr}`}></MainTitle>
+              <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={false} onClick={() => { this.changeLangClick('fr') }} className={`link top-logo-title lang-button lang-button--fr ${langState.fr}`}></MainTitle>
             </div>
             <div className='description' ref='description'>
               <p>

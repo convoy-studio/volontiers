@@ -175,6 +175,17 @@
     &-button {
       display: inline-block;
       vertical-align: middle;
+
+      &--en {
+        .holder .title {
+          padding-left: 4 * $mobileMargin !important;
+        }
+      }
+      &--fr {
+        .holder .title {
+          padding-right: 4 * $mobileMargin !important;
+        }
+      }
     }
     .main-btn {
       .holder {

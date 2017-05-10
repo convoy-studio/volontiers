@@ -129,6 +129,7 @@
       pointer-events: all;
       @media (max-width: $MQ_SMALL) {
         height: $mobileLineHeight * 2;
+        overflow-y: hidden;
       }
       &.show {
         opacity: 1;
