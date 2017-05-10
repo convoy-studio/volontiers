@@ -31,11 +31,20 @@ function _getPageAssetsToLoad(r) {
   if (type === Constants.PROJECT) {
     manifest = manifest.slice(0, 1)
   } else if (type === Constants.HOME) {
-    const project = _getProjectById(route.target)
-    if (project) {
-      manifest.push({
-        src: `assets/${project.image}`
-      })
+    if ( Store.Detector.isMobile ) {
+      const homeProjects = Store.AllHomeProjects
+      for ( let project of homeProjects ) {
+        manifest.push({
+          src: `assets/${project.image}`
+        })
+      }
+    } else {
+      const project = _getProjectById(route.target)
+      if (project) {
+        manifest.push({
+          src: `assets/${project.image}`
+        })
+      }
     }
   }
   return manifest
