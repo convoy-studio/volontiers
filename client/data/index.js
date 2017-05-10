@@ -604,6 +604,47 @@ export default {
       assets: [
         '86.jpg'
       ]
+    },
+    'tom-ford-scented-dinner': {
+      'inHome': 0,
+      'brand': 'Tom Ford',
+      'separator': ' ',
+      'project': 'Scented Dinner',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the launch of the new Tom Ford Private Blend fragrance, Sole di Positano, VOLONTIERS and YARD designed and produced an event with a unique set-up design emphasizing the sharp shapes and bluish colours of the fragrances, immersing the guests in the Italian Riviera.<br/>Through a tailor-made olfactory and gastronomic food-pairing experience in 4 courses, delivered by young and talented Italian chef Michele Farnesi, the influencers were able to discover in a unique and empiric way all the fragrances of the collection. Each course was associated with the notes of a fragrance to create a perfect symbiosis between flavours and scents.<br/>After dinner, the guests were able to assist to the reveal of the new perfume Sole di Positano, highlight of the evening that continued with the DJ-sets of Goldilox and Sam Tiba.',
+        fr: 'Pour le lancement de la nouvelle senteur Tom Ford Private Blend, Sole di Positano, VOLONTIERS et YARD ont imaginé et produit un événement avec une mise en scène sublimant les formes géométriques et les tons bleutés des parfums, plongeant les invités au cœur de la Riviera Italienne.<br/>À travers une expérience olfactive et gastronomique sur-mesure en 4 plats délivrée par le jeune et talentueux chef italien Michele Farnesi, les influenceurs ont pu découvrir de façon unique et empirique les différentes fragrances de la collection. Chaque plat était associé aux notes d’un parfum, afin de créer une symbiose parfaite entre mets et senteurs.<br/>A l’issue du diner, les invités ont pu assister au dévoilement du nouveau parfum Sole di Positano, point d’orgue de la soirée, qui s’est poursuivie aux sons des DJ Goldilox et Sam Tiba.'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg'
+      ]
+    },
+    'tom-ford-soleil-press-event': {
+      'inHome': 0,
+      'brand': 'Tom Ford',
+      'separator': ' ',
+      'project': 'Soleil Press Event',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the launch of the Tom Ford Beauty Soleil collection, VOLONTIERS designed and produced an event that would immerse the guests into a solar and vegetal escape, in line with the spirit of this new creation.<br/>During a Michelin-starred lunch orchestrated by a Tom Ford make-up artist present for the occasion, the journalists were able to discover the fragrances and make-up products of the Soleil Blanc collection in the felted winter garden of a famous restaurant, located in a “art nouveau” style building at the heart of Paris.',
+        fr: 'À l’occasion du lancement presse de la collection Soleil de la marque Tom Ford Beauty, VOLONTIERS a scénographié et produit un événement plongeant les invités dans un univers solaire et végétal, esprit de cette nouvelle création.<br/>Au cours d’un déjeuner étoilé orchestré par un make-up artist Tom Ford présent pour l’occasion, les journalistes ont pu découvrir les parfums et produits make-up de la collection Soleil Blanc dans l’ambiance feutrée de la verrière d’un restaurant de renom, situé dans un immeuble style « art nouveau » en plein cœur de Paris.'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
     }
   }
 }
