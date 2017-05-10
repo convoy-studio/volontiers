@@ -83,11 +83,11 @@ export default {
         en: 'The famous concept store colette asked VOLONTIERS to produce an exceptional event in order to celebrate its 20th birthday and recreate « The Beach », a playful masterpiece invented by the artists studio Snarkitecture. Inspired by long and hot days spent at the beach with family and friends, the piece evokes a white monochrome landscape recreating the summery atmosphere of a coastline.<br/>After an exciting launch party allowing happy fews, press and influencers to discover The Beach, almost 10 000 visitors attended the event over the week to explore and share a playful and relaxing moment in the exceptional venue of the nave of the Musée des Arts Décoratifs of Paris.',
         fr: 'Le célèbre concept store colette a fait appel à VOLONTIERS pour produire un événement exceptionnel à l’occasion de ses 20 ans et recréer « The Beach », oeuvre ludique du studio d’architectes et designers Snarkitecture. Inspirée des journées passées à la plage en famille ou entre amis, l’œuvre évoque un paysage blanc monochrome recréant l’univers du littoral estival.<br/>Après une soirée de lancement remarquée lors de laquelle invités prestigieux, presse et influencers ont pu profiter de l’installation, près de 10 000 visiteurs se sont succédés pendant une semaine pour explorer, jouer et se détendre dans le cadre exceptionnel de la nef du Musée des Arts Décoratifs de Paris.'
       },
-      preview: '0.jpg',
+      preview: '3.jpg',
       assets: [
+        '0.jpg',
         '1.jpg',
         '2.jpg',
-        '3.jpg',
         '4.jpg',
         '5.jpg',
         '6.jpg',
@@ -140,8 +140,8 @@ export default {
     },
     'nikelab-x-olivier-rousteing': {
       'inHome': 2,
-      'brand': 'nikelab',
-      'separator': ' × ',
+      'brand': 'nikelab ×',
+      'separator': ' ',
       'project': 'olivier rousteing',
       'type': Constants.TYPE.EVENT,
       'about': {
