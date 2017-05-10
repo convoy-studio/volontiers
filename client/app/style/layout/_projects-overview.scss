@@ -273,6 +273,7 @@
     top: 100px;
     left: 0;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
     height: calc(100% - 100px);
 

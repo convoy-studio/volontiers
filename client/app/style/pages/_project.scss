@@ -3,6 +3,7 @@
   overflow-y: hidden;
   @media (max-width: $MQ_SMALL) {
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     padding-top: 5 * $mobileMargin;
   }
 
