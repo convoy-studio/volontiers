@@ -1,5 +1,6 @@
 import BaseComponent from '../../pager/components/BaseComponent'
 import Store from '../../store'
+import Actions from '../../actions'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import dom from 'dom-hand'
@@ -135,7 +136,16 @@ class Logo extends BaseComponent {
     this.logoAnimAbout.pause(0)
   }
   onLogoClick() {
-    Router.setRoute(Store.defaultRoute())
+    const route = Router.getNewRoute()
+    if ( route.path === Store.defaultRoute() ) {
+      if (Store.State === Constants.STATE.PROJECTS) {
+        setTimeout(Actions.closeProjectsOverview)
+      } else if (Store.State === Constants.STATE.ABOUT) {
+        setTimeout(Actions.toggleAbout)
+      }
+    } else {
+      Router.setRoute(Store.defaultRoute())
+    }
   }
   show() {
     dom.classes.add(this.refs.logo, 'show')

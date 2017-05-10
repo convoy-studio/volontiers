@@ -32,7 +32,6 @@ class App {
   }
   loadInitialAssets() {
     const manifest = Store.pageAssetsToLoad()
-    console.log(manifest)
     Store.Preloader.load(manifest, this.onAssetsLoaded)
   }
   logoAnimation() {
