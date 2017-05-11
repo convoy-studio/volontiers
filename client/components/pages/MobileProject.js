@@ -26,9 +26,10 @@ export default class Project extends Page {
       const ext = Utils.getFileExtension(media)
       let mediaItem
       if ( ext === 'mp4') {
-        const src = media.substring(0, media.lastIndexOf('.')) + '-mobile' + media.substring(media.lastIndexOf('.'))
+        const videoSrc = media.substring(0, media.lastIndexOf('.')) + '-mobile' + media.substring(media.lastIndexOf('.'))
+        const posterSrc = media.substring(0, media.lastIndexOf('.')) + '-poster.png'
         mediaItem = (
-          <video src={ basePath + src } className="project__video" width="100%" height="auto" controls></video>
+          <video src={ basePath + videoSrc } poster={ basePath + posterSrc } className="project__video" width="100%" height="auto" controls></video>
         )
       } else {
         mediaItem = (

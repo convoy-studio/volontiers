@@ -92,7 +92,7 @@ export default {
         '5.jpg',
         '6.jpg',
         '7.jpg',
-        'COLETTE_20 ANS_RECAP.mp4',
+        'COLETTE_20_ANS_RECAP.mp4',
         'THE_BEACH_DRONE.mp4',
         'THE_BEACH_TL.mp4'
       ]
