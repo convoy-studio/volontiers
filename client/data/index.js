@@ -471,8 +471,8 @@ export default {
     },
     'nikelab-olivier-rousteing': {
       'inHome': 0,
-      'brand': 'nikelab',
-      'separator': ' × ',
+      'brand': 'nikelab ×',
+      'separator': ' ',
       'project': 'olivier rousteing',
       'type': Constants.TYPE.RETAIL,
       'about': {

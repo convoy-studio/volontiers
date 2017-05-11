@@ -20,6 +20,7 @@ export default class Project extends Page {
     const id = Router.getNewRoute().target
     const infoContent = Store.getCurrentAboutContent()
     const next = Store.nextProject()
+    const nextProject = next.brand + next.separator + next.project
     const projectTitle = this.projectContent.brand + this.projectContent.separator + this.projectContent.project
     const basePath = `assets/images/${id}/`
     const medias = this.projectContent.assets.map( (media, i) => {
@@ -49,9 +50,9 @@ export default class Project extends Page {
           <div className="project__medias" ref="projectMedias">
             { medias }
           </div>
-          <div className="project__footer" ref="projectFooter">
+          <div className="project__footer" ref="projectFooter" onClick={ () => Router.setRoute(`/project/${next.slug}`) }>
             <MainTitle ref='nextProject' title={this.content.nextProject} hasMouseEnterLeave={false} className='link project__nextProject show'></MainTitle>
-            <MainTitle ref='nextProjectTitle' title={next.project} hasMouseEnterLeave={false} className='link project__nextProjectTitle show' onClick={ () => Router.setRoute(`/project/${next.slug}`) }></MainTitle>
+            <MainTitle ref='nextProjectTitle' title={nextProject} hasMouseEnterLeave={false} className='link project__nextProjectTitle show'></MainTitle>
           </div>
         </div>
       </div>
