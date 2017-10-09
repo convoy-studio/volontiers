@@ -73,6 +73,111 @@ export default {
   'routing': {
   },
   projects: {
+    'ikea-make-room-for-paris-design-week': {
+      'inHome': 0,
+      'brand': 'Ikea',
+      'separator': '-',
+      'project': 'Make Room for Paris Design Week',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For Paris Design Week, IKEA and Zmirov Communication once again called Volontiers to set up a living space in the Marais in Paris. After a day dedicated to the press, the public was invited to discover the collaboration between IKEA and the danish designer HAY called “YPPERLIG”, along with this year’s new products presented in three “experience rooms”. The hacking, which consists in twisting pieces to create new functional objects, was also in the spotlight of the event. Volontiers suggested 3 artists with 3 different universes who presented their hacking projects to the public : a folding screen made with hangers by Atelier Hapax, a destructured playing area for kids by Cécile Chaput and a life-size Mario Kart game by Désormeaux/Carrette studio.',
+        fr: 'A l’occasion de la Paris Design Week, IKEA et l’agence Zmirov Communication ont une nouvelle fois fait appel à Volontiers pour scénographier un espace de vie dans le Marais. Après une journée dédiée à la presse, le grand public a pu découvrir la collaboration entre IKEA et le designer danois HAY, baptisée « YPPERLIG », ainsi que les nouveautés de l’année, présentées dans des « experience rooms ». Le hacking, principe qui consiste à détourner des pièces de leur utilisation première pour créer de nouveaux objets tout aussi fonctionnels, était également mis à l’honneur. Volontiers a trouvé 3 artistes d’univers différents qui ont pu exposer leur projet de hacking au public : un paravent composé de cintres pour Atelier Hapax, un espace de jeu restructuré pour Cécile Chaput, et le jeu Mario Kart grandeur nature pour le studio Désormeaux/Carrette.'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg'
+      ]
+    },
+    'nikelab-x-pigalle-duperre-basketball-court': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' × ',
+      'project': 'Pigalle - Duperré Basketball Court',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Celebrating the new collaboration between Nikelab & Pigalle, Volontiers was commissioned by Nike to renovate the Duperré basketball court. Thanks to Ill Studio’s design, the court gets harmonious new colors, including shades and optical illusions referring to the collection. This playground is surely the most famous sport court in the world. It benefits from a very large exposure, with articles in many international newspaper & design magazines such as Time, NY Times, BBC, Archidigest, AD, Wallpaper, Liberation.',
+        fr: 'A l’occasion de la nouvelle collaboration entre Nikelab et l’emblématique griffe parisienne Pigalle, Volontiers a été chargé par Nike de rénover le terrain de basket Duperré, situé dans le 9e à Paris. Sous la direction artistique d’Ill Studio, le terrain se pare de nouvelles couleurs et dégradés de rose et de bleu, intégrant des éléments trompe-l’oeil, en référence aux pièces de la nouvelle collection. Ce playground a fait le tour de tous les plus grands medias internationaux, il est aujourd’hui un lieu de culte pour les amoureux du design et du sport qui a fait l’objet de nombreuses parutions, notamment dans le Time, NY Times, BBC, Archidigest, AD, Wallpaper, Libération...'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
+    },
+    'nikelab-x-pigalle-influencers-journey': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' × ',
+      'project': 'Pigalle - Influencers Journey',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'During the Paris Fashion Week, 40 international influencers were invited to experience an amazing journey through Paris organized by Volontiers. After attending the Nikelab x Pigalle show at the Modern Art Museum of Paris, where they discovered a personalized jacket exclusively made for them, they experienced some prestigious parisian restaurants fully privatized and had the chance to discover the Duperré bball court before anyone. They ended their stay with an amazing party near Paris.',
+        fr: 'Invités par Nike dans le cadre de la fashion week parisienne, une quarantaine d’influencers internationaux ont arpenté Paris lors d’un séjour organisé par Volontiers. Ils ont ainsi pu assister au défilé Nikelab x Pigalle où les attendaient une veste personnalisée dans un espace dédié au MAM, découvrir la collection de plus près dans les bureaux Nikelab décorés pour l’occasion, diner dans des restaurants prestigieux, et avoir le privilège d’admirer en avant première le nouveau design du terrain Duperré. Ce séjour a pris fin après une soirée exceptionnelle organisée en province.'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg'
+      ]
+    },
+    'nikelab-x-pigalle': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' × ',
+      'project': 'Pigalle',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg',
+        '11.jpg',
+        '12.jpg',
+        '13.jpg'
+      ]
+    },
+    'esteban-cortazar': {
+      'inHome': 0,
+      'brand': 'Esteban Cortazar',
+      'separator': ' ',
+      'project': '@Colette',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg'
+      ]
+    },
     'colette-20-ans-the-beach': {
       'inHome': 1,
       'brand': 'Colette 20 ans',
