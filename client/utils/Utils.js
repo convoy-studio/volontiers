@@ -132,6 +132,7 @@ class Utils {
         newUrl = url.substring(0, url.lastIndexOf('.')) + '-mobile' + url.substring(url.lastIndexOf('.'))
       } else newUrl = url
       scope.texture = new PIXI.Texture.fromVideo(newUrl)
+      scope.texture.baseTexture.source.volume = 0
       cb(scope)
     } else {
       loader = new PIXI.loaders.Loader()
