@@ -73,10 +73,52 @@ export default {
   'routing': {
   },
   projects: {
+    'eyevan-breakfast-launch-at-colette': {
+      'inHome': 0,
+      'brand': 'Eyevan',
+      'separator': ' - ',
+      'project': 'Breakfast launch @colette',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To promote its new collections, Eyevan, a Japanese eyewear brand, entrusted Volontiers to organize a breakfast gathering journalists & influencers. For one of the very first time, and certainly the last, colette accepted to privatize and to decorate its ground floor. The guests discovered the collections « 10 Eyevan » et « Eyevan Capsule Collection » in a Japanese atmosphere celebrating the main value of the brand : Japan’s great craftsmanship.',
+        fr: 'Pour promouvoir ses nouvelles collections, Eyevan, une marque de lunettes japonaise réputée pour son design & son artisanat légendaire, a confié à Volontiers l’organisation d’un petit déjeuner regroupant media et influencers. Pour l’une des premières, et certainement la dernière fois, le magasin colette a bien voulu privatiser et habiller son rdc aux couleurs de la marque. Les invités ont ainsi pu découvrir les collections « 10 Eyevan » et « Eyevan Capsule Collection », dans une ambiance japonisante avec cérémonie du thé traditionnelle, calligraphie sur papier washi, et petit déjeuner typiquement japonais.'
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg',
+        '11.jpg'
+      ]
+    },
+    'nikelab-the-ten-x-virgil-abloh-at-nikelab': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' - ',
+      'project': 'The ten × Virgil Abloh @nikelab',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'IMG_79600000.jpg',
+      assets: [
+        'IMG_79950000.jpg',
+        'IMG_80560000.jpg',
+        'IMG_80760000.jpg',
+        'IMG_80910000.jpg'
+      ]
+    },
     'ikea-make-room-for-paris-design-week': {
       'inHome': 0,
       'brand': 'Ikea',
-      'separator': '-',
+      'separator': ' - ',
       'project': 'Make Room for Paris Design Week',
       'type': Constants.TYPE.EVENT,
       'about': {
@@ -181,7 +223,7 @@ export default {
     'colette-20-ans-the-beach': {
       'inHome': 1,
       'brand': 'Colette 20 ans',
-      'separator': '-',
+      'separator': ' - ',
       'project': 'The Beach',
       'type': Constants.TYPE.EVENT,
       'about': {
