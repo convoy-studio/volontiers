@@ -97,24 +97,6 @@ export default {
         '11.jpg'
       ]
     },
-    'nikelab-the-ten-x-virgil-abloh-at-nikelab': {
-      'inHome': 0,
-      'brand': 'Nikelab',
-      'separator': ' - ',
-      'project': 'The ten × Virgil Abloh @nikelab',
-      'type': Constants.TYPE.RETAIL,
-      'about': {
-        en: '',
-        fr: ''
-      },
-      preview: 'IMG_79600000.jpg',
-      assets: [
-        'IMG_79950000.jpg',
-        'IMG_80560000.jpg',
-        'IMG_80760000.jpg',
-        'IMG_80910000.jpg'
-      ]
-    },
     'ikea-make-room-for-paris-design-week': {
       'inHome': 0,
       'brand': 'Ikea',
@@ -139,7 +121,7 @@ export default {
       ]
     },
     'nikelab-x-pigalle-duperre-basketball-court': {
-      'inHome': 0,
+      'inHome': 1,
       'brand': 'Nikelab',
       'separator': ' × ',
       'project': 'Pigalle - Duperré Basketball Court',
@@ -177,51 +159,8 @@ export default {
         '8.jpg'
       ]
     },
-    'nikelab-x-pigalle': {
-      'inHome': 0,
-      'brand': 'Nikelab',
-      'separator': ' × ',
-      'project': 'Pigalle',
-      'type': Constants.TYPE.RETAIL,
-      'about': {
-        en: '',
-        fr: ''
-      },
-      preview: '1.jpg',
-      assets: [
-        '2.jpg',
-        '3.jpg',
-        '4.jpg',
-        '5.jpg',
-        '6.jpg',
-        '7.jpg',
-        '8.jpg',
-        '9.jpg',
-        '10.jpg',
-        '11.jpg',
-        '12.jpg',
-        '13.jpg'
-      ]
-    },
-    'esteban-cortazar': {
-      'inHome': 0,
-      'brand': 'Esteban Cortazar',
-      'separator': ' ',
-      'project': '@Colette',
-      'type': Constants.TYPE.RETAIL,
-      'about': {
-        en: '',
-        fr: ''
-      },
-      preview: '1.jpg',
-      assets: [
-        '2.jpg',
-        '3.jpg',
-        '4.jpg'
-      ]
-    },
     'colette-20-ans-the-beach': {
-      'inHome': 1,
+      'inHome': 2,
       'brand': 'Colette 20 ans',
       'separator': ' - ',
       'project': 'The Beach',
@@ -286,7 +225,7 @@ export default {
       ]
     },
     'nikelab-x-olivier-rousteing': {
-      'inHome': 2,
+      'inHome': 3,
       'brand': 'nikelab ×',
       'separator': ' ',
       'project': 'olivier rousteing',
@@ -336,7 +275,7 @@ export default {
       ]
     },
     'airbnb-paris': {
-      'inHome': 3,
+      'inHome': 4,
       'brand': 'Airbnb PARIS',
       'separator': ' - ',
       'project': 'la maison parisienne',
@@ -399,7 +338,7 @@ export default {
       ]
     },
     'google-curiocite': {
-      'inHome': 5,
+      'inHome': 0,
       'brand': 'GOOGLE',
       'separator': ' - ',
       'project': 'Curio-cité',
@@ -446,7 +385,7 @@ export default {
       ]
     },
     'nikelab-acg-2016': {
-      'inHome': 4,
+      'inHome': 5,
       'brand': 'NIKELAB',
       'separator': ' ',
       'project': 'ACG 2016',
@@ -484,6 +423,67 @@ export default {
         '03_3I3A4140.jpg',
         '04_3I3A4289.jpg',
         'ACG-HO15-NIKELAB-P75-LAUNCH-EVENT-HD.mp4'
+      ]
+    },
+    'nikelab-the-ten-x-virgil-abloh-at-nikelab': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' - ',
+      'project': 'The ten × Virgil Abloh @nikelab',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: 'IMG_79600000.jpg',
+      assets: [
+        'IMG_79950000.jpg',
+        'IMG_80560000.jpg',
+        'IMG_80760000.jpg',
+        'IMG_80910000.jpg'
+      ]
+    },
+    'nikelab-x-pigalle': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' × ',
+      'project': 'Pigalle',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg',
+        '11.jpg',
+        '12.jpg',
+        '13.jpg'
+      ]
+    },
+    'esteban-cortazar': {
+      'inHome': 0,
+      'brand': 'Esteban Cortazar',
+      'separator': ' ',
+      'project': '@Colette',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1.jpg',
+      assets: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg'
       ]
     },
     'nike-acg-2016': {
