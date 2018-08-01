@@ -73,6 +73,324 @@ export default {
   'routing': {
   },
   projects: {
+    'darphin-digital-detox': {
+      'inHome': 0,
+      'brand': 'Darphin',
+      'separator': ' - ',
+      'project': 'Digital Detox',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Launching two new anti-stress products, Darphin commissioned Volontiers to imagine a detox-day to reach about forty fashion & beauty influencers. Deprived of their mobile phones at their arrival, they were able to experience a progressive digital detox through three immersive rooms.  <br/>The first room, called fluffy room, invited them to relax in a ocean of softness, while the bubble room offered them to unwind by popping bubble wrap. As an ultimate anti-stress technic, the last door opened on a piñata taking centre stage of the room. Its destruction, a perfect way to let off steam, released personalized gifts and millions of confetti flying around each guest.<br/>   The journey ended in a reveal room where the influencers could discover the products showcased in the middle of a luxuriant jungle highlighting the natural and botanical values of the brand. In order to create photos and videos content shareable on social medias, cameras were placed in each room, filming the entire experience that each guest received as soon as they entered the reveal room.',
+        fr: 'A l’occasion du lancement de deux nouveaux produits anti-stress, DARPHIN a mandaté Volontiers d’imaginer une journée détox dédiée à une quarantaine d’influenceuses mode et beauté. Privées de leur téléphone à leur arrivée, elles ont pu expérimenter une digital detox progressive à travers trois pièces immersives.  <br/>La première pièce, la fluffy room, les invitait à se détendre dans une montagne de douceur, tandis que la bubble room leur permettait de se défouler en éclatant du papier bulle. Enfin, summum de l’anti-stress, la dernière pièce s’ouvrait sur une pinata trônant au milieu de la pièce et dont la destruction révélait de nombreux cadeaux personnalisés.<br/>   Le parcours s’achevait dans une reveal room, où les influenceuses pouvaient découvrir les produits mis en scène au milieu d’une jungle verte et luxuriante mettant l’accent sur les valeurs naturelles et botaniques de la marque.  Des caméras installées dans toutes les pièces ont permis de filmer toute l’expérience, créant ainsi du contenu photos et vidéos que les influenceuses ont pu partager sur les réseaux dès leur arrivée dans la reveal room. '
+      },
+      preview: '1_BOY0952_copie.jpg',
+      assets: [
+        '2_BOY0939_copie.jpg',
+        '3_BOY0954_copie.jpg',
+        '4_BOY1254_copie.jpg',
+        '5_BOY1344_copie.jpg',
+        '6_BOY0936_copie.jpg',
+        '7-BOY0925_copie.jpg',
+        '8_BOY1510_copie.jpg',
+        '9_BOY1051_copie.jpg'
+      ]
+    },
+    'de-beers-influencers-event': {
+      'inHome': 0,
+      'brand': 'De Beers',
+      'separator': ' - ',
+      'project': 'Influencers Event',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'In order to reach a new audience of parisian influencers, the fine jewelry house De Beers commissioned Volontiers to create an event presenting several of its emblematic jewelry collections.<br/>In the most beautiful salon of the Ritz Paris, those collections were brought to light on an infinity-shape display, telling the story of a diamond from a rough stone to a delicate masterpiece.<br/>Guests also enjoyed cocktails from the famous Hemingway Bar, a perfect music selection by Louise Chen interrupted by a Mattias Mimoun live piano session, and also customized clutches by a talented calligrapher.',
+        fr: 'Souhaitant s’adresser pour la première fois à des influencers, la maison de haute joaillerie De Beers a mandaté Volontiers pour imaginer un évènement présentant plusieurs de ses collections emblématiques.<br/>Dans le plus beau salon du Ritz, ces dernières ont ainsi été présentées sur un display en forme d’infini, suivant un parcours évolutif symbolisant le passage de la pierre brute à un diamant travaillé. <br/>Les invités ont aussi pu apprécier les cocktails de la carte du fameux Bar Hemingway, une parfaite sélection musicale jouée par Louise Chen, des reprises au piano par Mattias Mimoun et des pochettes en cuir De Beers personnalisées par une calligraphe de talent.'
+      },
+      preview: '1-DSC_2881.jpg',
+      assets: [
+        '2-DSC_2973.jpg',
+        '3-DSC_3487.jpg',
+        '4-IMG_7582.jpg'
+      ]
+    },
+    'ikea-let-it-slow': {
+      'inHome': 0,
+      'brand': 'Ikea',
+      'separator': ' - ',
+      'project': 'Let it slow',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the launch of its three new collections SOMMAR 2018, HJARTELIG and INDUSTRIELL, IKEA and Zmirov Communication asked VOLONTIERS to fully furnish an architect house in the 16th arrondissement of Paris. <br/>After a day dedicated to the press, 5 famous bloggers have led workshops singing the praises of the slow life movement for their community and IKEA clients. <br/>The guests have participated to a sport session with Canard Ivre, a DIY workshop with Gambettes Sauvages, a beauty workshop with Daphné Narcy, a repotting class with Sweety Oxalis and a cooking lesson with Plus une Miette.',
+        fr: 'IKEA et l’agence Zmirov Communication ont demandé à VOLONTIERS de mettre en scène ses trois nouvelles collections SOMMAR 2018, HJARTELIG et INDUSTRIELL dans une superbe maison d’architecte à Paris. <br/>Après une journée dédiée à la presse, 5 blogueuses de renom et d’univers différents ont pu animer des ateliers ventant les mérites du mouvement slow life et auxquels ont pris part leur communauté ainsi que des clientes IKEA. <br/>Dans des pièces décorées aux couleurs de ces différents ateliers, les invités ont ainsi pu assister à un cours de sport animé par Canard Ivre, un atelier DIY avec Gambettes Sauvages, un atelier beauté avec Daphné Narcy, un atelier rempotage avec Sweety Oxalis et enfin, un atelier cuisine avec Plus une Miette.'
+      },
+      preview: '1-Volontiers-Ikea-32.jpg',
+      assets: [
+        '2-Volontiers-ikea.jpg',
+        '3-Volontiers-Ikea-12.jpg',
+        '4-Volontiers-Ikea-13.jpg',
+        '5-Volontiers-Ikea-45.jpg',
+        '6Volontiers-Ikea-16.jpg',
+        '7AC6A5656.jpg',
+        '8Volontiers-Ikea-18.jpg',
+        '9AC6A6407.jpg',
+        '10Volontiers-Ikea-21.jpg',
+        '11AC6A5762.jpg',
+        '12AC6A5543.jpg',
+        '13AC6A5749.jpg',
+        '14Volontiers-Ikea-109.jpg',
+        '15Volontiers-Ikea-46.jpg'
+      ]
+    },
+    'de-beers-bridal-event': {
+      'inHome': 0,
+      'brand': 'De Beers',
+      'separator': ' - ',
+      'project': 'Bridal Event',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To reveal the new De Beers 2018 Bridal Jewellery collection, VOLONTIERS imagined the wedding of De Beers with other prestigious Parisian brands in a unique floral set up. <br/>Journalists and major clients were invited to witness the wedding through exclusive collaborations, from l’Eclair de Génie proposing a De Beers wedding cake, to Bloom’s wedding bouquet made by the guests, not forgetting the nails thanks to an exclusive Manucurist nail color polish. To complete the guests experience, after a fun quizz defining which ring matches best their personality, an illustrator was sketching them with the matching ring.',
+        fr: 'Pour dévoiler la nouvelle collection 2018 De Beers Bridal Jewellery, VOLONTIERS a imaginé le mariage de De Beers avec d’autres prestigieuses marques parisiennes dans un set up floral unique. <br/>Journalistes et clients majeurs étaient invités à être les témoins de ce mariage à travers des collaborations exclusives ; du gâteau de mariage De Beers par l’Eclair de Génie aux bouquets de mariage Bloom’s composés par les invités, en passant par des coloris inédits de vernis Manucurist appliqués sur place. Pour compléter leur expérience, après avoir répondu à un rapide questionnaire leur révélant quelle bague correspondait le mieux à leur personnalité, une illustratrice dessinait les invités avec la bague correspondante. '
+      },
+      preview: '1_XL10906.jpg',
+      assets: [
+        '2_XL10940.jpg',
+        '3_XL10958.jpg',
+        '3_XL11022.jpg',
+        '4_XL11011.jpg',
+        '5_XL11074.jpg'
+      ]
+    },
+    'journe-x-coca-cola': {
+      'inHome': 0,
+      'brand': 'Coca-Cola',
+      'separator': ' - ',
+      'project': 'JOUR/NE x COCA-COLA',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the launch of the capsule collection between Jour/né & Coca-Cola, VOLONTIERS conceived an experience in different steps, in the trendiest Parisian Hôtel Montana.<br/>After discovering the collection on the rooftop, guests were able to explore three rooms with different universes, such as a beauty room in partnership with Estee Lauder, where make-up artists were available to refresh their make-up.<br/>The second suite was a flocking workshop, allowing guests to personalize a shirt from the collection with different embroidered patches specially designed for the event.<br/>Finally, guests with their professional makeup and their customized shirt, entered the third and final room, turned for the occasion into a photo studio.<br/>In this suite, they were able to pretend to be models as a professional photographer was taking pictures that, right after, were touched up to imitate the real ads from the campaign and then printed.',
+        fr: 'Pour le lancement de la collection capsule entre Jour/né & Coca-Cola, VOLONTIERS a conçu une expérience en différentes étapes dans l’hôtel le plus branché du moment, Le Montana.<br>Après avoir découvert la collection sur le rooftop, les invités ont pu explorer trois chambres aux univers différents, comme la « beauty room » en partenariat avec Estee Lauder où des make-up artists étaient à leur disposition pour rafraichir leur maquillage. La seconde suite était un atelier flocage, permettant aux invités de personnaliser une chemise de la collection grâce à différents patchs brodés spécialement créés pour l’événement.<br/>Enfin, les participantes remaquillées et avec leur chemise customisée étaient invitées à se rendre dans la troisième et dernière chambre transformée pour l’occasion en studio photo. Dans cette suite, elles ont pu se prendre pour des mannequins grâce à la présence d’un photographe professionnel, prenant des photos immédiatement retouchées pour imiter les vraies affiches de la campagne puis imprimées.'
+      },
+      preview: '1-IMG_0617.jpg',
+      assets: [
+        '2-Volontiers-Jour-ne-CocaCola-16.jpg',
+        '2-Volontiers-Jour-ne-CocaCola.jpg',
+        '2-Volontiers.jpg',
+        '3-Volontiers-Jour-ne-CocaCola-11.jpg',
+        '4-Volontiers-Jour-ne-CocaCola-27.jpg',
+        '5-Volontiers-Jour-ne-CocaCola-30.jpg',
+        '6-Volontiers-Jour-ne-CocaCola-36.jpg',
+        '7-IMG_0608.jpg',
+        '8-IMG_9373.jpg',
+        '9-Volontiers-Jour-ne-CocaCola-24.jpg'
+      ]
+    },
+    'nike-mercurial-barbier': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'Nike Mercurial @barbier',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To present its new Mercurial model, Nike asked Volontiers to create a set-up and organize an event around its emblematic shoe. After an evening with the next best sportman in the world, Killian Mbappé, the few guests were invited to flock their jersey with patches especially created for the occasion offering a unique custom. The day after, influencers have had the opportunity to discover this special set-up and to customized their jersey.',
+        fr: 'Afin de présenter son dernier modèle de Mercurial, Nike a demandé à Volontiers de concevoir un set-up et de développer un évènement autour de sa basket emblématique. Après une soirée avec le plus grand sportif de tous les temps, Killian Mbappé, les quelques VIP ont pu floquer leur maillot grâce à des patchs et lettrages spécialement réalisés pour l’occasion et permettant une customisation exceptionnelle. Les jours suivants, des influencers ont eu l’occasion de découvrir ce set-up spécial et de floquer des maillots.'
+      },
+      preview: '1-LJ1B9594.jpg',
+      assets: [
+        '2-LJ1B9580.jpg',
+        '2-LJ1B9645.jpg',
+        '3-LJ1B9528.jpg',
+        '5-LJ1B9484.jpg',
+        '6-LJ1B9453.jpg',
+        '7-LJ1B9461.jpg'
+      ]
+    },
+    'nikelab-x-mmw-x-nsdos-training-sessions': {
+      'inHome': 0,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'NIKELAB x MMW x NSDOS  - TRAINING SESSIONS',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
+        fr: 'Pour le lancement français de la collection de vêtements d’entrainement dessinée par Matthew M. Williams, créateur de la marque Alyx, Nikelab a fait appel à l’artiste pluridisciplinaire NSDOS et son management Mr Maqs Production. NSDOS, pendant une semaine, initiait de petits groupes d’influencers à la pratique du 8OS dérivé de l’art martial russe Systema. Mais ce n’est pas tout, NSDOS est avant tout un artiste digital reconnu et connu pour associer la composition de sa musique à différents domaines tels que le hacking, l’informatique, et surtout l’algorithme. <br/>Grâce à l’intervention d’ingénieurs specialisés, les sessions d’entrainement étaient équipées d’un système de tracking vidéo captant la position des participants dont les déplacements influençaient la musique et les lumières. Utilisant le software Infranodus, il envoie des mots clés (liés aux exercices de l’entrainement et aux profils des participants) à son ordinateur, créant un réseau d’idées, un visuel et des données influençant elles aussi la musique.'
+      },
+      preview: '1-NIKE_MMW_JJ0058.jpg',
+      assets: [
+        '2NIKE_MMW_JJ0051.jpg',
+        '3-NIKE_MMW_JJ0066.jpg',
+        '4NIKE_MMW_JJ0443.jpg',
+        '5NIKE_MMW_JJ0111.jpg',
+        '6NIKE_MMW_JJ0405.jpg',
+        '7NIKE_MMW_JJ0992.jpg',
+        '9NIKE_MMW_JJ0639.jpg'
+      ]
+    },
+    'converse-one-start-street': {
+      'inHome': 0,
+      'brand': 'Converse',
+      'separator': ' - ',
+      'project': 'CONVERSE ONE STAR STREET',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Launching the Converse x Mademe NYC and Converse x Golf le Fleur collections, Volontiers produced two pop-up stores taking over one street in the center of Paris. Guests were fully immersed in both brands universes thanks to a design imagined by Hotel Creative, mimicking their DNA.<br/>A yellow color block pop-up store for the Converse x Mademe collection and a blue & pink pop-up for the Converse x Golf le Fleur collection aka Tyler the Creator’s brand.<br/>During both launch events, guests enjoyed concerts of trendy artists that brought a great energy and made everybody dance. ',
+        fr: 'A l’occasion du lancement des collections Converse x Mademe NYC et Converse x Golf le Fleur, Volontiers a produit deux pop-up stores dans une rue du centre de Paris. Les clients ont ainsi pu s’immerger totalement dans l’univers des deux marques grâce à une scénographie imaginée par Hotel Creative imitant les codes de ces deux griffes à la mode. <br/>C’est ainsi que sont apparues pendant deux semaines une boutique entièrement jaune de la devanture au lit installé pour l’occasion pour présenter la collection Converse x Mademe et une autre boutique bleue & rose renfermant la collection Converse x Golf le Fleur, marque du rappeur Tyler the Creator. <br/>Lors des soirées de lancement de ces deux collections, également organisées par Volontiers, les visiteurs ont pu profiter de concerts d’artistes en vogue qui ont mis le feu !'
+      },
+      preview: '1-converse-Mademe-14.jpg',
+      assets: [
+        '2-converse-Mademe-6.jpg',
+        '3-converse-Mademe-7.jpg',
+        '4-Converse-GolfLeFleur.jpg',
+        '5-converse-Mademe-40.jpg',
+        '6-Converse-GolfLeFleur-27.jpg',
+        '7-Converse-GolfLeFleur-33.jpg',
+        '8-Converse-GolfLeFleur-57.jpg',
+        '9-Converse-GolfLeFleur-23.jpg',
+        '10-Converse-GolfLeFleur-103',
+        '11-Converse-GolfLeFleur-108.jpg'
+      ]
+    },
+    'nike-pfw-diner': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'NIKE PFW DINER',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To celebrate the end of the Paris Fashion Week, Virgil Abloh & Kim Jones hosted a dinner bringing together 60 celebrities from the art world in a hotel particulier with a view over Place des Vosges. <br>After enjoying one of the cocktails especially created for the occasion, guests discovered an exceptional dinning room where artworks and two long custom-made tables took centre stage. Volontiers convinced the Michelin star chef Frederic Vardon to leave his Parisian restaurant for the night and to prepare a unique menu for the guests. <br>The dinner was followed by a party in a club located in the same building where Louise Chen, Lil’ Vic, and Virgil Abloh himslef played the right tracks. ',
+        fr: 'Pour fêter la fin de la Fashion Week parisienne, Virgil Abloh et Kim Jones étaient les hôtes d’un diner rassemblant une soixantaine de célébrités du monde artistique dans un hôtel particulier donnant sur la place des Vosges. <br>Après avoir dégusté l’un des cocktails créés spécialement pour l’occasion, les invités ont pu découvrir une salle à manger exceptionnelle où trônait de nombreuses œuvres d’art et en son centre deux tablées fabriquées sur mesure. Pour le repas, Volontiers a fait appel au talentueux chef étoilé Frédéric Vardon. <br>La soirée s’est ensuite terminée dans le club situé au sous-sol de la demeure où Louise Chen et Lil’ Vic sont passés derrière les platines suivie par Virgil Abloh lui-même.'
+      },
+      preview: '1-18040BD_NIKE_Diner_JJ2056_PR.jpg',
+      assets: [
+        '1-18040BD_NIKE-Iconic-Shot_VAbloh_KJones_02_HD2.jpg',
+        '2-18040BD_NIKE_Diner_JJ2062_PR.jpg',
+        '3-18040BD_NIKE_Diner_JJ2046_PR.jpg',
+        '4-18040BD_NIKE_Diner_JJ2042_PR.jpg',
+        '5-18040BD_NIKE-Iconic-Shot-Virgil-Abloh-Kim-Jones_12719.jpg',
+        '7-18040BD_NIKE_Diner_JJ2060_PR.jpg'
+      ]
+    },
+    'tom-ford-make-up-launch': {
+      'inHome': 0,
+      'brand': 'Tom Ford',
+      'separator': ' - ',
+      'project': 'TOM FORD – MAKE UP LAUNCH',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the exclusive release at Sephora of the Tom Ford lipstick collection called Lips & Boys, the brand wanted to gather influencers to discover the collection. Volontiers suggested an intimate and luxury suite at the Hotel Particulier Montmartre for this presentation. These influencers were able to discover the Soleil collection and new range of make-up products, and get advices from Tom Ford beauty.',
+        fr: 'A l’occasion de la sortie de la collection de rouges à lèvres Lips & Boys en exclusivité chez Sephora, Tom Ford a souhaité faire découvrir en avant-première cette collection à des influencers. Volontiers a suggéré une suite intimiste et luxueuse de l’Hotel Particulier Montmartre pour cette présentation. Ces influencers ont pu redécouvrir les collection Soleil et Make-up, et profiter des conseils des experts Tom présents pour l’occasion.'
+      },
+      preview: '1-TOM_FORD_INFLUENCERS_MARS18-64.jpg',
+      assets: [
+        '2-TOM_FORD_INFLUENCERS_MARS18-4.jpg',
+        '3TOM_FORD_INFLUENCERS_MARS18-59.jpg',
+        '4TOM_FORD_INFLUENCERS_MARS18-95.jpg',
+        '5TOM_FORD_INFLUENCERS_MARS18-155.jpg'
+      ]
+    },
+    'ami-x-smiley-photobooth-at-le-bon-marche': {
+      'inHome': 0,
+      'brand': 'Ami Smiley',
+      'separator': ' - ',
+      'project': 'AMI x SMILEY PHOTOBOOTH @LE BON MARCHÉ',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1-IMG_2617.jpg',
+      assets: [
+        '3IMG_2552.jpg',
+        'IMG_2555.jpg',
+        'IMG_2559.jpg'
+      ]
+    },
+    'converse-showroom': {
+      'inHome': 0,
+      'brand': 'Converse',
+      'separator': ' - ',
+      'project': 'Converse Showroom',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1-CONVERSE-PARIS-romainbourven.jpg',
+      assets: [
+        '2-CONVERSE-PARIS-romainbourven-2.jpg',
+        '3-CONVERSE-PARIS-romainbourven-5.jpg',
+        '4-CONVERSE-PARIS-romainbourven-22.jpg',
+        '5-CONVERSE-PARIS-cut-romainbourven-34.jpg'
+      ]
+    },
+    'matthew-m-williams-nikelab': {
+      'inHome': 0,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'MATTHEW M. WILLIAMS @NIKELAB',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1_XL11287.jpg',
+      assets: [
+        '2_XL11309.jpg',
+        '3_XL11306.jpg',
+        '4_XL11295.jpg',
+        '5_XL11303.jpg'
+      ]
+    },
+    'nike-airmax-270-citadium': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'NIKE AIRMAX 270 @CITADIUM',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1-20180323-Nike-AM270AM1-155.jpg',
+      assets: [
+        '2-20180323-Nike-AM270AM1-152.jpg',
+        '3.jpg'
+      ]
+    },
+    'raf-simons-the-broken-arm': {
+      'inHome': 0,
+      'brand': 'Raf Simons',
+      'separator': ' - ',
+      'project': 'RAF SIMONS @THE BROKEN ARM',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1TheBrokenArm-RS-16.jpg',
+      assets: [
+        '2TheBrokenArm-RS-9.jpg',
+        '3TheBrokenArm-RS-14.jpg',
+        '4TheBrokenArm-RS-12.jpg'
+      ]
+    },
+    'nikelab-x-virgil-abloh-x-kim-jones': {
+      'inHome': 0,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'VIRGIL ABLOH & KIM JONES @NIKELAB',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1-VOLONTIERS-OFFWHITE-NIKE-romainbourven-27.jpg',
+      assets: [
+        '2-VOLONTIERS-OFFWHITE-NIKE-romainbourven-6.jpg',
+        '3VOLONTIERS-OFFWHITE-NIKE-romainbourven-23.jpg',
+        '4VOLONTIERS-OFFWHITE-NIKE-romainbourven-26.jpg',
+        '5_XL11339.jpg',
+        '6_XL11331_1.jpg'
+      ]
+    },
     'eyevan-breakfast-launch-at-colette': {
       'inHome': 0,
       'brand': 'Eyevan',

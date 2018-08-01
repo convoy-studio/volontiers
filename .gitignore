@@ -5,3 +5,5 @@ doc/
 *.log
 dist/
 src/components/WebGLBase
+
+__STUFF
