@@ -73,14 +73,33 @@ export default {
   'routing': {
   },
   projects: {
+    'nikelab-x-virgil-abloh-x-kim-jones': {
+      'inHome': 1,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'VIRGIL ABLOH & KIM JONES @NIKELAB',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1-VOLONTIERS-OFFWHITE-NIKE-romainbourven-27.jpg',
+      assets: [
+        '2-VOLONTIERS-OFFWHITE-NIKE-romainbourven-6.jpg',
+        '3VOLONTIERS-OFFWHITE-NIKE-romainbourven-23.jpg',
+        '4VOLONTIERS-OFFWHITE-NIKE-romainbourven-26.jpg',
+        '5_XL11339.jpg',
+        '6_XL11331_1.jpg'
+      ]
+    },
     'darphin-digital-detox': {
-      'inHome': 0,
+      'inHome': 2,
       'brand': 'Darphin',
       'separator': ' - ',
       'project': 'Digital Detox',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: 'Launching two new anti-stress products, Darphin commissioned Volontiers to imagine a detox-day to reach about forty fashion & beauty influencers. Deprived of their mobile phones at their arrival, they were able to experience a progressive digital detox through three immersive rooms.  <br/>The first room, called fluffy room, invited them to relax in a ocean of softness, while the bubble room offered them to unwind by popping bubble wrap. As an ultimate anti-stress technic, the last door opened on a piñata taking centre stage of the room. Its destruction, a perfect way to let off steam, released personalized gifts and millions of confetti flying around each guest.<br/>   The journey ended in a reveal room where the influencers could discover the products showcased in the middle of a luxuriant jungle highlighting the natural and botanical values of the brand. In order to create photos and videos content shareable on social medias, cameras were placed in each room, filming the entire experience that each guest received as soon as they entered the reveal room.',
+        en: '',
         fr: 'A l’occasion du lancement de deux nouveaux produits anti-stress, DARPHIN a mandaté Volontiers d’imaginer une journée détox dédiée à une quarantaine d’influenceuses mode et beauté. Privées de leur téléphone à leur arrivée, elles ont pu expérimenter une digital detox progressive à travers trois pièces immersives.  <br/>La première pièce, la fluffy room, les invitait à se détendre dans une montagne de douceur, tandis que la bubble room leur permettait de se défouler en éclatant du papier bulle. Enfin, summum de l’anti-stress, la dernière pièce s’ouvrait sur une pinata trônant au milieu de la pièce et dont la destruction révélait de nombreux cadeaux personnalisés.<br/>   Le parcours s’achevait dans une reveal room, où les influenceuses pouvaient découvrir les produits mis en scène au milieu d’une jungle verte et luxuriante mettant l’accent sur les valeurs naturelles et botaniques de la marque.  Des caméras installées dans toutes les pièces ont permis de filmer toute l’expérience, créant ainsi du contenu photos et vidéos que les influenceuses ont pu partager sur les réseaux dès leur arrivée dans la reveal room. '
       },
       preview: '1_BOY0952_copie.jpg',
@@ -93,6 +112,51 @@ export default {
         '7-BOY0925_copie.jpg',
         '8_BOY1510_copie.jpg',
         '9_BOY1051_copie.jpg'
+      ]
+    },
+    'nikelab-x-mmw-x-nsdos-training-sessions': {
+      'inHome': 3,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'NIKELAB x MMW x NSDOS  - TRAINING SESSIONS',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
+        fr: 'Pour le lancement français de la collection de vêtements d’entrainement dessinée par Matthew M. Williams, créateur de la marque Alyx, Nikelab a fait appel à l’artiste pluridisciplinaire NSDOS et son management Mr Maqs Production. NSDOS, pendant une semaine, initiait de petits groupes d’influencers à la pratique du 8OS dérivé de l’art martial russe Systema. Mais ce n’est pas tout, NSDOS est avant tout un artiste digital reconnu et connu pour associer la composition de sa musique à différents domaines tels que le hacking, l’informatique, et surtout l’algorithme. <br/>Grâce à l’intervention d’ingénieurs specialisés, les sessions d’entrainement étaient équipées d’un système de tracking vidéo captant la position des participants dont les déplacements influençaient la musique et les lumières. Utilisant le software Infranodus, il envoie des mots clés (liés aux exercices de l’entrainement et aux profils des participants) à son ordinateur, créant un réseau d’idées, un visuel et des données influençant elles aussi la musique.'
+      },
+      preview: '1-NIKE_MMW_JJ0058.jpg',
+      assets: [
+        '2NIKE_MMW_JJ0051.jpg',
+        '3-NIKE_MMW_JJ0066.jpg',
+        '4NIKE_MMW_JJ0443.jpg',
+        '5NIKE_MMW_JJ0111.jpg',
+        '6NIKE_MMW_JJ0405.jpg',
+        '7NIKE_MMW_JJ0992.jpg',
+        '9NIKE_MMW_JJ0639.jpg'
+      ]
+    },
+    'converse-one-start-street': {
+      'inHome': 4,
+      'brand': 'Converse',
+      'separator': ' - ',
+      'project': 'CONVERSE ONE STAR STREET',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Launching the Converse x Mademe NYC and Converse x Golf le Fleur collections, Volontiers produced two pop-up stores taking over one street in the center of Paris. Guests were fully immersed in both brands universes thanks to a design imagined by Hotel Creative, mimicking their DNA.<br/>A yellow color block pop-up store for the Converse x Mademe collection and a blue & pink pop-up for the Converse x Golf le Fleur collection aka Tyler the Creator’s brand.<br/>During both launch events, guests enjoyed concerts of trendy artists that brought a great energy and made everybody dance. ',
+        fr: 'A l’occasion du lancement des collections Converse x Mademe NYC et Converse x Golf le Fleur, Volontiers a produit deux pop-up stores dans une rue du centre de Paris. Les clients ont ainsi pu s’immerger totalement dans l’univers des deux marques grâce à une scénographie imaginée par Hotel Creative imitant les codes de ces deux griffes à la mode. <br/>C’est ainsi que sont apparues pendant deux semaines une boutique entièrement jaune de la devanture au lit installé pour l’occasion pour présenter la collection Converse x Mademe et une autre boutique bleue & rose renfermant la collection Converse x Golf le Fleur, marque du rappeur Tyler the Creator. <br/>Lors des soirées de lancement de ces deux collections, également organisées par Volontiers, les visiteurs ont pu profiter de concerts d’artistes en vogue qui ont mis le feu !'
+      },
+      preview: '1-converse-Mademe-14.jpg',
+      assets: [
+        '2-converse-Mademe-6.jpg',
+        '3-converse-Mademe-7.jpg',
+        '4-Converse-GolfLeFleur.jpg',
+        '5-converse-Mademe-40.jpg',
+        '6-Converse-GolfLeFleur-27.jpg',
+        '7-Converse-GolfLeFleur-33.jpg',
+        '8-Converse-GolfLeFleur-57.jpg',
+        '9-Converse-GolfLeFleur-23.jpg',
+        '10-Converse-GolfLeFleur-103',
+        '11-Converse-GolfLeFleur-108.jpg'
       ]
     },
     'de-beers-influencers-event': {
@@ -113,7 +177,7 @@ export default {
       ]
     },
     'ikea-let-it-slow': {
-      'inHome': 0,
+      'inHome': 7,
       'brand': 'Ikea',
       'separator': ' - ',
       'project': 'Let it slow',
@@ -201,51 +265,6 @@ export default {
         '5-LJ1B9484.jpg',
         '6-LJ1B9453.jpg',
         '7-LJ1B9461.jpg'
-      ]
-    },
-    'nikelab-x-mmw-x-nsdos-training-sessions': {
-      'inHome': 0,
-      'brand': 'NikeLab',
-      'separator': ' - ',
-      'project': 'NIKELAB x MMW x NSDOS  - TRAINING SESSIONS',
-      'type': Constants.TYPE.EVENT,
-      'about': {
-        en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
-        fr: 'Pour le lancement français de la collection de vêtements d’entrainement dessinée par Matthew M. Williams, créateur de la marque Alyx, Nikelab a fait appel à l’artiste pluridisciplinaire NSDOS et son management Mr Maqs Production. NSDOS, pendant une semaine, initiait de petits groupes d’influencers à la pratique du 8OS dérivé de l’art martial russe Systema. Mais ce n’est pas tout, NSDOS est avant tout un artiste digital reconnu et connu pour associer la composition de sa musique à différents domaines tels que le hacking, l’informatique, et surtout l’algorithme. <br/>Grâce à l’intervention d’ingénieurs specialisés, les sessions d’entrainement étaient équipées d’un système de tracking vidéo captant la position des participants dont les déplacements influençaient la musique et les lumières. Utilisant le software Infranodus, il envoie des mots clés (liés aux exercices de l’entrainement et aux profils des participants) à son ordinateur, créant un réseau d’idées, un visuel et des données influençant elles aussi la musique.'
-      },
-      preview: '1-NIKE_MMW_JJ0058.jpg',
-      assets: [
-        '2NIKE_MMW_JJ0051.jpg',
-        '3-NIKE_MMW_JJ0066.jpg',
-        '4NIKE_MMW_JJ0443.jpg',
-        '5NIKE_MMW_JJ0111.jpg',
-        '6NIKE_MMW_JJ0405.jpg',
-        '7NIKE_MMW_JJ0992.jpg',
-        '9NIKE_MMW_JJ0639.jpg'
-      ]
-    },
-    'converse-one-start-street': {
-      'inHome': 0,
-      'brand': 'Converse',
-      'separator': ' - ',
-      'project': 'CONVERSE ONE STAR STREET',
-      'type': Constants.TYPE.EVENT,
-      'about': {
-        en: 'Launching the Converse x Mademe NYC and Converse x Golf le Fleur collections, Volontiers produced two pop-up stores taking over one street in the center of Paris. Guests were fully immersed in both brands universes thanks to a design imagined by Hotel Creative, mimicking their DNA.<br/>A yellow color block pop-up store for the Converse x Mademe collection and a blue & pink pop-up for the Converse x Golf le Fleur collection aka Tyler the Creator’s brand.<br/>During both launch events, guests enjoyed concerts of trendy artists that brought a great energy and made everybody dance. ',
-        fr: 'A l’occasion du lancement des collections Converse x Mademe NYC et Converse x Golf le Fleur, Volontiers a produit deux pop-up stores dans une rue du centre de Paris. Les clients ont ainsi pu s’immerger totalement dans l’univers des deux marques grâce à une scénographie imaginée par Hotel Creative imitant les codes de ces deux griffes à la mode. <br/>C’est ainsi que sont apparues pendant deux semaines une boutique entièrement jaune de la devanture au lit installé pour l’occasion pour présenter la collection Converse x Mademe et une autre boutique bleue & rose renfermant la collection Converse x Golf le Fleur, marque du rappeur Tyler the Creator. <br/>Lors des soirées de lancement de ces deux collections, également organisées par Volontiers, les visiteurs ont pu profiter de concerts d’artistes en vogue qui ont mis le feu !'
-      },
-      preview: '1-converse-Mademe-14.jpg',
-      assets: [
-        '2-converse-Mademe-6.jpg',
-        '3-converse-Mademe-7.jpg',
-        '4-Converse-GolfLeFleur.jpg',
-        '5-converse-Mademe-40.jpg',
-        '6-Converse-GolfLeFleur-27.jpg',
-        '7-Converse-GolfLeFleur-33.jpg',
-        '8-Converse-GolfLeFleur-57.jpg',
-        '9-Converse-GolfLeFleur-23.jpg',
-        '10-Converse-GolfLeFleur-103',
-        '11-Converse-GolfLeFleur-108.jpg'
       ]
     },
     'nike-pfw-diner': {
@@ -372,25 +391,6 @@ export default {
         '4TheBrokenArm-RS-12.jpg'
       ]
     },
-    'nikelab-x-virgil-abloh-x-kim-jones': {
-      'inHome': 0,
-      'brand': 'NikeLab',
-      'separator': ' - ',
-      'project': 'VIRGIL ABLOH & KIM JONES @NIKELAB',
-      'type': Constants.TYPE.RETAIL,
-      'about': {
-        en: '',
-        fr: ''
-      },
-      preview: '1-VOLONTIERS-OFFWHITE-NIKE-romainbourven-27.jpg',
-      assets: [
-        '2-VOLONTIERS-OFFWHITE-NIKE-romainbourven-6.jpg',
-        '3VOLONTIERS-OFFWHITE-NIKE-romainbourven-23.jpg',
-        '4VOLONTIERS-OFFWHITE-NIKE-romainbourven-26.jpg',
-        '5_XL11339.jpg',
-        '6_XL11331_1.jpg'
-      ]
-    },
     'eyevan-breakfast-launch-at-colette': {
       'inHome': 0,
       'brand': 'Eyevan',
@@ -457,7 +457,7 @@ export default {
       ]
     },
     'nikelab-x-pigalle-duperre-basketball-court': {
-      'inHome': 0,
+      'inHome': 6,
       'brand': 'Nikelab',
       'separator': ' × ',
       'project': 'Pigalle - Duperré Basketball Court',
@@ -539,7 +539,7 @@ export default {
       ]
     },
     'colette-20-ans-the-beach': {
-      'inHome': 1,
+      'inHome': 5,
       'brand': 'Colette 20 ans',
       'separator': ' - ',
       'project': 'The Beach',
@@ -604,7 +604,7 @@ export default {
       ]
     },
     'nikelab-x-olivier-rousteing': {
-      'inHome': 2,
+      'inHome': 0,
       'brand': 'nikelab ×',
       'separator': ' ',
       'project': 'olivier rousteing',
@@ -654,7 +654,7 @@ export default {
       ]
     },
     'airbnb-paris': {
-      'inHome': 3,
+      'inHome': 0,
       'brand': 'Airbnb PARIS',
       'separator': ' - ',
       'project': 'la maison parisienne',
@@ -717,7 +717,7 @@ export default {
       ]
     },
     'google-curiocite': {
-      'inHome': 5,
+      'inHome': 0,
       'brand': 'GOOGLE',
       'separator': ' - ',
       'project': 'Curio-cité',
@@ -764,7 +764,7 @@ export default {
       ]
     },
     'nikelab-acg-2016': {
-      'inHome': 4,
+      'inHome': 0,
       'brand': 'NIKELAB',
       'separator': ' ',
       'project': 'ACG 2016',
