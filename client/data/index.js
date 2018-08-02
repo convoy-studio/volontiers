@@ -99,8 +99,8 @@ export default {
       'project': 'Digital Detox',
       'type': Constants.TYPE.EVENT,
       'about': {
-        en: '',
-        fr: 'A l’occasion du lancement de deux nouveaux produits anti-stress, DARPHIN a mandaté Volontiers d’imaginer une journée détox dédiée à une quarantaine d’influenceuses mode et beauté. Privées de leur téléphone à leur arrivée, elles ont pu expérimenter une digital detox progressive à travers trois pièces immersives.  <br/>La première pièce, la fluffy room, les invitait à se détendre dans une montagne de douceur, tandis que la bubble room leur permettait de se défouler en éclatant du papier bulle. Enfin, summum de l’anti-stress, la dernière pièce s’ouvrait sur une pinata trônant au milieu de la pièce et dont la destruction révélait de nombreux cadeaux personnalisés.<br/>   Le parcours s’achevait dans une reveal room, où les influenceuses pouvaient découvrir les produits mis en scène au milieu d’une jungle verte et luxuriante mettant l’accent sur les valeurs naturelles et botaniques de la marque.  Des caméras installées dans toutes les pièces ont permis de filmer toute l’expérience, créant ainsi du contenu photos et vidéos que les influenceuses ont pu partager sur les réseaux dès leur arrivée dans la reveal room. '
+        'en': 'Launching two new anti-stress products, Darphin commissioned Volontiers to imagine a detox-day to reach about forty fashion & beauty influencers. Deprived of their mobile phones at their arrival, they were able to experience a progressive digital detox through three immersive rooms.<br>The first room, called fluffy room, invited them to relax in a ocean of softness, while the bubble room offered them to unwind by popping bubble wrap. As an ultimate anti-stress technic, the last door opened on a piñata taking centre stage of the room. Its destruction, a perfect way to let off steam, released personalized gifts and millions of confetti flying around each guest.<br>The journey ended in a reveal room where the influencers could discover the products showcased in the middle of a luxuriant jungle highlighting the natural and botanical values of the brand.<br>In order to create photos and videos content shareable on social medias, cameras were placed in each room, filming the entire experience that each guest received as soon as they entered the reveal room.',
+        'fr': 'A l’occasion du lancement de deux nouveaux produits anti-stress, DARPHIN a mandaté Volontiers d’imaginer une journée détox dédiée à une quarantaine d’influenceuses mode et beauté. Privées de leur téléphone à leur arrivée, elles ont pu expérimenter une digital detox progressive à travers trois pièces immersives. <br/>La première pièce, la fluffy room, les invitait à se détendre dans une montagne de douceur, tandis que la bubble room leur permettait de se défouler en éclatant du papier bulle. Enfin, summum de l’anti-stress, la dernière pièce s’ouvrait sur une pinata trônant au milieu de la pièce et dont la destruction révélait de nombreux cadeaux personnalisés.<br>Le parcours s’achevait dans une reveal room, où les influenceuses pouvaient découvrir les produits mis en scène au milieu d’une jungle verte et luxuriante mettant l’accent sur les valeurs naturelles et botaniques de la marque. Des caméras installées dans toutes les pièces ont permis de filmer toute l’expérience, créant ainsi du contenu photos et vidéos que les influenceuses ont pu partager sur les réseaux dès leur arrivée dans la reveal room. '
       },
       preview: '1_BOY0952_copie.jpg',
       assets: [
@@ -201,7 +201,8 @@ export default {
         '12AC6A5543.jpg',
         '13AC6A5749.jpg',
         '14Volontiers-Ikea-109.jpg',
-        '15Volontiers-Ikea-46.jpg'
+        '15Volontiers-Ikea-46.jpg',
+        'IMG_0350.mp4'
       ]
     },
     'de-beers-bridal-event': {
