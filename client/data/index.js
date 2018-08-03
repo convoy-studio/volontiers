@@ -74,10 +74,10 @@ export default {
   },
   projects: {
     'nikelab-x-virgil-abloh-x-kim-jones': {
-      'inHome': 1,
+      'inHome': 0,
       'brand': 'NikeLab',
       'separator': ' - ',
-      'project': 'VIRGIL ABLOH & KIM JONES @NIKELAB',
+      'project': 'Virgil Abloh & Kim Jones',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -116,9 +116,9 @@ export default {
     },
     'nikelab-x-mmw-x-nsdos-training-sessions': {
       'inHome': 3,
-      'brand': 'NikeLab',
+      'brand': 'Nikelab x MMW x NSDOS',
       'separator': ' - ',
-      'project': 'NIKELAB x MMW x NSDOS  - TRAINING SESSIONS',
+      'project': 'Training sessions',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
@@ -139,7 +139,7 @@ export default {
       'inHome': 4,
       'brand': 'Converse',
       'separator': ' - ',
-      'project': 'CONVERSE ONE STAR STREET',
+      'project': 'One start street',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'Launching the Converse x Mademe NYC and Converse x Golf le Fleur collections, Volontiers produced two pop-up stores taking over one street in the center of Paris. Guests were fully immersed in both brands universes thanks to a design imagined by Hotel Creative, mimicking their DNA.<br/>A yellow color block pop-up store for the Converse x Mademe collection and a blue & pink pop-up for the Converse x Golf le Fleur collection aka Tyler the Creator’s brand.<br/>During both launch events, guests enjoyed concerts of trendy artists that brought a great energy and made everybody dance. ',
@@ -200,9 +200,9 @@ export default {
         '11AC6A5762.jpg',
         '12AC6A5543.jpg',
         '13AC6A5749.jpg',
+        'IMG_0350.mp4',
         '14Volontiers-Ikea-109.jpg',
-        '15Volontiers-Ikea-46.jpg',
-        'IMG_0350.mp4'
+        '15Volontiers-Ikea-46.jpg'
       ]
     },
     'de-beers-bridal-event': {
@@ -226,9 +226,9 @@ export default {
     },
     'journe-x-coca-cola': {
       'inHome': 0,
-      'brand': 'Coca-Cola',
-      'separator': ' - ',
-      'project': 'JOUR/NE x COCA-COLA',
+      'brand': 'JOUR/NE x COCA-COLA',
+      'separator': '',
+      'project': '',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the launch of the capsule collection between Jour/né & Coca-Cola, VOLONTIERS conceived an experience in different steps, in the trendiest Parisian Hôtel Montana.<br/>After discovering the collection on the rooftop, guests were able to explore three rooms with different universes, such as a beauty room in partnership with Estee Lauder, where make-up artists were available to refresh their make-up.<br/>The second suite was a flocking workshop, allowing guests to personalize a shirt from the collection with different embroidered patches specially designed for the event.<br/>Finally, guests with their professional makeup and their customized shirt, entered the third and final room, turned for the occasion into a photo studio.<br/>In this suite, they were able to pretend to be models as a professional photographer was taking pictures that, right after, were touched up to imitate the real ads from the campaign and then printed.',
@@ -252,7 +252,7 @@ export default {
       'inHome': 0,
       'brand': 'Nike',
       'separator': ' - ',
-      'project': 'Nike Mercurial @barbier',
+      'project': 'Mercurial @barbier',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To present its new Mercurial model, Nike asked Volontiers to create a set-up and organize an event around its emblematic shoe. After an evening with the next best sportman in the world, Killian Mbappé, the few guests were invited to flock their jersey with patches especially created for the occasion offering a unique custom. The day after, influencers have had the opportunity to discover this special set-up and to customized their jersey.',
@@ -269,10 +269,10 @@ export default {
       ]
     },
     'nike-pfw-diner': {
-      'inHome': 0,
+      'inHome': 1,
       'brand': 'Nike',
       'separator': ' - ',
-      'project': 'NIKE PFW DINER',
+      'project': 'PFW diner',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To celebrate the end of the Paris Fashion Week, Virgil Abloh & Kim Jones hosted a dinner bringing together 60 celebrities from the art world in a hotel particulier with a view over Place des Vosges. <br>After enjoying one of the cocktails especially created for the occasion, guests discovered an exceptional dinning room where artworks and two long custom-made tables took centre stage. Volontiers convinced the Michelin star chef Frederic Vardon to leave his Parisian restaurant for the night and to prepare a unique menu for the guests. <br>The dinner was followed by a party in a club located in the same building where Louise Chen, Lil’ Vic, and Virgil Abloh himslef played the right tracks. ',
@@ -292,7 +292,7 @@ export default {
       'inHome': 0,
       'brand': 'Tom Ford',
       'separator': ' - ',
-      'project': 'TOM FORD – MAKE UP LAUNCH',
+      'project': 'Make up launch',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the exclusive release at Sephora of the Tom Ford lipstick collection called Lips & Boys, the brand wanted to gather influencers to discover the collection. Volontiers suggested an intimate and luxury suite at the Hotel Particulier Montmartre for this presentation. These influencers were able to discover the Soleil collection and new range of make-up products, and get advices from Tom Ford beauty.',
@@ -310,7 +310,7 @@ export default {
       'inHome': 0,
       'brand': 'Ami Smiley',
       'separator': ' - ',
-      'project': 'AMI x SMILEY PHOTOBOOTH @LE BON MARCHÉ',
+      'project': 'Photobooth @Le Bon Marché',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -327,7 +327,7 @@ export default {
       'inHome': 0,
       'brand': 'Converse',
       'separator': ' - ',
-      'project': 'Converse Showroom',
+      'project': 'Showroom',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -345,7 +345,7 @@ export default {
       'inHome': 0,
       'brand': 'NikeLab',
       'separator': ' - ',
-      'project': 'MATTHEW M. WILLIAMS @NIKELAB',
+      'project': 'Matthew M. Williams @nikelab',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -363,7 +363,7 @@ export default {
       'inHome': 0,
       'brand': 'Nike',
       'separator': ' - ',
-      'project': 'NIKE AIRMAX 270 @CITADIUM',
+      'project': 'Airmax 270 @citadium',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -379,7 +379,7 @@ export default {
       'inHome': 0,
       'brand': 'Raf Simons',
       'separator': ' - ',
-      'project': 'RAF SIMONS @THE BROKEN ARM',
+      'project': '@the broken arm',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
@@ -420,7 +420,7 @@ export default {
       'inHome': 0,
       'brand': 'Nikelab',
       'separator': ' - ',
-      'project': 'The ten × Virgil Abloh @nikelab',
+      'project': 'The ten × Virgil Abloh',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: '',
