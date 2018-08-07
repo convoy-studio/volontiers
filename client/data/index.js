@@ -116,9 +116,9 @@ export default {
     },
     'nikelab-x-mmw-x-nsdos-training-sessions': {
       'inHome': 3,
-      'brand': 'Nikelab x MMW x NSDOS',
-      'separator': ' - ',
-      'project': 'Training sessions',
+      'brand': 'MMW x NIKE x NSDOS TRAINING',
+      'separator': '',
+      'project': '',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
@@ -135,11 +135,11 @@ export default {
         '9NIKE_MMW_JJ0639.jpg'
       ]
     },
-    'converse-one-start-street': {
+    'converse-one-star-street': {
       'inHome': 4,
       'brand': 'Converse',
       'separator': ' - ',
-      'project': 'One start street',
+      'project': 'One star street',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'Launching the Converse x Mademe NYC and Converse x Golf le Fleur collections, Volontiers produced two pop-up stores taking over one street in the center of Paris. Guests were fully immersed in both brands universes thanks to a design imagined by Hotel Creative, mimicking their DNA.<br/>A yellow color block pop-up store for the Converse x Mademe collection and a blue & pink pop-up for the Converse x Golf le Fleur collection aka Tyler the Creator’s brand.<br/>During both launch events, guests enjoyed concerts of trendy artists that brought a great energy and made everybody dance. ',
@@ -163,7 +163,7 @@ export default {
       'inHome': 0,
       'brand': 'De Beers',
       'separator': ' - ',
-      'project': 'Influencers Event',
+      'project': 'Influencers Event @Ritz',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'In order to reach a new audience of parisian influencers, the fine jewelry house De Beers commissioned Volontiers to create an event presenting several of its emblematic jewelry collections.<br/>In the most beautiful salon of the Ritz Paris, those collections were brought to light on an infinity-shape display, telling the story of a diamond from a rough stone to a delicate masterpiece.<br/>Guests also enjoyed cocktails from the famous Hemingway Bar, a perfect music selection by Louise Chen interrupted by a Mattias Mimoun live piano session, and also customized clutches by a talented calligrapher.',
@@ -248,11 +248,11 @@ export default {
         '9-Volontiers-Jour-ne-CocaCola-24.jpg'
       ]
     },
-    'nike-mercurial-barbier': {
+    'nike-mercurial-launch-jersey-atelier': {
       'inHome': 0,
-      'brand': 'Nike',
-      'separator': ' - ',
-      'project': 'Mercurial @barbier',
+      'brand': 'NIKE MERCURIAL LAUNCH & JERSEY ATELIER',
+      'separator': '',
+      'project': '',
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To present its new Mercurial model, Nike asked Volontiers to create a set-up and organize an event around its emblematic shoe. After an evening with the next best sportman in the world, Killian Mbappé, the few guests were invited to flock their jersey with patches especially created for the occasion offering a unique custom. The day after, influencers have had the opportunity to discover this special set-up and to customized their jersey.',
@@ -270,7 +270,7 @@ export default {
     },
     'nike-pfw-diner': {
       'inHome': 1,
-      'brand': 'Nike',
+      'brand': 'VIRGIL ABLOH & KIM JONES x NIKE',
       'separator': ' - ',
       'project': 'PFW diner',
       'type': Constants.TYPE.EVENT,
