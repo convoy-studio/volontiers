@@ -237,8 +237,9 @@ export default class ProjectsOverview extends BaseComponent {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.direction = Store.Mouse.x > (windowW >> 1) ? Constants.RIGHT : Constants.LEFT
-    this.eventProjects.nx = Math.abs(Math.min(0, Store.Mouse.nX))
-    this.retailProjects.nx = Math.abs(Math.max(0, Store.Mouse.nX))
+    const mouselimit = ( windowW / 2 - 250 ) / (windowW / 2)
+    this.eventProjects.nx = Math.min(1, Math.abs(Math.min(0, Store.Mouse.nX / mouselimit)))
+    this.retailProjects.nx = Math.min(1, Math.abs(Math.max(0, Store.Mouse.nX / mouselimit)))
     this.positionContainerDependsMousePosition(this.eventProjects, windowH, this.eventProjectsHeight, 0.05)
     this.positionContainerDependsMousePosition(this.retailProjects, windowH, this.retailProjectsHeight, 0.02)
     switch (this.animationsState) {
