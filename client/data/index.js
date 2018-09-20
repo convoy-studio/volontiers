@@ -124,10 +124,9 @@ export default {
         en: 'For the french launch of the training apparel collection designed by Matthew M. Williams, founder of the trendy brand Alyx. Nikelab collaborated with the multidisciplinary artist NS DOS and his management Mr Maqs Production. <br/>During a week, NS DOS initiated small groups of influencers into the martial art Systema. Also, he is well known for its great knowledge about hacking, data processing and algorithm that he uses to produce his music. <br/>Thanks to the help of few specialized engineers, the training sessions were equipped with a video tracking system catching the participants’ position whose moves influenced the musique and the lights. Also a software was specially created for the occasion, letting guests to send keywords (linked to the training exercices and their profiles), creating a network of ideas, a visual and datas having also an impact on music.',
         fr: 'Pour le lancement français de la collection de vêtements d’entrainement dessinée par Matthew M. Williams, créateur de la marque Alyx, Nikelab a fait appel à l’artiste pluridisciplinaire NSDOS et son management Mr Maqs Production. NSDOS, pendant une semaine, initiait de petits groupes d’influencers à la pratique du 8OS dérivé de l’art martial russe Systema. Mais ce n’est pas tout, NSDOS est avant tout un artiste digital reconnu et connu pour associer la composition de sa musique à différents domaines tels que le hacking, l’informatique, et surtout l’algorithme. <br/>Grâce à l’intervention d’ingénieurs specialisés, les sessions d’entrainement étaient équipées d’un système de tracking vidéo captant la position des participants dont les déplacements influençaient la musique et les lumières. Utilisant le software Infranodus, il envoie des mots clés (liés aux exercices de l’entrainement et aux profils des participants) à son ordinateur, créant un réseau d’idées, un visuel et des données influençant elles aussi la musique.'
       },
-      preview: '1-NIKE_MMW_JJ0058.jpg',
+      preview: '3-NIKE_MMW_JJ0066.jpg',
       assets: [
         '2NIKE_MMW_JJ0051.jpg',
-        '3-NIKE_MMW_JJ0066.jpg',
         '4NIKE_MMW_JJ0443.jpg',
         '5NIKE_MMW_JJ0111.jpg',
         '6NIKE_MMW_JJ0405.jpg',
@@ -155,7 +154,7 @@ export default {
         '7-Converse-GolfLeFleur-33.jpg',
         '8-Converse-GolfLeFleur-57.jpg',
         '9-Converse-GolfLeFleur-23.jpg',
-        '10-Converse-GolfLeFleur-103',
+        '10-Converse-GolfLeFleur-103.jpg',
         '11-Converse-GolfLeFleur-108.jpg'
       ]
     },
