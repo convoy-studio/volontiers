@@ -132,21 +132,29 @@ export default (container)=> {
   }
   const next = () => {
     if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened || Store.State === Constants.STATE.ABOUT) return
-    activityHandler.count()
     scope.counter.inc()
-    updateCurrentSlide()
-    if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
-    scope.currentSlide.show({from: Constants.RIGHT, to: Constants.CENTER})
-    updateSlideshowState()
+    if (scope.slides[scope.counter.props.index].isLoaded) {
+      activityHandler.count()
+      updateCurrentSlide()
+      if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
+      scope.currentSlide.show({from: Constants.RIGHT, to: Constants.CENTER})
+      updateSlideshowState()
+    } else {
+      scope.counter.dec()
+    }
   }
   const previous = () => {
     if (activityHandler.isReady === false || scope.firstItemLoaded === false || Store.ProjectInfoIsOpened || Store.State === Constants.STATE.ABOUT) return
-    activityHandler.count()
     scope.counter.dec()
-    updateCurrentSlide()
-    if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
-    scope.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
-    updateSlideshowState()
+    if (scope.slides[scope.counter.props.index].isLoaded) {
+      activityHandler.count()
+      updateCurrentSlide()
+      if (scope.oldSlide) scope.oldSlide.hide({from: Constants.CENTER, to: Constants.RIGHT})
+      scope.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
+      updateSlideshowState()
+    } else {
+      scope.counter.inc()
+    }
   }
   const updateSlideshowState = () => {
     if (scope.counter.props.index >= scope.slides.length - 1) setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.END)})
@@ -154,9 +162,12 @@ export default (container)=> {
     else setTimeout(() => {Actions.setSlideshowState(Constants.SLIDESHOW.MIDDLE)})
   }
   const updateCurrentSlide = () => {
-    scope.oldSlide = scope.currentSlide
-    scope.currentSlide = scope.slides[scope.counter.props.index]
-    setTimeout(() => { Actions.currentSlideChanged(scope.currentSlide) })
+    console.log(scope.slides[scope.counter.props.index].isLoaded)
+    if ( scope.slides[scope.counter.props.index].isLoaded ) {
+      scope.oldSlide = scope.currentSlide
+      scope.currentSlide = scope.slides[scope.counter.props.index]
+      setTimeout(() => { Actions.currentSlideChanged(scope.currentSlide) })
+    }
   }
   const update = () => {
     scope.slides.forEach((item) => {
