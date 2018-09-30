@@ -31,21 +31,27 @@ function _getPageAssetsToLoad(r) {
   if (type === Constants.PROJECT) {
     manifest = manifest.slice(0, 1)
   } else if (type === Constants.HOME) {
-    if ( Store.Detector.isMobile ) {
-      const homeProjects = Store.AllHomeProjects
-      for ( let project of homeProjects ) {
-        manifest.push({
-          src: `assets/${project.image}`
-        })
-      }
-    } else {
-      const project = _getProjectById(route.target)
-      if (project) {
-        manifest.push({
-          src: `assets/${project.image}`
-        })
-      }
+    const homeProjects = Store.AllHomeProjects
+    for ( let project of homeProjects ) {
+      manifest.push({
+        src: `assets/${project.image}`
+      })
     }
+    // if ( Store.Detector.isMobile ) {
+    //   const homeProjects = Store.AllHomeProjects
+    //   for ( let project of homeProjects ) {
+    //     manifest.push({
+    //       src: `assets/${project.image}`
+    //     })
+    //   }
+    // } else {
+    //   const project = _getProjectById(route.target)
+    //   if (project) {
+    //     manifest.push({
+    //       src: `assets/${project.image}`
+    //     })
+    //   }
+    // }
   }
   return manifest
 }
@@ -339,10 +345,6 @@ const Store = assign({}, EventEmitter2.prototype, {
       break
     case Constants.PREVIEW_CHANGED:
       Store.CurrentPreviewIndex = action.item.previewIdx
-      Store.emitChange(action.actionType, action.item)
-      break
-    case Constants.CURRENT_SLIDE_CHANGED:
-      Store.CurrentSlide = action.item
       Store.emitChange(action.actionType, action.item)
       break
     case Constants.GO_BACK:

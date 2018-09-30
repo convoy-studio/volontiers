@@ -25,7 +25,7 @@ export default class Project extends Page {
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
     Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
-    Store.on(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
+    // Store.on(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     this.content = Store.getContent('project')
     this.device = Store.Detector.isMobile ? Constants.MOBILE : Constants.DESKTOP
     this.projectInfo = undefined
@@ -57,16 +57,17 @@ export default class Project extends Page {
     )
   }
   componentDidMount() {
-    this.container = new PIXI.Container()
-    setTimeout(() => {Actions.addToCanvas(this.container)})
-    TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
-    TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
-    this.slideshow = slideshow(this.container).load(() => {
-      this.refs.projectCounter.updateState({
-        title: `${this.slideshow.counter.props.index + 1}/${this.slideshow.slides.length}`
-      })
-      super.componentDidMount()
-    })
+    // this.container = new PIXI.Container()
+    // setTimeout(() => {Actions.addToCanvas(this.container)})
+    // TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+    // TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff', delay: 0.2 })
+    // this.slideshow = slideshow(this.container).load(() => {
+    //   this.refs.projectCounter.updateState({
+    //     title: `${this.slideshow.counter.props.index + 1}/${this.slideshow.slides.length}`
+    //   })
+    //   super.componentDidMount()
+    // })
+    super.componentDidMount()
   }
   willTransitionIn() {
     setTimeout(() => { super.willTransitionIn() }, 400)
@@ -92,7 +93,7 @@ export default class Project extends Page {
     setTimeout(() => { super.willTransitionOut() }, 200)
   }
   didTransitionOutComplete() {
-    this.slideshow.transitionOut()
+    // this.slideshow.transitionOut()
     setTimeout(() => { super.didTransitionOutComplete() }, 300)
   }
   onProjectInformationsClick() {
@@ -162,17 +163,17 @@ export default class Project extends Page {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
     this.refs['next-previous-btns'].resize()
-    if (this.slideshow) this.slideshow.resize()
+    // if (this.slideshow) this.slideshow.resize()
     super.resize()
   }
   componentWillUnmount() {
-    this.slideshow.clear()
+    // this.slideshow.clear()
     Store.off(Constants.NEXT_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.PREVIOUS_SLIDE, this.onSlideshowUpdated)
     Store.off(Constants.TOGGLE_PROJECT_INFOS, this.onToggleProjectInfos)
     Store.off(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.off(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
-    Store.off(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
+    // Store.off(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     Store.off(Constants.WINDOW_RESIZE, this.updateButtons)
     setTimeout(() => {Actions.removeFromCanvas(this.container)})
     super.componentWillUnmount()

@@ -18,7 +18,6 @@ class App {
     this.introAnimationCompleted = this.introAnimationCompleted.bind(this)
     this.introAnimation = this.introAnimation.bind(this)
     this.removeLanding = this.removeLanding.bind(this)
-    Store.on(Constants.PREVIEWS_LOADED, this.removeLanding)
     Store.on(Constants.START_INTRO_ANIMATION_COMPLETED, this.introAnimationCompleted)
     Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
   }
@@ -64,7 +63,6 @@ class App {
   }
   introAnimationCompleted() {
     this.logoAnim.clear()
-    Store.off(Constants.PREVIEWS_LOADED, this.removeLanding)
     Store.off(Constants.START_INTRO_ANIMATION_COMPLETED, this.introAnimationCompleted)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
     dom.tree.remove(this.landingEl)
@@ -75,6 +73,7 @@ class App {
     }})
   }
   onAssetsLoaded() {
+    this.removeLanding()
     ReactDOM.render(<AppTemplate />, document.getElementById('app-container')) // Render the app
     setTimeout(Actions.appStart) // Dispatch that the app is ready
   }

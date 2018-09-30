@@ -187,12 +187,6 @@ const Actions = {
       item: path
     })
   },
-  resizeProjectsPreview: (preview) => {
-    Dispatcher.handleViewAction({
-      actionType: Constants.RESIZE_PROJECTS_PREVIEW,
-      item: preview
-    })
-  },
   unBlockInteractivity: () => {
     Dispatcher.handleViewAction({
       actionType: Constants.UN_BLOCK_INTERACTIVITY,
@@ -251,12 +245,6 @@ const Actions = {
     Dispatcher.handleViewAction({
       actionType: Constants.TOGGLE_ABOUT,
       item: undefined
-    })
-  },
-  currentSlideChanged: (slide) => {
-    Dispatcher.handleViewAction({
-      actionType: Constants.CURRENT_SLIDE_CHANGED,
-      item: slide
     })
   },
   goBack: () => {

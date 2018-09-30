@@ -18,4 +18,39 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
+
+  &__cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    perspective: 1000px;
+  }
+  &__block {
+    display: block;
+    position: relative;
+    height: 75%;
+    width: auto;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+  &__top, &__bottom {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+  }
+  &__top {
+    top: 0;
+    cursor: url('/assets/images/arrow-up.svg'), auto;
+  }
+  &__bottom {
+    bottom: 0;
+    cursor: url('/assets/images/arrow-down.svg'), auto;
+  }
 }

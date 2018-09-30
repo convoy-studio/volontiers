@@ -20,7 +20,6 @@ export default class FrontContainer extends BaseComponent {
     this.content = Store.getContent('navigation')
     this.language = Store.getLang()
     this.toggleAboutInterval = undefined
-    this.isDesktop = !Store.Detector.isMobile
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
   }
   render() {
@@ -50,7 +49,7 @@ export default class FrontContainer extends BaseComponent {
             </li>
           </ul>
         </div>
-        { this.isDesktop && <ProjectsOverview ref='projects-overview' /> }
+        <ProjectsOverview ref='projects-overview' />
       </header>
     )
   }
@@ -72,30 +71,26 @@ export default class FrontContainer extends BaseComponent {
   }
   aboutClick() {
     clearInterval(this.toggleAboutInterval)
-    if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) {
-      setTimeout(Actions.toggleAbout)
-      return
-    } else if (Store.State === Constants.STATE.PROJECTS) {
-      setTimeout(Actions.closeProjectsOverview)
-    }
-    this.toggleAboutInterval = setInterval(() => {
-      if (Store.CurrentSlide.state === Constants.STATE.ACTIVE && Store.State !== Constants.STATE.PROJECTS) {
-        clearInterval(this.toggleAboutInterval)
-        setTimeout(Actions.toggleAbout)
-      }
-    }, 100)
-  }
-  onProjectsClick() {
     if (Store.State === Constants.STATE.PROJECTS) {
       setTimeout(Actions.closeProjectsOverview)
-    } else if (Store.CurrentSlide.state === Constants.STATE.ACTIVE) {
-      setTimeout(Actions.openProjectsOverview)
+      this.toggleAboutInterval = setInterval(() => {
+        if (Store.State !== Constants.STATE.PROJECTS) {
+          clearInterval(this.toggleAboutInterval)
+          setTimeout(Actions.toggleAbout)
+        }
+      }, 100)
+    } else {
+      setTimeout(Actions.toggleAbout)
     }
   }
+  onProjectsClick() {
+    if (Store.State === Constants.STATE.PROJECTS) setTimeout(Actions.closeProjectsOverview)
+    else setTimeout(Actions.openProjectsOverview)
+  }
   update() {
-    if ( this.isDesktop ) this.refs['projects-overview'].update()
+    this.refs['projects-overview'].update()
   }
   resize() {
-    if ( this.isDesktop ) this.refs['projects-overview'].resize()
+    this.refs['projects-overview'].resize()
   }
 }

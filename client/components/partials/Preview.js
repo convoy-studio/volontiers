@@ -5,14 +5,10 @@ import Constants from '../../constants'
 import Router from '../../services/router'
 import Utils from '../../utils/Utils'
 import dom from 'dom-hand'
-import Hammer from 'hammerjs'
 import counter from 'ccounter'
-import slide from './Slide'
-import slideshow from './Slideshow'
 import {PagerActions} from '../../pager/Pager'
 
 const activityHandler = Utils.countActivityHandler(650)
-const hammer = new Hammer(dom.select('html'))
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -21,133 +17,69 @@ class Preview extends BaseComponent {
     Store.on(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
-    Store.on(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
-    this.oldSlide = undefined
     this.currentSlide = undefined
-    this.slides = []
     this.isEnteredPreview = false
     this.firstPreviewLoaded = false
     this.needIntroAnimation = false
     this.introAnimationFinished = false
     this.cursor = 'auto'
-    this.pixelRatio = Math.min(Store.Detector.pixelRatio, 1.5)
-    this.allPreviewsLoaded = Store.AllPreviewsLoaded
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
     this.loadingCounter = counter(this.projects.length)
-    this.isMobile = Store.Detector.isMobile
-    this.boundsShift = this.isMobile ? 0 : 50
+    this.boundsShift = 50
+    this.dir = 1
+    this.scaleEase = CustomEase.create('custom', 'M0,0,C1,0.01,0.14,1.01,1,1')
+    this.transitionEase = CustomEase.create('custom', 'M0,0,C1,0.13,0.7,0.89,1,1')
   }
   render() {
     return (
-      <div ref="preview" className="preview" onClick={this.goToProject}></div>
+      <div ref="preview" className="preview">
+        <div ref="container" className="preview__container" style={{height: `${this.projects.length * 100}vh`, opacity: 0}}>
+        {
+          this.projects.map((project) => {
+            return <div className="preview__cover" key={project.slug}>
+              <div  className="preview__block" ref={`preview-${project.slug}`}>
+                <img src={`assets/${project.image}`}/>
+                <div className="preview__top" onClick={this.goToProject.bind(null, 'up')}></div>
+                <div className="preview__bottom" onClick={this.goToProject.bind(null, 'down')}></div>
+              </div>
+            </div>
+          })
+        }
+        </div>
+      </div>
     )
   }
-  componentDidMount() {
-    this.parent = this.refs.preview
-    this.container = new PIXI.Container()
-    setTimeout(() => {Actions.addToCanvas(this.container)})
-    const oldRoute = Router.getOldRoute()
-    if (oldRoute !== undefined) {
-      TweenMax.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ececec', delay: 0.2 })
-      TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ececec', delay: 0.2 })
-    }
-    this.projects.forEach((project, i) => {
-      this.slides.push(slide(project.slug, this.container, project.image, i, 'preview', { from: Constants.CENTER, to: Constants.CENTER } ))
-    })
-  }
-  loadFirstSlide(done) {
-    const currentSlide = this.getSlideById(Router.getNewRoute().target)
-    this.slides[currentSlide.index].load(() => {
-      this.slidesLoaded()
-      done()
-    })
-    this.counter.set(currentSlide.index)
-  }
-  loadSlides(done) {
+  setFirstSlide(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
     this.counter.set(currentSlide.index)
     this.firstPreviewLoaded = true
-    this.projects.forEach((project, i) => {
-      this.loadSlide(this.slides[i])
-    })
-    this.previewsLoadedCb = done
+    done()
+  }
+  setSlides(done) {
+    const currentSlide = this.getSlideById(Router.getNewRoute().target)
+    this.counter.set(currentSlide.index)
+    this.firstPreviewLoaded = true
     this.needIntroAnimation = true
+    this.previewsLoadedCb = done
   }
-  goToProject(e) {
-    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT || (this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE)) return
+  goToProject = (dir) => {
+    if (activityHandler.isReady === false || Store.State === Constants.STATE.ABOUT) return
     activityHandler.count()
-    const bounds = this.currentSlide.plane.mesh.getBounds()
-    const boundsWidth = bounds.width + bounds.x
-    const boundsHeight = bounds.height + bounds.y
-    let posX = 0
-    let posY = 0
-    if (this.isMobile) {
-      posX = e.center.x * this.pixelRatio
-      posY = e.center.y * this.pixelRatio
+    if (dir === 'down') {
+      this.counter.inc()
+      this.dir = 1
     } else {
-      posX = Store.Mouse.x * this.pixelRatio
-      posY = Store.Mouse.y * this.pixelRatio
+      this.counter.dec()
+      this.dir = -1
     }
-    if (posX > bounds.x - this.boundsShift && posX < boundsWidth + this.boundsShift && posY > bounds.y - this.boundsShift && posY < boundsHeight + this.boundsShift) {
-      if (this.isMobile) {
-        Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
-      } else {
-        if (this.cursor === 'down') {
-          this.counter.inc()
-          Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
-        } else if (this.cursor === 'up') {
-          this.counter.dec()
-          Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
-        } else {
-          return
-        }
-      }
-    }
-  }
-  slidesLoaded() {
-    const oldRoute = Router.getOldRoute()
-    this.resize()
-    this.updateCurrentSlide()
-    if (this.needIntroAnimation) Actions.previewsLoaded()
-    if (!this.needIntroAnimation) this.loadNextPreviousSlide()
-    if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) Utils.setDefaultPlanePositions(this.currentSlide.plane, Constants.LEFT)
-    if (this.isMobile) {
-      hammer.on('tap', this.goToProject)
-    }
-    this.firstPreviewLoaded = true
-  }
-  loadNextPreviousSlide() {
-    const slides = this.getNextPreviousSlide()
-    this.loadSlide(slides.prev)
-    this.loadSlide(slides.next)
-  }
-  completeLoader() {
-    if (this.needIntroAnimation) {
-      if (this.loadingCounter.props.index === 4) {
-        this.slidesLoaded()
-        this.previewsLoadedCb()
-      }
-      this.loadingCounter.inc()
-    }
-    this.resize()
-  }
-  loadSlide(s) {
-    if (s.isLoaded) this.completeLoader()
-    else s.load(this.completeLoader)
-  }
-  update() {
-    if (this.currentSlide === undefined) return
-    const nextNx = Math.max(Store.Mouse.nX - 0.4, 0) * 0.2
-    this.mousePreviewActionHandler(nextNx)
-    this.mouseMoveHandler()
-    this.currentSlide.animate()
+    Router.setRoute(`/home/${this.projects[this.counter.props.index].slug}`)
   }
   onUpdatePreviewSlide(id) {
     if (!this.firstPreviewLoaded) return
-    for (let i = 0; i < this.slides.length; i++) {
-      const s = this.slides[i]
-      if (s.id === id) {
+    for (let i = 0; i < this.projects.length; i++) {
+      const p = this.projects[i]
+      if (p.slug === id) {
         this.counter.set(i)
         this.updateCurrentSlide()
         break
@@ -157,154 +89,106 @@ class Preview extends BaseComponent {
   }
   getSlideById(id) {
     let currentSlide = undefined
-    for (let i = 0; i < this.slides.length; i++) {
-      const s = this.slides[i]
-      if (s.id === id) {
-        currentSlide = s
+    for (let i = 0; i < this.projects.length; i++) {
+      const p = this.projects[i]
+      if (p.slug === id) {
+        currentSlide = p
         break
       }
     }
     return currentSlide
   }
-  getNextPreviousSlide() {
-    return {
-      prev: this.slides[this.counter.props.prev],
-      next: this.slides[this.counter.props.next]
-    }
-  }
-  mousePreviewActionHandler(val) {
-    if (val > 0) {
-      if (this.isEnteredPreview) return // return is it's already entered, so avoid to send multiple actions
-      Actions.mouseEnterPreview()
-      this.isEnteredPreview = true
-    } else {
-      if (!this.isEnteredPreview) return // return is it's already not entered, so avoid to send multiple actions
-      Actions.mouseLeavePreview()
-      this.isEnteredPreview = false
-    }
-  }
-  mouseMoveHandler(val) {
-    if (this.currentSlide.plane === undefined || activityHandler.isReady === false || Store.State === Constants.STATE.PROJECTS || Store.State === Constants.STATE.ABOUT) return
-    const bounds = this.currentSlide.plane.mesh.getBounds()
-    const boundsWidth = bounds.width + bounds.x
-    const boundsHeight = bounds.height + bounds.y
-    const boundsTop = boundsHeight * 0.55
-    const posX = Store.Mouse.x * this.pixelRatio
-    const posY = Store.Mouse.y * this.pixelRatio
-    if (posX > bounds.x - 50 && posX < boundsWidth + 50 && posY > bounds.y - 50 && posY < boundsHeight + 50) {
-      if (posY < boundsTop && this.cursor !== 'up') {
-        this.cursor = 'up'
-        dom.style(this.refs.preview, {
-          'cursor': 'url(assets/images/arrow-up.svg), auto'
-        })
-      } else if (posY > boundsTop && !this.cursor !== 'down') {
-        this.cursor = 'down'
-        dom.style(this.refs.preview, {
-          'cursor': 'url(assets/images/arrow-down.svg), auto'
-        })
-      } else {
-        return
-      }
-    } else {
-      this.cursor = 'auto'
-      dom.style(this.refs.preview, {
-        'cursor': 'url(assets/images/cursor.svg), auto'
-      })
-    }
-  }
   onScroll(direction) {
-    if (activityHandler.isReady === false) return
+    if (!activityHandler.isReady) return
     activityHandler.count()
     switch (direction) {
     case -1:
       this.counter.dec()
+      this.dir = -1
       break
     case 1:
       this.counter.inc()
+      this.dir = 1
       break
     default:
       this.counter.inc()
+      this.dir = 1
     }
-    Router.setRoute(`/home/${this.slides[this.counter.props.index].id}`)
+    Router.setRoute(`/home/${this.projects[this.counter.props.index].slug}`)
   }
   updateCurrentSlide() {
-    this.oldSlide = this.currentSlide
-    this.currentSlide = this.slides[this.counter.props.index]
-    setTimeout(() => { Actions.currentSlideChanged(this.currentSlide) })
-    if (this.oldSlide) this.oldSlide.deactivate()
-    if (this.firstPreviewLoaded) this.currentSlide.activate()
+    this.currentSlide = this.projects[this.counter.props.index]
     this.animateContainer()
     setTimeout(() => { Actions.changePreview(this.counter.props.index) })
-    if (this.firstPreviewLoaded && !this.needIntroAnimation) this.loadNextPreviousSlide()
   }
   animateContainer() {
     if (!this.introAnimationFinished && Router.getOldRoute() === undefined) return
-    const windowH = Store.Window.h * this.pixelRatio
+    const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    if (this.firstPreviewLoaded) TweenMax.to(this.container.position, 0.6, {y: -position, ease: Expo.easeOut})
-    else this.container.position.y = -position
+    if (this.firstPreviewLoaded) TweenMax.to(this.refs.container, 0.6, {y: -position, ease: Expo.easeOut})
+    else TweenMax.set(this.refs.container, { y: -position })
   }
   introAnimation() {
-    const windowH = Store.Window.h  * this.pixelRatio
+    const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    this.container.position.y = -this.projects.length * windowH
+    TweenMax.set(this.refs.container, { y: -this.projects.length * windowH })
     this.introAnimationFinished = true
+    this.refs.container.style.opacity = 1
     const tl = new TimelineMax({ onComplete: () => {
       tl.clear()
       this.introAnimationCompleted()
+      if (this.previewsLoadedCb) this.previewsLoadedCb()
     }})
-    tl.to(this.container.position, 2.5, {y: 0, force3D: true, ease: Expo.easeInOut}, 0)
-    tl.to(this.container.position, 1, {y: -position, ease: Expo.easeInOut}, 2.3)
+    tl.set(this.refs.container, {opacity: 1}, 0)
+    tl.to(this.refs.container, 2.5, {y: 0, force3D: true, ease: Expo.easeInOut}, 0)
+    tl.to(this.refs.container, 1, {y: -position, ease: Expo.easeInOut}, 2.3)
   }
   introAnimationCompleted() {
+    this.updateCurrentSlide()
     setTimeout(Actions.introAnimationCompleted)
   }
   transitionIn() {
     if (!this.currentSlide) return
     const oldRoute = Router.getOldRoute()
-    if (oldRoute && (oldRoute.type === Constants.PROJECT || oldRoute.type === Constants.ABOUT)) this.currentSlide.show({from: Constants.LEFT, to: Constants.CENTER})
-    else this.currentSlide.activate()
+    if (oldRoute && oldRoute.type === Constants.PROJECT) {
+      const windowW = Store.Window.w
+      const current = this.refs[`preview-${this.currentSlide.slug}`]
+      TweenMax.set(this.refs.container, { opacity: 1 })
+      TweenMax.set(current, { x: -windowW * 2, scaleX: 1.5, rotateY: '10deg' })
+      TweenMax.to(current, 0.8, { x: 0, scaleX: 1, rotateY: 0, ease: this.transitionEase })
+    }
   }
   transitionOut() {
     if (!this.currentSlide) return
-    this.currentSlide.hide({from: Constants.CENTER, to: Constants.LEFT})
+    const windowW = Store.Window.w
+    const current = this.refs[`preview-${this.currentSlide.slug}`]
+    TweenMax.to(current, 0.5, { x: -windowW * 3, scaleX: 1.5, rotateY: '-10deg', ease: this.transitionEase })
   }
   keyboardTriggered(key) {
     if (key === Constants.DOWN) this.onScroll(1)
     else if (key === Constants.UP) this.onScroll(-1)
-    else if (!((this.isMobile && Store.Orientation === Constants.ORIENTATION.LANDSCAPE))) Router.setRoute(`/project/${this.slides[this.counter.props.index].id}`)
+  }
+  onProjectsOverviewOpen() {
+    const current = this.refs[`preview-${this.currentSlide.slug}`]
+    const windowW = Store.Window.w
+    TweenMax.to(current, 0.6, { scale: 0.8, ease: this.scaleEase, onComplete: () => {
+      TweenMax.set(current, { opacity: 0, delay: 0.05 })
+    } })
+  }
+  onProjectsOverviewClose() {
+    const current = this.refs[`preview-${this.currentSlide.slug}`]
+    const windowW = Store.Window.w
+    TweenMax.set(current, { opacity: 1 })
+    TweenMax.to(current, 0.6, { scale: 1, ease: this.scaleEase })
   }
   resize() {
-    if (!this.slides || this.slides.length < 1) return
-    const windowW = Store.Window.w * this.pixelRatio
-    const windowH = Store.Window.h * this.pixelRatio
-    this.slides.forEach((item, i) => {
-      const resizeVars = item.resize()
-      if (item.isLoaded) {
-        item.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-        item.mesh.position.y = ((windowH >> 1) - (resizeVars.height >> 1)) + (i * windowH)
-      }
-    })
-  }
-  resizePreview() {
-    const windowW = Store.Window.w * this.pixelRatio
-    const windowH = Store.Window.h * this.pixelRatio
-    const resizeVars = this.currentSlide.resize()
-    this.currentSlide.mesh.position.x = (windowW >> 1) - (resizeVars.width >> 1)
-    this.currentSlide.mesh.position.y = (windowH >> 1) - (resizeVars.height >> 1) + (this.currentSlide.index * windowH)
   }
   componentWillUnmount() {
-    this.slides.forEach((item) => { item.clear() })
     Store.off(Constants.UPDATE_PREVIEW_SLIDE, this.onUpdatePreviewSlide)
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
-    Store.off(Constants.RESIZE_PROJECTS_PREVIEW, this.resizePreview)
     dom.event.off(this.refs.preview, 'click', this.goToProject)
-    hammer.off('tap', this.goToProject)
-    setTimeout(() => {Actions.removeFromCanvas(this.container)})
-    this.slides.length = 0
-    this.slides = undefined
   }
 }
 

@@ -1,13 +1,10 @@
 import Store from '../../store'
 import Constants from '../../constants'
-import Actions from '../../actions'
 import Router from '../../services/router'
-import { initGlobalEvents, resize as globalResize } from '../../services/global-events'
+import { resize as globalResize } from '../../services/global-events'
 import FrontContainer from '../../components/FrontContainer'
 import PagesContainer from '../../components/PagesContainer'
-import CanvasContainer from '../../components/CanvasContainer'
 import BlockInteractionLayer from '../../components/partials/BlockInteractionLayer'
-// import HelperLayer from '../../components/partials/HelperLayer'
 import About from '../../components/partials/About'
 import raf from 'raf'
 
@@ -29,7 +26,6 @@ export default class AppTemplate extends React.Component {
         <BlockInteractionLayer />
         <FrontContainer ref='front-container' />
         <PagesContainer ref='pages-container' />
-        <CanvasContainer ref='canvas-container'/>
         <About />
       </div>
     )
@@ -42,15 +38,13 @@ export default class AppTemplate extends React.Component {
   }
   update() {
     raf(() => {
-      this.refs['pages-container'].update()
-      this.refs['canvas-container'].update()
+      // this.refs['pages-container'].update()
       this.refs['front-container'].update()
       this.update()
     })
   }
   resize() {
     this.refs['pages-container'].resize()
-    this.refs['canvas-container'].resize()
     this.refs['front-container'].resize()
   }
   didPageChange() {

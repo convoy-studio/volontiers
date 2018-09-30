@@ -14,7 +14,6 @@ export default class About extends BaseComponent {
     this.toggleAbout = this.toggleAbout.bind(this)
     this.toggleCredits = this.toggleCredits.bind(this)
     this.onPan = this.onPan.bind(this)
-    this.isMobile = Store.Detector.isMobile
     this.pos = 0
     this.hidden = true
     this.listHidden = true
@@ -56,11 +55,6 @@ export default class About extends BaseComponent {
     this.parent = this.refs['page-wrapper']
     this.wrapperHeight = dom.size(this.refs.wrapper)[1]
     this.setupAnimations()
-    if (this.isMobile) {
-      this.hammer = new Hammer(this.refs.wrapper)
-      this.hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
-      this.hammer.on('pan', this.onPan)
-    }
   }
   setupAnimations() {
     this.tlBlink = new TimelineMax({
@@ -83,7 +77,7 @@ export default class About extends BaseComponent {
     })
     this.tlOverlayIn.set(this.parent, { visibility: 'visible' }, 0)
     this.tlOverlayIn.fromTo(this.parent, 0.55, { opacity: 0 }, { opacity: 1, force3D: true, ease: Expo.easeOut }, 0)
-    this.tlOverlayIn.to(dom.select('#canvas-container'), 0.5, {backgroundColor: '#ffffff' }, 0)
+    this.tlOverlayIn.to(dom.select('html'), 0.5, {backgroundColor: '#ffffff' }, 0)
     this.tlOverlayIn.staggerFromTo(this.refs.description.children, 0.7, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 0.2, 0.5)
     this.tlOverlayIn.fromTo(this.refs.catchline, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1)
     this.tlOverlayIn.fromTo(this.refs.details, 0.55, { opacity: 0, y: 5 }, { opacity: 1, y: 0, ease: Sine.easeInOut }, 1.2)
@@ -119,10 +113,6 @@ export default class About extends BaseComponent {
       this.wrapperHeight = dom.size(this.refs.wrapper)[1]
       TweenMax.fromTo(this.refs.list, 0.6, { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: Expo.easeOut })
       this.listHidden = false
-      if (this.isMobile && (this.wrapperHeight -  this.visibleHeight > 0)) {
-        this.pos = this.wrapperHeight - this.visibleHeight
-        TweenMax.to(this.refs.wrapper, 0.2, { y: -this.pos })
-      }
     } else {
       TweenMax.set(this.refs.list, { 'display': 'none' })
       this.wrapperHeight = dom.size(this.refs.wrapper)[1]

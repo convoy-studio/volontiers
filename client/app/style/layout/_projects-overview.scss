@@ -3,14 +3,35 @@
 	$thumbMobileScale: 0.6;
 	$thumbW: 238px;
 	$thumbH: 159px;
-	position: fixed;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 	z-index: 6;
 	@extend .top-left;
 	@include anim(.0s, .0s, $easeOutExpo, translateY(-99999px) translateZ(1px));
 	@media (max-width: $MQ_SMALL) {
 		margin-top: $globalMargin * 1.5;
 	}
-	pointer-events: all;
+  pointer-events: all;
+
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+    &__image {
+      height: 75%;
+      width: 100%;
+      transform: scale(0.8);
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 0.3s $easeOutCirc;
+    }
+  }
+
 	.btn > * {
 		pointer-events: none;
 	}
@@ -74,7 +95,7 @@
 	}
 
 	&.open {
-		@include anim(.0s, .0s, $easeOutExpo, translateY(0px) translateZ(0px));
+		@include anim(.0s, .0s, $easeOutExpo, translateY(-$globalMargin) translateZ(0px));
 	}
 	.background {
 		position: absolute;

@@ -2,10 +2,7 @@ import Page from '../Page'
 import Store from '../../store'
 import Constants from '../../constants'
 import Router from '../../services/router'
-import dom from 'dom-hand'
 import Preview from '../partials/Preview'
-import NextPreviousBtns from '../partials/NextPreviousBtns'
-import MainTitle from '../partials/MainTitle'
 import HomeNavigation from '../partials/HomeNavigation'
 
 export default class Home extends Page {
@@ -15,11 +12,9 @@ export default class Home extends Page {
     this.onDiscoverProjectClick = this.onDiscoverProjectClick.bind(this)
     this.projectOverviewOpened = this.projectOverviewOpened.bind(this)
     this.projectOverviewClosed = this.projectOverviewClosed.bind(this)
-    // this.updateButtons = this.updateButtons.bind(this)
     this.projects = Store.getHomeProjects()
     this.content = Store.getContent('preview')
     this.oldRoute = Router.getOldRoute()
-    this.shiftScale = Store.Detector.isMobile ? 0.5 : 1
     this.state = {
       brand: '',
       project: ''
@@ -52,14 +47,12 @@ export default class Home extends Page {
     Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
-    // Store.on(Constants.WINDOW_RESIZE, this.updateButtons)
-    this.previewComponent = this.refs.preview
     if (this.oldRoute === undefined) { // First load
-      this.refs.preview.loadSlides(() => {
+      this.refs.preview.setSlides(() => {
         super.componentDidMount()
       })
     } else {
-      this.refs.preview.loadFirstSlide(() => {
+      this.refs.preview.setFirstSlide(() => {
         super.componentDidMount()
       })
     }
@@ -71,11 +64,10 @@ export default class Home extends Page {
   }
   willTransitionIn() {
     this.refs.preview.transitionIn()
-    setTimeout(() => { super.willTransitionIn() }, 300)
+    super.willTransitionIn()
   }
   didTransitionInComplete() {
-    if (this.oldRoute === undefined) TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut, delay: 4 })
-    else TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut, delay: 1 })
+    TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut, delay: 1})
     super.didTransitionInComplete()
   }
   onDiscoverProjectClick() {
@@ -86,9 +78,6 @@ export default class Home extends Page {
   didPreviewChange(item) {
     const project = this.projects[item.previewIdx]
     let projectTitle = project.project
-    if (Store.Detector.isMobile) {
-      projectTitle = projectTitle.length > 25 ? projectTitle.substr(0, 25) + '...' : projectTitle
-    }
     let tl = undefined
     tl = new TimelineMax({
       onComplete: () => {
@@ -100,9 +89,10 @@ export default class Home extends Page {
         this.setState(state)
       }
     })
-    tl.to(this.refs.brand, 1, { y: -80 * this.shiftScale, ease: Circ.easeOutt }, 0)
-    tl.to(this.refs.project, 1, { y: -80 * this.shiftScale, ease: Circ.easeOutt }, 0.02)
-    tl.to(this.refs.discover, 1, { y: -80 * this.shiftScale, ease: Circ.easeOutt }, 0.04)
+    const dir = this.refs.preview.dir
+    tl.to(this.refs.brand, 1, { y: -80 * dir, ease: Circ.easeOutt }, 0)
+    tl.to(this.refs.project, 1, { y: -80 * dir, ease: Circ.easeOutt }, 0.02)
+    tl.to(this.refs.discover, 1, { y: -80 * dir, ease: Circ.easeOutt }, 0.04)
     tl.timeScale(2)
     this.refs.projectNavigation.updateProject(item.previewIdx)
   }
@@ -114,22 +104,21 @@ export default class Home extends Page {
         tl.clear()
       }
     })
-    tl.fromTo(this.refs.brand, 1, { y: 80 * this.shiftScale }, { y: 0, ease: Circ.easeOut }, 0)
-    tl.fromTo(this.refs.project, 1, { y: 80 * this.shiftScale }, { y: 0, ease: Circ.easeOut }, 0.02)
-    tl.fromTo(this.refs.discover, 1, { y: 80 * this.shiftScale }, { y: 0, ease: Circ.easeOut }, 0.04)
+    const dir = this.refs.preview.dir
+    tl.fromTo(this.refs.brand, 1, { y: 80 * dir }, { y: 0, ease: Circ.easeOut }, 0)
+    tl.fromTo(this.refs.project, 1, { y: 80 * dir }, { y: 0, ease: Circ.easeOut }, 0.02)
+    tl.fromTo(this.refs.discover, 1, { y: 80 * dir }, { y: 0, ease: Circ.easeOut }, 0.04)
     tl.timeScale(2)
   }
   projectOverviewOpened() {
     TweenMax.to(this.refs.helper, 0.3, { opacity: 0, ease: Circ.easeOut })
+    this.refs.preview.onProjectsOverviewOpen()
   }
   projectOverviewClosed() {
     TweenMax.to(this.refs.helper, 0.3, { opacity: 1, ease: Circ.easeOut })
-  }
-  update() {
-    this.previewComponent.update()
+    this.refs.preview.onProjectsOverviewClose()
   }
   resize() {
-    this.refs.preview.resize()
     super.resize()
   }
   componentWillUnmount() {

@@ -11,12 +11,15 @@ export default {
   entry: {
     vendor: [
       'gsap',
-      'pixi.js'
+      path.resolve(__dirname, '..', 'static/libs/CustomEase.js')
     ],
     js: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
       './client/index.js'
     ]
+  },
+  externals: {
+    'TweenLite': 'TweenLite'
   },
   output: {
     path: __dirname,

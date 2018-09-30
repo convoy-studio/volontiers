@@ -11,9 +11,12 @@ export default {
   context: path.resolve(__dirname, '..'),
   entry: [
     'gsap',
-    'pixi.js',
+    path.resolve(__dirname, '..', 'static/libs/CustomEase.js'),
     './client/index.js'
   ],
+  externals: {
+    'TweenLite': 'TweenLite'
+  },
   output: {
     path: path.join(__dirname, '..', 'dist'),
     filename: '[name]-[hash].min.js'

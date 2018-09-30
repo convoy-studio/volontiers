@@ -7,9 +7,8 @@ import Router from '../../services/router'
 import Img from './Img'
 import MainTitle from './MainTitle'
 import dom from 'dom-hand'
-import hammer from 'hammerjs'
 import bezier from 'cubic-bezier'
-import {PagerStore, PagerActions, PagerConstants} from '../../pager/Pager'
+import {PagerStore, PagerConstants} from '../../pager/Pager'
 
 const STATE = {
   ACTIVE: 'ACTIVE',
@@ -55,14 +54,12 @@ export default class ProjectsOverview extends BaseComponent {
     this.onImgLoad = this.onImgLoad.bind(this)
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
-    this.testOrientation = this.testOrientation.bind(this)
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
     this.didPageChange = this.didPageChange.bind(this)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.open)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.close)
     Store.on(Constants.ROUTE_CHANGED, this.didPageChange)
-    Store.on(Constants.WINDOW_RESIZE, this.testOrientation)
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.pageTransitionOut)
   }
   render() {
@@ -75,6 +72,9 @@ export default class ProjectsOverview extends BaseComponent {
         <div className="titles-container">
           <MainTitle ref='eventTitle' rotation='90deg' title='event' className='link event-title'></MainTitle>
           <MainTitle ref='retailTitle' rotation='-90deg' title='product space' className='link retail-title'></MainTitle>
+        </div>
+        <div className="preview">
+          <div className="preview__image" ref="previewImage"></div>
         </div>
         <div ref='background' className="background btn"></div>
       </div>
@@ -98,14 +98,6 @@ export default class ProjectsOverview extends BaseComponent {
       this.retailProjectsLength = this.projects.RETAIL.length * thumbW * mobileScale
       eventProjectsEl.style.width = this.eventProjectsLength + 'px'
       retailProjectsEl.style.width = this.retailProjectsLength + 'px'
-      this.eventHammer = new Hammer(eventProjectsEl)
-      this.eventHammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
-      this.retailHammer = new Hammer(retailProjectsEl)
-      this.retailHammer.get('pan').set({ direction: Hammer.DIRECTION_ALL })
-      this.panEvent = this.panEvent.bind(this)
-      this.panRetail = this.panRetail.bind(this)
-      this.eventHammer.on('pan', this.panEvent)
-      this.retailHammer.on('pan', this.panRetail)
     }
     this.direction = Constants.LEFT
     this.eventProjects = {
@@ -146,18 +138,19 @@ export default class ProjectsOverview extends BaseComponent {
       )
     })
   }
-  testOrientation() {
-    if (Store.Orientation === Constants.ORIENTATION.LANDSCAPE && this.isMobile) {
-      setTimeout(Actions.closeProjectsOverview)
-    }
-  }
   onMouseEnter(e) {
     clearTimeout(changeTextureTimeout)
     const hovered = e.target.getAttribute('data-slug')
     if (this.selectedProject !== hovered) {
       this.selectedProject = hovered
-      changeTextureTimeout = setTimeout(() => { Actions.changeProjectsPreview(this.selectedProject) }, 500)
+      this.refs.previewImage.style.opacity = 0
+      changeTextureTimeout = setTimeout(() => { this.changeTexture(this.selectedProject) }, 300)
     }
+  }
+  changeTexture = (slug) => {
+    const preview = Store.getProjectPreview(slug)
+    this.refs.previewImage.style.backgroundImage = `url('/assets/images/${slug}/${preview}')`
+    this.refs.previewImage.style.opacity = 1
   }
   onMouseLeave() {
     clearTimeout(changeTextureTimeout)
@@ -177,6 +170,8 @@ export default class ProjectsOverview extends BaseComponent {
       this.refs.retailTitle.show()
     }, 100)
     dom.event.on(this.refs.background, 'click', this.onBackgroundClick)
+    const newRoute = Router.getNewRoute()
+    setTimeout(() => { this.changeTexture(newRoute.target) }, 600)
   }
   close() {
     clearTimeout(showTitlesTimeout)
@@ -184,6 +179,7 @@ export default class ProjectsOverview extends BaseComponent {
     setTimeout(() => { dom.classes.remove(this.refs.parent, 'open') }, 600)
     this.refs.eventTitle.hide()
     this.refs.retailTitle.hide()
+    this.refs.previewImage.style.opacity = 0
     dom.event.off(this.refs.background, 'click', this.onBackgroundClick)
   }
   didPageChange(item) {
@@ -193,23 +189,8 @@ export default class ProjectsOverview extends BaseComponent {
     //   dom.classes.add(dom.select(`#projects-overview .btn.${route.target}`), 'hide')
     // }
   }
-  panEvent(e) {
-    let newPos = this.currentEventPos + (e.deltaX * 0.2)
-    if (newPos > 0) this.currentEventPos = 0
-    else if (newPos < -(this.eventProjectsLength - thumbW * 1.5)) this.currentEventPos = -(this.eventProjectsLength - thumbW * 1.5)
-    else this.currentEventPos = newPos
-    this.refs['event-projects'].style.left = this.currentEventPos + 'px'
-  }
-  panRetail(e) {
-    let newPos = this.currentRetailPos + (-e.deltaX * 0.2)
-    if (newPos > 0) this.currentRetailPos = 0
-    else if (newPos < -(this.retailProjectsLength - thumbW * 1.5)) this.currentRetailPos = -(this.retailProjectsLength - thumbW * 1.5)
-    else this.currentRetailPos = newPos
-    this.refs['retail-projects'].style.right = this.currentRetailPos + 'px'
-  }
   onBackgroundClick(e) {
     e.preventDefault()
-    if (this.isMobile) return
     Router.setRoute(`/project/${this.selectedProject}`)
   }
   onProjectClick(id)  {
@@ -276,8 +257,6 @@ export default class ProjectsOverview extends BaseComponent {
   resize() {
     const windowW = Store.Window.w
     const windowH = Store.Window.h
-    this.refs.parent.style.width = windowW + 'px'
-    this.refs.parent.style.height = windowH + 'px'
     if (this.isMobile) return
     this.eventProjects.el.style.top = (windowH >> 1) - (this.eventProjects.size[1] >> 1) + 'px'
     this.retailProjects.el.style.top = (windowH >> 1) - (this.retailProjects.size[1] >> 1) + 'px'
