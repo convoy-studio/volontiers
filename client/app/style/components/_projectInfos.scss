@@ -1,5 +1,8 @@
 .project-infos {
   @extend .full;
+  position: absolute;
+  top: 0;
+  left: 0;
   cursor: url('/assets/images/close.svg'), auto;
 
   &__description {

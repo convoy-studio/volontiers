@@ -91,5 +91,8 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.7.1",
     "wheel-inertia": "0.0.2"
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
   }
 }

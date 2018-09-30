@@ -33,7 +33,7 @@ export default class BasePage extends React.Component {
     } else {
       this.tlOut.eventCallback('onComplete', this.didTransitionOutComplete)
       this.tlOut.timeScale(1.8)
-      setTimeout(()=>this.tlOut.play(0), 500)
+      setTimeout(()=>this.tlOut.play(0), 0)
     }
   }
   didTransitionInComplete() {

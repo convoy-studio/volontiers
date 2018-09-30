@@ -86,6 +86,9 @@ class Utils {
     const d = Math.pow(10, decimals)
     return ~~((d * randomNum) + 0.5) / d
   }
+  static randomSign() {
+    return Math.random() < 0.5 ? -1 : 1
+  }
   static getImgUrlId(url) {
     const split = url.split('/')
     return split[split.length - 1].split('.')[0]

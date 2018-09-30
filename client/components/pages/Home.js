@@ -1,9 +1,11 @@
 import Page from '../Page'
 import Store from '../../store'
+import Actions from '../../actions'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import Preview from '../partials/Preview'
 import HomeNavigation from '../partials/HomeNavigation'
+import dom from 'dom-hand'
 
 export default class Home extends Page {
   constructor(props) {
@@ -44,6 +46,7 @@ export default class Home extends Page {
     )
   }
   componentDidMount() {
+    TweenMax.to(dom.select('html'), 0.5, {backgroundColor: '#ececec', delay: 0.2 })
     Store.on(Constants.PREVIEW_CHANGED, this.didPreviewChange)
     Store.on(Constants.OPEN_PROJECTS_OVERVIEW, this.projectOverviewOpened)
     Store.on(Constants.CLOSE_PROJECTS_OVERVIEW, this.projectOverviewClosed)
@@ -57,18 +60,18 @@ export default class Home extends Page {
       })
     }
   }
+  willTransitionIn() {
+    this.refs.preview.transitionIn()
+    setTimeout(() => { super.willTransitionIn() }, 300)
+  }
+  didTransitionInComplete() {
+    TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut})
+    super.didTransitionInComplete()
+  }
   willTransitionOut() {
     TweenMax.to(this.refs.helper, 0.3, { opacity: 0, ease: Circ.easeOut })
     this.refs.preview.transitionOut()
     setTimeout(() => { super.willTransitionOut() }, 700)
-  }
-  willTransitionIn() {
-    this.refs.preview.transitionIn()
-    super.willTransitionIn()
-  }
-  didTransitionInComplete() {
-    TweenMax.to(this.refs.helper, 1, { opacity: 1, ease: Circ.easeOut, delay: 1})
-    super.didTransitionInComplete()
   }
   onDiscoverProjectClick() {
     const project = this.projects[Store.CurrentPreviewIndex]
@@ -117,6 +120,8 @@ export default class Home extends Page {
   projectOverviewClosed() {
     TweenMax.to(this.refs.helper, 0.3, { opacity: 1, ease: Circ.easeOut })
     this.refs.preview.onProjectsOverviewClose()
+  }
+  update() {
   }
   resize() {
     super.resize()

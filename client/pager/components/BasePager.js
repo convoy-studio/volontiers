@@ -1,6 +1,4 @@
-import BaseComponent from './BaseComponent'
 import {PagerStore, PagerActions, PagerConstants} from '../Pager'
-import Utils from '../../utils/Utils'
 import Store from '../../store'
 import Actions from '../../actions'
 
@@ -13,6 +11,7 @@ class BasePager extends React.Component {
     this.didPageTransitionInComplete = this.didPageTransitionInComplete.bind(this)
     this.didPageTransitionOutComplete = this.didPageTransitionOutComplete.bind(this)
     this.pageTransitionDidFinish = this.pageTransitionDidFinish.bind(this)
+    this.setupNewComponent = this.setupNewComponent.bind(this)
     this.components = {
       'new-component': undefined,
       'old-component': undefined

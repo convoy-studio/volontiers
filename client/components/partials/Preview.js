@@ -4,11 +4,10 @@ import Actions from '../../actions'
 import Constants from '../../constants'
 import Router from '../../services/router'
 import Utils from '../../utils/Utils'
-import dom from 'dom-hand'
 import counter from 'ccounter'
 import {PagerActions} from '../../pager/Pager'
 
-const activityHandler = Utils.countActivityHandler(650)
+const activityHandler = Utils.countActivityHandler(850)
 
 class Preview extends BaseComponent {
   constructor(props) {
@@ -18,15 +17,12 @@ class Preview extends BaseComponent {
     Store.on(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
     this.currentSlide = undefined
-    this.isEnteredPreview = false
     this.firstPreviewLoaded = false
     this.needIntroAnimation = false
     this.introAnimationFinished = false
-    this.cursor = 'auto'
+    this.isAnimating = false
     this.projects = Store.getHomeProjects()
     this.counter = counter(this.projects.length)
-    this.loadingCounter = counter(this.projects.length)
-    this.boundsShift = 50
     this.dir = 1
     this.scaleEase = CustomEase.create('custom', 'M0,0,C1,0.01,0.14,1.01,1,1')
     this.transitionEase = CustomEase.create('custom', 'M0,0,C1,0.13,0.7,0.89,1,1')
@@ -49,6 +45,11 @@ class Preview extends BaseComponent {
         </div>
       </div>
     )
+  }
+  componentDidMount() {
+    this.projects.forEach(project => {
+      TweenMax.set(this.refs[`preview-${project.slug}`], { xPercent: -50, yPercent: -50, left: '50%', top: '50%' })
+    })
   }
   setFirstSlide(done) {
     const currentSlide = this.getSlideById(Router.getNewRoute().target)
@@ -99,7 +100,7 @@ class Preview extends BaseComponent {
     return currentSlide
   }
   onScroll(direction) {
-    if (!activityHandler.isReady) return
+    if (!activityHandler.isReady || this.isAnimating) return
     activityHandler.count()
     switch (direction) {
     case -1:
@@ -125,8 +126,12 @@ class Preview extends BaseComponent {
     if (!this.introAnimationFinished && Router.getOldRoute() === undefined) return
     const windowH = Store.Window.h
     const position = this.counter.props.index * windowH
-    if (this.firstPreviewLoaded) TweenMax.to(this.refs.container, 0.6, {y: -position, ease: Expo.easeOut})
-    else TweenMax.set(this.refs.container, { y: -position })
+    this.isAnimating = true
+    if (this.firstPreviewLoaded) TweenMax.to(this.refs.container, 0.6, {y: -position, ease: Expo.easeOut, onComplete: () => { this.isAnimating = false }})
+    else {
+      TweenMax.set(this.refs.container, { y: -position })
+      this.isAnimating = fakse
+    }
   }
   introAnimation() {
     const windowH = Store.Window.h
@@ -154,15 +159,15 @@ class Preview extends BaseComponent {
       const windowW = Store.Window.w
       const current = this.refs[`preview-${this.currentSlide.slug}`]
       TweenMax.set(this.refs.container, { opacity: 1 })
-      TweenMax.set(current, { x: -windowW * 2, scaleX: 1.5, rotateY: '10deg' })
-      TweenMax.to(current, 0.8, { x: 0, scaleX: 1, rotateY: 0, ease: this.transitionEase })
+      TweenMax.set(current, { x: -windowW * 2, scaleX: 1.5, scaleY: 0.75, rotationY: 10 })
+      TweenMax.to(current, 0.8, { x: 0, scale: 1, rotationY: 0, ease: this.transitionEase })
     }
   }
   transitionOut() {
     if (!this.currentSlide) return
     const windowW = Store.Window.w
     const current = this.refs[`preview-${this.currentSlide.slug}`]
-    TweenMax.to(current, 0.5, { x: -windowW * 3, scaleX: 1.5, rotateY: '-10deg', ease: this.transitionEase })
+    TweenMax.to(current, 0.5, { x: -windowW * 3, scaleX: 1.5, scaleY: 0.75, rotationY: -10, ease: this.transitionEase })
   }
   keyboardTriggered(key) {
     if (key === Constants.DOWN) this.onScroll(1)
@@ -170,14 +175,12 @@ class Preview extends BaseComponent {
   }
   onProjectsOverviewOpen() {
     const current = this.refs[`preview-${this.currentSlide.slug}`]
-    const windowW = Store.Window.w
     TweenMax.to(current, 0.6, { scale: 0.8, ease: this.scaleEase, onComplete: () => {
       TweenMax.set(current, { opacity: 0, delay: 0.05 })
     } })
   }
   onProjectsOverviewClose() {
     const current = this.refs[`preview-${this.currentSlide.slug}`]
-    const windowW = Store.Window.w
     TweenMax.set(current, { opacity: 1 })
     TweenMax.to(current, 0.6, { scale: 1, ease: this.scaleEase })
   }
@@ -188,7 +191,6 @@ class Preview extends BaseComponent {
     Store.off(Constants.KEYBOARD_TRIGGERED, this.keyboardTriggered)
     Store.off(Constants.SCROLL_TRIGGERED, this.onScroll)
     Store.off(Constants.START_INTRO_ANIMATION, this.introAnimation)
-    dom.event.off(this.refs.preview, 'click', this.goToProject)
   }
 }
 

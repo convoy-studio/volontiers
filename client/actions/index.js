@@ -73,6 +73,12 @@ const Actions = {
       item: undefined
     })
   },
+  firstOverviewHovered: () => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.FIRST_OVERVIEW_HOVERED,
+      item: undefined
+    })
+  },
   changePreview: (idx) => {
     Dispatcher.handleViewAction({
       actionType: Constants.PREVIEW_CHANGED,

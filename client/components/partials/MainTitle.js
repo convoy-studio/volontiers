@@ -83,6 +83,7 @@ class MainTitle extends BaseComponent {
   }
   hide() {
     if (!this.isVisible) return
+    this.refs.parent.classList.remove('show')
     dom.classes.remove(this.refs.parent, 'show')
     this.isVisible = false
   }

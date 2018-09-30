@@ -163,6 +163,7 @@ a {
 .next-previous-container {
   position: fixed;
   @extend .top-left;
+  @extend .full;
   .main-btn {
     text-transform: uppercase;
     position: fixed;
@@ -172,9 +173,6 @@ a {
       width: 80vh;
       height: 51vw;
       transform: translate(-50%);
-      @media (max-width: $MQ_SMALL) {
-        height: (2 * $globalMargin) + $mobileLineHeight;
-      }
     }
     &.previous {
       cursor: url('/assets/images/arrow-left.svg'), auto;
@@ -259,18 +257,35 @@ a {
 }
 .st0{fill:#F7A0F9;}
 .st1{fill:#FFFFFF;}
-.video-btn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 40%;
-  cursor: url('/assets/images/play.svg'), auto;
-  pointer-events: none;
-  z-index: 1;
 
-  &.playing {
+.vid-player {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: url('/assets/images/play.svg'), auto;
+
+  &.is-playing {
     cursor: url('/assets/images/pause.svg'), auto;
+  }
+
+  video {
+    height: 100%;
+    width: auto;
+  }
+
+  &__sound-icon {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: $globalMargin;
+    width: 26px;
+    height: 22px;
+    pointer-events: all;
+    cursor: url('/assets/images/cursor.svg'), auto;
+
+    g {
+      fill: $pink;
+      stroke: none;
+    }
   }
 }

@@ -47,6 +47,7 @@ export default class ProjectsOverview extends BaseComponent {
     this.currentRetailPos = 0
     this.selectedProject = ''
     this.isMobile = Store.Detector.isMobile
+    this.firstHover = true
   }
   componentWillMount() {
     this.onProjectClick = this.onProjectClick.bind(this)
@@ -148,6 +149,10 @@ export default class ProjectsOverview extends BaseComponent {
     }
   }
   changeTexture = (slug) => {
+    if (this.firstHover) {
+      Actions.firstOverviewHovered()
+      this.firstHover = false
+    }
     const preview = Store.getProjectPreview(slug)
     this.refs.previewImage.style.backgroundImage = `url('/assets/images/${slug}/${preview}')`
     this.refs.previewImage.style.opacity = 1
@@ -158,6 +163,8 @@ export default class ProjectsOverview extends BaseComponent {
   open() {
     transitionShowTime = 0
     transitionHideTime = 0
+    this.firstHover = true
+    this.selectedProject = ''
     this.eventProjects.pos[0] = -initialPos
     this.retailProjects.pos[0] = initialPos
     this.eventProjects.pos[1] = 0
@@ -171,7 +178,9 @@ export default class ProjectsOverview extends BaseComponent {
     }, 100)
     dom.event.on(this.refs.background, 'click', this.onBackgroundClick)
     const newRoute = Router.getNewRoute()
-    setTimeout(() => { this.changeTexture(newRoute.target) }, 600)
+    if (newRoute.type === Constants.HOME) {
+      setTimeout(() => { this.changeTexture(newRoute.target) }, 600)
+    }
   }
   close() {
     clearTimeout(showTitlesTimeout)

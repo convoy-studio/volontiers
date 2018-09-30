@@ -1,0 +1,30 @@
+.slideshow {
+  height: 100vh;
+
+  &__container {
+    pointer-events: none;
+  }
+
+  &__item {
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    perspective: 1000px;
+  }
+
+  &__block {
+    display: block;
+    position: absolute;
+    height: 75%;
+    width: auto;
+    max-width: 100%;
+
+    img, video {
+      height: 100%;
+      width: auto;
+    }
+  }
+  &__video {
+    pointer-events: all;
+  }
+}

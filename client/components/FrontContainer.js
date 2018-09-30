@@ -44,7 +44,7 @@ export default class FrontContainer extends BaseComponent {
             </li>
             <li>
               <MainTitle ref='langTitleEn' title={'en'} hasMouseEnterLeave={langState.en} onClick={() => { this.changeLangClick('en') }} className='link top-logo-title lang-button lang-button--en'></MainTitle>
-              <span className="lang-separator">|</span>
+              <span ref="separator" className="lang-separator">|</span>
               <MainTitle ref='langTitleFr' title={'fr'} hasMouseEnterLeave={langState.fr} onClick={() => { this.changeLangClick('fr') }} className='link top-logo-title lang-button lang-button--fr'></MainTitle>
             </li>
           </ul>
@@ -62,6 +62,7 @@ export default class FrontContainer extends BaseComponent {
       this.refs.logo.show()
       this.refs.langTitleEn.show()
       this.refs.langTitleFr.show()
+      TweenMax.from(this.refs.separator, 0.8, { opacity: 0 })
       this.refs.aboutTitle.show()
     }, 0)
   }
