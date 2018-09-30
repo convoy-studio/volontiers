@@ -9,6 +9,9 @@
 *, *:before, *:after {
   box-sizing: inherit;
 }
+// body.ie {
+//   text-shadow: 0 0 1em transparent, 1px 1px 1px rgba( 0, 0, 0, .5 );
+// }
 button {
   background: none repeat scroll 0 0 transparent;
   border: medium none;

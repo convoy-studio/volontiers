@@ -20,6 +20,12 @@ class App {
     this.removeLanding = this.removeLanding.bind(this)
     Store.on(Constants.START_INTRO_ANIMATION_COMPLETED, this.introAnimationCompleted)
     Store.on(Constants.START_INTRO_ANIMATION, this.introAnimation)
+    const ua = window.navigator.userAgent
+    const msie = ua.indexOf('MSIE ')
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      document.body.classList.add('ie')
+    }
   }
   init() {
     this.landingEl = dom.select('.landing')
