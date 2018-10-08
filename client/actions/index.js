@@ -91,6 +91,12 @@ const Actions = {
       item: { projectSlideIdx: idx }
     })
   },
+  currentSlideChanged: (slide) => {
+    Dispatcher.handleViewAction({
+      actionType: Constants.CURRENT_SLIDE_CHANGED,
+      item: slide
+    })
+  },
   toggleProjectInfos: () => {
     Dispatcher.handleViewAction({
       actionType: Constants.TOGGLE_PROJECT_INFOS,

@@ -71,7 +71,6 @@ class Slideshow extends BaseComponent {
   componentDidMount() {
     setTimeout(Actions.setSlideshowState, 0, Constants.SLIDESHOW.BEGIN)
     this.assets.forEach(asset => {
-      console.log(this.refs[`slide-${asset.id}`])
       TweenMax.set(this.refs[`slide-${asset.id}`], { xPercent: -50, yPercent: -50, left: '50%', top: '50%' })
     })
   }
@@ -143,7 +142,6 @@ class Slideshow extends BaseComponent {
     }})
   }
   transitionOut() {
-    console.log('out')
     const newRoute = Router.getNewRoute()
     const windowW = Store.Window.w
     const windowH = Store.Window.h

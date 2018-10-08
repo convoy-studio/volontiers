@@ -72,7 +72,6 @@ export default (id, container, imgFilename, index, pre = 'preview', direction = 
           }
         }, 100)
       } else {
-        console.log(data)
         if (data.texture) {
           scope.size[0] = data.texture.width
           scope.size[1] = data.texture.height

@@ -20,6 +20,7 @@ export default class FrontContainer extends BaseComponent {
     this.content = Store.getContent('navigation')
     this.language = Store.getLang()
     this.toggleAboutInterval = undefined
+    this.isMobile = Store.Detector.isMobile
     PagerStore.on(PagerConstants.PAGE_TRANSITION_DID_FINISH, this.onTransitionInCompleted)
   }
   render() {
@@ -49,7 +50,7 @@ export default class FrontContainer extends BaseComponent {
             </li>
           </ul>
         </div>
-        <ProjectsOverview ref='projects-overview' />
+        { !this.isMobile && <ProjectsOverview ref='projects-overview' /> }
       </header>
     )
   }
@@ -89,9 +90,9 @@ export default class FrontContainer extends BaseComponent {
     else setTimeout(Actions.openProjectsOverview)
   }
   update() {
-    this.refs['projects-overview'].update()
+    if (!this.isMobile) this.refs['projects-overview'].update()
   }
   resize() {
-    this.refs['projects-overview'].resize()
+    if (!this.isMobile) this.refs['projects-overview'].resize()
   }
 }
