@@ -51,7 +51,7 @@ export default class About extends BaseComponent {
             </div>
             <p className='catchline' ref='catchline'>{content.text[3]}</p>
             <div className='details' ref='details'>
-              <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>14 rue Coquillière 75001 Paris - France</a></p>
+              <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>7 boulevard Saint-Martin 75003 Paris - France</a></p>
               <p>+ 33 (0) 1 53 69 63 83 | <a className='link btn mail' href='mailto:hello@volontiers.fr' ref='mail'>hello@volontiers.fr</a></p>
             </div>
           </div>

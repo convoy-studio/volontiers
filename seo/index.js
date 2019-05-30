@@ -54,7 +54,7 @@ const createHtml = (id, url, siteLinks) => {
             head: `
                 <meta name="keywords" content="event, paris, production, set design, événement, design, agence, display, scénographie, agencement">
                 <meta name="author" content="Volontiers">
-                <meta name="copyright" content="© Copyright 2017 - Volontiers" />
+                <meta name="copyright" content="© Copyright 2019 - Volontiers" />
                 <meta name="location" content="Paris, FRANCE">
                 <base href="/">
 
