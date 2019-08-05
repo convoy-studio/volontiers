@@ -73,6 +73,279 @@ export default {
   'routing': {
   },
   projects: {
+    'galeries-lafayette-funarea': {
+      'inHome': 1,
+      'brand': 'GALERIES LAFAYETTE',
+      'separator': ' - ',
+      'project': 'FUNAREA',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To celebrate Funorama campaign at Galeries Lafayette Haussmann, Volontiers imagined Funarea, a colorful net hung under the iconic centenarian doma. During one month and a half, more than 50 000 people from all over the world enjoyed a break suspended in the heart of the famous building.',
+        fr: 'Pour célébrer le temps fort du Printemps aux Galeries Lafayette, Funorama, Volontiers a imaginé et réalisé Funorama, un filet coloré tendu sous la coupole centenaire. Pendant un mois et demi, plus de 50 000 personnes venant du monde entier ont pu profiter d’un instant suspendu au cœur du bâtiment emblématique.'
+      },
+      preview: '1IMG_4712.jpg',
+      assets: [
+        '2-IMG_459400000-Edit.jpg',
+        '3-IMG_4576.jpg',
+        '4-PBL_1644.jpg',
+        '5-IMG_465900000-panorama-Edit.jpg',
+        '6-PBL_1705_1.jpg',
+        '7-IMG_451200000-Edit.jpg',
+        '8-PBL_1640.jpg',
+        '9-PBL_1657.jpg',
+        '10-IMG_4565.jpg',
+        '11-PBL_1710.jpg',
+        '12-IMG_7500.mp4',
+        '13-IMG_7529.mp4'
+      ]
+    },
+    'shiseido-pop-up': {
+      'inHome': 2,
+      'brand': 'SHISEIDO',
+      'separator': ' - ',
+      'project': 'POP UP',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To celebrate the anniversary of its iconic magazine Hanatsubaki, Shiseido opened a pop up in the heart of Paris during 10 days. The pop up featured various activations such as a Hanatsubaki exhibition, 3 make up collections, workshops and a typical Japanese cafe serving doriyaki and green tea. ',
+        fr: 'Pour célébrer l\'anniversaire de son emblématique magazine Hanatsubaki, Shiseido a ouvert un pop up en plein centre de Paris pendant 10 jours. Au programme : présentation de 3 collections de make up, ateliers, exposition et café japonais où le public a pu déguster doriyaki et thés japonais.'
+      },
+      preview: '1Volontiers-Shisheido-32.jpg',
+      assets: [
+        '2Volontiers-Shisheido.jpg',
+        '3Shiseido-Volontiers-18.jpg',
+        '4DIM_8737.jpg',
+        '5DIM_8367.jpg',
+        '6DIM_8397.jpg',
+        '7DIM_9131.jpg',
+        '8Shiseido-Volontiers-14.jpg',
+        '9Volontiers-Shisheido-21.jpg',
+        '10Volontiers-Shisheido-16.jpg',
+        '11Shiseido-Volontiers-12.jpg',
+        '12Shiseido-Volontiers-3.jpg'
+      ]
+    },
+    'nikelab-p75-refit': {
+      'inHome': 3,
+      'brand': 'NikeLab',
+      'separator': ' - ',
+      'project': 'P75 Refit',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: '',
+        fr: ''
+      },
+      preview: '1Nike LAB28_.jpg',
+      assets: [
+        '2Nike LAB34_.jpg',
+        '3Nike LAB26_.jpg',
+        '4Nike LAB33_.jpg',
+        '5IMG_8351.jpg',
+        '6IMG_8420.jpg',
+        '7Nike LAB3_.jpg',
+        '8Nike LAB6_.jpg',
+        '9Nike LAB10_.jpg',
+        '10Nike LAB12_.jpg',
+        '11Nike LAB14_.jpg',
+        '12Nike LAB21_.jpg',
+        '13Nike LAB39_.jpg',
+        '14Nike LAB41_.jpg'
+      ]
+    },
+    'ikea-paris-design-week-2018': {
+      'inHome': 4,
+      'brand': 'Ikea',
+      'separator': ' - ',
+      'project': 'Paris Design Week 2018',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the Paris Design Week and to celebrate its 70th anniversary, IKEA decided to revisit its iconic furniture. Volontiers created a small museum to illustrate the brand history and the future collaborations. ',
+        fr: 'Pour la Paris Design Week et pour célébrer ses 70 ans, IKEA a choisi de revenir sur des pièces iconiques qui ont marqué ses collections. Ce fut aussi l’occasion de présenter l’histoire de la marque mais aussi de dévoiler les futures collaborations. '
+      },
+      preview: '1-Volontiers-Ikea.jpg',
+      assets: [
+        '2-Volontiers-Ikea-5.jpg',
+        '3-Volontiers-Ikea-16.jpg',
+        '4Volontiers-Ikea-22.jpg',
+        '5Volontiers-Ikea-18.jpg',
+        '6Volontiers-Ikea-33.jpg',
+        '7Volontiers-Ikea-47.jpg',
+        '8AC6A2303.jpg',
+        '9Volontiers-Ikea-67.jpg',
+        '10Volontiers-Ikea-35.jpg',
+        '11Ikea75-LD.mp4'
+      ]
+    },
+    'facebook-nuit-blanche-2019': {
+      'inHome': 5,
+      'brand': 'Facebook',
+      'separator': ' - ',
+      'project': 'Nuit Blanche 2019',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'An interactive art installation designed & produced by Volontiers where stories posted by the public become stars in the Facebook sky',
+        fr: 'A l’occasion de la Nuit Blanche, Volontiers a imaginé et produit une installation interactive où les stories postées par les visiteurs deviennent des étoiles dans le ciel Facebook'
+      },
+      preview: '1planetariumStories-20.jpg',
+      assets: [
+        '2-8I0A6394-Editar.jpg',
+        '3-8I0A6388.jpg',
+        '4-8I0A6532.jpg',
+        '5planetariumStories-11_1.jpg',
+        'FacebookPlanetarium.mp4'
+      ]
+    },
+    'converse-showroom-2019': {
+      'inHome': 0,
+      'brand': 'Converse',
+      'separator': ' - ',
+      'project': 'Showroom 2019',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Showcase of the future collections and collaborations',
+        fr: 'Présentation des nouvelles collections et collaborations à venir'
+      },
+      preview: '1Converse2019-Showroom-5.jpg',
+      assets: [
+        '2Converse2019-Showroom-14_flou.jpg',
+        '3Converse2019-Showroom-22_flou.jpg',
+        '4Converse2019-Showroom-23_flou.jpg',
+        '5Converse2019-Showroom-11.jpg',
+        '6Converse2019-Showroom.jpg',
+        '7Converse2019-Showroom-44_flou.jpg',
+        '8Converse2019-Showroom-54_flou.jpg'
+      ]
+    },
+    'it-pop-up': {
+      'inHome': 0,
+      'brand': 'IT',
+      'separator': ' - ',
+      'project': 'Pop up',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'To celebrate their 30 years anniversary, the Chinese retailer IT HK imagined a digital exhibition showcasing the future of retail and brand collaborations.',
+        fr: 'Pour ses 30 ans, le retailer chinois IT HK a imaginé une exposition digitale présentant le futur du retail ainsi que des collaborations avec de grandes marques.'
+      },
+      preview: '1IT-Volontiers-romainbourven-41.jpg',
+      assets: [
+        '2IT-Volontiers-romainbourven-13.jpg',
+        '3IT-Volontiers-romainbourven-33.jpg',
+        '4IT-Volontiers-romainbourven-37.jpg',
+        '5IT-Volontiers-romainbourven-63.jpg',
+        '6IT-Volontiers-romainbourven-71.jpg',
+        '7IT-Volontiers-romainbourven-74.jpg',
+        '8IT-Volontiers-romainbourven-3.jpg'
+      ]
+    },
+    'nike-le-marais-showroom': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'Le Maris showroom',
+      'type': Constants.TYPE.RETAIL,
+      'about': {
+        en: 'Presentation of the future collections and collaborations',
+        fr: 'Présentation des nouvelles collections et collaborations à venir'
+      },
+      preview: '1VolontierxNike_Espaces-12.jpg',
+      assets: [
+        '2VolontierxNike_Espaces-15_flou.jpg',
+        '3VolontierxNike_Mobilier-27.jpg',
+        '4VolontierxNike_Mobilier-20.jpg',
+        '5VolontierxNike_Mobilier-22.jpg',
+        '6VolontierxNike_Espaces-3_flou.jpg',
+        '7VolontierxNike_Produits-104_flou.jpg',
+        '8VolontierxNike_Produits-118_flou.jpg',
+        '9VolontierxNike_Espaces-20.jpg',
+        '10IMG_8100.jpg',
+        '11IMG_8103.jpg',
+        '12Volontier x Nike_Mobilier-39.jpg'
+      ]
+    },
+    'nike-the-space-for-every-future-athlete': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'THE SPACE FOR EVERY FUTURE ATHLETE',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'On the occasion of the Women’s World Cup, Nike opened a place during one month, gathering influencers, athletes and public around talks, workshops, trainings and parties. A room was designed to welcome jersey customization workshops hosted by designers, while another room, called the DNA room, was dedicated to vintage Nike iconic products, worn by famous female athletes.',
+        fr: 'A l\'occasion de la coupe du monde de football féminin, Nike a ouvert un lieu de vie pendant 1 mois, réunissant des athlètes, influencers et grand public autour de conférences, ateliers et entrainements. Une pièce était spécialement designée pour accueillir des ateliers de customisation de maillots de foot dirigés par des créateurs, tandis qu\'une autre pièce était dédiée aux archives emblématiques de Nike, toutes portées par des athlètes féminines de toutes disciplines.'
+      },
+      preview: '1Nike-goncourt36_.jpg',
+      assets: [
+        '2Nike-goncourt31_.jpg',
+        '3Nike-goncourt34_.jpg',
+        '4Nike-goncourt33_.jpg',
+        '5Nike-goncourt22_.jpg',
+        '6Nike-goncourt4_.jpg',
+        '7Nike-goncourt6_.jpg',
+        '8Nike-goncourt9_.jpg',
+        '9Nike-goncourt10_.jpg',
+        '10Nike-goncourt16_.jpg',
+        '11Nike-goncourt26_.jpg'
+      ]
+    },
+    'nike-unlaced': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'Unlaced',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Nike Unlaced features collaborations, insights on sneaker culture and style from industry experts, dedicated to women. Volontiers produced a multi-purpose space connecting sport and fashion through conversations and workshops. This showroom was curated by Sarah Andelman, showcasing her selection of Unlaced H018 and best of collab collections for HO18 and SP19.',
+        fr: 'Nike Unlaced met en avant les collaborations et les tendances autour de la culture sneakers dédiée à la femme. Pour illustrer le lien entre le sport & la mode, Nike a imaginé un espace pluridisciplinaire accueillant conférences et ateliers. Et pour sélectionner les produits Nike Unlaced présentés à cette occasion, Nike a fait appel à Sarah Andelman.'
+      },
+      preview: '1Showroom-Nike-OffWhite-4.jpg',
+      assets: [
+        '2Showroom-Nike-OffWhite-35.jpg',
+        '3Showroom-Nike-OffWhite-21_flou.jpg',
+        '4Showroom-Nike-OffWhite-22_flou.jpg',
+        '5Showroom-Nike-OffWhite-6_flou.jpg',
+        '6Showroom-Nike-OffWhite.jpg'
+      ]
+    },
+    'nike-sneakersnstuff': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' - ',
+      'project': 'SNEAKERS’N’STUFF',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'To celebrate the launch of the Air Max 720, Nike and SNS teamed up to organize a exclusive dinner followed by a party where guests could create their own “ Air Max bubble “ using an application specially designed for the event, and then enjoy a live performance of Sheck Wes.',
+        fr: 'A l’occasion du lancement de la Air Max 720, Nike et SNS se sont associées pour organiser un diner exclusif suivi d’une soirée, au cours de laquelle les invités ont pu créer leur propre « bulle Air Max » à l’aide d’une application spécialement conçue pour l’occasion, et profiter d’un live de Sheck Wes.'
+      },
+      preview: '1DSC_4324.jpg',
+      assets: [
+        '2IMG_8434.jpg',
+        '3DSC_4369.jpg',
+        '4DSC_4347.jpg',
+        '5DSC_4388.jpg',
+        '6DSC_4642.jpg'
+      ]
+    },
+    'nike-x-yoon-ambush': {
+      'inHome': 0,
+      'brand': 'Nike',
+      'separator': ' x ',
+      'project': 'YOON AMBUSH',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'For the collaboration reveal between Nikelab and Yoon Ambush, Dior Men director of jewelry, Nike wanted to show how creatives like Yoon can be athletes without doing sports. Volontiers illustrated this idea by organizing various talks and workshops and by creating adjustable furniture. ',
+        fr: 'A l’occasion du lancement de la collection issue de la collaboration entre Nikelab et Yoon Ambush, directrice artistique joaillerie chez Dior Homme, Nike souhaitait montrer que des créatifs comme Yoon peuvent être considérés comme des athlètes. Afin d’illustrer cette idée, Volontiers a organisé des ateliers et des conférences pour lesquels il a fallu dessiner un mobilier modulable.'
+      },
+      preview: '1volontiers-nike-ambush-22.jpg',
+      assets: [
+        '2volontiers-nike-ambush-11.jpg',
+        '3volontiers-nike-ambush-10.jpg',
+        '4volontiers-nike-ambush-2.jpg',
+        '5volontiers-nike-ambush-4.jpg',
+        '6volontiers-nike-ambush-64.jpg',
+        '7volontiers-nike-ambush-25.jpg',
+        '8volontiers-nike-ambush-37.jpg',
+        '9volontiers-nike-ambush-45.jpg',
+        '9volontiers-nike-ambush-74.jpg'
+      ]
+    },
     'nikelab-x-virgil-abloh-x-kim-jones': {
       'inHome': 0,
       'brand': 'NikeLab',
@@ -93,7 +366,7 @@ export default {
       ]
     },
     'darphin-digital-detox': {
-      'inHome': 2,
+      'inHome': 0,
       'brand': 'Darphin',
       'separator': ' - ',
       'project': 'Digital Detox',
@@ -115,7 +388,7 @@ export default {
       ]
     },
     'nikelab-x-mmw-x-nsdos-training-sessions': {
-      'inHome': 3,
+      'inHome': 0,
       'brand': 'MMW x NIKE x NSDOS TRAINING',
       'separator': '',
       'project': '',
@@ -135,7 +408,7 @@ export default {
       ]
     },
     'converse-one-star-street': {
-      'inHome': 4,
+      'inHome': 0,
       'brand': 'Converse',
       'separator': ' - ',
       'project': 'One star street',
@@ -176,7 +449,7 @@ export default {
       ]
     },
     'ikea-let-it-slow': {
-      'inHome': 7,
+      'inHome': 0,
       'brand': 'Ikea',
       'separator': ' - ',
       'project': 'Let it slow',
@@ -268,7 +541,7 @@ export default {
       ]
     },
     'nike-pfw-diner': {
-      'inHome': 1,
+      'inHome': 0,
       'brand': 'VIRGIL ABLOH & KIM JONES x NIKE',
       'separator': ' - ',
       'project': 'PFW diner',
@@ -457,7 +730,7 @@ export default {
       ]
     },
     'nikelab-x-pigalle-duperre-basketball-court': {
-      'inHome': 6,
+      'inHome': 0,
       'brand': 'Nikelab',
       'separator': ' × ',
       'project': 'Pigalle - Duperré Basketball Court',
@@ -539,7 +812,7 @@ export default {
       ]
     },
     'colette-20-ans-the-beach': {
-      'inHome': 5,
+      'inHome': 0,
       'brand': 'Colette 20 ans',
       'separator': ' - ',
       'project': 'The Beach',
