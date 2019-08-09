@@ -172,14 +172,17 @@ function _getProjectsByType(type) {
   return filteredProjects
 }
 function _getNextProject() {
-  const projects = Store.AllProjects
   const route = Router.getNewRoute()
+  const projects = Store.AllProjects
+  const currentType = data.projects[route.target].type
+  const typeProjects = projects.filter(p => p.type === currentType)
+
   let project = undefined
-  for (let i = 0; i < projects.length; i++) {
-    const p = projects[i]
+  for (let i = 0; i < typeProjects.length; i++) {
+    const p = typeProjects[i]
     if (p.slug === route.target) {
-      project = projects[i + 1]
-      if (project === undefined) project = projects[0]
+      project = typeProjects[i + 1]
+      if (project === undefined) project = typeProjects[0]
       break
     }
   }

@@ -68,7 +68,7 @@
     width: 100%;
     @media (min-width: $MQ_SMALL) {
       position: absolute;
-      top: 60%;
+      top: 63%;
       left: 0;
       transform: translateY(-50%);
     }
@@ -193,12 +193,12 @@
         .title {
           padding: 2 * $mobileMargin;
           text-transform: uppercase;
-        } 
+        }
       }
 
       &.active .title {
         color: $pink;
       }
     }
-  } 
+  }
 }
