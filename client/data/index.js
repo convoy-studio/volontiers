@@ -134,21 +134,21 @@ export default {
         en: '',
         fr: ''
       },
-      preview: '1Nike LAB28_.jpg',
+      preview: '1NikeLAB28_.jpg',
       assets: [
-        '2Nike LAB34_.jpg',
-        '3Nike LAB26_.jpg',
-        '4Nike LAB33_.jpg',
+        '2NikeLAB34_.jpg',
+        '3NikeLAB26_.jpg',
+        '4NikeLAB33_.jpg',
         '5IMG_8351.jpg',
         '6IMG_8420.jpg',
-        '7Nike LAB3_.jpg',
-        '8Nike LAB6_.jpg',
-        '9Nike LAB10_.jpg',
-        '10Nike LAB12_.jpg',
-        '11Nike LAB14_.jpg',
-        '12Nike LAB21_.jpg',
-        '13Nike LAB39_.jpg',
-        '14Nike LAB41_.jpg'
+        '7NikeLAB3_.jpg',
+        '8NikeLAB6_.jpg',
+        '9NikeLAB10_.jpg',
+        '10NikeLAB12_.jpg',
+        '11NikeLAB14_.jpg',
+        '12NikeLAB21_.jpg',
+        '13NikeLAB39_.jpg',
+        '14NikeLAB41_.jpg'
       ]
     },
     'ikea-paris-design-week-2018': {
@@ -240,7 +240,7 @@ export default {
       'inHome': 0,
       'brand': 'Nike',
       'separator': ' - ',
-      'project': 'Le Maris showroom',
+      'project': 'Le Marais showroom',
       'type': Constants.TYPE.RETAIL,
       'about': {
         en: 'Presentation of the future collections and collaborations',
@@ -269,7 +269,7 @@ export default {
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'On the occasion of the Women’s World Cup, Nike opened a place during one month, gathering influencers, athletes and public around talks, workshops, trainings and parties. A room was designed to welcome jersey customization workshops hosted by designers, while another room, called the DNA room, was dedicated to vintage Nike iconic products, worn by famous female athletes.',
-        fr: 'A l\'occasion de la coupe du monde de football féminin, Nike a ouvert un lieu de vie pendant 1 mois, réunissant des athlètes, influencers et grand public autour de conférences, ateliers et entrainements. Une pièce était spécialement designée pour accueillir des ateliers de customisation de maillots de foot dirigés par des créateurs, tandis qu\'une autre pièce était dédiée aux archives emblématiques de Nike, toutes portées par des athlètes féminines de toutes disciplines.'
+        fr: 'A l\'occasion de la coupe du monde de football féminin, Nike a ouvert un lieu de vie pendant 1 mois, réunissant des athlètes, influencers et grand public autour de conférences, ateliers et entrainements. Une pièce était spécialement designée pour accueillir des ateliers de customisation de maillots de foot dirigés par des créateurs, tandis qu\'une autre pièce était dédiée aux archives emblématiques de Nike, portées par des athlètes féminines de toutes disciplines.'
       },
       preview: '1Nike-goncourt36_.jpg',
       assets: [
@@ -335,15 +335,25 @@ export default {
       },
       preview: '1volontiers-nike-ambush-22.jpg',
       assets: [
-        '2volontiers-nike-ambush-11.jpg',
-        '3volontiers-nike-ambush-10.jpg',
-        '4volontiers-nike-ambush-2.jpg',
-        '5volontiers-nike-ambush-4.jpg',
-        '6volontiers-nike-ambush-64.jpg',
-        '7volontiers-nike-ambush-25.jpg',
-        '8volontiers-nike-ambush-37.jpg',
-        '9volontiers-nike-ambush-45.jpg',
-        '9volontiers-nike-ambush-74.jpg'
+        '2volontiers-nike-ambush-11.jpg'
+      ]
+    },
+    'nikelab-x-pigalle-duperre-basketball-court': {
+      'inHome': 0,
+      'brand': 'Nikelab',
+      'separator': ' × ',
+      'project': 'Pigalle - Duperré Basketball Court',
+      'type': Constants.TYPE.EVENT,
+      'about': {
+        en: 'Celebrating the new collaboration between Nikelab & Pigalle, Volontiers was commissioned by Nike to renovate the Duperré basketball court. Thanks to Ill Studio’s design, the court gets harmonious new colors, including shades and optical illusions referring to the collection. This playground is surely the most famous sport court in the world. It benefits from a very large exposure, with articles in many international newspaper & design magazines such as Time, NY Times, BBC, Archidigest, AD, Wallpaper, Liberation.',
+        fr: 'A l’occasion de la nouvelle collaboration entre Nikelab et l’emblématique griffe parisienne Pigalle, Volontiers a été chargé par Nike de rénover le terrain de basket Duperré, situé dans le 9e à Paris. Sous la direction artistique d’Ill Studio, le terrain se pare de nouvelles couleurs et dégradés de rose et de bleu, intégrant des éléments trompe-l’oeil, en référence aux pièces de la nouvelle collection. Ce playground a fait le tour de tous les plus grands medias internationaux, il est aujourd’hui un lieu de culte pour les amoureux du design et du sport qui a fait l’objet de nombreuses parutions, notamment dans le Time, NY Times, BBC, Archidigest, AD, Wallpaper, Libération...'
+      },
+      preview: '2.jpg',
+      assets: [
+        '1.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
       ]
     },
     'nikelab-x-virgil-abloh-x-kim-jones': {
@@ -727,24 +737,6 @@ export default {
         '8.jpg',
         '9.jpg',
         '10.jpg'
-      ]
-    },
-    'nikelab-x-pigalle-duperre-basketball-court': {
-      'inHome': 0,
-      'brand': 'Nikelab',
-      'separator': ' × ',
-      'project': 'Pigalle - Duperré Basketball Court',
-      'type': Constants.TYPE.EVENT,
-      'about': {
-        en: 'Celebrating the new collaboration between Nikelab & Pigalle, Volontiers was commissioned by Nike to renovate the Duperré basketball court. Thanks to Ill Studio’s design, the court gets harmonious new colors, including shades and optical illusions referring to the collection. This playground is surely the most famous sport court in the world. It benefits from a very large exposure, with articles in many international newspaper & design magazines such as Time, NY Times, BBC, Archidigest, AD, Wallpaper, Liberation.',
-        fr: 'A l’occasion de la nouvelle collaboration entre Nikelab et l’emblématique griffe parisienne Pigalle, Volontiers a été chargé par Nike de rénover le terrain de basket Duperré, situé dans le 9e à Paris. Sous la direction artistique d’Ill Studio, le terrain se pare de nouvelles couleurs et dégradés de rose et de bleu, intégrant des éléments trompe-l’oeil, en référence aux pièces de la nouvelle collection. Ce playground a fait le tour de tous les plus grands medias internationaux, il est aujourd’hui un lieu de culte pour les amoureux du design et du sport qui a fait l’objet de nombreuses parutions, notamment dans le Time, NY Times, BBC, Archidigest, AD, Wallpaper, Libération...'
-      },
-      preview: '1.jpg',
-      assets: [
-        '2.jpg',
-        '3.jpg',
-        '4.jpg',
-        '5.jpg'
       ]
     },
     'nikelab-x-pigalle-influencers-journey': {
