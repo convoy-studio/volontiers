@@ -81,7 +81,7 @@ export default {
       'type': Constants.TYPE.EVENT,
       'about': {
         en: 'To celebrate Funorama campaign at Galeries Lafayette Haussmann, Volontiers imagined Funarea, a colorful net hung under the iconic centenarian doma. During one month and a half, more than 50 000 people from all over the world enjoyed a break suspended in the heart of the famous building.',
-        fr: 'Pour célébrer le temps fort du Printemps aux Galeries Lafayette, Funorama, Volontiers a imaginé et réalisé Funorama, un filet coloré tendu sous la coupole centenaire. Pendant un mois et demi, plus de 50 000 personnes venant du monde entier ont pu profiter d’un instant suspendu au cœur du bâtiment emblématique.'
+        fr: 'Pour célébrer le temps fort du Printemps aux Galeries Lafayette, Funorama, Volontiers a imaginé et réalisé Funarea, un filet coloré tendu sous la coupole centenaire. Pendant un mois et demi, plus de 50 000 personnes venant du monde entier ont pu profiter d’un instant suspendu au cœur du bâtiment emblématique.'
       },
       preview: '1IMG_4712.jpg',
       assets: [
@@ -335,7 +335,15 @@ export default {
       },
       preview: '1volontiers-nike-ambush-22.jpg',
       assets: [
-        '2volontiers-nike-ambush-11.jpg'
+        '2volontiers-nike-ambush-11.jpg',
+        '3volontiers-nike-ambush-10.jpg',
+        '4volontiers-nike-ambush-2.jpg',
+        '5volontiers-nike-ambush-4.jpg',
+        '6volontiers-nike-ambush-64.jpg',
+        '7volontiers-nike-ambush-25.jpg',
+        '8volontiers-nike-ambush-37.jpg',
+        '9volontiers-nike-ambush-45.jpg',
+        '9volontiers-nike-ambush-74.jpg'
       ]
     },
     'nikelab-x-pigalle-duperre-basketball-court': {
