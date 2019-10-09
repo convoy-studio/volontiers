@@ -36,7 +36,7 @@ export default class About extends BaseComponent {
             </div>
             <p className='catchline' ref='catchline'>{content.text[3]}</p>
             <div className='details' ref='details'>
-              <p><a className='link btn' href='https://www.google.fr/maps/place/14+Rue+Coquillière,+75001+Paris' target='_blank'>7 boulevard Saint-Martin 75003 Paris - France</a></p>
+              <p><a className='link btn' href='https://www.google.fr/maps/place/7+boulevard+Saint-Martin,+75003+Paris' target='_blank'>7 boulevard Saint-Martin 75003 Paris - France</a></p>
               <p><a className='link btn mail' href='mailto:hello@volontiers.fr' ref='mail'>hello@volontiers.fr</a></p>
             </div>
           </div>
