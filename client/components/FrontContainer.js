@@ -34,7 +34,10 @@ export default class FrontContainer extends BaseComponent {
     }
     return (
       <header id='front-container' ref='front-container' className="navigation">
-        <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link top-projects-title'></MainTitle>
+        <div className={'top-projects-title'}>
+          <MainTitle ref='projectsTitle' title={this.content.projects} onClick={this.onProjectsClick} className='link'></MainTitle>
+          { !this.isMobile && <a ref='shopLink' className={'navigation__shoplink'} target={'_blank'} href={'https://www.volontiers-shop.com/'}>Shop</a>}
+        </div>
         <div className="navigation__center">
           <Logo ref='logo' className='top-logo-title'/>
         </div>

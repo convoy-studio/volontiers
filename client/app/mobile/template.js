@@ -29,6 +29,7 @@ export default class AppTemplate extends React.Component {
       <div id='app-template' className={this.state.currentPage}>
         <BlockInteractionLayer />
         <FrontContainer ref='front-container' />
+        <a className={'mobile__shoplink'} target={'_blank'} href={'https://www.volontiers-shop.com/'}>Shop</a>
         <MobilePagesContainer ref='pages-container' />
         <About ref="about"/>
         <ProjectsOverview ref="projects-overview"/>

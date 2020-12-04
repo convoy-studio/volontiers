@@ -80,3 +80,13 @@ html {
     text-align: center;
   }
 }
+
+.mobile__shoplink {
+  position: fixed;
+  right: $globalMargin;
+  bottom: $globalMargin;
+  z-index: 9999;
+  text-transform: uppercase;
+  color: black;
+  font-size: $mobileFontSize;
+}

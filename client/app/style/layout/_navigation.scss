@@ -29,12 +29,17 @@
     position: absolute;
     z-index: 7;
     pointer-events: all;
+    display: flex;
     @media (min-width: $MQ_SMALL) {
       margin-top: -$globalMargin;
       left: 0;
       padding: $globalMargin;
       top: 0;
     }
+  }
+  &__shoplink {
+    margin-left: 40px;
+    color: black;
   }
   &__right {
     position: absolute;
